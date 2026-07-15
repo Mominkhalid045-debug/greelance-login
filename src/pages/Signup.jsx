@@ -1,21 +1,19 @@
-import Logo from './Logo';
-import Input from './Input';
-import Button from './Button';
-import SocialLogin from './SocialLogin';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Logo from '../components/Logo';
+import Input from '../components/Input';
+import Button from '../components/Button';
+import SocialLogin from '../components/SocialLogin';
 
-/**
- * LoginCard — the white card containing the full login form.
- */
-export default function LoginCard() {
+export default function Signup() {
+  const [name, setName]         = useState('');
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
   const [showPw, setShowPw]     = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle sign-in logic here
-    console.log('Sign in with:', email);
+    console.log('Sign up with:', name, email);
   };
 
   const EyeIcon = () => (
@@ -44,20 +42,17 @@ export default function LoginCard() {
     <div
       className="animate-slide-in login-card"
       role="main"
-      aria-label="Login form"
+      aria-label="Signup form"
       style={{
         width: '477.75px',
-        minHeight: '470.25px',
         background: '#FFFFFF',
         borderRadius: '40.5px',
         boxShadow: '0 20px 50px rgba(0,0,0,0.08)',
         padding: '48px',
       }}
     >
-      {/* Logo */}
       <Logo />
 
-      {/* Welcome heading */}
       <h1
         className="font-poppins"
         style={{
@@ -67,11 +62,20 @@ export default function LoginCard() {
           marginBottom: '24px',
         }}
       >
-        Welcome!
+        Create Account
       </h1>
 
       <form onSubmit={handleSubmit} noValidate>
-        {/* Email */}
+        <Input
+          id="name"
+          label="Full Name"
+          type="text"
+          placeholder="Enter your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          autoComplete="name"
+        />
+
         <Input
           id="email"
           label="Email Address"
@@ -82,7 +86,6 @@ export default function LoginCard() {
           autoComplete="email"
         />
 
-        {/* Password */}
         <Input
           id="password"
           label="Password"
@@ -90,29 +93,26 @@ export default function LoginCard() {
           placeholder="••••••••"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
+          autoComplete="new-password"
           rightElement={<EyeIcon />}
         />
 
-        {/* Forgot password */}
-        <div className="flex justify-end mb-6 -mt-1">
-          <a
-            href="#forgot"
+        <div className="flex justify-end items-center mb-6 -mt-1">
+          <Link
+            to="/login"
             className="font-poppins font-medium transition-opacity hover:opacity-75 focus-ring rounded"
             style={{ fontSize: '12px', color: '#4F5BFF' }}
-            aria-label="Forgot password"
+            aria-label="Sign in"
           >
-            Forgot Password?
-          </a>
+            Already have an account? Sign In
+          </Link>
         </div>
 
-        {/* Sign In button */}
-        <Button type="submit" id="sign-in-btn">
-          Sign In
+        <Button type="submit" id="sign-up-btn">
+          Sign Up
         </Button>
       </form>
 
-      {/* Social login */}
       <SocialLogin />
     </div>
   );

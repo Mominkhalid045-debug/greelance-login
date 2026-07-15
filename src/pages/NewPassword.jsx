@@ -1,28 +1,31 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import SocialLogin from '../components/SocialLogin';
 
-export default function Login() {
-  const [email, setEmail]       = useState('');
+export default function NewPassword() {
   const [password, setPassword] = useState('');
-  const [showPw, setShowPw]     = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPw, setShowPw] = useState(false);
+  const [showConfirmPw, setShowConfirmPw] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Sign in with:', email);
+    console.log('Set new password');
+    // Navigate back to login
+    navigate('/login');
   };
 
-  const EyeIcon = () => (
+  const EyeIcon = ({ show, toggle }) => (
     <button
       type="button"
-      aria-label={showPw ? 'Hide password' : 'Show password'}
-      onClick={() => setShowPw((v) => !v)}
+      aria-label={show ? 'Hide password' : 'Show password'}
+      onClick={() => toggle((v) => !v)}
       className="text-body hover:text-heading transition-colors focus-ring rounded"
     >
-      {showPw ? (
+      {show ? (
         <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#6F7894" strokeWidth="2">
           <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
           <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
@@ -41,20 +44,21 @@ export default function Login() {
     <div
       className="animate-slide-in login-card"
       role="main"
-      aria-label="Login form"
+      aria-label="Set New Password form"
       style={{
         width: '477.75px',
-        minHeight: '470.25px',
         background: '#FFFFFF',
         borderRadius: '40.5px',
         boxShadow: '0 20px 50px rgba(0,0,0,0.08)',
         padding: '48px',
       }}
     >
-      <Logo />
+      <div className="flex justify-center mb-6">
+        <Logo />
+      </div>
 
       <h1
-        className="font-poppins"
+        className="font-poppins text-center"
         style={{
           fontSize: '26px',
           fontWeight: 700,
@@ -62,56 +66,38 @@ export default function Login() {
           marginBottom: '24px',
         }}
       >
-        Welcome!
+        Set New Password
       </h1>
 
       <form onSubmit={handleSubmit} noValidate>
         <Input
-          id="email"
-          label="Email Address"
-          type="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoComplete="email"
-        />
-
-        <Input
           id="password"
-          label="Password"
+          label="New Password"
           type={showPw ? 'text' : 'password'}
           placeholder="••••••••"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
-          rightElement={<EyeIcon />}
+          autoComplete="new-password"
+          rightElement={<EyeIcon show={showPw} toggle={setShowPw} />}
         />
 
-        <div className="flex justify-between items-center mb-6 -mt-1">
-          <Link
-            to="/signup"
-            className="font-poppins font-medium transition-opacity hover:opacity-75 focus-ring rounded"
-            style={{ fontSize: '12px', color: '#4F5BFF' }}
-            aria-label="Sign up"
-          >
-            Create Account
-          </Link>
-          <Link
-            to="/forgot-password"
-            className="font-poppins font-medium transition-opacity hover:opacity-75 focus-ring rounded"
-            style={{ fontSize: '12px', color: '#4F5BFF' }}
-            aria-label="Forgot password"
-          >
-            Forgot Password?
-          </Link>
+        <Input
+          id="confirmPassword"
+          label="Confirm Password"
+          type={showConfirmPw ? 'text' : 'password'}
+          placeholder="••••••••"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          autoComplete="new-password"
+          rightElement={<EyeIcon show={showConfirmPw} toggle={setShowConfirmPw} />}
+        />
+
+        <div className="mt-8">
+          <Button type="submit" id="update-password-btn">
+            Update Password
+          </Button>
         </div>
-
-        <Button type="submit" id="sign-in-btn">
-          Sign In
-        </Button>
       </form>
-
-      <SocialLogin />
     </div>
   );
 }
