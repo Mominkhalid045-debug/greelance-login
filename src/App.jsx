@@ -62,20 +62,15 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
 
         {/* Split-screen routes */}
-        <Route path="*" element={
-          <SplitLayout>
-            <Routes>
-              <Route path="/" element={<RoleSelection />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/verify-otp" element={<VerifyOTP />} />
-              <Route path="/new-password" element={<NewPassword />} />
-              {/* Fallback */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </SplitLayout>
-        } />
+        <Route path="/" element={<SplitLayout><RoleSelection /></SplitLayout>} />
+        <Route path="/login" element={<SplitLayout><Login /></SplitLayout>} />
+        <Route path="/signup" element={<SplitLayout><Signup /></SplitLayout>} />
+        <Route path="/forgot-password" element={<SplitLayout><ForgotPassword /></SplitLayout>} />
+        <Route path="/verify-otp" element={<SplitLayout><VerifyOTP /></SplitLayout>} />
+        <Route path="/new-password" element={<SplitLayout><NewPassword /></SplitLayout>} />
+        
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );
