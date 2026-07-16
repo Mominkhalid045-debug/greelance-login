@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -41,10 +41,13 @@ export default function Login() {
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
   const [showPw, setShowPw]     = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Sign in with:', email);
+    // Dummy navigation for demo purposes
+    alert('Signed in successfully!');
   };
 
   return (
