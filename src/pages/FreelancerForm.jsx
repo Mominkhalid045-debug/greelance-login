@@ -99,7 +99,7 @@ export default function FreelancerForm() {
 
           <div style={{ display: 'flex', gap: '16px' }}>
             <button 
-              onClick={() => alert('Resume uploaded! Proceed to next step.')}
+              onClick={() => navigate('/setup-profile')}
               style={{
                 background: '#3741D4',
                 color: '#fff',
@@ -123,7 +123,7 @@ export default function FreelancerForm() {
             </button>
 
             <button 
-              onClick={() => alert('Proceeding to manual creation.')}
+              onClick={() => navigate('/setup-profile')}
               style={{
                 background: 'transparent',
                 color: '#3741D4',

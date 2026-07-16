@@ -9,6 +9,7 @@ import NewPassword from './pages/NewPassword';
 import Dashboard from './pages/Dashboard';
 import RoleSelection from './pages/RoleSelection';
 import FreelancerForm from './pages/FreelancerForm';
+import SetupProfile from './pages/SetupProfile';
 
 /**
  * SplitLayout — handles the 40/60 split screen.
@@ -59,6 +60,7 @@ export default function App() {
       <Routes>
         {/* Full-screen routes */}
         <Route path="/form" element={<FreelancerForm />} />
+        <Route path="/setup-profile" element={<SetupProfile />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
         {/* Split-screen routes */}

@@ -1,0 +1,1 @@
+const fs = require('fs'); const content = fs.readFileSync('C:/Users/HTC/.gemini/antigravity/brain/006d3392-a49f-4d75-bfee-2dcf18d171b4/.system_generated/steps/327/content.md', 'utf8'); const routes = [...content.matchAll(/["']\/[a-z0-9-]+["']/g)].map(m => m[0]); console.log([...new Set(routes)]);
