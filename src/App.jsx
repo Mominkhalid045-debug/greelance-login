@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import VerifyOTP from './pages/VerifyOTP';
 import NewPassword from './pages/NewPassword';
+import Dashboard from './pages/Dashboard';
 
 /**
  * App — root layout: split-screen auth.
@@ -50,6 +51,7 @@ export default function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/verify-otp" element={<VerifyOTP />} />
             <Route path="/new-password" element={<NewPassword />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </section>
       </div>

@@ -47,7 +47,7 @@ export default function Login() {
     e.preventDefault();
     console.log('Sign in with:', email);
     // Dummy navigation for demo purposes
-    alert('Signed in successfully!');
+    navigate('/dashboard');
   };
 
   return (
