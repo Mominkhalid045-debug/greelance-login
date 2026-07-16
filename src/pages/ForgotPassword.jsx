@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import { ArrowLeft } from 'lucide-react';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -12,50 +11,89 @@ export default function ForgotPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Reset password for:', email);
-    // Move to verify OTP for demo purposes
     navigate('/verify-otp');
   };
 
   return (
+    /* White floating card */
     <div
-      className="animate-slide-in login-card relative"
+      className="animate-slide-in"
       role="main"
       aria-label="Forgot Password form"
       style={{
-        width: '477.75px',
+        width: '100%',
+        maxWidth: '460px',
         background: '#FFFFFF',
-        borderRadius: '40.5px',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.08)',
-        padding: '48px',
+        borderRadius: '28px',
+        boxShadow: '0 10px 40px rgba(0,0,0,0.08)',
+        padding: '40px 40px 44px',
+        margin: '0 24px',
       }}
     >
-      <Link
-        to="/login"
-        className="absolute top-12 left-12 text-[#6F7894] hover:text-[#202B52] transition-colors"
-        aria-label="Back to login"
+      {/* Top row: back arrow + logo */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          marginBottom: '32px',
+        }}
       >
-        <ArrowLeft size={24} />
-      </Link>
-      
-      <div className="flex justify-center mb-6">
-        <Logo />
+        <Link
+          to="/login"
+          aria-label="Back to login"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            color: '#6B7280',
+            textDecoration: 'none',
+            transition: 'color 0.2s',
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.color = '#0A0F2E'}
+          onMouseLeave={(e) => e.currentTarget.style.color = '#6B7280'}
+        >
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </Link>
+
+        {/* Logo inline — no bottom margin here */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <svg width="30" height="30" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M20 4 L28 10 L24 10 C24 10 28 14 28 20" stroke="#4ADE80" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            <path d="M20 4 L12 10 L16 10" stroke="#4ADE80" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            <path d="M20 36 L12 30 L16 30 C16 30 12 26 12 20" stroke="#4ADE80" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            <path d="M20 36 L28 30 L24 30" stroke="#4ADE80" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          </svg>
+          <span style={{ fontFamily: "'Poppins', sans-serif", fontSize: '20px', lineHeight: 1 }}>
+            <span style={{ color: '#0A0F2E', fontWeight: 700 }}>GREE</span>
+            <span style={{ color: '#22C55E', fontWeight: 400 }}>LANCE</span>
+          </span>
+        </div>
       </div>
 
       <h1
-        className="font-poppins text-center"
         style={{
-          fontSize: '26px',
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: '28px',
           fontWeight: 700,
-          color: '#202B52',
-          marginBottom: '12px',
+          color: '#0A0F2E',
+          textAlign: 'center',
+          marginBottom: '10px',
         }}
       >
         Forgot Password?
       </h1>
-      
-      <p 
-        className="text-center font-poppins mb-8"
-        style={{ color: '#6F7894', fontSize: '14px' }}
+
+      <p
+        style={{
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: '14px',
+          color: '#6B7280',
+          textAlign: 'center',
+          marginBottom: '32px',
+          lineHeight: 1.6,
+        }}
       >
         Enter your email address to receive a verification code.
       </p>
@@ -71,7 +109,7 @@ export default function ForgotPassword() {
           autoComplete="email"
         />
 
-        <div className="mt-8">
+        <div style={{ marginTop: '24px' }}>
           <Button type="submit" id="send-code-btn">
             Send Code
           </Button>

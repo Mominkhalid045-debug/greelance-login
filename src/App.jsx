@@ -7,9 +7,9 @@ import VerifyOTP from './pages/VerifyOTP';
 import NewPassword from './pages/NewPassword';
 
 /**
- * App — root layout: 1440×810 split-screen login page.
- * Left  40%  #3438C6 blue  (LeftBanner)
- * Right 60%  #F8FAFF light (LoginSection / Outlet)
+ * App — root layout: split-screen auth.
+ * Left  ~42%  deep blue gradient  (LeftBanner)
+ * Right ~58%  light gray-blue     (Auth pages)
  */
 export default function App() {
   return (
@@ -24,13 +24,23 @@ export default function App() {
           overflow: 'hidden',
         }}
       >
-        {/* Left blue panel — 40% */}
+        {/* Left blue panel */}
         <LeftBanner />
 
-        {/* Right light panel — 60% */}
+        {/* Right light panel */}
         <section
-          className="flex flex-1 items-center justify-center relative"
-          style={{ background: '#F8FAFF', height: '100%', overflowY: 'auto' }}
+          style={{
+            flex: 1,
+            height: '100%',
+            overflowY: 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#EEF0FA',
+            backgroundImage: `radial-gradient(circle, rgba(55,65,212,0.07) 1px, transparent 1px)`,
+            backgroundSize: '24px 24px',
+            position: 'relative',
+          }}
           aria-label="Auth section"
         >
           <Routes>

@@ -3,50 +3,67 @@ import linkedinIcon from '../assets/linkedin.svg';
 import appleIcon from '../assets/apple.svg';
 
 const providers = [
-  { id: 'google',   label: 'Sign in with Google',   icon: googleIcon },
-  { id: 'linkedin', label: 'Sign in with LinkedIn', icon: linkedinIcon },
-  { id: 'apple',    label: 'Sign in with Apple',    icon: appleIcon },
+  { id: 'google',   label: 'Sign in with Google',   icon: googleIcon,   bg: '#fff' },
+  { id: 'linkedin', label: 'Sign in with LinkedIn', icon: linkedinIcon, bg: '#0A66C2' },
+  { id: 'apple',    label: 'Sign in with Apple',    icon: appleIcon,    bg: '#1A1A1A' },
 ];
 
 /**
- * SocialLogin — "You can also sign in with" section with icon buttons.
+ * SocialLogin — "You can also sign in with" section.
+ * Matches the reference: Google (white bg), LinkedIn (blue bg), Apple (dark bg).
  */
 export default function SocialLogin() {
   return (
-    <div 
-      className="mt-6 text-center"
+    <div
       style={{
-        width: '172.5px',
-        height: '69.53px',
-        margin: '24px auto 0 auto',
+        marginTop: '24px',
+        textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between'
+        alignItems: 'center',
+        gap: '16px',
       }}
     >
       <p
-        className="font-poppins"
-        style={{ fontSize: '12px', color: '#6F7894', margin: 0, padding: 0 }}
+        style={{
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: '13px',
+          color: '#9CA3AF',
+          margin: 0,
+        }}
       >
         You can also sign in with
       </p>
-      <div className="flex items-center justify-center gap-5">
-        {providers.map(({ id, label, icon }) => (
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        {providers.map(({ id, label, icon, bg }) => (
           <button
             key={id}
             id={`social-${id}`}
             type="button"
             aria-label={label}
-            className="rounded-full flex items-center justify-center transition-transform duration-150 hover:scale-110 active:scale-95 focus-ring"
             style={{
-              width: '42px',
-              height: '42px',
-              background: 'white',
+              width: '44px',
+              height: '44px',
+              borderRadius: '50%',
+              background: bg,
+              border: bg === '#fff' ? '1.5px solid #E5E7EB' : 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               boxShadow: '0 2px 8px rgba(0,0,0,0.10)',
-              border: '1px solid #E4E8F2',
+              transition: 'transform 0.15s, box-shadow 0.15s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.08)';
+              e.currentTarget.style.boxShadow = '0 4px 14px rgba(0,0,0,0.18)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.10)';
             }}
           >
-            <img src={icon} alt={label} width={24} height={24} />
+            <img src={icon} alt={label} width={22} height={22} />
           </button>
         ))}
       </div>

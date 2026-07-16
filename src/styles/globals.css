@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,14 +7,13 @@
    CSS custom properties — Greelance design tokens
 ──────────────────────────────────────────────────── */
 :root {
-  --color-primary:    #3438C6;
+  --color-primary:    #3741D4;
   --color-primary-dk: #2D31A8;
-  --color-btn-blue:   #3944D4;
-  --color-green:      #5DE083;
-  --color-bg-right:   #F8FAFF;
-  --color-heading:    #202B52;
-  --color-body:       #6F7894;
-  --color-border:     #E3E7F1;
+  --color-green:      #4ADE80;
+  --color-bg-right:   #EEF0FA;
+  --color-heading:    #0A0F2E;
+  --color-body:       #6B7280;
+  --color-border:     #E8EAF0;
 }
 
 /* ────────────────────────────────────────────────────
@@ -44,75 +43,46 @@ body {
 }
 
 /* ────────────────────────────────────────────────────
-   Focus ring utility (accessibility)
-──────────────────────────────────────────────────── */
-.focus-ring:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-/* ────────────────────────────────────────────────────
    Animations
 ──────────────────────────────────────────────────── */
 
 /* Fade + slide up — used on left panel elements */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-up {
-  animation: fadeUp 0.55s ease both;
+  animation: fadeInUp 0.6s ease both;
 }
 
-/* Slide in from right — used on login card */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+/* Slide in from right — used on auth cards */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
-.animate-slide-in  { animation: slideInRight 0.55s ease both; }
-.animate-fade-up   { animation: fadeInUp 0.6s ease both; }
-.animate-pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
-
-/* Left banner responsive width */
-.left-banner {
-  width: 40%;
-}
-@media (max-width: 1024px) {
-  .left-banner {
-    width: 35%;
-  }
+.animate-slide-in {
+  animation: slideInRight 0.5s ease both;
 }
 
-/* Login card — mobile full width */
-@media (max-width: 767px) {
-  #login-page {
-    flex-direction: column;
-  }
-  .login-card {
-    width: calc(100% - 48px) !important;
-    min-height: auto !important;
-    margin: 24px;
-    padding: 28px !important;
-  }
-}
-
-/* Floating coin bounce */
+/* Floating coin animation */
 @keyframes floatCoin {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-8px); }
+  50%       { transform: translateY(-10px); }
 }
 .animate-float {
   animation: floatCoin 3s ease-in-out infinite;
+}
+
+/* ────────────────────────────────────────────────────
+   Responsive
+──────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  #app-root {
+    flex-direction: column;
+  }
+  #app-root > aside {
+    width: 100% !important;
+    height: 220px;
+    overflow: hidden;
+  }
 }

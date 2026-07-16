@@ -5,6 +5,38 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import SocialLogin from '../components/SocialLogin';
 
+function EyeIcon({ show, onClick }) {
+  return (
+    <button
+      type="button"
+      aria-label={show ? 'Hide password' : 'Show password'}
+      onClick={onClick}
+      style={{
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        padding: 0,
+        display: 'flex',
+        alignItems: 'center',
+        color: '#9CA3AF',
+      }}
+    >
+      {show ? (
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+          <line x1="1" y1="1" x2="23" y2="23" />
+        </svg>
+      ) : (
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 export default function Login() {
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
@@ -15,51 +47,27 @@ export default function Login() {
     console.log('Sign in with:', email);
   };
 
-  const EyeIcon = () => (
-    <button
-      type="button"
-      aria-label={showPw ? 'Hide password' : 'Show password'}
-      onClick={() => setShowPw((v) => !v)}
-      className="text-body hover:text-heading transition-colors focus-ring rounded"
-    >
-      {showPw ? (
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#6F7894" strokeWidth="2">
-          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
-          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
-          <line x1="1" y1="1" x2="23" y2="23" />
-        </svg>
-      ) : (
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#6F7894" strokeWidth="2">
-          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-          <circle cx="12" cy="12" r="3" />
-        </svg>
-      )}
-    </button>
-  );
-
   return (
     <div
-      className="animate-slide-in login-card"
+      className="animate-slide-in"
       role="main"
       aria-label="Login form"
       style={{
-        width: '477.75px',
-        minHeight: '470.25px',
-        background: '#FFFFFF',
-        borderRadius: '40.5px',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.08)',
-        padding: '48px',
+        width: '100%',
+        maxWidth: '460px',
+        padding: '0 32px',
       }}
     >
       <Logo />
 
       <h1
-        className="font-poppins"
         style={{
-          fontSize: '26px',
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: '30px',
           fontWeight: 700,
-          color: '#202B52',
-          marginBottom: '24px',
+          color: '#0A0F2E',
+          marginBottom: '28px',
+          lineHeight: 1.2,
         }}
       >
         Welcome!
@@ -84,23 +92,46 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           autoComplete="current-password"
-          rightElement={<EyeIcon />}
+          rightElement={<EyeIcon show={showPw} onClick={() => setShowPw((v) => !v)} />}
         />
 
-        <div className="flex justify-between items-center mb-6 -mt-1">
+        {/* Links row */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '24px',
+            marginTop: '-4px',
+          }}
+        >
           <Link
             to="/signup"
-            className="font-poppins font-medium transition-opacity hover:opacity-75 focus-ring rounded"
-            style={{ fontSize: '12px', color: '#4F5BFF' }}
-            aria-label="Sign up"
+            style={{
+              fontFamily: "'Poppins', sans-serif",
+              fontSize: '13px',
+              fontWeight: 500,
+              color: '#3741D4',
+              textDecoration: 'none',
+            }}
+            aria-label="Create account"
+            onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
+            onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
           >
             Create Account
           </Link>
           <Link
             to="/forgot-password"
-            className="font-poppins font-medium transition-opacity hover:opacity-75 focus-ring rounded"
-            style={{ fontSize: '12px', color: '#4F5BFF' }}
+            style={{
+              fontFamily: "'Poppins', sans-serif",
+              fontSize: '13px',
+              fontWeight: 500,
+              color: '#3741D4',
+              textDecoration: 'none',
+            }}
             aria-label="Forgot password"
+            onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
+            onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
           >
             Forgot Password?
           </Link>
