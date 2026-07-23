@@ -10,6 +10,9 @@ import Dashboard from './pages/Dashboard';
 import RoleSelection from './pages/RoleSelection';
 import FreelancerForm from './pages/FreelancerForm';
 import SetupProfile from './pages/SetupProfile';
+import SkillsSelection from './pages/SkillsSelection';
+import ConnectWallet from './pages/ConnectWallet';
+import Assessment from './pages/Assessment';
 
 /**
  * SplitLayout — handles the 40/60 split screen.
@@ -79,6 +82,9 @@ export default function App() {
         {/* Full-screen routes */}
         <Route path="/form" element={<FreelancerForm />} />
         <Route path="/setup-profile" element={<SetupProfile />} />
+        <Route path="/skills" element={<SkillsSelection />} />
+        <Route path="/connect-wallet" element={<ConnectWallet />} />
+        <Route path="/assessment" element={<Assessment />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
         {/* Split-screen routes */}
