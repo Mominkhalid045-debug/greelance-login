@@ -1,12 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const WALLETS = [
-  { name: 'CoinBase', icon: '🔵', color: '#2563EB' },
-  { name: 'Fortmatic', icon: '🟣', color: '#6366F1' },
-  { name: 'MetaMask', icon: '🦊', color: '#F59E0B' },
-];
-
 export default function ConnectWallet() {
   const navigate = useNavigate();
   const [selectedWallet, setSelectedWallet] = useState(null);
@@ -70,112 +64,121 @@ export default function ConnectWallet() {
       </div>
 
       {/* Main Content Area - Scrollable */}
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '32px 40px' }}>
-        <div style={{ maxWidth: '960px', margin: '0 auto', background: '#FFFFFF', borderRadius: '20px', padding: '36px 40px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
+        <div style={{ maxWidth: '960px', margin: '0 auto', background: '#FFFFFF', borderRadius: '0 0 20px 20px', minHeight: 'calc(100vh - 60px)', padding: '40px 48px' }}>
           
           {/* Title */}
-          <h2 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '22px', fontWeight: 700, color: '#0A0F2E', margin: '0 0 4px 0' }}>
+          <h2 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '22px', fontWeight: 700, color: '#0A0F2E', margin: '0 0 8px 0' }}>
             Connect Wallet
           </h2>
-          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', color: '#6B7280', margin: '0 0 32px 0' }}>
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', color: '#6B7280', margin: '0 0 36px 0' }}>
             Select a wallet you want to connect for your payment method. You can change the wallet after a sign in too.
           </p>
 
           {/* Wallet Cards */}
-          <div style={{ display: 'flex', gap: '20px', marginBottom: '40px' }}>
-            {WALLETS.map(w => {
-              const isSelected = selectedWallet === w.name;
-              return (
-                <div
-                  key={w.name}
-                  onClick={() => setSelectedWallet(w.name)}
-                  style={{
-                    width: '140px',
-                    padding: '24px 16px',
-                    borderRadius: '16px',
-                    border: isSelected ? '2px solid #3741D4' : '1.5px solid #E5E7EB',
-                    background: isSelected ? '#EEF2FF' : '#FFFFFF',
-                    cursor: 'pointer',
-                    textAlign: 'center',
-                    transition: 'all 0.15s',
-                  }}
-                >
-                  {/* Wallet Icon */}
-                  <div style={{
-                    width: '56px',
-                    height: '56px',
-                    borderRadius: '16px',
-                    background: w.name === 'CoinBase' ? '#2563EB' : w.name === 'Fortmatic' ? '#6366F1' : '#F59E0B',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto 12px',
-                    fontSize: '24px',
-                    color: '#fff',
-                    fontWeight: 700,
-                  }}>
-                    {w.name === 'CoinBase' ? 'C' : w.name === 'Fortmatic' ? 'F' : 'M'}
-                  </div>
-                  <p style={{ margin: 0, fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#0A0F2E' }}>{w.name}</p>
-                </div>
-              );
-            })}
+          <div style={{ display: 'flex', gap: '20px', marginBottom: '48px' }}>
+
+            {/* CoinBase */}
+            <div
+              onClick={() => setSelectedWallet('CoinBase')}
+              style={{
+                width: '130px',
+                padding: '28px 16px 20px',
+                borderRadius: '14px',
+                border: selectedWallet === 'CoinBase' ? '2px solid #3741D4' : '1.5px solid #E5E7EB',
+                background: selectedWallet === 'CoinBase' ? '#F0F1FF' : '#FFFFFF',
+                cursor: 'pointer',
+                textAlign: 'center',
+              }}
+            >
+              <div style={{
+                width: '60px', height: '60px', borderRadius: '30px',
+                background: '#2563EB',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                margin: '0 auto 14px',
+              }}>
+                <span style={{ color: '#fff', fontSize: '28px', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>C</span>
+              </div>
+              <p style={{ margin: 0, fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#0A0F2E' }}>CoinBase</p>
+            </div>
+
+            {/* Fortmatic */}
+            <div
+              onClick={() => setSelectedWallet('Fortmatic')}
+              style={{
+                width: '130px',
+                padding: '28px 16px 20px',
+                borderRadius: '14px',
+                border: selectedWallet === 'Fortmatic' ? '2px solid #3741D4' : '1.5px solid #E5E7EB',
+                background: selectedWallet === 'Fortmatic' ? '#F0F1FF' : '#FFFFFF',
+                cursor: 'pointer',
+                textAlign: 'center',
+              }}
+            >
+              <div style={{
+                width: '60px', height: '60px', borderRadius: '14px',
+                background: '#6366F1',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                margin: '0 auto 14px',
+              }}>
+                <span style={{ color: '#fff', fontSize: '28px', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>F</span>
+              </div>
+              <p style={{ margin: 0, fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#0A0F2E' }}>Fortmatic</p>
+            </div>
+
+            {/* MetaMask */}
+            <div
+              onClick={() => setSelectedWallet('MetaMask')}
+              style={{
+                width: '130px',
+                padding: '28px 16px 20px',
+                borderRadius: '14px',
+                border: selectedWallet === 'MetaMask' ? '2px solid #3741D4' : '1.5px solid #E5E7EB',
+                background: selectedWallet === 'MetaMask' ? '#F0F1FF' : '#FFFFFF',
+                cursor: 'pointer',
+                textAlign: 'center',
+              }}
+            >
+              <div style={{
+                width: '60px', height: '60px', borderRadius: '14px',
+                background: '#F59E0B',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                margin: '0 auto 14px',
+              }}>
+                <span style={{ color: '#fff', fontSize: '22px', fontWeight: 700 }}>🦊</span>
+              </div>
+              <p style={{ margin: 0, fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#0A0F2E' }}>MetaMask</p>
+            </div>
+
           </div>
 
           {/* Form Fields */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', marginBottom: '32px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', marginBottom: '48px' }}>
             <div>
-              <label style={{ display: 'block', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#0A0F2E', marginBottom: '8px' }}>Unique Address</label>
+              <label style={{ display: 'block', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 700, color: '#0A0F2E', marginBottom: '10px' }}>Unique Address</label>
               <input
                 type="text"
                 value={uniqueAddress}
                 onChange={(e) => setUniqueAddress(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  borderRadius: '10px',
-                  border: '1.5px solid #E5E7EB',
-                  fontFamily: "'Poppins', sans-serif",
-                  fontSize: '13px',
-                  outline: 'none',
-                  boxSizing: 'border-box',
-                }}
+                style={inputStyle}
               />
             </div>
             <div>
-              <label style={{ display: 'block', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#0A0F2E', marginBottom: '8px' }}>First Name</label>
+              <label style={{ display: 'block', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 700, color: '#0A0F2E', marginBottom: '10px' }}>First Name</label>
               <input
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  borderRadius: '10px',
-                  border: '1.5px solid #E5E7EB',
-                  fontFamily: "'Poppins', sans-serif",
-                  fontSize: '13px',
-                  outline: 'none',
-                  boxSizing: 'border-box',
-                }}
+                style={inputStyle}
               />
             </div>
             <div>
-              <label style={{ display: 'block', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#0A0F2E', marginBottom: '8px' }}>Last Name</label>
+              <label style={{ display: 'block', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 700, color: '#0A0F2E', marginBottom: '10px' }}>Last Name</label>
               <input
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  borderRadius: '10px',
-                  border: '1.5px solid #E5E7EB',
-                  fontFamily: "'Poppins', sans-serif",
-                  fontSize: '13px',
-                  outline: 'none',
-                  boxSizing: 'border-box',
-                }}
+                style={inputStyle}
               />
             </div>
           </div>
@@ -188,7 +191,7 @@ export default function ConnectWallet() {
                 background: '#3741D4',
                 color: '#FFFFFF',
                 border: 'none',
-                borderRadius: '10px',
+                borderRadius: '24px',
                 padding: '12px 40px',
                 fontFamily: "'Poppins', sans-serif",
                 fontSize: '14px',
@@ -205,3 +208,16 @@ export default function ConnectWallet() {
     </div>
   );
 }
+
+const inputStyle = {
+  width: '100%',
+  padding: '14px 16px',
+  borderRadius: '10px',
+  border: '1.5px solid #E5E7EB',
+  background: '#fff',
+  fontFamily: "'Poppins', sans-serif",
+  fontSize: '13px',
+  color: '#0A0F2E',
+  outline: 'none',
+  boxSizing: 'border-box',
+};
