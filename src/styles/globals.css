@@ -50,46 +50,73 @@ body {
 }
 
 /* ────────────────────────────────────────────────────
-   Animations
+   Mobile & Responsive Styles
 ──────────────────────────────────────────────────── */
-
-/* Fade + slide up — used on left panel elements */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-up {
-  animation: fadeInUp 0.6s ease both;
-}
-
-/* Slide in from right — used on auth cards */
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(24px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-.animate-slide-in {
-  animation: slideInRight 0.5s ease both;
-}
-
-/* Floating coin animation */
-@keyframes floatCoin {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
-}
-.animate-float {
-  animation: floatCoin 3s ease-in-out infinite;
-}
-
-/* ────────────────────────────────────────────────────
-   Responsive
-──────────────────────────────────────────────────── */
-@media (max-width: 767px) {
-  #app-root {
-    flex-direction: column;
+@media (max-width: 768px) {
+  /* Split Screen Auth Layout on Mobile */
+  .split-container {
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
   }
-  #app-root > aside {
+
+  .role-left-banner {
     width: 100% !important;
-    height: 220px;
-    overflow: hidden;
+    height: 180px !important;
+    padding: 24px 16px !important;
+    justify-content: center !important;
+  }
+
+  .role-left-banner h2 {
+    font-size: 20px !important;
+    line-height: 26px !important;
+  }
+
+  .role-left-banner .center-illustration {
+    display: none !important; /* Hide complex card graphic on mobile to save vertical space */
+  }
+
+  .role-left-banner h3 {
+    display: none !important;
+  }
+
+  .auth-right-section {
+    width: 100% !important;
+    padding: 24px 16px !important;
+  }
+
+  /* 5 Step Header Nav on Mobile */
+  .step-header-nav {
+    overflow-x: auto !important;
+  }
+  
+  .step-tab-item {
+    min-width: 140px !important;
+    width: 140px !important;
+    padding: 6px 12px !important;
+  }
+
+  /* Onboarding Pages Padding */
+  .onboarding-page-padding {
+    padding: 0 16px !important;
+    margin-top: 20px !important;
+  }
+
+  /* Form Grids on Mobile */
+  .personal-info-grid-responsive {
+    grid-template-columns: 1fr !important;
+  }
+
+  .wallet-cards-grid-responsive {
+    grid-template-columns: 1fr !important;
+  }
+
+  .wallet-fields-grid-responsive {
+    grid-template-columns: 1fr !important;
+  }
+
+  .upload-box-responsive {
+    width: 100% !important;
   }
 }

@@ -3,6 +3,7 @@ const F = "'Lexend', sans-serif";
 export default function RoleLeftBanner() {
   return (
     <aside
+      className="role-left-banner"
       style={{
         width: '50%',
         flexShrink: 0,
@@ -36,6 +37,7 @@ export default function RoleLeftBanner() {
 
       {/* Center Illustration with Cyan Radial Glow Ring */}
       <div
+        className="center-illustration"
         style={{
           width: '320px',
           height: '320px',

@@ -27,13 +27,14 @@ function StepHeader({ activeStep, navigate }) {
       </button>
 
       {/* Step Tabs */}
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+      <div className="step-header-nav" style={{ display: 'flex', flex: 1, overflowX: 'auto' }}>
         {steps.map(step => {
           const isActive = step.num === activeStep;
           return (
             <div
               key={step.num}
               onClick={() => navigate(step.path)}
+              className="step-tab-item"
               style={{
                 width: '236.25px',
                 height: '85.5px',

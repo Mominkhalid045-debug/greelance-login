@@ -21,6 +21,7 @@ import CompleteProfile from './pages/CompleteProfile';
 function SplitLayout({ children }) {
   return (
     <div
+      className="split-container"
       style={{
         display: 'flex',
         width: '100vw',
@@ -34,6 +35,7 @@ function SplitLayout({ children }) {
 
       {/* Right light panel */}
       <section
+        className="auth-right-section"
         style={{
           flex: 1,
           height: '100%',
