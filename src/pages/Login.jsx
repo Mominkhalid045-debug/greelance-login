@@ -52,25 +52,24 @@ export default function Login() {
 
   return (
     <div
-      className="animate-slide-in"
       role="main"
       aria-label="Login form"
       style={{
         width: '100%',
-        maxWidth: '460px',
-        padding: '0 32px',
+        boxSizing: 'border-box',
       }}
     >
-      <Logo />
+      <Logo centered style={{ marginBottom: '14px', height: '26px' }} />
 
       <h1
         style={{
           fontFamily: "'Poppins', sans-serif",
-          fontSize: '30px',
+          fontSize: '24px',
           fontWeight: 700,
           color: '#0A0F2E',
-          marginBottom: '28px',
+          marginBottom: '20px',
           lineHeight: 1.2,
+          textAlign: 'center',
         }}
       >
         Welcome!

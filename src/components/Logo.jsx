@@ -2,14 +2,17 @@
  * Greelance Logo — matches the reference exactly.
  * Recycling-arrows G mark (green) + "GREE" dark navy bold + "LANCE" green regular weight.
  */
-export default function Logo({ centered = false }) {
+export default function Logo({ centered = false, style = {} }) {
   return (
     <div
-      className="flex items-center gap-2"
       aria-label="Greelance logo"
       style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
         justifyContent: centered ? 'center' : 'flex-start',
         marginBottom: '32px',
+        ...style,
       }}
     >
       {/* Recycling arrows G-mark icon */}

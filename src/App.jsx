@@ -41,14 +41,32 @@ function SplitLayout({ children }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#EEF0FA',
-          backgroundImage: `radial-gradient(circle, rgba(55,65,212,0.07) 1px, transparent 1px)`,
-          backgroundSize: '24px 24px',
+          background: '#E9EAEE',
           position: 'relative',
+          padding: '20px 40px',
+          boxSizing: 'border-box',
         }}
         aria-label="Auth section"
       >
-        {children}
+        <div
+          className="signup-card animate-slide-in"
+          style={{
+            position: 'relative',
+            width: '480px',
+            maxWidth: '100%',
+            background: '#FFFFFF',
+            borderRadius: '24px',
+            boxShadow: 'rgba(31, 35, 51, 0.08) 0px 10px 30px 0px',
+            padding: '20px 32px 18px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            boxSizing: 'border-box',
+            margin: 'auto 0',
+          }}
+        >
+          {children}
+        </div>
       </section>
     </div>
   );

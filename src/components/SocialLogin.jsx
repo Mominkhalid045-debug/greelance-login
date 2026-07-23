@@ -3,38 +3,37 @@ import linkedinIcon from '../assets/linkedin.svg';
 import appleIcon from '../assets/apple.svg';
 
 const providers = [
-  { id: 'google',   label: 'Sign in with Google',   icon: googleIcon,   bg: '#fff' },
   { id: 'linkedin', label: 'Sign in with LinkedIn', icon: linkedinIcon, bg: '#0A66C2' },
+  { id: 'google',   label: 'Sign in with Google',   icon: googleIcon,   bg: '#fff' },
   { id: 'apple',    label: 'Sign in with Apple',    icon: appleIcon,    bg: '#1A1A1A' },
 ];
 
 /**
- * SocialLogin — "You can also sign in with" section.
- * Matches the reference: Google (white bg), LinkedIn (blue bg), Apple (dark bg).
+ * SocialLogin — "You can also signin with" section.
+ * Matches the reference: LinkedIn (blue bg), Google (white bg), Apple (dark bg).
  */
 export default function SocialLogin() {
   return (
     <div
       style={{
-        marginTop: '24px',
-        textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '16px',
+        boxSizing: 'border-box',
       }}
     >
       <p
         style={{
           fontFamily: "'Poppins', sans-serif",
-          fontSize: '13px',
-          color: '#9CA3AF',
-          margin: 0,
+          fontSize: '12px',
+          color: '#8B8FA3',
+          margin: '0 0 10px 0',
+          lineHeight: '18px',
         }}
       >
-        You can also sign in with
+        You can also signin with
       </p>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
         {providers.map(({ id, label, icon, bg }) => (
           <button
             key={id}
@@ -42,28 +41,29 @@ export default function SocialLogin() {
             type="button"
             aria-label={label}
             style={{
-              width: '44px',
-              height: '44px',
+              width: '38px',
+              height: '38px',
               borderRadius: '50%',
               background: bg,
-              border: bg === '#fff' ? '1.5px solid #E5E7EB' : 'none',
+              border: bg === '#fff' ? '1.33px solid #E5E7EB' : 'none',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.10)',
+              boxShadow: 'rgba(31, 35, 51, 0.08) 0px 4px 12px 0px',
               transition: 'transform 0.15s, box-shadow 0.15s',
+              padding: 0,
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'scale(1.08)';
-              e.currentTarget.style.boxShadow = '0 4px 14px rgba(0,0,0,0.18)';
+              e.currentTarget.style.boxShadow = 'rgba(31, 35, 51, 0.15) 0px 6px 16px 0px';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.10)';
+              e.currentTarget.style.boxShadow = 'rgba(31, 35, 51, 0.08) 0px 4px 12px 0px';
             }}
           >
-            <img src={icon} alt={label} width={22} height={22} />
+            <img src={icon} alt={label} width={18} height={18} />
           </button>
         ))}
       </div>

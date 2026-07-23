@@ -49,19 +49,12 @@ export default function NewPassword() {
   };
 
   return (
-    /* White floating card */
     <div
-      className="animate-slide-in"
       role="main"
       aria-label="Set New Password form"
       style={{
         width: '100%',
-        maxWidth: '460px',
-        background: '#FFFFFF',
-        borderRadius: '28px',
-        boxShadow: '0 10px 40px rgba(0,0,0,0.08)',
-        padding: '40px 40px 44px',
-        margin: '0 24px',
+        boxSizing: 'border-box',
       }}
     >
       {/* Logo centered at top */}

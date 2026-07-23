@@ -1,11 +1,12 @@
 import { useState, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Button from '../components/Button';
 
 export default function VerifyOTP() {
   const [otp, setOtp] = useState(['', '', '', '']);
   const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChange = (index, value) => {
     if (!/^[0-9]*$/.test(value)) return;
@@ -34,23 +35,21 @@ export default function VerifyOTP() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Verifying OTP:', otp.join(''));
-    navigate('/new-password');
+    const fromSignup = location.state?.from === 'signup';
+    if (fromSignup) {
+      navigate('/form');
+    } else {
+      navigate('/new-password');
+    }
   };
 
   return (
-    /* White floating card */
     <div
-      className="animate-slide-in"
       role="main"
       aria-label="Verify OTP form"
       style={{
         width: '100%',
-        maxWidth: '460px',
-        background: '#FFFFFF',
-        borderRadius: '28px',
-        boxShadow: '0 10px 40px rgba(0,0,0,0.08)',
-        padding: '40px 40px 44px',
-        margin: '0 24px',
+        boxSizing: 'border-box',
       }}
     >
       {/* Top row: back arrow + logo */}

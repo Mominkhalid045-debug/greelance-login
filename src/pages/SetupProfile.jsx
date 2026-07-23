@@ -136,7 +136,7 @@ export default function SetupProfile() {
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '40px' }}>
-             <button style={{ background: '#3741D4', color: '#fff', border: 'none', borderRadius: '30px', padding: '14px 40px', fontFamily: "'Poppins', sans-serif", fontSize: '15px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 14px rgba(55,65,212,0.3)' }}>Next Step</button>
+             <button onClick={() => navigate('/dashboard')} style={{ background: '#3741D4', color: '#fff', border: 'none', borderRadius: '30px', padding: '14px 40px', fontFamily: "'Poppins', sans-serif", fontSize: '15px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 14px rgba(55,65,212,0.3)' }}>Next Step</button>
           </div>
 
         </div>

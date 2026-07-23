@@ -11,23 +11,16 @@ export default function ForgotPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Reset password for:', email);
-    navigate('/verify-otp');
+    navigate('/verify-otp', { state: { from: 'forgot' } });
   };
 
   return (
-    /* White floating card */
     <div
-      className="animate-slide-in"
       role="main"
       aria-label="Forgot Password form"
       style={{
         width: '100%',
-        maxWidth: '460px',
-        background: '#FFFFFF',
-        borderRadius: '28px',
-        boxShadow: '0 10px 40px rgba(0,0,0,0.08)',
-        padding: '40px 40px 44px',
-        margin: '0 24px',
+        boxSizing: 'border-box',
       }}
     >
       {/* Top row: back arrow + logo */}

@@ -17,66 +17,87 @@ export default function RoleSelection() {
   const navigate = useNavigate();
 
   const handleNext = () => {
-    // Navigate to the signup form
     navigate('/signup');
   };
 
   return (
     <div
-      className="animate-slide-in"
       style={{
         width: '100%',
-        maxWidth: '500px',
-        margin: '0 auto',
-        padding: '0 32px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        boxSizing: 'border-box',
       }}
     >
-      <Logo centered />
+      <Logo centered style={{ marginBottom: '0px', height: '26px' }} />
 
       <p
         style={{
           fontFamily: "'Poppins', sans-serif",
-          fontSize: '15px',
-          color: '#6B7280',
+          fontSize: '12px',
+          color: '#8B8FA3',
           textAlign: 'center',
-          marginBottom: '32px',
-          lineHeight: 1.6,
+          marginTop: '14px',
+          marginBottom: '14px',
+          lineHeight: '18px',
+          maxWidth: '416px',
         }}
       >
         Thanks for your interest in Greelance! Before we get started, how do you want to sign up in Greelance?
       </p>
 
-      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px' }}>
+      <div
+        className="occupation-list"
+        style={{
+          width: '100%',
+          maxWidth: '416px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '8px',
+          marginBottom: '16px',
+        }}
+      >
         {roles.map((role) => {
           const isSelected = selectedRole === role;
           return (
             <button
               key={role}
               onClick={() => setSelectedRole(role)}
+              className={`occupation-pill ${isSelected ? 'selected' : ''}`}
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 width: '100%',
-                padding: '16px 24px',
-                borderRadius: '12px',
-                border: isSelected ? '2px solid #22C55E' : '1.5px solid #E5E7EB',
-                background: isSelected ? '#22C55E' : '#fff',
+                height: '46px',
+                padding: '10px 12px',
+                borderRadius: '7.5px',
+                border: isSelected ? '1.33px solid #22C55E' : '1.33px solid #E5E7EB',
+                background: isSelected ? '#22C55E' : 'transparent',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
                 fontFamily: "'Poppins', sans-serif",
-                fontSize: '15px',
+                fontSize: '14px',
                 fontWeight: isSelected ? 600 : 500,
-                color: isSelected ? '#fff' : '#1F2937',
+                color: isSelected ? '#ffffff' : '#1F2333',
+                boxSizing: 'border-box',
               }}
             >
-              {role}
+              <span style={{ color: isSelected ? '#ffffff' : '#1F2333' }}>{role}</span>
               {isSelected && (
-                <div style={{ background: '#fff', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <div
+                  style={{
+                    background: '#fff',
+                    borderRadius: '50%',
+                    width: '20px',
+                    height: '20px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 </div>
@@ -88,27 +109,44 @@ export default function RoleSelection() {
 
       <button
         onClick={handleNext}
+        className="btn-next"
         style={{
-          width: '160px',
-          height: '48px',
-          borderRadius: '24px',
-          background: '#3741D4',
-          color: '#fff',
+          width: '99px',
+          height: '30px',
+          padding: '6px 32px',
+          marginBottom: '12px',
+          background: '#4B3FF2',
+          color: '#FFFFFF',
           fontFamily: "'Poppins', sans-serif",
-          fontWeight: 600,
-          fontSize: '15px',
+          fontWeight: '600',
+          fontSize: '12px',
           border: 'none',
+          borderRadius: '7.5px',
           cursor: 'pointer',
-          marginBottom: '24px',
-          boxShadow: '0 4px 14px rgba(55,65,212,0.3)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: 'rgba(75, 63, 242, 0.25) 0px 4px 10px 0px',
+          transition: 'background 0.2s',
         }}
+        onMouseEnter={(e) => e.currentTarget.style.background = '#3B30E2'}
+        onMouseLeave={(e) => e.currentTarget.style.background = '#4B3FF2'}
       >
         Next
       </button>
 
-      <div style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', color: '#6B7280', marginBottom: '16px' }}>
+      <div
+        className="signin-text"
+        style={{
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: '12px',
+          color: '#8B8FA3',
+          marginBottom: '12px',
+          lineHeight: '18px',
+        }}
+      >
         Already have an account?{' '}
-        <Link to="/login" style={{ color: '#3741D4', fontWeight: 600, textDecoration: 'none' }}>
+        <Link to="/login" style={{ color: '#4B3FF2', fontWeight: 600, textDecoration: 'none' }}>
           Sign In
         </Link>
       </div>
