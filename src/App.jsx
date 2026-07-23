@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import LeftBanner from './components/LeftBanner';
 import RoleLeftBanner from './components/RoleLeftBanner';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -20,21 +19,18 @@ import CompleteProfile from './pages/CompleteProfile';
  * Dynamically switches the LeftBanner based on the route.
  */
 function SplitLayout({ children }) {
-  const location = useLocation();
-  const isRoleSelection = location.pathname === '/';
-
   return (
     <div
       style={{
         display: 'flex',
         width: '100vw',
         height: '100vh',
-        fontFamily: "'Poppins', sans-serif",
+        fontFamily: "'Lexend', sans-serif",
         overflow: 'hidden',
       }}
     >
       {/* Left blue panel */}
-      {isRoleSelection ? <RoleLeftBanner /> : <LeftBanner />}
+      <RoleLeftBanner />
 
       {/* Right light panel */}
       <section

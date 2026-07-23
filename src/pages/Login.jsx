@@ -1,150 +1,145 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../components/Logo';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import SocialLogin from '../components/SocialLogin';
 
-function EyeIcon({ show, onClick }) {
-  return (
-    <button
-      type="button"
-      aria-label={show ? 'Hide password' : 'Show password'}
-      onClick={onClick}
-      style={{
-        background: 'none',
-        border: 'none',
-        cursor: 'pointer',
-        padding: 0,
-        display: 'flex',
-        alignItems: 'center',
-        color: '#9CA3AF',
-      }}
-    >
-      {show ? (
-        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
-          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
-          <line x1="1" y1="1" x2="23" y2="23" />
-        </svg>
-      ) : (
-        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-          <circle cx="12" cy="12" r="3" />
-        </svg>
-      )}
-    </button>
-  );
-}
+const F = "'Lexend', sans-serif";
 
 export default function Login() {
-  const [email, setEmail]       = useState('');
-  const [password, setPassword] = useState('');
-  const [showPw, setShowPw]     = useState(false);
   const navigate = useNavigate();
+  const [email, setEmail] = useState('johnsmith@gmail.com');
+  const [password, setPassword] = useState('••••••••••');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Sign in with:', email);
-    // Navigate directly into the Greelance onboarding flow
     navigate('/form');
   };
 
   return (
-    <div
-      role="main"
-      aria-label="Login form"
-      style={{
-        width: '100%',
-        boxSizing: 'border-box',
-      }}
-    >
-      <Logo centered style={{ marginBottom: '14px', height: '26px' }} />
+    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      
+      {/* Brand Logo */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '32px', cursor: 'pointer' }} onClick={() => navigate('/')}>
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+          <path d="M20 4 L28 10 L24 10 C24 10 28 14 28 20" stroke="#22D3A6" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <path d="M20 4 L12 10 L16 10" stroke="#22D3A6" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <path d="M20 36 L12 30 L16 30 C16 30 12 26 12 20" stroke="#22D3A6" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <path d="M20 36 L28 30 L24 30" stroke="#22D3A6" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        </svg>
+        <span style={{ fontFamily: F, fontSize: '20px', fontWeight: 700, letterSpacing: '0.5px' }}>
+          <span style={{ color: '#050A5F' }}>GREE</span>
+          <span style={{ color: '#22D3A6' }}>LANCE</span>
+        </span>
+      </div>
 
-      <h1
+      {/* Card Container */}
+      <div
         style={{
-          fontFamily: "'Poppins', sans-serif",
-          fontSize: '24px',
-          fontWeight: 700,
-          color: '#0A0F2E',
-          marginBottom: '20px',
-          lineHeight: 1.2,
-          textAlign: 'center',
+          width: '360px',
+          maxWidth: '100%',
+          background: '#FFFFFF',
+          borderRadius: '20px',
+          border: '1px solid #E0E2FE',
+          padding: '32px 28px',
+          boxShadow: '0 10px 30px rgba(5,10,95,0.05)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          boxSizing: 'border-box',
         }}
       >
-        Welcome!
-      </h1>
+        <h2 style={{ fontFamily: F, fontSize: '18px', fontWeight: 700, color: '#050A5F', margin: '0 0 24px 0', textAlign: 'center' }}>
+          Welcome Back!
+        </h2>
 
-      <form onSubmit={handleSubmit} noValidate>
-        <Input
-          id="email"
-          label="Email Address"
-          type="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoComplete="email"
-        />
+        <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {/* Email Field */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <label style={{ fontFamily: F, fontSize: '12px', fontWeight: 600, color: '#050A5F' }}>Email Address</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={inputStyle}
+              required
+            />
+          </div>
 
-        <Input
-          id="password"
-          label="Password"
-          type={showPw ? 'text' : 'password'}
-          placeholder="••••••••"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
-          rightElement={<EyeIcon show={showPw} onClick={() => setShowPw((v) => !v)} />}
-        />
+          {/* Password Field */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', position: 'relative' }}>
+            <label style={{ fontFamily: F, fontSize: '12px', fontWeight: 600, color: '#050A5F' }}>Password</label>
+            <div style={{ position: 'relative', width: '100%' }}>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                style={{ ...inputStyle, paddingRight: '40px' }}
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+                  background: 'none', border: 'none', cursor: 'pointer', color: '#ADAFDD', display: 'flex',
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '2px' }}>
+              <Link to="/forgot-password" style={{ fontFamily: F, fontSize: '11px', color: '#3038BD', textDecoration: 'none', fontWeight: 500 }}>
+                Forget Password?
+              </Link>
+            </div>
+          </div>
 
-        {/* Links row */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '24px',
-            marginTop: '-4px',
-          }}
-        >
-          <Link
-            to="/signup"
+          {/* Sign In Button */}
+          <button
+            type="submit"
             style={{
-              fontFamily: "'Poppins', sans-serif",
-              fontSize: '13px',
-              fontWeight: 500,
-              color: '#3741D4',
-              textDecoration: 'none',
+              background: '#3038BD', color: '#fff', border: 'none',
+              borderRadius: '20px', height: '38px', width: '100%',
+              fontFamily: F, fontSize: '13px', fontWeight: 600,
+              cursor: 'pointer', marginTop: '12px',
+              boxShadow: '0 4px 12px rgba(48,56,189,0.3)',
             }}
-            aria-label="Create account"
-            onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
-            onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
           >
-            Create Account
+            Sign In
+          </button>
+        </form>
+
+        {/* Signup Link */}
+        <p style={{ fontFamily: F, fontSize: '12px', color: '#050A5F', margin: '20px 0 0 0', textAlign: 'center' }}>
+          Don't have an account?{' '}
+          <Link to="/signup" style={{ color: '#3038BD', fontWeight: 600, textDecoration: 'none' }}>
+            Sign Up
           </Link>
-          <Link
-            to="/forgot-password"
-            style={{
-              fontFamily: "'Poppins', sans-serif",
-              fontSize: '13px',
-              fontWeight: 500,
-              color: '#3741D4',
-              textDecoration: 'none',
-            }}
-            aria-label="Forgot password"
-            onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
-            onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
-          >
-            Forgot Password?
-          </Link>
+        </p>
+      </div>
+
+      {/* Social Sign In at bottom */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', marginTop: '24px' }}>
+        <span style={{ fontFamily: F, fontSize: '11px', color: '#ADAFDD' }}>You can also signin with</span>
+        <div style={{ display: 'flex', gap: '14px' }}>
+          {/* LinkedIn */}
+          <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#0A66C2', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }}>in</div>
+          {/* Google */}
+          <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#fff', border: '1px solid #E0E2FE', color: '#EA4335', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', fontWeight: 700, cursor: 'pointer' }}>G</div>
+          {/* Apple */}
+          <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#000', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', cursor: 'pointer' }}></div>
         </div>
+      </div>
 
-        <Button type="submit" id="sign-in-btn">
-          Sign In
-        </Button>
-      </form>
-
-      <SocialLogin />
     </div>
   );
 }
+
+const inputStyle = {
+  width: '100%', height: '40px', padding: '0 16px',
+  borderRadius: '20px', border: '1px solid #E0E2FE',
+  background: '#F3F7FF', fontFamily: F, fontSize: '13px', color: '#050A5F',
+  outline: 'none', boxSizing: 'border-box',
+};
