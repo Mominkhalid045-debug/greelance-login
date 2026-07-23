@@ -1,26 +1,18 @@
 import { useNavigate, Link } from 'react-router-dom';
+import Logo from '../components/Logo';
 
 export default function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ width: '100vw', minHeight: '100vh', background: '#F4F5FB', fontFamily: "'Poppins', sans-serif", color: '#0A0F2E', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ width: '100vw', minHeight: '100vh', background: '#F4F5FB', fontFamily: "'Lexend', sans-serif", color: '#0A0F2E', display: 'flex', flexDirection: 'column' }}>
       
       {/* Top Navbar */}
       <header style={{ background: '#FFFFFF', borderBottom: '1px solid #E5E7EB', padding: '16px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 2px 8px rgba(0,0,0,0.03)' }}>
         
         {/* Brand Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }} onClick={() => navigate('/')}>
-          <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-            <path d="M20 4 L28 10 L24 10 C24 10 28 14 28 20" stroke="#4ADE80" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-            <path d="M20 4 L12 10 L16 10" stroke="#4ADE80" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-            <path d="M20 36 L12 30 L16 30 C16 30 12 26 12 20" stroke="#4ADE80" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-            <path d="M20 36 L28 30 L24 30" stroke="#4ADE80" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-          </svg>
-          <span style={{ fontSize: '22px', fontWeight: 800, letterSpacing: '-0.5px' }}>
-            <span style={{ color: '#0A0F2E' }}>GREE</span>
-            <span style={{ color: '#22C55E' }}>LANCE</span>
-          </span>
+        <div style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+          <Logo size="small" />
         </div>
 
         {/* Navigation items */}

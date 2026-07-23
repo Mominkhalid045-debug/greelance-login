@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Logo from '../components/Logo';
 
 const F = "'Lexend', sans-serif";
 
@@ -18,17 +19,8 @@ export default function Login() {
     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       
       {/* Brand Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '32px', cursor: 'pointer' }} onClick={() => navigate('/')}>
-        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
-          <path d="M20 4 L28 10 L24 10 C24 10 28 14 28 20" stroke="#22D3A6" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-          <path d="M20 4 L12 10 L16 10" stroke="#22D3A6" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-          <path d="M20 36 L12 30 L16 30 C16 30 12 26 12 20" stroke="#22D3A6" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-          <path d="M20 36 L28 30 L24 30" stroke="#22D3A6" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-        </svg>
-        <span style={{ fontFamily: F, fontSize: '20px', fontWeight: 700, letterSpacing: '0.5px' }}>
-          <span style={{ color: '#050A5F' }}>GREE</span>
-          <span style={{ color: '#22D3A6' }}>LANCE</span>
-        </span>
+      <div style={{ marginBottom: '32px', cursor: 'pointer' }} onClick={() => navigate('/')}>
+        <Logo centered size="medium" />
       </div>
 
       {/* Card Container */}

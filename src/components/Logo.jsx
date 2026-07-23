@@ -1,77 +1,58 @@
+const F = "'Lexend', sans-serif";
+
 /**
- * Greelance Logo — matches the reference exactly.
- * Recycling-arrows G mark (green) + "GREE" dark navy bold + "LANCE" green regular weight.
+ * Greelance Logo — Pixel-perfect match to official branding:
+ * Green hexagon ribbon G mark + "GREE" (bold charcoal #2B2F42) + "LANCE" (thin mint green #34E096).
  */
-export default function Logo({ centered = false, style = {} }) {
+export default function Logo({ centered = false, size = 'medium', style = {} }) {
+  const iconHeight = size === 'small' ? 24 : size === 'large' ? 40 : 32;
+  const fontSize = size === 'small' ? 18 : size === 'large' ? 28 : 22;
+
   return (
     <div
       aria-label="Greelance logo"
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '8px',
+        gap: '10px',
         justifyContent: centered ? 'center' : 'flex-start',
-        marginBottom: '32px',
         ...style,
       }}
     >
-      {/* Recycling arrows G-mark icon */}
+      {/* Official Greelance Green Hexagon Ribbon Icon */}
       <svg
-        width="36"
-        height="36"
-        viewBox="0 0 40 40"
+        width={Math.round(iconHeight * 1.15)}
+        height={iconHeight}
+        viewBox="0 0 46 40"
         fill="none"
-        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
         style={{ flexShrink: 0 }}
       >
-        {/* Top-left arrow arc */}
+        {/* Top green polygon */}
         <path
-          d="M20 4 L28 10 L24 10 C24 10 28 14 28 20"
-          stroke="#4ADE80"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
+          d="M12 0H34L46 12L34 24H24L31 17L24 10H12L0 22V12L12 0Z"
+          fill="#34E096"
         />
+        {/* Bottom green polygon */}
         <path
-          d="M20 4 L12 10 L16 10"
-          stroke="#4ADE80"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        {/* Bottom-right arrow arc */}
-        <path
-          d="M20 36 L12 30 L16 30 C16 30 12 26 12 20"
-          stroke="#4ADE80"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        <path
-          d="M20 36 L28 30 L24 30"
-          stroke="#4ADE80"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
+          d="M34 40H12L0 28L12 16H22L15 23L22 30H34L46 18V28L34 40Z"
+          fill="#34E096"
         />
       </svg>
 
       {/* Wordmark */}
       <span
         style={{
-          fontFamily: "'Poppins', sans-serif",
-          fontSize: '24px',
+          fontFamily: F,
+          fontSize: `${fontSize}px`,
           lineHeight: 1,
           display: 'flex',
           alignItems: 'center',
+          letterSpacing: '0.5px',
         }}
       >
-        <span style={{ color: '#0A0F2E', fontWeight: 700 }}>GREE</span>
-        <span style={{ color: '#22C55E', fontWeight: 400 }}>LANCE</span>
+        <span style={{ color: '#2B2F42', fontWeight: 800 }}>GREE</span>
+        <span style={{ color: '#34E096', fontWeight: 300, marginLeft: '1px' }}>LANCE</span>
       </span>
     </div>
   );
