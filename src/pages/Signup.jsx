@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
-import Input from '../components/Input';
-import Button from '../components/Button';
 import SocialLogin from '../components/SocialLogin';
+
+const F = "'Lexend', sans-serif";
 
 function EyeIcon({ show, onClick }) {
   return (
@@ -38,16 +38,25 @@ function EyeIcon({ show, onClick }) {
 }
 
 export default function Signup() {
-  const [name, setName]         = useState('');
-  const [email, setEmail]       = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPw, setShowPw]     = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPw, setShowPw] = useState(false);
+  const [showConfirmPw, setShowConfirmPw] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Sign up with:', name, email);
-    navigate('/verify-otp', { state: { from: 'signup' } });
+    if (!email) {
+      alert('Please enter your email address');
+      return;
+    }
+    if (password && confirmPassword && password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+    // Navigate directly to OTP Verification with email state
+    navigate('/verify-otp', { state: { email } });
   };
 
   return (
@@ -57,88 +66,163 @@ export default function Signup() {
       style={{
         width: '100%',
         boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}
     >
-      <Logo centered style={{ marginBottom: '14px', height: '26px' }} />
+      <div style={{ marginBottom: '24px' }}>
+        <Logo centered size="medium" />
+      </div>
 
-      <h1
+      {/* Main Card Container */}
+      <div
         style={{
-          fontFamily: "'Poppins', sans-serif",
-          fontSize: '24px',
-          fontWeight: 700,
-          color: '#0A0F2E',
-          marginBottom: '20px',
-          lineHeight: 1.2,
-          textAlign: 'center',
+          width: '100%',
+          maxWidth: '440px',
+          background: '#FFFFFF',
+          borderRadius: '24px',
+          padding: '36px 36px 28px',
+          boxShadow: '0 12px 36px rgba(5,10,95,0.06)',
+          border: '0.75px solid #E0E2FE',
+          boxSizing: 'border-box',
         }}
       >
-        Create Account
-      </h1>
-
-      <form onSubmit={handleSubmit} noValidate>
-        <Input
-          id="name"
-          label="Full Name"
-          type="text"
-          placeholder="Enter your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          autoComplete="name"
-        />
-
-        <Input
-          id="email"
-          label="Email Address"
-          type="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoComplete="email"
-        />
-
-        <Input
-          id="password"
-          label="Password"
-          type={showPw ? 'text' : 'password'}
-          placeholder="••••••••"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="new-password"
-          rightElement={<EyeIcon show={showPw} onClick={() => setShowPw((v) => !v)} />}
-        />
-
-        {/* Already have account link */}
-        <div
+        <h1
           style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
+            fontFamily: F,
+            fontSize: '20px',
+            fontWeight: 700,
+            color: '#050A5F',
             marginBottom: '24px',
-            marginTop: '-4px',
+            textAlign: 'left',
           }}
         >
+          Create Account
+        </h1>
+
+        <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {/* Email Address */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <label style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F' }}>
+              Email Address
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="johnsmith@gmail.com"
+              style={inputStyle}
+              required
+            />
+          </div>
+
+          {/* Password */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <label style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F' }}>
+              Password
+            </label>
+            <div style={{ position: 'relative', width: '100%' }}>
+              <input
+                type={showPw ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••••••"
+                style={{ ...inputStyle, paddingRight: '40px' }}
+                required
+              />
+              <div style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)' }}>
+                <EyeIcon show={showPw} onClick={() => setShowPw(!showPw)} />
+              </div>
+            </div>
+          </div>
+
+          {/* Confirm Password */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <label style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F' }}>
+              Confirm Password
+            </label>
+            <div style={{ position: 'relative', width: '100%' }}>
+              <input
+                type={showConfirmPw ? 'text' : 'password'}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="johnsmith123%^&"
+                style={{ ...inputStyle, paddingRight: '40px' }}
+                required
+              />
+              <div style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)' }}>
+                <EyeIcon show={showConfirmPw} onClick={() => setShowConfirmPw(!showConfirmPw)} />
+              </div>
+            </div>
+          </div>
+
+          {/* Password Requirement Hint */}
+          <p style={{ fontFamily: F, fontSize: '9px', color: '#6B7280', margin: '2px 0 8px', lineHeight: '14px' }}>
+            <span style={{ color: '#22D3A6' }}>*</span> Password must contain 8 characters, uppercase letters, lower case letters, numbers, symbols
+          </p>
+
+          {/* Sign Up Button */}
+          <button
+            type="submit"
+            style={{
+              background: '#3038BD',
+              color: '#FFFFFF',
+              border: 'none',
+              borderRadius: '20px',
+              height: '36px',
+              width: '120px',
+              fontFamily: F,
+              fontSize: '12px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              alignSelf: 'center',
+              boxShadow: '0 4px 12px rgba(48,56,189,0.3)',
+              marginTop: '4px',
+            }}
+          >
+            Sign Up
+          </button>
+        </form>
+
+        {/* Already have account */}
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <span style={{ fontFamily: F, fontSize: '11.5px', color: '#050A5F', opacity: 0.8 }}>
+            Already have an account?{' '}
+          </span>
           <Link
             to="/login"
             style={{
-              fontFamily: "'Poppins', sans-serif",
-              fontSize: '13px',
-              fontWeight: 500,
-              color: '#3741D4',
+              fontFamily: F,
+              fontSize: '11.5px',
+              fontWeight: 600,
+              color: '#3038BD',
               textDecoration: 'none',
             }}
-            aria-label="Sign in"
-            onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
-            onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
           >
-            Already have an account? Sign In
+            Sign In
           </Link>
         </div>
+      </div>
 
-        <Button type="submit" id="sign-up-btn">
-          Sign Up
-        </Button>
-      </form>
-
-      <SocialLogin />
+      {/* Social Login */}
+      <div style={{ marginTop: '24px' }}>
+        <SocialLogin />
+      </div>
     </div>
   );
 }
+
+const inputStyle = {
+  width: '100%',
+  height: '39px',
+  padding: '0 16px',
+  borderRadius: '45px',
+  border: '0.75px solid #E0E2FE',
+  background: '#F3F7FF',
+  fontFamily: F,
+  fontSize: '12px',
+  color: '#050A5F',
+  outline: 'none',
+  boxSizing: 'border-box',
+};
