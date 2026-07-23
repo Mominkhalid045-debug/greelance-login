@@ -73,7 +73,7 @@ export default function Dashboard() {
         {/* Welcome Banner */}
         <div style={{ background: 'linear-gradient(135deg, #1E1B4B 0%, #3741D4 100%)', borderRadius: '24px', padding: '36px 40px', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 10px 30px rgba(55,65,212,0.2)', marginBottom: '32px' }}>
           <div>
-            <h1 style={{ fontSize: '28px', fontWeight: 700, margin: '0 0 10px 0' }}>Welcome to Greelance! 👋</h1>
+            <h1 style={{ fontSize: '28px', fontWeight: 700, margin: '0 0 10px 0' }}>Welcome to Greelance, Momin Khalid! 👋</h1>
             <p style={{ fontSize: '15px', color: '#C7D2FE', margin: '0 0 20px 0', maxWidth: '540px', lineHeight: '1.6' }}>
               Your account is successfully created. Complete your freelancer profile setup to start exploring top freelance opportunities and skill assessments.
             </p>

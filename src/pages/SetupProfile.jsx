@@ -13,8 +13,8 @@ export default function SetupProfile() {
         {/* Personal Info Grid */}
         <div style={{ width: '100%', maxWidth: '1320px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '15px', marginTop: '15px' }}>
-            <FormField label="First Name" defaultValue="Alex" />
-            <FormField label="Last Name" defaultValue="Morgan" />
+            <FormField label="First Name" defaultValue="Momin" />
+            <FormField label="Last Name" defaultValue="Khalid" />
             <FormField label="Country of Residence" type="select" options={['United States','United Kingdom','Canada']} />
             <FormField label="Country of Citizenship" type="select" options={['United States','United Kingdom','Canada']} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

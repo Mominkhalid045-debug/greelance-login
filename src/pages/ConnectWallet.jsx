@@ -6,8 +6,8 @@ export default function ConnectWallet() {
   const navigate = useNavigate();
   const [selectedWallet, setSelectedWallet] = useState(null);
   const [uniqueAddress, setUniqueAddress] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('Momin');
+  const [lastName, setLastName] = useState('Khalid');
 
   const wallets = [
     { name: 'CoinBase', color: '#2563EB', letter: 'C', shape: 'circle' },
