@@ -1,31 +1,29 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const WALLETS = [
+  { name: 'CoinBase', icon: '🔵', color: '#2563EB' },
+  { name: 'Fortmatic', icon: '🟣', color: '#6366F1' },
+  { name: 'MetaMask', icon: '🦊', color: '#F59E0B' },
+];
+
 export default function ConnectWallet() {
   const navigate = useNavigate();
-  const [connectedWallet, setConnectedWallet] = useState(null);
-
-  const wallets = [
-    { name: 'MetaMask', icon: '🦊', desc: 'Connect using browser extension or mobile app' },
-    { name: 'Phantom', icon: '👻', desc: 'Solana & Multi-chain Web3 wallet' },
-    { name: 'WalletConnect', icon: '🔗', desc: 'Scan with WalletConnect to connect mobile wallet' },
-    { name: 'Coinbase Wallet', icon: '🔵', desc: 'Connect using Coinbase Wallet mobile app' }
-  ];
-
-  const handleConnect = (walletName) => {
-    setConnectedWallet(`${walletName} (0x71C...8A3E)`);
-  };
+  const [selectedWallet, setSelectedWallet] = useState(null);
+  const [uniqueAddress, setUniqueAddress] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#EEF0FA', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       
       {/* Top Header / Progress Bar */}
-      <div style={{ flexShrink: 0, display: 'flex', background: '#fff', padding: '16px 32px', alignItems: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', zIndex: 10 }}>
+      <div style={{ flexShrink: 0, display: 'flex', background: '#fff', padding: '0', alignItems: 'stretch', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', zIndex: 10 }}>
         
         {/* Back Button */}
         <button 
           onClick={() => navigate('/skills')}
-          style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#22C55E', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', flexShrink: 0 }}
+          style={{ width: '56px', background: '#22C55E', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -33,113 +31,177 @@ export default function ConnectWallet() {
         </button>
 
         {/* Steps */}
-        <div style={{ display: 'flex', flex: 1, gap: '32px', overflowX: 'auto' }}>
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/form')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 1</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Upload Resume</p>
-          </div>
-          
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/setup-profile')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 2</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Setup Profile</p>
-          </div>
-
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/skills')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 3</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Choose Skill</p>
-          </div>
-
-          <div style={{ background: '#E0E7FF', padding: '8px 20px', borderRadius: '8px', borderLeft: '4px solid #3741D4', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/connect-wallet')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#22C55E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 4</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#3741D4', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Connect Wallet</p>
-          </div>
-          
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/complete-profile')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 5</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Complete Profile</p>
-          </div>
+        <div style={{ display: 'flex', flex: 1 }}>
+          {[
+            { num: 1, label: 'Upload Resume', path: '/form' },
+            { num: 2, label: 'Setup Profile', path: '/setup-profile' },
+            { num: 3, label: 'Choose Skill', path: '/skills' },
+            { num: 4, label: 'Connect Wallet', path: '/connect-wallet' },
+            { num: 5, label: 'Complete Profile', path: '/complete-profile' },
+          ].map(step => {
+            const isActive = step.num === 4;
+            return (
+              <div
+                key={step.num}
+                onClick={() => navigate(step.path)}
+                style={{
+                  flex: 1,
+                  padding: '14px 16px',
+                  cursor: 'pointer',
+                  background: isActive ? '#3741D4' : 'transparent',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}
+              >
+                <p style={{ margin: 0, fontSize: '11px', color: isActive ? '#93C5FD' : '#22C55E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step {step.num}</p>
+                <p style={{ margin: 0, fontSize: '13px', color: isActive ? '#FFFFFF' : '#0A0F2E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>{step.label}</p>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Exit Icon */}
-        <button onClick={() => navigate('/')} style={{ width: '48px', height: '48px', borderRadius: '24px', background: '#F3F4F6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4B5563" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+        {/* Forward Arrow */}
+        <button onClick={() => navigate('/complete-profile')} style={{ width: '56px', background: '#fff', border: 'none', borderLeft: '1px solid #E5E7EB', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3741D4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </button>
       </div>
 
-      {/* Main Container - Scrollable */}
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '40px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ width: '100%', maxWidth: '640px', background: '#FFFFFF', borderRadius: '24px', padding: '40px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+      {/* Main Content Area - Scrollable */}
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '32px 40px' }}>
+        <div style={{ maxWidth: '960px', margin: '0 auto', background: '#FFFFFF', borderRadius: '20px', padding: '36px 40px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
           
-          <h2 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '22px', fontWeight: 700, color: '#0A0F2E', marginBottom: '8px', textAlign: 'center' }}>
-            Connect Your Crypto Wallet
+          {/* Title */}
+          <h2 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '22px', fontWeight: 700, color: '#0A0F2E', margin: '0 0 4px 0' }}>
+            Connect Wallet
           </h2>
-          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', color: '#6B7280', marginBottom: '32px', textAlign: 'center' }}>
-            Connect a web3 wallet to receive crypto payments directly for completed freelance milestone contracts.
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', color: '#6B7280', margin: '0 0 32px 0' }}>
+            Select a wallet you want to connect for your payment method. You can change the wallet after a sign in too.
           </p>
 
-          {/* Connected Badge */}
-          {connectedWallet && (
-            <div style={{ background: '#DCFCE7', border: '1px solid #86EFAC', borderRadius: '16px', padding: '16px', marginBottom: '24px', textAlign: 'center' }}>
-              <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: '#166534' }}>
-                ✓ Connected: {connectedWallet}
-              </p>
-            </div>
-          )}
-
-          {/* Wallet List */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '32px' }}>
-            {wallets.map(w => (
-              <div
-                key={w.name}
-                onClick={() => handleConnect(w.name)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '16px',
-                  padding: '16px 20px',
-                  borderRadius: '16px',
-                  border: '1px solid #E5E7EB',
-                  background: '#F9FAFB',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s'
-                }}
-              >
-                <span style={{ fontSize: '28px' }}>{w.icon}</span>
-                <div style={{ flex: 1 }}>
-                  <h4 style={{ margin: '0 0 2px 0', fontSize: '15px', fontWeight: 600, color: '#0A0F2E' }}>{w.name}</h4>
-                  <p style={{ margin: 0, fontSize: '12px', color: '#6B7280' }}>{w.desc}</p>
-                </div>
-                <button 
-                  type="button"
-                  style={{ background: '#3741D4', color: '#FFFFFF', border: 'none', borderRadius: '12px', padding: '8px 16px', fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}
+          {/* Wallet Cards */}
+          <div style={{ display: 'flex', gap: '20px', marginBottom: '40px' }}>
+            {WALLETS.map(w => {
+              const isSelected = selectedWallet === w.name;
+              return (
+                <div
+                  key={w.name}
+                  onClick={() => setSelectedWallet(w.name)}
+                  style={{
+                    width: '140px',
+                    padding: '24px 16px',
+                    borderRadius: '16px',
+                    border: isSelected ? '2px solid #3741D4' : '1.5px solid #E5E7EB',
+                    background: isSelected ? '#EEF2FF' : '#FFFFFF',
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    transition: 'all 0.15s',
+                  }}
                 >
-                  Connect
-                </button>
-              </div>
-            ))}
+                  {/* Wallet Icon */}
+                  <div style={{
+                    width: '56px',
+                    height: '56px',
+                    borderRadius: '16px',
+                    background: w.name === 'CoinBase' ? '#2563EB' : w.name === 'Fortmatic' ? '#6366F1' : '#F59E0B',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '0 auto 12px',
+                    fontSize: '24px',
+                    color: '#fff',
+                    fontWeight: 700,
+                  }}>
+                    {w.name === 'CoinBase' ? 'C' : w.name === 'Fortmatic' ? 'F' : 'M'}
+                  </div>
+                  <p style={{ margin: 0, fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#0A0F2E' }}>{w.name}</p>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Action Buttons */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #E5E7EB', paddingTop: '24px' }}>
-            <button 
-              onClick={() => navigate('/skills')}
-              style={{ background: 'transparent', color: '#6B7280', border: '1px solid #D1D5DB', borderRadius: '30px', padding: '12px 28px', fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: '14px', cursor: 'pointer' }}
-            >
-              Back
-            </button>
+          {/* Form Fields */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', marginBottom: '32px' }}>
+            <div>
+              <label style={{ display: 'block', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#0A0F2E', marginBottom: '8px' }}>Unique Address</label>
+              <input
+                type="text"
+                value={uniqueAddress}
+                onChange={(e) => setUniqueAddress(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  borderRadius: '10px',
+                  border: '1.5px solid #E5E7EB',
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: '13px',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#0A0F2E', marginBottom: '8px' }}>First Name</label>
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  borderRadius: '10px',
+                  border: '1.5px solid #E5E7EB',
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: '13px',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#0A0F2E', marginBottom: '8px' }}>Last Name</label>
+              <input
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  borderRadius: '10px',
+                  border: '1.5px solid #E5E7EB',
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: '13px',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Next Button */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <button 
               onClick={() => navigate('/complete-profile')}
-              style={{ background: '#3741D4', color: '#FFFFFF', border: 'none', borderRadius: '30px', padding: '12px 36px', fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: '14px', cursor: 'pointer', boxShadow: '0 4px 14px rgba(55,65,212,0.3)' }}
+              style={{
+                background: '#3741D4',
+                color: '#FFFFFF',
+                border: 'none',
+                borderRadius: '10px',
+                padding: '12px 40px',
+                fontFamily: "'Poppins', sans-serif",
+                fontSize: '14px',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
             >
-              Next Step: Complete Profile →
+              Next
             </button>
           </div>
 
         </div>
       </div>
-
     </div>
   );
 }

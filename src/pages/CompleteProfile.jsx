@@ -5,8 +5,6 @@ export default function CompleteProfile() {
   const navigate = useNavigate();
   const [profileImage, setProfileImage] = useState(null);
   const [aboutText, setAboutText] = useState('');
-  const [showPreviewModal, setShowPreviewModal] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleImageUpload = (e) => {
     const file = e.target.files?.[0];
@@ -29,12 +27,12 @@ export default function CompleteProfile() {
     <div style={{ width: '100vw', height: '100vh', background: '#EEF0FA', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       
       {/* Top Header / Progress Bar */}
-      <div style={{ flexShrink: 0, display: 'flex', background: '#fff', padding: '16px 32px', alignItems: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', zIndex: 10 }}>
+      <div style={{ flexShrink: 0, display: 'flex', background: '#fff', padding: '0', alignItems: 'stretch', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', zIndex: 10 }}>
         
         {/* Back Button */}
         <button 
           onClick={() => navigate('/connect-wallet')}
-          style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#22C55E', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', flexShrink: 0 }}
+          style={{ width: '56px', background: '#22C55E', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -42,90 +40,96 @@ export default function CompleteProfile() {
         </button>
 
         {/* Steps */}
-        <div style={{ display: 'flex', flex: 1, gap: '32px', overflowX: 'auto' }}>
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/form')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 1</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Upload Resume</p>
-          </div>
-          
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/setup-profile')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 2</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Setup Profile</p>
-          </div>
-
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/skills')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 3</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Choose Skill</p>
-          </div>
-
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/connect-wallet')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 4</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Connect Wallet</p>
-          </div>
-          
-          <div style={{ background: '#E0E7FF', padding: '8px 20px', borderRadius: '8px', borderLeft: '4px solid #3741D4', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/complete-profile')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#22C55E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 5</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#3741D4', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Complete Profile</p>
-          </div>
+        <div style={{ display: 'flex', flex: 1 }}>
+          {[
+            { num: 1, label: 'Upload Resume', path: '/form' },
+            { num: 2, label: 'Setup Profile', path: '/setup-profile' },
+            { num: 3, label: 'Choose Skill', path: '/skills' },
+            { num: 4, label: 'Connect Wallet', path: '/connect-wallet' },
+            { num: 5, label: 'Complete Profile', path: '/complete-profile' },
+          ].map(step => {
+            const isActive = step.num === 5;
+            return (
+              <div
+                key={step.num}
+                onClick={() => navigate(step.path)}
+                style={{
+                  flex: 1,
+                  padding: '14px 16px',
+                  cursor: 'pointer',
+                  background: isActive ? '#3741D4' : 'transparent',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}
+              >
+                <p style={{ margin: 0, fontSize: '11px', color: isActive ? '#93C5FD' : '#22C55E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step {step.num}</p>
+                <p style={{ margin: 0, fontSize: '13px', color: isActive ? '#FFFFFF' : '#0A0F2E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>{step.label}</p>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Exit Icon */}
-        <button onClick={() => navigate('/')} style={{ width: '48px', height: '48px', borderRadius: '24px', background: '#F3F4F6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4B5563" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+        {/* Forward Arrow placeholder */}
+        <div style={{ width: '56px', background: '#fff', borderLeft: '1px solid #E5E7EB', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </button>
+        </div>
       </div>
 
-      {/* Main Container - Scrollable */}
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '40px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ width: '100%', maxWidth: '850px', background: '#FFFFFF', borderRadius: '24px', padding: '48px 40px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+      {/* Main Content Area - Scrollable */}
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '32px 40px' }}>
+        <div style={{ maxWidth: '960px', margin: '0 auto', background: '#FFFFFF', borderRadius: '20px', padding: '48px 40px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
           
-          {/* Header Title & Subtitle */}
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <h1 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '26px', fontWeight: 700, color: '#0A0F2E', marginBottom: '8px' }}>
+          {/* Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '22px', fontWeight: 700, color: '#3741D4', margin: '0 0 6px 0' }}>
               Complete Profile
-            </h1>
+            </h2>
             <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', color: '#6B7280', margin: 0 }}>
               Upload your photo and write about your work to start your Greelance journey.
             </p>
           </div>
 
-          {/* Profile Picture Upload Box */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
+          {/* Profile Picture Upload */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '36px' }}>
             <label style={{ cursor: 'pointer' }}>
               <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
               <div 
                 style={{
-                  width: '320px',
-                  padding: '16px 24px',
-                  borderRadius: '16px',
-                  background: '#EEF2FF',
-                  border: '1.5px solid #C7D2FE',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '16px',
-                  transition: 'all 0.2s'
+                  gap: '14px',
+                  padding: '12px 24px',
+                  borderRadius: '14px',
+                  background: '#EEF2FF',
+                  border: '1.5px solid #C7D2FE',
+                  transition: 'all 0.2s',
                 }}
               >
                 {/* Avatar Icon */}
-                <div style={{ width: '48px', height: '48px', borderRadius: '24px', background: '#E0E7FF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', flexShrink: 0 }}>
+                <div style={{ width: '44px', height: '44px', borderRadius: '22px', background: '#E0E7FF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', position: 'relative' }}>
                   {profileImage ? (
                     <img src={profileImage} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   ) : (
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3741D4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
+                    <>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3741D4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                      {/* Green collar accent */}
+                      <div style={{ position: 'absolute', bottom: '0', left: '50%', transform: 'translateX(-50%)', width: '28px', height: '10px', background: '#22C55E', borderRadius: '0 0 14px 14px' }}></div>
+                    </>
                   )}
                 </div>
 
-                <span style={{ flex: 1, fontFamily: "'Poppins', sans-serif", fontSize: '14px', fontWeight: 600, color: '#0A0F2E' }}>
-                  {profileImage ? 'Change Profile Picture' : 'Upload Profile Picture'}
+                <span style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', fontWeight: 600, color: '#0A0F2E' }}>
+                  Upload Profile Picture
                 </span>
 
-                {/* Upload Arrow Icon */}
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3741D4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                {/* Upload Arrow */}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3741D4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                   <polyline points="17 8 12 3 7 8" />
                   <line x1="12" y1="3" x2="12" y2="15" />
@@ -139,29 +143,26 @@ export default function CompleteProfile() {
           </div>
 
           {/* About Section */}
-          <div style={{ marginBottom: '40px' }}>
+          <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
               <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '15px', fontWeight: 700, color: '#0A0F2E' }}>
                 About
               </label>
 
-              {/* Modify With AI Button */}
               <button 
                 type="button"
                 onClick={handleModifyWithAI}
                 style={{
-                  background: '#EEF2FF',
-                  color: '#3741D4',
-                  border: '1px solid #C7D2FE',
-                  borderRadius: '20px',
-                  padding: '6px 16px',
+                  background: 'transparent',
+                  color: '#6B7280',
+                  border: 'none',
                   fontFamily: "'Poppins', sans-serif",
                   fontSize: '13px',
-                  fontWeight: 600,
+                  fontWeight: 500,
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px'
+                  gap: '6px',
                 }}
               >
                 <span>✨</span> Modify With AI
@@ -177,100 +178,20 @@ export default function CompleteProfile() {
                 width: '100%',
                 padding: '16px 20px',
                 borderRadius: '16px',
-                border: '1px solid #E0E2FE',
+                border: '1.5px solid #E5E7EB',
                 background: '#F9FAFD',
                 fontFamily: "'Poppins', sans-serif",
                 fontSize: '14px',
                 color: '#0A0F2E',
                 outline: 'none',
                 resize: 'vertical',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
               }}
             />
           </div>
 
-          {/* Action Row */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E5E7EB', paddingTop: '24px' }}>
-            <button 
-              onClick={() => navigate('/connect-wallet')}
-              style={{ background: 'transparent', color: '#6B7280', border: '1px solid #D1D5DB', borderRadius: '30px', padding: '12px 32px', fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: '14px', cursor: 'pointer' }}
-            >
-              Back
-            </button>
-
-            <button 
-              onClick={() => setShowPreviewModal(true)} 
-              style={{ background: '#3741D4', color: '#fff', border: 'none', borderRadius: '30px', padding: '14px 40px', fontFamily: "'Poppins', sans-serif", fontSize: '15px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 14px rgba(55,65,212,0.3)' }}
-            >
-              Preview Profile →
-            </button>
-          </div>
-
         </div>
       </div>
-
-      {/* Profile Preview Modal */}
-      {showPreviewModal && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(10, 15, 46, 0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '20px' }}>
-          <div style={{ width: '100%', maxWidth: '640px', background: '#FFFFFF', borderRadius: '24px', padding: '36px', boxShadow: '0 20px 40px rgba(0,0,0,0.2)', position: 'relative' }}>
-            <button onClick={() => setShowPreviewModal(false)} style={{ position: 'absolute', top: '20px', right: '20px', background: 'none', border: 'none', fontSize: '20px', cursor: 'pointer', color: '#6B7280' }}>✕</button>
-
-            <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#0A0F2E', marginBottom: '20px', textAlign: 'center' }}>
-              Profile Preview
-            </h2>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '24px', padding: '16px', background: '#F9FAFB', borderRadius: '16px' }}>
-              <div style={{ width: '64px', height: '64px', borderRadius: '32px', background: '#3741D4', color: '#fff', fontSize: '24px', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                {profileImage ? <img src={profileImage} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : 'AM'}
-              </div>
-              <div>
-                <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700, color: '#0A0F2E' }}>Alex Morgan</h3>
-                <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#6B7280' }}>Senior Blockchain & UI/UX Developer • $45.00/hr</p>
-              </div>
-            </div>
-
-            <div style={{ marginBottom: '24px' }}>
-              <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#374151', marginBottom: '8px' }}>About</h4>
-              <p style={{ fontSize: '13px', color: '#4B5563', lineHeight: 1.6, background: '#F9FAFB', padding: '16px', borderRadius: '12px', margin: 0 }}>
-                {aboutText || "Experienced developer passionate about building high-performance decentralized web applications."}
-              </p>
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '16px', paddingTop: '16px', borderTop: '1px solid #E5E7EB' }}>
-              <button onClick={() => setShowPreviewModal(false)} style={{ background: 'transparent', color: '#6B7280', border: '1px solid #D1D5DB', borderRadius: '30px', padding: '12px 28px', fontWeight: 600, cursor: 'pointer' }}>Edit Profile</button>
-              <button 
-                onClick={() => { setShowPreviewModal(false); setShowSuccessModal(true); }}
-                style={{ background: '#22C55E', color: '#FFFFFF', border: 'none', borderRadius: '30px', padding: '12px 36px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 14px rgba(34,197,94,0.3)' }}
-              >
-                Submit Profile ✓
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Success Modal */}
-      {showSuccessModal && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(10, 15, 46, 0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '20px' }}>
-          <div style={{ width: '100%', maxWidth: '520px', background: '#FFFFFF', borderRadius: '24px', padding: '40px', boxShadow: '0 20px 40px rgba(0,0,0,0.2)', textAlign: 'center' }}>
-            <div style={{ width: '72px', height: '72px', borderRadius: '36px', background: '#DCFCE7', color: '#166534', fontSize: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
-              ✓
-            </div>
-            <h2 style={{ fontSize: '24px', fontWeight: 700, color: '#0A0F2E', marginBottom: '8px' }}>
-              Profile Submitted Successfully!
-            </h2>
-            <p style={{ fontSize: '14px', color: '#6B7280', marginBottom: '32px' }}>
-              Your Greelance freelancer profile is now live. Complete the skill assessment to get verified.
-            </p>
-
-            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
-              <button onClick={() => navigate('/dashboard')} style={{ background: '#F3F4F6', color: '#374151', border: 'none', borderRadius: '30px', padding: '12px 24px', fontWeight: 600, cursor: 'pointer' }}>Go to Home</button>
-              <button onClick={() => navigate('/assessment')} style={{ background: '#3741D4', color: '#FFFFFF', border: 'none', borderRadius: '30px', padding: '12px 32px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 14px rgba(55,65,212,0.3)' }}>Start Assessment →</button>
-            </div>
-          </div>
-        </div>
-      )}
-
     </div>
   );
 }

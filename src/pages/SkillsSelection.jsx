@@ -2,57 +2,45 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const CATEGORIES = [
-  'Development & IT',
-  'Design & Creative',
-  'AI & Machine Learning',
-  'Marketing & Sales',
-  'Writing & Translation',
-  'Finance & Accounting'
-];
-
-const SUB_CATEGORIES = [
-  'Web Development',
-  'Mobile App Development',
-  'Blockchain & Web3',
-  'UI/UX Design',
-  'DevOps & Cloud'
-];
-
-const AVAILABLE_SKILLS = [
-  'React.js', 'TypeScript', 'Node.js', 'Tailwind CSS', 'Next.js',
-  'Solidity', 'Web3.js', 'Ethers.js', 'Rust', 'Python',
-  'Figma', 'UI Design', 'UX Research', 'GraphQL', 'Docker',
-  'PostgreSQL', 'MongoDB', 'AWS', 'Smart Contracts', 'Go'
+  { name: 'E Commerce Skills', icon: '🛒' },
+  { name: 'Cybersecurity Engineer', icon: '🔒' },
+  { name: 'Cloud Computing Engineer', icon: '☁️' },
+  { name: 'Digital Marketing Expert', icon: '📈' },
+  { name: 'Software Engineering', icon: '💻' },
+  { name: 'IT Staffing', icon: '👥' },
+  { name: 'Data Center security', icon: '🛡️' },
+  { name: 'Artificial Intelligence', icon: '🤖' },
+  { name: 'Business Intelligence', icon: '📊' },
+  { name: 'Decision Intelligence', icon: '🧠' },
+  { name: 'Robotics', icon: '🦾' },
+  { name: 'Virtual/Augmented', icon: '🥽' },
+  { name: 'Systems Engineering', icon: '⚙️' },
+  { name: 'Cryptocurrency', icon: '🪙' },
+  { name: 'Fintech', icon: '💳' },
+  { name: 'Autonomus Systems', icon: '🚗' },
+  { name: 'Machine Learning', icon: '📡' },
+  { name: 'Electric-Vehicle Technology', icon: '🔋' },
+  { name: 'Internet of Things', icon: '🌐' },
+  { name: 'Recycle-Energy', icon: '♻️' },
+  { name: 'Smart-Home', icon: '🏠' },
+  { name: 'Quantum Computing', icon: '⚛️' },
+  { name: 'Blockchain', icon: '🔗' },
 ];
 
 export default function SkillsSelection() {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState('Development & IT');
-  const [selectedSubCategory, setSelectedSubCategory] = useState('Blockchain & Web3');
-  const [selectedSkills, setSelectedSkills] = useState(['React.js', 'TypeScript', 'Solidity']);
-
-  const toggleSkill = (skill) => {
-    if (selectedSkills.includes(skill)) {
-      setSelectedSkills(selectedSkills.filter(s => s !== skill));
-    } else {
-      if (selectedSkills.length >= 15) {
-        alert('You can only select up to 15 skills in total.');
-        return;
-      }
-      setSelectedSkills([...selectedSkills, skill]);
-    }
-  };
+  const [selected, setSelected] = useState('Cloud Computing Engineer');
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#EEF0FA', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       
       {/* Top Header / Progress Bar */}
-      <div style={{ flexShrink: 0, display: 'flex', background: '#fff', padding: '16px 32px', alignItems: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', zIndex: 10 }}>
+      <div style={{ flexShrink: 0, display: 'flex', background: '#fff', padding: '0', alignItems: 'stretch', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', zIndex: 10 }}>
         
         {/* Back Button */}
         <button 
           onClick={() => navigate('/setup-profile')}
-          style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#22C55E', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', flexShrink: 0 }}
+          style={{ width: '56px', background: '#22C55E', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -60,137 +48,111 @@ export default function SkillsSelection() {
         </button>
 
         {/* Steps */}
-        <div style={{ display: 'flex', flex: 1, gap: '32px', overflowX: 'auto' }}>
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/form')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 1</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Upload Resume</p>
-          </div>
-          
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/setup-profile')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 2</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Setup Profile</p>
-          </div>
-
-          <div style={{ background: '#E0E7FF', padding: '8px 20px', borderRadius: '8px', borderLeft: '4px solid #3741D4', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/skills')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#22C55E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 3</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#3741D4', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Choose Skill</p>
-          </div>
-
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/connect-wallet')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 4</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Connect Wallet</p>
-          </div>
-          
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/complete-profile')}>
-            <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 5</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Complete Profile</p>
-          </div>
+        <div style={{ display: 'flex', flex: 1 }}>
+          {[
+            { num: 1, label: 'Upload Resume', path: '/form' },
+            { num: 2, label: 'Setup Profile', path: '/setup-profile' },
+            { num: 3, label: 'Choose Skill', path: '/skills' },
+            { num: 4, label: 'Connect Wallet', path: '/connect-wallet' },
+            { num: 5, label: 'Complete Profile', path: '/complete-profile' },
+          ].map(step => {
+            const isActive = step.num === 3;
+            return (
+              <div
+                key={step.num}
+                onClick={() => navigate(step.path)}
+                style={{
+                  flex: 1,
+                  padding: '14px 16px',
+                  cursor: 'pointer',
+                  background: isActive ? '#3741D4' : 'transparent',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}
+              >
+                <p style={{ margin: 0, fontSize: '11px', color: isActive ? '#93C5FD' : '#22C55E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step {step.num}</p>
+                <p style={{ margin: 0, fontSize: '13px', color: isActive ? '#FFFFFF' : '#0A0F2E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>{step.label}</p>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Exit Icon */}
-        <button onClick={() => navigate('/')} style={{ width: '48px', height: '48px', borderRadius: '24px', background: '#F3F4F6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4B5563" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+        {/* Forward/Exit Arrow */}
+        <button onClick={() => navigate('/connect-wallet')} style={{ width: '56px', background: '#fff', border: 'none', borderLeft: '1px solid #E5E7EB', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3741D4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </button>
       </div>
 
-      {/* Main Container - Scrollable */}
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '40px 20px' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', background: '#FFFFFF', borderRadius: '24px', padding: '40px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+      {/* Main Content Area - Scrollable */}
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '32px 40px' }}>
+        <div style={{ maxWidth: '960px', margin: '0 auto', background: '#FFFFFF', borderRadius: '20px', padding: '36px 40px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
           
-          <h2 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '22px', fontWeight: 700, color: '#0A0F2E', marginBottom: '8px' }}>
-            Category & Skills Selection
+          {/* Title */}
+          <h2 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '22px', fontWeight: 700, color: '#0A0F2E', margin: '0 0 4px 0' }}>
+            Category<span style={{ color: '#EF4444' }}>*</span>
           </h2>
-          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', color: '#6B7280', marginBottom: '32px' }}>
-            Select your main domain and pick up to 15 key skills to display on your Greelance freelancer card.
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', color: '#6B7280', margin: '0 0 28px 0' }}>
+            Select a category from the following.
           </p>
 
-          {/* Category Dropdowns */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px', marginBottom: '32px' }}>
-            <div>
-              <label style={{ display: 'block', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151', marginBottom: '8px' }}>
-                Category *
-              </label>
-              <select 
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid #E0E2FE', outline: 'none', fontFamily: "'Poppins', sans-serif", fontSize: '14px' }}
-              >
-                {CATEGORIES.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-              </select>
-            </div>
-
-            <div>
-              <label style={{ display: 'block', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151', marginBottom: '8px' }}>
-                Sub Category *
-              </label>
-              <select 
-                value={selectedSubCategory}
-                onChange={(e) => setSelectedSubCategory(e.target.value)}
-                style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid #E0E2FE', outline: 'none', fontFamily: "'Poppins', sans-serif", fontSize: '14px' }}
-              >
-                {SUB_CATEGORIES.map(sub => <option key={sub} value={sub}>{sub}</option>)}
-              </select>
-            </div>
+          {/* Category Grid */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginBottom: '32px' }}>
+            {CATEGORIES.map(cat => {
+              const isSelected = selected === cat.name;
+              return (
+                <button
+                  key={cat.name}
+                  type="button"
+                  onClick={() => setSelected(cat.name)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '12px 18px',
+                    borderRadius: '12px',
+                    border: isSelected ? '2px solid #3741D4' : '1.5px solid #E5E7EB',
+                    background: isSelected ? '#EEF2FF' : '#FFFFFF',
+                    cursor: 'pointer',
+                    fontFamily: "'Poppins', sans-serif",
+                    fontSize: '13px',
+                    fontWeight: 500,
+                    color: '#0A0F2E',
+                    transition: 'all 0.15s',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  <span style={{ fontSize: '20px' }}>{cat.icon}</span>
+                  {cat.name}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Skills Grid */}
-          <div style={{ marginBottom: '32px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', fontWeight: 600, color: '#0A0F2E' }}>
-                Select Skills ({selectedSkills.length}/15)
-              </label>
-              <span style={{ fontSize: '12px', color: '#6B7280' }}>*You can only select 15 skills in total</span>
-            </div>
-
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-              {AVAILABLE_SKILLS.map(skill => {
-                const active = selectedSkills.includes(skill);
-                return (
-                  <button
-                    key={skill}
-                    type="button"
-                    onClick={() => toggleSkill(skill)}
-                    style={{
-                      padding: '10px 18px',
-                      borderRadius: '24px',
-                      border: active ? '1.5px solid #3741D4' : '1px solid #E5E7EB',
-                      background: active ? '#EEF2FF' : '#F9FAFB',
-                      color: active ? '#3741D4' : '#374151',
-                      fontFamily: "'Poppins', sans-serif",
-                      fontSize: '13px',
-                      fontWeight: active ? 600 : 500,
-                      cursor: 'pointer',
-                      transition: 'all 0.2s'
-                    }}
-                  >
-                    {active ? `✓ ${skill}` : `+ ${skill}`}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Navigation Buttons */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #E5E7EB', paddingTop: '24px' }}>
-            <button 
-              onClick={() => navigate('/setup-profile')}
-              style={{ background: 'transparent', color: '#6B7280', border: '1px solid #D1D5DB', borderRadius: '30px', padding: '12px 28px', fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: '14px', cursor: 'pointer' }}
-            >
-              Back
-            </button>
+          {/* Next Button */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <button 
               onClick={() => navigate('/connect-wallet')}
-              style={{ background: '#3741D4', color: '#FFFFFF', border: 'none', borderRadius: '30px', padding: '12px 36px', fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: '14px', cursor: 'pointer', boxShadow: '0 4px 14px rgba(55,65,212,0.3)' }}
+              style={{
+                background: '#3741D4',
+                color: '#FFFFFF',
+                border: 'none',
+                borderRadius: '10px',
+                padding: '12px 40px',
+                fontFamily: "'Poppins', sans-serif",
+                fontSize: '14px',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
             >
-              Next Step: Connect Wallet →
+              Next
             </button>
           </div>
 
         </div>
       </div>
-
     </div>
   );
 }
