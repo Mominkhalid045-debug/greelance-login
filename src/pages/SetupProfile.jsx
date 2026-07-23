@@ -19,30 +19,30 @@ export default function SetupProfile() {
         </button>
 
         {/* Steps */}
-        <div style={{ display: 'flex', flex: 1, gap: '40px' }}>
-          <div style={{ padding: '8px 0', opacity: 0.5, cursor: 'pointer' }} onClick={() => navigate('/form')}>
+        <div style={{ display: 'flex', flex: 1, gap: '32px' }}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/form')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 1</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#9CA3AF', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Upload Resume</p>
+            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Upload Resume</p>
           </div>
           
-          <div style={{ background: '#E0E7FF', padding: '8px 24px', borderRadius: '8px', borderLeft: '4px solid #3741D4' }}>
+          <div style={{ background: '#E0E7FF', padding: '8px 20px', borderRadius: '8px', borderLeft: '4px solid #3741D4', cursor: 'pointer' }} onClick={() => navigate('/setup-profile')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#22C55E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 2</p>
             <p style={{ margin: 0, fontSize: '14px', color: '#3741D4', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Setup Profile</p>
           </div>
 
-          <div style={{ padding: '8px 0', opacity: 0.5 }}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/skills')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 3</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#9CA3AF', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Choose Skill</p>
+            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Choose Skill</p>
           </div>
 
-          <div style={{ padding: '8px 0', opacity: 0.5 }}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/connect-wallet')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 4</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#9CA3AF', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Connect Wallet</p>
+            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Connect Wallet</p>
           </div>
           
-          <div style={{ padding: '8px 0', opacity: 0.5 }}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/assessment')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 5</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#9CA3AF', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Complete Profile</p>
+            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Complete Profile</p>
           </div>
         </div>
 
@@ -56,47 +56,47 @@ export default function SetupProfile() {
 
       {/* Main Content Area */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '40px' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto', background: '#F7FAFF', borderRadius: '16px', padding: '32px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', background: '#FFFFFF', borderRadius: '24px', padding: '40px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
           
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
             <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: '20px', color: '#0A0F2E', margin: 0 }}>Personal Information</h2>
             <span style={{ color: '#EF4444', fontWeight: 700, fontSize: '20px' }}>*</span>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px', marginBottom: '40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '24px', marginBottom: '40px' }}>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>First Name *</label>
-              <input type="text" placeholder="First Name" style={inputStyle} />
+              <input type="text" placeholder="First Name" style={inputStyle} defaultValue="Alex" />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Last Name *</label>
-              <input type="text" placeholder="Last Name" style={inputStyle} />
+              <input type="text" placeholder="Last Name" style={inputStyle} defaultValue="Morgan" />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Country of Residence</label>
-              <select style={inputStyle}><option>Select Country</option></select>
+              <select style={inputStyle}><option>United States</option><option>United Kingdom</option><option>Canada</option></select>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Country of Citizenship</label>
-              <select style={inputStyle}><option>Select Country</option></select>
+              <select style={inputStyle}><option>United States</option><option>United Kingdom</option><option>Canada</option></select>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Phone Number</label>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <select style={{ ...inputStyle, width: '80px' }}><option>+1</option></select>
-                <input type="text" placeholder="201 555 0123" style={{ ...inputStyle, flex: 1 }} />
+                <input type="text" placeholder="201 555 0123" defaultValue="201 555 0123" style={{ ...inputStyle, flex: 1 }} />
               </div>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>English Proficiency</label>
               <select style={inputStyle}>
-                <option>Basic</option><option>Conversational</option><option>Fluent</option><option>Native</option>
+                <option>Fluent</option><option>Native</option><option>Conversational</option><option>Basic</option>
               </select>
             </div>
 
@@ -116,13 +116,13 @@ export default function SetupProfile() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Hourly Rate ($)</label>
-              <input type="number" placeholder="$ 0.00" style={inputStyle} />
+              <input type="text" placeholder="$ 45.00" defaultValue="$ 45.00" style={inputStyle} />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Time Zone</label>
               <select style={inputStyle}>
-                <option>GMT+5 Islamabad</option><option>GMT+0 London</option><option>GMT-5 New York</option>
+                <option>GMT-5 New York</option><option>GMT+0 London</option><option>GMT+5 Islamabad</option>
               </select>
             </div>
 
@@ -130,13 +130,26 @@ export default function SetupProfile() {
 
           <div style={{ borderTop: '1px solid #E5E7EB', margin: '32px 0' }}></div>
 
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px' }}>
             <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: '20px', color: '#0A0F2E', margin: 0 }}>Education</h2>
-            <button style={{ background: '#3741D4', color: '#fff', border: 'none', borderRadius: '8px', padding: '10px 16px', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>+ Add Education</button>
+            <button style={{ background: '#3741D4', color: '#fff', border: 'none', borderRadius: '8px', padding: '10px 20px', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>+ Add Education</button>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '40px' }}>
-             <button onClick={() => navigate('/skills')} style={{ background: '#3741D4', color: '#fff', border: 'none', borderRadius: '30px', padding: '14px 40px', fontFamily: "'Poppins', sans-serif", fontSize: '15px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 14px rgba(55,65,212,0.3)' }}>Next Step: Choose Skill →</button>
+          {/* Action Row */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E5E7EB', paddingTop: '24px', marginTop: '20px' }}>
+            <button 
+              onClick={() => navigate('/form')}
+              style={{ background: 'transparent', color: '#6B7280', border: '1px solid #D1D5DB', borderRadius: '30px', padding: '12px 28px', fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: '14px', cursor: 'pointer' }}
+            >
+              Back
+            </button>
+
+            <button 
+              onClick={() => navigate('/skills')} 
+              style={{ background: '#3741D4', color: '#fff', border: 'none', borderRadius: '30px', padding: '14px 40px', fontFamily: "'Poppins', sans-serif", fontSize: '15px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 14px rgba(55,65,212,0.3)' }}
+            >
+              Next Step: Choose Skill →
+            </button>
           </div>
 
         </div>

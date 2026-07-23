@@ -18,36 +18,36 @@ export default function FreelancerForm() {
           </svg>
         </button>
 
-        {/* Steps */}
-        <div style={{ display: 'flex', flex: 1, gap: '40px' }}>
-          <div style={{ background: '#E0E7FF', padding: '8px 24px', borderRadius: '8px', borderLeft: '4px solid #3741D4' }}>
+        {/* Steps Header Bar */}
+        <div style={{ display: 'flex', flex: 1, gap: '32px' }}>
+          <div style={{ background: '#E0E7FF', padding: '8px 20px', borderRadius: '8px', borderLeft: '4px solid #3741D4', cursor: 'pointer' }} onClick={() => navigate('/form')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#22C55E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 1</p>
             <p style={{ margin: 0, fontSize: '14px', color: '#3741D4', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Upload Resume</p>
           </div>
           
-          <div style={{ padding: '8px 0', opacity: 0.5 }}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/setup-profile')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 2</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#9CA3AF', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Setup Profile</p>
+            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Setup Profile</p>
           </div>
 
-          <div style={{ padding: '8px 0', opacity: 0.5 }}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/skills')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 3</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#9CA3AF', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Choose Skill</p>
+            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Choose Skill</p>
           </div>
 
-          <div style={{ padding: '8px 0', opacity: 0.5 }}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/connect-wallet')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 4</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#9CA3AF', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Connect Wallet</p>
+            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Connect Wallet</p>
           </div>
           
-          <div style={{ padding: '8px 0', opacity: 0.5 }}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/assessment')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 5</p>
-            <p style={{ margin: 0, fontSize: '14px', color: '#9CA3AF', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Complete Profile</p>
+            <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Complete Profile</p>
           </div>
         </div>
 
         {/* Exit Icon */}
-        <button style={{ width: '48px', height: '48px', borderRadius: '24px', background: '#F3F4F6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <button onClick={() => navigate('/')} style={{ width: '48px', height: '48px', borderRadius: '24px', background: '#F3F4F6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4B5563" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
           </svg>
@@ -70,7 +70,7 @@ export default function FreelancerForm() {
           alignItems: 'center'
         }}>
           
-          {/* Upload Graphic Placeholder */}
+          {/* Upload Graphic */}
           <div style={{ 
             width: '240px', 
             height: '160px', 
@@ -105,7 +105,7 @@ export default function FreelancerForm() {
                 color: '#fff',
                 border: 'none',
                 borderRadius: '30px',
-                padding: '14px 28px',
+                padding: '14px 32px',
                 fontFamily: "'Poppins', sans-serif",
                 fontWeight: 600,
                 fontSize: '15px',
@@ -129,7 +129,7 @@ export default function FreelancerForm() {
                 color: '#3741D4',
                 border: '1.5px solid #3741D4',
                 borderRadius: '30px',
-                padding: '14px 28px',
+                padding: '14px 32px',
                 fontFamily: "'Poppins', sans-serif",
                 fontWeight: 600,
                 fontSize: '15px',
