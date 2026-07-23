@@ -1,180 +1,88 @@
 import { useNavigate } from 'react-router-dom';
+import { StepHeader, F } from './FreelancerForm';
 
 export default function SetupProfile() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ width: '100vw', height: '100vh', background: '#EEF0FA', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-      
-      {/* Top Header / Progress Bar */}
-      <div style={{ flexShrink: 0, display: 'flex', background: '#fff', padding: '0', alignItems: 'stretch', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', zIndex: 10 }}>
+    <div style={{ width: '100%', maxWidth: '1440px', margin: '0 auto', minHeight: '100vh', background: '#F7FAFF', display: 'flex', flexDirection: 'column' }}>
+      <StepHeader activeStep={2} navigate={navigate} />
+
+      <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 60px', marginTop: '15px' }}>
         
-        {/* Back Button */}
-        <button 
-          onClick={() => navigate('/form')}
-          style={{ width: '56px', background: '#22C55E', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M19 12H5M12 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        {/* Steps */}
-        <div style={{ display: 'flex', flex: 1 }}>
-          {[
-            { num: 1, label: 'Upload Resume', path: '/form' },
-            { num: 2, label: 'Setup Profile', path: '/setup-profile' },
-            { num: 3, label: 'Choose Skill', path: '/skills' },
-            { num: 4, label: 'Connect Wallet', path: '/connect-wallet' },
-            { num: 5, label: 'Complete Profile', path: '/complete-profile' },
-          ].map(step => {
-            const isActive = step.num === 2;
-            return (
-              <div
-                key={step.num}
-                onClick={() => navigate(step.path)}
-                style={{
-                  flex: 1,
-                  padding: '14px 16px',
-                  cursor: 'pointer',
-                  background: isActive ? '#3741D4' : 'transparent',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                }}
-              >
-                <p style={{ margin: 0, fontSize: '11px', color: isActive ? '#93C5FD' : '#22C55E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step {step.num}</p>
-                <p style={{ margin: 0, fontSize: '13px', color: isActive ? '#FFFFFF' : '#0A0F2E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>{step.label}</p>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Forward Arrow */}
-        <button onClick={() => navigate('/skills')} style={{ width: '56px', background: '#fff', border: 'none', borderLeft: '1px solid #E5E7EB', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3741D4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-
-      {/* Main Content Area - Scrollable */}
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '32px 40px' }}>
-        <div style={{ maxWidth: '960px', margin: '0 auto', background: '#FFFFFF', borderRadius: '20px', padding: '36px 40px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
-          
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
-            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: '20px', color: '#0A0F2E', margin: 0 }}>Personal Information</h2>
-            <span style={{ color: '#EF4444', fontWeight: 700, fontSize: '20px' }}>*</span>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '24px', marginBottom: '40px' }}>
-            
+        {/* Personal Info Grid */}
+        <div style={{ width: '100%', maxWidth: '1320px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '15px', marginTop: '15px' }}>
+            <FormField label="First Name" defaultValue="Alex" />
+            <FormField label="Last Name" defaultValue="Morgan" />
+            <FormField label="Country of Residence" type="select" options={['United States','United Kingdom','Canada']} />
+            <FormField label="Country of Citizenship" type="select" options={['United States','United Kingdom','Canada']} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>First Name *</label>
-              <input type="text" placeholder="First Name" style={inputStyle} defaultValue="Alex" />
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Last Name *</label>
-              <input type="text" placeholder="Last Name" style={inputStyle} defaultValue="Morgan" />
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Country of Residence</label>
-              <select style={inputStyle}><option>United States</option><option>United Kingdom</option><option>Canada</option></select>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Country of Citizenship</label>
-              <select style={inputStyle}><option>United States</option><option>United Kingdom</option><option>Canada</option></select>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Phone Number</label>
+              <label style={{ fontFamily: F, fontSize: '12px', fontWeight: 500, color: '#050A5F' }}>Phone Number</label>
               <div style={{ display: 'flex', gap: '8px' }}>
-                <select style={{ ...inputStyle, width: '80px' }}><option>+1</option></select>
-                <input type="text" placeholder="201 555 0123" defaultValue="201 555 0123" style={{ ...inputStyle, flex: 1 }} />
+                <select style={{ ...selectStyle, width: '90px' }}><option>+1</option></select>
+                <input type="text" defaultValue="201 555 0123" style={{ ...inputFieldStyle, flex: 1 }} />
               </div>
             </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>English Proficiency</label>
-              <select style={inputStyle}>
-                <option>Fluent</option><option>Native</option><option>Conversational</option><option>Basic</option>
-              </select>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', gridColumn: 'span 2' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Notice period to resign from current job</label>
-              <select style={inputStyle}>
-                <option>Immediate</option><option>2 Weeks</option><option>One Month</option><option>2 Months</option>
-              </select>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Preferred Job Commitment</label>
-              <select style={inputStyle}>
-                <option>Full Time</option><option>Part Time</option><option>Contract</option>
-              </select>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Hourly Rate ($)</label>
-              <input type="text" placeholder="$ 45.00" defaultValue="$ 45.00" style={inputStyle} />
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, color: '#374151' }}>Time Zone</label>
-              <select style={inputStyle}>
-                <option>GMT-5 New York</option><option>GMT+0 London</option><option>GMT+5 Islamabad</option>
-              </select>
-            </div>
-
+            <FormField label="English Proficiency" type="select" options={['Fluent','Native','Conversational','Basic']} />
+            <FormField label="Notice Period" type="select" options={['Immediate','2 Weeks','One Month','2 Months']} />
+            <FormField label="Preferred Job Commitment" type="select" options={['Full Time','Part Time','Contract']} />
+            <FormField label="Hourly Rate ($)" defaultValue="$ 45.00" />
+            <FormField label="Time Zone" type="select" options={['GMT-5 New York','GMT+0 London','GMT+5 Islamabad']} />
           </div>
-
-          <div style={{ borderTop: '1px solid #E5E7EB', margin: '32px 0' }}></div>
-
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px' }}>
-            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: '20px', color: '#0A0F2E', margin: 0 }}>Education</h2>
-            <button style={{ background: '#3741D4', color: '#fff', border: 'none', borderRadius: '8px', padding: '10px 20px', fontFamily: "'Poppins', sans-serif", fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>+ Add Education</button>
-          </div>
-
-          {/* Next Button */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid #E5E7EB', paddingTop: '24px', marginTop: '20px' }}>
-            <button 
-              onClick={() => navigate('/skills')} 
-              style={{
-                background: '#3741D4',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '12px 40px',
-                fontFamily: "'Poppins', sans-serif",
-                fontSize: '14px',
-                fontWeight: 600,
-                cursor: 'pointer',
-              }}
-            >
-              Next
-            </button>
-          </div>
-
         </div>
+
+        {/* Education Section */}
+        <div style={{ width: '100%', maxWidth: '1320px', marginTop: '32px', marginBottom: '12px', paddingBottom: '8px', borderBottom: '1px solid #E0E2FE', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3 style={{ fontFamily: F, fontSize: '16px', fontWeight: 700, color: '#050A5F' }}>Education</h3>
+          <button style={{ background: '#4ADF86', color: '#fff', border: 'none', borderRadius: '15px', padding: '4px 10.5px', fontFamily: F, fontSize: '9px', fontWeight: 500, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5.25px' }}>+ Add Education</button>
+        </div>
+
+        {/* Experience Section */}
+        <div style={{ width: '100%', maxWidth: '1320px', marginTop: '16px', marginBottom: '12px', paddingBottom: '8px', borderBottom: '1px solid #E0E2FE', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3 style={{ fontFamily: F, fontSize: '16px', fontWeight: 700, color: '#050A5F' }}>Experience</h3>
+          <button style={{ background: '#4ADF86', color: '#fff', border: 'none', borderRadius: '15px', padding: '4px 10.5px', fontFamily: F, fontSize: '9px', fontWeight: 500, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5.25px' }}>+ Add Experience</button>
+        </div>
+
+        {/* Next Button */}
+        <div style={{ width: '100%', maxWidth: '1320px', display: 'flex', justifyContent: 'flex-end', marginTop: '24px', marginBottom: '40px' }}>
+          <button onClick={() => navigate('/skills')} style={{ background: '#ADAFDD', color: '#fff', border: '0.28px solid #ADAFDD', borderRadius: '16.88px', width: '99px', height: '27.6px', fontFamily: F, fontSize: '9px', fontWeight: 500, cursor: 'pointer' }}>
+            Next
+          </button>
+        </div>
+
       </div>
     </div>
   );
 }
 
-const inputStyle = {
-  width: '100%',
-  padding: '12px 16px',
-  borderRadius: '10px',
-  border: '1.5px solid #E5E7EB',
-  background: '#fff',
-  fontFamily: "'Poppins', sans-serif",
-  fontSize: '13px',
-  color: '#050A5F',
-  outline: 'none',
-  transition: 'border-color 0.2s',
-  boxSizing: 'border-box',
+function FormField({ label, defaultValue, type = 'text', options = [] }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <label style={{ fontFamily: F, fontSize: '12px', fontWeight: 500, color: '#050A5F' }}>{label}</label>
+      {type === 'select' ? (
+        <select style={selectStyle}>
+          {options.map(o => <option key={o}>{o}</option>)}
+        </select>
+      ) : (
+        <input type="text" defaultValue={defaultValue} style={inputFieldStyle} />
+      )}
+    </div>
+  );
+}
+
+const inputFieldStyle = {
+  width: '100%', height: '39px', padding: '0 15px',
+  borderRadius: '45px', border: '0.75px solid #D2D4FF',
+  background: '#F3F7FF', fontFamily: F, fontSize: '12px', color: '#050A5F',
+  outline: 'none', boxSizing: 'border-box',
+};
+
+const selectStyle = {
+  ...inputFieldStyle,
+  appearance: 'none', cursor: 'pointer',
+  backgroundImage: `url("data:image/svg+xml;utf8,<svg fill='none' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")`,
+  backgroundPosition: 'right 12px center',
+  backgroundRepeat: 'no-repeat',
+  paddingRight: '30px',
 };

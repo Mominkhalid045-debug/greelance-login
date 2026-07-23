@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { StepHeader, F } from './FreelancerForm';
 
 export default function CompleteProfile() {
   const navigate = useNavigate();
@@ -17,182 +18,115 @@ export default function CompleteProfile() {
 
   const handleModifyWithAI = () => {
     if (!aboutText.trim()) {
-      setAboutText("Experienced Full Stack & Blockchain Developer with over 5 years of experience crafting high-performance decentralized web applications, smart contracts, and intuitive user interfaces. Passionate about Web3 ecosystem growth.");
-    } else {
-      setAboutText(prev => `${prev}\n\n✨ AI Refined: Driven developer with deep expertise in modern React architectures, Solidity smart contracts, and scalable backend services.`);
+      setAboutText("Experienced Full Stack & Blockchain Developer with over 5 years of experience crafting high-performance decentralized web applications, smart contracts, and intuitive user interfaces.");
     }
   };
 
   return (
-    <div style={{ width: '100vw', height: '100vh', background: '#EEF0FA', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-      
-      {/* Top Header / Progress Bar */}
-      <div style={{ flexShrink: 0, display: 'flex', background: '#fff', padding: '0', alignItems: 'stretch', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', zIndex: 10 }}>
+    <div style={{ width: '100%', maxWidth: '1440px', margin: '0 auto', minHeight: '100vh', background: '#F7FAFF', display: 'flex', flexDirection: 'column' }}>
+      <StepHeader activeStep={5} navigate={navigate} />
+
+      <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 60px', marginTop: '40px' }}>
         
-        {/* Back Button */}
-        <button 
-          onClick={() => navigate('/connect-wallet')}
-          style={{ width: '56px', background: '#22C55E', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M19 12H5M12 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        {/* Steps */}
-        <div style={{ display: 'flex', flex: 1 }}>
-          {[
-            { num: 1, label: 'Upload Resume', path: '/form' },
-            { num: 2, label: 'Setup Profile', path: '/setup-profile' },
-            { num: 3, label: 'Choose Skill', path: '/skills' },
-            { num: 4, label: 'Connect Wallet', path: '/connect-wallet' },
-            { num: 5, label: 'Complete Profile', path: '/complete-profile' },
-          ].map(step => {
-            const isActive = step.num === 5;
-            return (
-              <div
-                key={step.num}
-                onClick={() => navigate(step.path)}
-                style={{
-                  flex: 1,
-                  padding: '14px 16px',
-                  cursor: 'pointer',
-                  background: isActive ? '#3741D4' : 'transparent',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                }}
-              >
-                <p style={{ margin: 0, fontSize: '11px', color: isActive ? '#93C5FD' : '#22C55E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step {step.num}</p>
-                <p style={{ margin: 0, fontSize: '13px', color: isActive ? '#FFFFFF' : '#0A0F2E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>{step.label}</p>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Forward Arrow */}
-        <div style={{ width: '56px', background: '#fff', borderLeft: '1px solid #E5E7EB', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </div>
-      </div>
-
-      {/* Main Content Area - Scrollable */}
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
-        <div style={{ maxWidth: '960px', margin: '0 auto', background: '#FFFFFF', borderRadius: '0 0 20px 20px', minHeight: 'calc(100vh - 60px)', padding: '56px 64px' }}>
+        <div style={{ width: '100%', maxWidth: '1320px', minHeight: '530.25px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           
           {/* Title */}
-          <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '24px', fontWeight: 700, color: '#0A0F2E', margin: '0 0 8px 0' }}>
-              Complete Profile
-            </h2>
-            <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', color: '#6B7280', margin: 0 }}>
-              Upload your photo and write about your work to start your Greelance journey.
-            </p>
-          </div>
+          <h2 style={{ fontFamily: F, fontSize: '30px', fontWeight: 600, color: '#050A5F', marginBottom: '4px', textAlign: 'center', letterSpacing: '0.15px', lineHeight: '42.75px' }}>
+            Complete Profile
+          </h2>
+          <p style={{ fontFamily: F, fontSize: '12px', color: '#050A5F', opacity: 0.8, marginBottom: '24px', textAlign: 'center', letterSpacing: '0.15px', lineHeight: '18px' }}>
+            Upload your photo and write about your work to start your Greelance journey.
+          </p>
 
-          {/* Profile Picture Upload */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '12px' }}>
+          {/* Upload Profile Picture Box */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '24px' }}>
             <label style={{ cursor: 'pointer' }}>
               <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
-              <div 
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '14px',
-                  padding: '10px 24px 10px 10px',
-                  borderRadius: '14px',
-                  background: '#F0F1FF',
-                  border: '1.5px solid #D4D6FE',
-                }}
-              >
-                {/* Avatar Icon with green collar */}
-                <div style={{ width: '48px', height: '48px', borderRadius: '24px', background: '#E8E9FF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', position: 'relative' }}>
-                  {profileImage ? (
-                    <img src={profileImage} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  ) : (
-                    <>
-                      {/* Person silhouette */}
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1E1B4B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: 'relative', zIndex: 1 }}>
+              <div style={{
+                border: '1.5px dashed #D2D4FF',
+                background: '#F3F7FF',
+                borderRadius: '7.5px',
+                width: '278.56px', height: '110px',
+                padding: '15px 20px',
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                transition: 'all 0.3s',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  {/* Avatar Icon */}
+                  <div style={{
+                    width: '32px', height: '32px', borderRadius: '6px',
+                    border: '1px solid #E0E2FE', background: '#fff',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: '0 2px 4px rgba(5,10,95,0.05)',
+                    overflow: 'hidden',
+                  }}>
+                    {profileImage ? (
+                      <img src={profileImage} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '6px' }} />
+                    ) : (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3038BD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                         <circle cx="12" cy="7" r="4" />
                       </svg>
-                      {/* Green collar accent */}
-                      <div style={{ position: 'absolute', bottom: '0', left: '50%', transform: 'translateX(-50%)', width: '32px', height: '12px', background: '#22C55E', borderRadius: '12px 12px 0 0', zIndex: 0 }} />
-                    </>
-                  )}
+                    )}
+                  </div>
+                  <span style={{ fontFamily: F, fontSize: '12px', fontWeight: 500, color: '#050A5F', lineHeight: '13.5px' }}>
+                    Upload Profile Picture
+                  </span>
                 </div>
-
-                <span style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', fontWeight: 600, color: '#0A0F2E' }}>
-                  Upload Profile Picture
-                </span>
-
-                {/* Upload Arrow */}
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A0F2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="17 8 12 3 7 8" />
-                  <line x1="12" y1="3" x2="12" y2="15" />
-                </svg>
+                {/* Upload Icon */}
+                <div style={{ display: 'flex', alignItems: 'center', color: '#050A5F' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                  </svg>
+                </div>
               </div>
             </label>
-            
-            <p style={{ fontSize: '12px', color: '#9CA3AF', margin: '10px 0 0 0', fontFamily: "'Poppins', sans-serif" }}>
+            <p style={{ fontFamily: F, fontSize: '9.75px', color: '#050A5F', opacity: 0.6, marginTop: '8px', letterSpacing: '0.15px', lineHeight: '18px' }}>
               *You can upload any JPEG or PNG.
             </p>
           </div>
 
-          {/* Divider space */}
-          <div style={{ height: '24px' }} />
-
           {/* About Section */}
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-              <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '15px', fontWeight: 700, color: '#0A0F2E' }}>
-                About
-              </label>
-
-              <button 
+          <div style={{ width: '100%', maxWidth: '958.5px', display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '30px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <label style={{ fontFamily: F, fontSize: '14px', fontWeight: 600, color: '#050A5F' }}>About</label>
+              <button
                 type="button"
                 onClick={handleModifyWithAI}
                 style={{
-                  background: 'transparent',
-                  color: '#4B5563',
-                  border: 'none',
-                  fontFamily: "'Poppins', sans-serif",
-                  fontSize: '13px',
-                  fontWeight: 500,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '5px',
-                  padding: 0,
+                  background: '#E6EFFF', color: '#3038BD',
+                  border: '0.84px solid #3038BD',
+                  borderRadius: '16.88px',
+                  width: '103.5px', height: '19.5px',
+                  fontFamily: F, fontSize: '8.5px', fontWeight: 500,
+                  cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '3px',
                 }}
               >
                 ✨ Modify With AI
               </button>
             </div>
-
-            <textarea 
-              rows={7}
+            <textarea
+              rows={5}
               value={aboutText}
               onChange={(e) => setAboutText(e.target.value)}
               placeholder="Write text here..."
               style={{
-                width: '100%',
-                padding: '18px 22px',
-                borderRadius: '16px',
-                border: '1.5px solid #E5E7EB',
-                background: '#F8F9FC',
-                fontFamily: "'Poppins', sans-serif",
-                fontSize: '14px',
-                color: '#0A0F2E',
-                outline: 'none',
-                resize: 'vertical',
-                boxSizing: 'border-box',
-                lineHeight: 1.6,
+                width: '100%', minHeight: '80.25px', height: '100px',
+                padding: '12px 16px', borderRadius: '6px',
+                border: '0.75px solid #E0E2FE', background: '#F3F7FF',
+                fontFamily: F, fontSize: '13px', color: '#050A5F',
+                outline: 'none', resize: 'vertical', boxSizing: 'border-box',
               }}
             />
+          </div>
+
+          {/* Preview Button */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 'auto' }}>
+            <button onClick={() => navigate('/assessment')} style={{ background: '#ADAFDD', color: '#fff', border: '0.28px solid #ADAFDD', borderRadius: '16.88px', width: '99px', height: '27.6px', fontFamily: F, fontSize: '9px', fontWeight: 500, cursor: 'pointer', boxShadow: '0 2px 4px rgba(5,10,95,0.05)' }}>
+              Preview
+            </button>
           </div>
 
         </div>

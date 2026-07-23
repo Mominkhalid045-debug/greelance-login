@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,13 +8,18 @@
    CSS custom properties — Greelance design tokens
 ──────────────────────────────────────────────────── */
 :root {
-  --color-primary:    #3741D4;
-  --color-primary-dk: #2D31A8;
-  --color-green:      #4ADE80;
-  --color-bg-right:   #EEF0FA;
-  --color-heading:    #0A0F2E;
+  --color-primary:    #050A5F;
+  --color-primary-dk: #3038BD;
+  --color-green:      #4ADF86;
+  --color-mint:       #22D3A6;
+  --color-bg-right:   #F7FAFF;
+  --color-heading:    #050A5F;
   --color-body:       #6B7280;
-  --color-border:     #E8EAF0;
+  --color-border:     #E0E2FE;
+  --color-border-dash: #D2D4FF;
+  --color-bg-input:   #F3F7FF;
+  --color-lavender:   #ADAFDD;
+  --font-family:      'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 /* ────────────────────────────────────────────────────
@@ -36,10 +42,11 @@ body,
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-family);
   background: var(--color-bg-right);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--color-primary);
 }
 
 /* ────────────────────────────────────────────────────
