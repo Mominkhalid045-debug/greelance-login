@@ -43,9 +43,9 @@ export default function CompleteProfile() {
             <label style={{ cursor: 'pointer' }}>
               <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
               <div style={{
-                border: '1.5px dashed #D2D4FF',
+                border: '1.5px dashed #3038BD',
                 background: '#F3F7FF',
-                borderRadius: '7.5px',
+                borderRadius: '12px',
                 width: '278.56px', height: '110px',
                 padding: '15px 20px',
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
