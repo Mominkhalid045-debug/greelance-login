@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
+import SocialLogin from '../components/SocialLogin';
 
 const F = "'Lexend', sans-serif";
 
@@ -113,17 +114,7 @@ export default function Login() {
       </div>
 
       {/* Social Sign In at bottom */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', marginTop: '24px' }}>
-        <span style={{ fontFamily: F, fontSize: '11px', color: '#ADAFDD' }}>You can also signin with</span>
-        <div style={{ display: 'flex', gap: '14px' }}>
-          {/* LinkedIn */}
-          <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#0A66C2', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }}>in</div>
-          {/* Google */}
-          <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#fff', border: '1px solid #E0E2FE', color: '#EA4335', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', fontWeight: 700, cursor: 'pointer' }}>G</div>
-          {/* Apple */}
-          <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#000', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', cursor: 'pointer' }}></div>
-        </div>
-      </div>
+      <SocialLogin style={{ marginTop: '24px' }} />
 
     </div>
   );
