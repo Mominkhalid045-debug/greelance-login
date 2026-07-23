@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StepHeader, F } from './FreelancerForm';
+import coinbaseImg from '../assets/coinbase.png';
+import metamaskImg from '../assets/metamask.png';
+import fortmaticImg from '../assets/fortmatic.png';
 
 export default function ConnectWallet() {
   const navigate = useNavigate();
@@ -13,17 +16,17 @@ export default function ConnectWallet() {
     {
       id: 'CoinBase',
       name: 'CoinBase',
-      imgSrc: '/assets/coinbase.png',
+      imgSrc: coinbaseImg,
     },
     {
       id: 'Fortmatic',
       name: 'Fortmatic',
-      imgSrc: '/assets/fortmatic.png',
+      imgSrc: fortmaticImg,
     },
     {
       id: 'MetaMask',
       name: 'MetaMask',
-      imgSrc: '/assets/metamask.png',
+      imgSrc: metamaskImg,
     },
   ];
 
@@ -44,7 +47,7 @@ export default function ConnectWallet() {
             Select a wallet you want to connect for your payment method. You can change the wallet after a sign in too.
           </p>
 
-          {/* 3 Wallet Options Row (Using Exact Reference Card Images) */}
+          {/* 3 Wallet Options Row (Direct Bundled Image Assets) */}
           <div className="wallet-cards-grid-responsive" style={{ display: 'flex', gap: '24px', marginBottom: '40px' }}>
             {wallets.map((w) => {
               const isSelected = selectedWallet === w.name;
@@ -54,19 +57,19 @@ export default function ConnectWallet() {
                   key={w.id}
                   onClick={() => setSelectedWallet(w.name)}
                   style={{
-                    width: '138px',
-                    height: '138px',
-                    borderRadius: '16px',
+                    width: '144px',
+                    height: '144px',
+                    borderRadius: '18px',
                     cursor: 'pointer',
                     overflow: 'hidden',
-                    border: isSelected ? '2px solid #3038BD' : '1px solid #E0E2FE',
-                    boxShadow: isSelected ? '0 12px 28px rgba(48,56,189,0.35)' : '0 2px 8px rgba(5,10,95,0.04)',
-                    transform: isSelected ? 'scale(1.03)' : 'scale(1)',
-                    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                    background: '#FFFFFF',
+                    border: isSelected ? '3px solid #3038BD' : '1px solid #E0E2FE',
+                    boxShadow: isSelected ? '0 12px 32px rgba(48,56,189,0.4)' : '0 2px 8px rgba(5,10,95,0.04)',
+                    transform: isSelected ? 'scale(1.04)' : 'scale(1)',
+                    transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    background: '#FFFFFF',
                   }}
                 >
                   <img
@@ -75,8 +78,8 @@ export default function ConnectWallet() {
                     style={{
                       width: '100%',
                       height: '100%',
-                      objectFit: 'cover',
-                      borderRadius: '14px',
+                      objectFit: 'contain',
+                      borderRadius: '16px',
                     }}
                   />
                 </div>
