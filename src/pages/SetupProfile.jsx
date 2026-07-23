@@ -4,14 +4,15 @@ export default function SetupProfile() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ width: '100vw', minHeight: '100vh', background: '#EEF0FA', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ width: '100vw', height: '100vh', background: '#EEF0FA', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      
       {/* Top Header / Progress Bar */}
-      <div style={{ display: 'flex', background: '#fff', padding: '16px 32px', alignItems: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', zIndex: 10 }}>
+      <div style={{ flexShrink: 0, display: 'flex', background: '#fff', padding: '16px 32px', alignItems: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', zIndex: 10 }}>
         
         {/* Back Button */}
         <button 
           onClick={() => navigate('/form')}
-          style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#22C55E', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px' }}
+          style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#22C55E', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', flexShrink: 0 }}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -19,43 +20,43 @@ export default function SetupProfile() {
         </button>
 
         {/* Steps */}
-        <div style={{ display: 'flex', flex: 1, gap: '32px' }}>
-          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/form')}>
+        <div style={{ display: 'flex', flex: 1, gap: '32px', overflowX: 'auto' }}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/form')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 1</p>
             <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Upload Resume</p>
           </div>
           
-          <div style={{ background: '#E0E7FF', padding: '8px 20px', borderRadius: '8px', borderLeft: '4px solid #3741D4', cursor: 'pointer' }} onClick={() => navigate('/setup-profile')}>
+          <div style={{ background: '#E0E7FF', padding: '8px 20px', borderRadius: '8px', borderLeft: '4px solid #3741D4', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/setup-profile')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#22C55E', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 2</p>
             <p style={{ margin: 0, fontSize: '14px', color: '#3741D4', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Setup Profile</p>
           </div>
 
-          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/skills')}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/skills')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 3</p>
             <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Choose Skill</p>
           </div>
 
-          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/connect-wallet')}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/connect-wallet')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 4</p>
             <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Connect Wallet</p>
           </div>
           
-          <div style={{ padding: '8px 12px', cursor: 'pointer' }} onClick={() => navigate('/assessment')}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/assessment')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 5</p>
             <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Complete Profile</p>
           </div>
         </div>
 
         {/* Exit Icon */}
-        <button onClick={() => navigate('/')} style={{ width: '48px', height: '48px', borderRadius: '24px', background: '#F3F4F6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <button onClick={() => navigate('/')} style={{ width: '48px', height: '48px', borderRadius: '24px', background: '#F3F4F6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4B5563" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
           </svg>
         </button>
       </div>
 
-      {/* Main Content Area */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '40px' }}>
+      {/* Main Content Area - Scrollable */}
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '40px 20px' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto', background: '#FFFFFF', borderRadius: '24px', padding: '40px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
           
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
