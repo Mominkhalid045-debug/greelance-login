@@ -70,7 +70,7 @@ export default function CompleteProfile() {
           })}
         </div>
 
-        {/* Forward Arrow placeholder */}
+        {/* Forward Arrow */}
         <div style={{ width: '56px', background: '#fff', borderLeft: '1px solid #E5E7EB', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -79,12 +79,12 @@ export default function CompleteProfile() {
       </div>
 
       {/* Main Content Area - Scrollable */}
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '32px 40px' }}>
-        <div style={{ maxWidth: '960px', margin: '0 auto', background: '#FFFFFF', borderRadius: '20px', padding: '48px 40px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
+        <div style={{ maxWidth: '960px', margin: '0 auto', background: '#FFFFFF', borderRadius: '0 0 20px 20px', minHeight: 'calc(100vh - 60px)', padding: '56px 64px' }}>
           
           {/* Title */}
-          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '22px', fontWeight: 700, color: '#3741D4', margin: '0 0 6px 0' }}>
+          <div style={{ textAlign: 'center', marginBottom: '28px' }}>
+            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '24px', fontWeight: 700, color: '#0A0F2E', margin: '0 0 8px 0' }}>
               Complete Profile
             </h2>
             <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', color: '#6B7280', margin: 0 }}>
@@ -93,7 +93,7 @@ export default function CompleteProfile() {
           </div>
 
           {/* Profile Picture Upload */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '36px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '12px' }}>
             <label style={{ cursor: 'pointer' }}>
               <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
               <div 
@@ -101,25 +101,25 @@ export default function CompleteProfile() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '14px',
-                  padding: '12px 24px',
+                  padding: '10px 24px 10px 10px',
                   borderRadius: '14px',
-                  background: '#EEF2FF',
-                  border: '1.5px solid #C7D2FE',
-                  transition: 'all 0.2s',
+                  background: '#F0F1FF',
+                  border: '1.5px solid #D4D6FE',
                 }}
               >
-                {/* Avatar Icon */}
-                <div style={{ width: '44px', height: '44px', borderRadius: '22px', background: '#E0E7FF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', position: 'relative' }}>
+                {/* Avatar Icon with green collar */}
+                <div style={{ width: '48px', height: '48px', borderRadius: '24px', background: '#E8E9FF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', position: 'relative' }}>
                   {profileImage ? (
                     <img src={profileImage} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   ) : (
                     <>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3741D4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      {/* Person silhouette */}
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1E1B4B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: 'relative', zIndex: 1 }}>
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                         <circle cx="12" cy="7" r="4" />
                       </svg>
                       {/* Green collar accent */}
-                      <div style={{ position: 'absolute', bottom: '0', left: '50%', transform: 'translateX(-50%)', width: '28px', height: '10px', background: '#22C55E', borderRadius: '0 0 14px 14px' }}></div>
+                      <div style={{ position: 'absolute', bottom: '0', left: '50%', transform: 'translateX(-50%)', width: '32px', height: '12px', background: '#22C55E', borderRadius: '12px 12px 0 0', zIndex: 0 }} />
                     </>
                   )}
                 </div>
@@ -129,7 +129,7 @@ export default function CompleteProfile() {
                 </span>
 
                 {/* Upload Arrow */}
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3741D4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A0F2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                   <polyline points="17 8 12 3 7 8" />
                   <line x1="12" y1="3" x2="12" y2="15" />
@@ -137,14 +137,17 @@ export default function CompleteProfile() {
               </div>
             </label>
             
-            <p style={{ fontSize: '12px', color: '#9CA3AF', marginTop: '10px', margin: '10px 0 0 0' }}>
+            <p style={{ fontSize: '12px', color: '#9CA3AF', margin: '10px 0 0 0', fontFamily: "'Poppins', sans-serif" }}>
               *You can upload any JPEG or PNG.
             </p>
           </div>
 
+          {/* Divider space */}
+          <div style={{ height: '24px' }} />
+
           {/* About Section */}
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
               <label style={{ fontFamily: "'Poppins', sans-serif", fontSize: '15px', fontWeight: 700, color: '#0A0F2E' }}>
                 About
               </label>
@@ -154,7 +157,7 @@ export default function CompleteProfile() {
                 onClick={handleModifyWithAI}
                 style={{
                   background: 'transparent',
-                  color: '#6B7280',
+                  color: '#4B5563',
                   border: 'none',
                   fontFamily: "'Poppins', sans-serif",
                   fontSize: '13px',
@@ -162,30 +165,32 @@ export default function CompleteProfile() {
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
+                  gap: '5px',
+                  padding: 0,
                 }}
               >
-                <span>✨</span> Modify With AI
+                ✨ Modify With AI
               </button>
             </div>
 
             <textarea 
-              rows={6}
+              rows={7}
               value={aboutText}
               onChange={(e) => setAboutText(e.target.value)}
               placeholder="Write text here..."
               style={{
                 width: '100%',
-                padding: '16px 20px',
+                padding: '18px 22px',
                 borderRadius: '16px',
                 border: '1.5px solid #E5E7EB',
-                background: '#F9FAFD',
+                background: '#F8F9FC',
                 fontFamily: "'Poppins', sans-serif",
                 fontSize: '14px',
                 color: '#0A0F2E',
                 outline: 'none',
                 resize: 'vertical',
                 boxSizing: 'border-box',
+                lineHeight: 1.6,
               }}
             />
           </div>
