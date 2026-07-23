@@ -54,7 +54,7 @@ export default function ConnectWallet() {
             <p style={{ margin: 0, fontSize: '14px', color: '#3741D4', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>Connect Wallet</p>
           </div>
           
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/assessment')}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/complete-profile')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 5</p>
             <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Complete Profile</p>
           </div>
@@ -130,10 +130,10 @@ export default function ConnectWallet() {
               Back
             </button>
             <button 
-              onClick={() => navigate('/assessment')}
+              onClick={() => navigate('/complete-profile')}
               style={{ background: '#3741D4', color: '#FFFFFF', border: 'none', borderRadius: '30px', padding: '12px 36px', fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: '14px', cursor: 'pointer', boxShadow: '0 4px 14px rgba(55,65,212,0.3)' }}
             >
-              Next Step: Assessment →
+              Next Step: Complete Profile →
             </button>
           </div>
 

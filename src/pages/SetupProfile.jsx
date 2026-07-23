@@ -41,7 +41,7 @@ export default function SetupProfile() {
             <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Connect Wallet</p>
           </div>
           
-          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/assessment')}>
+          <div style={{ padding: '8px 12px', cursor: 'pointer', flexShrink: 0 }} onClick={() => navigate('/complete-profile')}>
             <p style={{ margin: 0, fontSize: '12px', color: '#6B7280', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Step 5</p>
             <p style={{ margin: 0, fontSize: '14px', color: '#374151', fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>Complete Profile</p>
           </div>

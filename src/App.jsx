@@ -13,6 +13,7 @@ import SetupProfile from './pages/SetupProfile';
 import SkillsSelection from './pages/SkillsSelection';
 import ConnectWallet from './pages/ConnectWallet';
 import Assessment from './pages/Assessment';
+import CompleteProfile from './pages/CompleteProfile';
 
 /**
  * SplitLayout — handles the 40/60 split screen.
@@ -84,6 +85,7 @@ export default function App() {
         <Route path="/setup-profile" element={<SetupProfile />} />
         <Route path="/skills" element={<SkillsSelection />} />
         <Route path="/connect-wallet" element={<ConnectWallet />} />
+        <Route path="/complete-profile" element={<CompleteProfile />} />
         <Route path="/assessment" element={<Assessment />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
