@@ -46,8 +46,8 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Sign in with:', email);
-    // Dummy navigation for demo purposes
-    navigate('/dashboard');
+    // Navigate directly into the Greelance onboarding flow
+    navigate('/form');
   };
 
   return (
