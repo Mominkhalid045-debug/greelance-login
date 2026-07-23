@@ -43,19 +43,23 @@ export default function Signup() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPw, setShowPw] = useState(false);
   const [showConfirmPw, setShowConfirmPw] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email) {
-      alert('Please enter your email address');
+    setErrorMessage('');
+
+    if (!email.trim()) {
+      setErrorMessage('Please enter your email address');
       return;
     }
     if (password && confirmPassword && password !== confirmPassword) {
-      alert('Passwords do not match');
+      setErrorMessage('Passwords do not match');
       return;
     }
-    // Navigate directly to OTP Verification with email state
+
+    // Direct transition to OTP verification page
     navigate('/verify-otp', { state: { email } });
   };
 
@@ -94,12 +98,33 @@ export default function Signup() {
             fontSize: '20px',
             fontWeight: 700,
             color: '#050A5F',
-            marginBottom: '24px',
+            marginBottom: '20px',
             textAlign: 'left',
           }}
         >
           Create Account
         </h1>
+
+        {/* Inline Error Banner (NO ugly browser alert popup) */}
+        {errorMessage && (
+          <div
+            style={{
+              background: '#FEF2F2',
+              border: '1px solid #FCA5A5',
+              borderRadius: '12px',
+              padding: '10px 14px',
+              marginBottom: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+            }}
+          >
+            <span style={{ color: '#EF4444', fontSize: '13px' }}>⚠️</span>
+            <span style={{ fontFamily: F, fontSize: '11px', fontWeight: 600, color: '#DC2626' }}>
+              {errorMessage}
+            </span>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {/* Email Address */}
@@ -110,10 +135,12 @@ export default function Signup() {
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setErrorMessage('');
+              }}
               placeholder="johnsmith@gmail.com"
               style={inputStyle}
-              required
             />
           </div>
 
@@ -126,10 +153,12 @@ export default function Signup() {
               <input
                 type={showPw ? 'text' : 'password'}
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setErrorMessage('');
+                }}
                 placeholder="••••••••••••"
                 style={{ ...inputStyle, paddingRight: '40px' }}
-                required
               />
               <div style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)' }}>
                 <EyeIcon show={showPw} onClick={() => setShowPw(!showPw)} />
@@ -146,10 +175,12 @@ export default function Signup() {
               <input
                 type={showConfirmPw ? 'text' : 'password'}
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                  setErrorMessage('');
+                }}
                 placeholder="johnsmith123%^&"
                 style={{ ...inputStyle, paddingRight: '40px' }}
-                required
               />
               <div style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)' }}>
                 <EyeIcon show={showConfirmPw} onClick={() => setShowConfirmPw(!showConfirmPw)} />

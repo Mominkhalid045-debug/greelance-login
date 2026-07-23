@@ -48,8 +48,8 @@ export default function VerifyOTP() {
       setError(true);
       return;
     }
-    // Success: navigate to role selection or onboarding form
-    navigate('/role-selection');
+    // Directly open Step 1: Upload Resume (/form)
+    navigate('/form');
   };
 
   const handleResend = () => {
@@ -99,7 +99,7 @@ export default function VerifyOTP() {
           Enter OTP
         </h1>
         <p style={{ fontFamily: F, fontSize: '11.5px', color: '#6B7280', margin: '0 0 36px 0' }}>
-          We Have Sent OTP To Your Email
+          We Have Sent OTP To Your Email ({email})
         </p>
 
         {/* 4 Circular OTP Input Fields */}
