@@ -27,14 +27,39 @@ const CATEGORIES = [
   { id: 'ml', name: 'Machine Learning', icon: '⚙️' },
 ];
 
+const SUB_CATEGORIES_MAP = {
+  'Digital Marketing Expert': ['Retail Media', 'Programmatic Ads', 'Network Marketing', 'Product Design', 'Email Marketing', 'SEO Strategy'],
+  'Virtual/Augmented': ['VR App Development', 'AR Modeling', 'Unity 3D', 'Unreal Engine', '3D Asset Creation', 'Spatial Computing'],
+  'default': ['Retail Media', 'Programmatic Ads', 'Network Marketing', 'Product Design', 'Email Marketing', 'SEO Strategy'],
+};
+
 export default function SkillsSelection() {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
 
   const handleSelectCategory = (catName) => {
     setSelectedCategory(catName);
+    setSelectedSubCategory(null);
     localStorage.setItem('userSelectedCategory', catName);
   };
+
+  const handleClearCategory = () => {
+    setSelectedCategory(null);
+    setSelectedSubCategory(null);
+    localStorage.removeItem('userSelectedCategory');
+    localStorage.removeItem('userSelectedSubCategory');
+  };
+
+  const handleSelectSubCategory = (subCatName) => {
+    setSelectedSubCategory(subCatName);
+    localStorage.setItem('userSelectedSubCategory', subCatName);
+  };
+
+  const currentCategoryObj = CATEGORIES.find((c) => c.name === selectedCategory);
+  const currentSubCategories = selectedCategory
+    ? SUB_CATEGORIES_MAP[selectedCategory] || SUB_CATEGORIES_MAP['default']
+    : [];
 
   return (
     <div
@@ -73,7 +98,7 @@ export default function SkillsSelection() {
             marginBottom: '32px',
           }}
         >
-          {/* Section Title & Subtitle */}
+          {/* Section 1: Category* Header */}
           <h2
             style={{
               fontFamily: F,
@@ -92,24 +117,23 @@ export default function SkillsSelection() {
               fontSize: '13px',
               color: '#050A5F',
               fontWeight: 500,
-              margin: '0 0 32px 0',
+              margin: '0 0 24px 0',
             }}
           >
             Select a category from the following.
           </p>
 
-          {/* Category Cards Flex Wrap Container */}
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '14px',
-              marginBottom: '16px',
-            }}
-          >
-            {CATEGORIES.map((cat) => {
-              const isSelected = selectedCategory === cat.name;
-              return (
+          {!selectedCategory ? (
+            /* Mode 1: Grid of All Categories */
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '14px',
+                marginBottom: '16px',
+              }}
+            >
+              {CATEGORIES.map((cat) => (
                 <button
                   key={cat.id}
                   type="button"
@@ -120,49 +144,167 @@ export default function SkillsSelection() {
                     gap: '10px',
                     padding: '12px 22px',
                     borderRadius: '14px',
-                    border: isSelected ? '2px solid #2334CD' : '1px solid #D6E4FF',
-                    background: isSelected ? '#EEF2FF' : '#F8FAFE',
+                    border: '1px solid #D6E4FF',
+                    background: '#F8FAFE',
                     color: '#050A5F',
                     fontFamily: F,
                     fontSize: '13px',
                     fontWeight: 600,
                     cursor: 'pointer',
-                    boxShadow: isSelected
-                      ? '0 4px 14px rgba(35, 52, 205, 0.15)'
-                      : '0 2px 6px rgba(5, 10, 95, 0.02)',
+                    boxShadow: '0 2px 6px rgba(5, 10, 95, 0.02)',
                     transition: 'all 0.2s ease',
                   }}
                   onMouseEnter={(e) => {
-                    if (!isSelected) {
-                      e.currentTarget.style.background = '#F0F4FF';
-                      e.currentTarget.style.borderColor = '#C7D2FE';
-                    }
+                    e.currentTarget.style.background = '#F0F4FF';
+                    e.currentTarget.style.borderColor = '#C7D2FE';
                   }}
                   onMouseLeave={(e) => {
-                    if (!isSelected) {
-                      e.currentTarget.style.background = '#F8FAFE';
-                      e.currentTarget.style.borderColor = '#D6E4FF';
-                    }
+                    e.currentTarget.style.background = '#F8FAFE';
+                    e.currentTarget.style.borderColor = '#D6E4FF';
                   }}
                 >
                   <span style={{ fontSize: '18px' }}>{cat.icon}</span>
                   <span>{cat.name}</span>
-                  {isSelected && (
-                    <span
+                </button>
+              ))}
+            </div>
+          ) : (
+            /* Mode 2: Selected Category Pill + Sub Category List */
+            <>
+              {/* Selected Category Pill with X Icon */}
+              <div style={{ marginBottom: '40px' }}>
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '16px',
+                    padding: '14px 22px',
+                    borderRadius: '14px',
+                    border: '1px solid #D6E4FF',
+                    background: '#F8FAFE',
+                    color: '#050A5F',
+                    fontFamily: F,
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    minWidth: '220px',
+                    boxShadow: '0 2px 8px rgba(5, 10, 95, 0.03)',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <span style={{ fontSize: '18px' }}>{currentCategoryObj?.icon || '📁'}</span>
+                    <span>{selectedCategory}</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleClearCategory}
+                    aria-label="Remove selected category"
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      color: '#050A5F',
+                      fontSize: '16px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: '2px',
+                    }}
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+
+              {/* Section 2: Sub Category* */}
+              <h2
+                style={{
+                  fontFamily: F,
+                  fontSize: '22px',
+                  fontWeight: 700,
+                  color: '#050A5F',
+                  margin: '0 0 6px 0',
+                }}
+              >
+                Sub Category<span style={{ color: '#EF4444' }}>*</span>
+              </h2>
+
+              <p
+                style={{
+                  fontFamily: F,
+                  fontSize: '13px',
+                  color: '#050A5F',
+                  fontWeight: 500,
+                  margin: '0 0 24px 0',
+                }}
+              >
+                Select a category from the following.
+              </p>
+
+              {/* Sub Categories Grid */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '14px',
+                }}
+              >
+                {currentSubCategories.map((sub) => {
+                  const isSubSelected = selectedSubCategory === sub;
+                  return (
+                    <button
+                      key={sub}
+                      type="button"
+                      onClick={() => handleSelectSubCategory(sub)}
                       style={{
-                        marginLeft: '4px',
-                        color: '#22C55E',
-                        fontSize: '14px',
-                        fontWeight: 700,
+                        padding: '14px 26px',
+                        borderRadius: '14px',
+                        border: isSubSelected ? '2px solid #2334CD' : '1px solid #D6E4FF',
+                        background: isSubSelected ? '#EEF2FF' : '#F8FAFE',
+                        color: '#050A5F',
+                        fontFamily: F,
+                        fontSize: '13px',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        boxShadow: isSubSelected
+                          ? '0 4px 14px rgba(35, 52, 205, 0.15)'
+                          : '0 2px 6px rgba(5, 10, 95, 0.02)',
+                        transition: 'all 0.2s ease',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isSubSelected) {
+                          e.currentTarget.style.background = '#F0F4FF';
+                          e.currentTarget.style.borderColor = '#C7D2FE';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isSubSelected) {
+                          e.currentTarget.style.background = '#F8FAFE';
+                          e.currentTarget.style.borderColor = '#D6E4FF';
+                        }
                       }}
                     >
-                      ✓
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
+                      <span>{sub}</span>
+                      {isSubSelected && (
+                        <span
+                          style={{
+                            marginLeft: '8px',
+                            color: '#22C55E',
+                            fontSize: '14px',
+                            fontWeight: 700,
+                          }}
+                        >
+                          ✓
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </div>
 
         {/* Bottom Navigation Controls (Outside Card) */}
@@ -178,7 +320,13 @@ export default function SkillsSelection() {
         >
           <button
             type="button"
-            onClick={() => navigate('/setup-profile')}
+            onClick={() => {
+              if (selectedCategory) {
+                handleClearCategory();
+              } else {
+                navigate('/setup-profile');
+              }
+            }}
             style={{
               background: '#FFFFFF',
               color: '#2334CD',
@@ -210,7 +358,7 @@ export default function SkillsSelection() {
             type="button"
             onClick={() => navigate('/connect-wallet')}
             style={{
-              background: selectedCategory ? '#2334CD' : '#A5B4FC',
+              background: '#2334CD',
               color: '#FFFFFF',
               border: 'none',
               borderRadius: '20px',
@@ -223,17 +371,11 @@ export default function SkillsSelection() {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              boxShadow: selectedCategory
-                ? 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px'
-                : 'none',
+              boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px',
               transition: 'background 0.2s ease',
             }}
-            onMouseEnter={(e) => {
-              if (selectedCategory) e.currentTarget.style.background = '#1B2AB2';
-            }}
-            onMouseLeave={(e) => {
-              if (selectedCategory) e.currentTarget.style.background = '#2334CD';
-            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#1B2AB2')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#2334CD')}
           >
             <span>Next</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -246,4 +388,5 @@ export default function SkillsSelection() {
     </div>
   );
 }
+
 
