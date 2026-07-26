@@ -44,23 +44,46 @@ export default function Signup() {
   const [showPw, setShowPw] = useState(false);
   const [showConfirmPw, setShowConfirmPw] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrorMessage('');
 
-    if (!email.trim()) {
-      setErrorMessage('Please enter your email address');
+    // 1. Fill all fields check
+    if (!email.trim() || !password || !confirmPassword) {
+      setErrorMessage('Please fill all fields');
       return;
     }
-    if (password && confirmPassword && password !== confirmPassword) {
+
+    // 2. Email format validation
+    if (!email.includes('@')) {
+      setErrorMessage(`Please include an '@' in the email address. '${email}' is missing an '@'.`);
+      return;
+    }
+
+    // 3. Password strength check (8+ chars, uppercase, number, symbol)
+    const hasUpper = /[A-Z]/.test(password);
+    const hasNum = /[0-9]/.test(password);
+    const hasSym = /[^A-Za-z0-9]/.test(password);
+
+    if (password.length < 8 || !hasUpper || !hasNum || !hasSym) {
+      setErrorMessage('Password must be 8+ characters with an uppercase letter, a number, and a symbol');
+      return;
+    }
+
+    // 4. Confirm password match check
+    if (password !== confirmPassword) {
       setErrorMessage('Passwords do not match');
       return;
     }
 
-    // Direct transition to OTP verification page
-    navigate('/verify-otp', { state: { email } });
+    // Valid submission state
+    setIsSubmitting(true);
+    setTimeout(() => {
+      navigate('/verify-otp', { state: { email } });
+    }, 600);
   };
 
   return (
@@ -75,63 +98,32 @@ export default function Signup() {
         alignItems: 'center',
       }}
     >
-      <div style={{ marginBottom: '24px' }}>
-        <Logo centered size="medium" />
-      </div>
+      <Logo centered size="medium" style={{ marginBottom: '12px' }} />
 
-      {/* Main Card Container */}
+      <h1
+        style={{
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: '20px',
+          fontWeight: 700,
+          color: '#1F2937',
+          marginBottom: '20px',
+          textAlign: 'center',
+        }}
+      >
+        Create Account
+      </h1>
+
       <div
         style={{
           width: '100%',
-          maxWidth: '440px',
-          background: '#FFFFFF',
-          borderRadius: '24px',
-          padding: '36px 36px 28px',
-          boxShadow: '0 12px 36px rgba(5,10,95,0.06)',
-          border: '0.75px solid #E0E2FE',
+          maxWidth: '400px',
           boxSizing: 'border-box',
         }}
       >
-        <h1
-          style={{
-            fontFamily: F,
-            fontSize: '20px',
-            fontWeight: 700,
-            color: '#050A5F',
-            marginBottom: '20px',
-            textAlign: 'left',
-          }}
-        >
-          Create Account
-        </h1>
-
-        {/* Inline Error Banner (NO ugly browser alert popup) */}
-        {errorMessage && (
-          <div
-            style={{
-              background: '#FEF2F2',
-              border: '1px solid #FCA5A5',
-              borderRadius: '12px',
-              padding: '10px 14px',
-              marginBottom: '16px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-            }}
-          >
-            <span style={{ color: '#EF4444', fontSize: '13px' }}>⚠️</span>
-            <span style={{ fontFamily: F, fontSize: '11px', fontWeight: 600, color: '#DC2626' }}>
-              {errorMessage}
-            </span>
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           {/* Email Address */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F' }}>
-              Email Address
-            </label>
+            <label style={labelStyle}>Email Address</label>
             <input
               type="email"
               value={email}
@@ -139,16 +131,14 @@ export default function Signup() {
                 setEmail(e.target.value);
                 setErrorMessage('');
               }}
-              placeholder="johnsmith@gmail.com"
+              placeholder="ss@gmail.com"
               style={inputStyle}
             />
           </div>
 
           {/* Password */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F' }}>
-              Password
-            </label>
+            <label style={labelStyle}>Password</label>
             <div style={{ position: 'relative', width: '100%' }}>
               <input
                 type={showPw ? 'text' : 'password'}
@@ -157,7 +147,7 @@ export default function Signup() {
                   setPassword(e.target.value);
                   setErrorMessage('');
                 }}
-                placeholder="••••••••••••"
+                placeholder="••••••••"
                 style={{ ...inputStyle, paddingRight: '40px' }}
               />
               <div style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)' }}>
@@ -168,9 +158,7 @@ export default function Signup() {
 
           {/* Confirm Password */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F' }}>
-              Confirm Password
-            </label>
+            <label style={labelStyle}>Confirm Password</label>
             <div style={{ position: 'relative', width: '100%' }}>
               <input
                 type={showConfirmPw ? 'text' : 'password'}
@@ -179,7 +167,7 @@ export default function Signup() {
                   setConfirmPassword(e.target.value);
                   setErrorMessage('');
                 }}
-                placeholder="johnsmith123%^&"
+                placeholder="••••••••"
                 style={{ ...inputStyle, paddingRight: '40px' }}
               />
               <div style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)' }}>
@@ -189,71 +177,97 @@ export default function Signup() {
           </div>
 
           {/* Password Requirement Hint */}
-          <p style={{ fontFamily: F, fontSize: '9px', color: '#6B7280', margin: '2px 0 8px', lineHeight: '14px' }}>
-            <span style={{ color: '#22D3A6' }}>*</span> Password must contain 8 characters, uppercase letters, lower case letters, numbers, symbols
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '11px', color: '#6B7280', margin: '2px 0 0px', lineHeight: '15px' }}>
+            *Password must contain 8 characters, uppercase letters, numbers, symbols
           </p>
+
+          {/* Error Message directly below hint */}
+          {errorMessage && (
+            <p
+              style={{
+                fontFamily: "'Poppins', sans-serif",
+                fontSize: '12px',
+                fontWeight: 600,
+                color: '#EF4444',
+                margin: '2px 0 0',
+                lineHeight: '16px',
+              }}
+            >
+              {errorMessage}
+            </p>
+          )}
 
           {/* Sign Up Button */}
           <button
             type="submit"
+            disabled={isSubmitting}
             style={{
-              background: '#3038BD',
+              width: '100%',
+              height: '42px',
+              background: '#2334CD',
               color: '#FFFFFF',
-              border: 'none',
-              borderRadius: '20px',
-              height: '36px',
-              width: '120px',
-              fontFamily: F,
-              fontSize: '12px',
+              fontFamily: "'Poppins', sans-serif",
               fontWeight: 600,
-              cursor: 'pointer',
-              alignSelf: 'center',
-              boxShadow: '0 4px 12px rgba(48,56,189,0.3)',
-              marginTop: '4px',
+              fontSize: '14px',
+              border: 'none',
+              borderRadius: '10px',
+              cursor: isSubmitting ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px',
+              marginTop: '10px',
+              transition: 'all 0.2s ease',
+              opacity: isSubmitting ? 0.8 : 1,
             }}
           >
-            Sign Up
+            {isSubmitting ? 'Creating...' : 'Sign Up'}
           </button>
         </form>
 
         {/* Already have account */}
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-          <span style={{ fontFamily: F, fontSize: '11.5px', color: '#050A5F', opacity: 0.8 }}>
-            Already have an account?{' '}
-          </span>
-          <Link
-            to="/login"
-            style={{
-              fontFamily: F,
-              fontSize: '11.5px',
-              fontWeight: 600,
-              color: '#3038BD',
-              textDecoration: 'none',
-            }}
-          >
+        <div
+          style={{
+            fontFamily: "'Poppins', sans-serif",
+            fontSize: '13px',
+            color: '#6B7280',
+            textAlign: 'center',
+            marginTop: '16px',
+            marginBottom: '16px',
+          }}
+        >
+          Already have an account?{' '}
+          <Link to="/login" style={{ color: '#2334CD', fontWeight: 600, textDecoration: 'none' }}>
             Sign In
           </Link>
         </div>
-      </div>
 
-      {/* Social Login */}
-      <div style={{ marginTop: '24px' }}>
+        {/* Social Login */}
         <SocialLogin />
       </div>
     </div>
   );
 }
 
+const labelStyle = {
+  fontFamily: "'Poppins', sans-serif",
+  fontSize: '13px',
+  fontWeight: 500,
+  color: '#374151',
+};
+
 const inputStyle = {
   width: '100%',
-  height: '39px',
+  height: '44px',
   padding: '0 16px',
-  borderRadius: '45px',
-  border: '0.75px solid #E0E2FE',
-  background: '#F3F7FF',
-  fontFamily: F,
-  fontSize: '12px',
-  color: '#050A5F',
+  borderRadius: '10px',
+  border: '1px solid #E5E7EB',
+  background: '#FFFFFF',
+  fontFamily: "'Poppins', sans-serif",
+  fontSize: '14px',
+  color: '#1F2937',
   outline: 'none',
   boxSizing: 'border-box',
+  transition: 'border-color 0.2s ease',
 };
+
