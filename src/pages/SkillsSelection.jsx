@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StepHeader, F } from './FreelancerForm';
 
@@ -33,10 +33,40 @@ const SUB_CATEGORIES_MAP = {
   'default': ['Retail Media', 'Programmatic Ads', 'Network Marketing', 'Product Design', 'Email Marketing', 'SEO Strategy'],
 };
 
+const DROPDOWN_SKILLS_LIST = [
+  'Retail Media',
+  'Programmatic',
+  'Network',
+  'Product Design',
+  'Email Marketing',
+  'SEO',
+  'Content Strategy',
+  'Paid Social',
+  'Analytics',
+];
+
+const SUGGESTED_SKILL_CHIPS = ['Network', 'Product Design', 'SEO', 'Content Strategy'];
+
 export default function SkillsSelection() {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+  const dropdownRef = useRef(null);
+
+  const [selectedCategory, setSelectedCategory] = useState('Digital Marketing Expert');
+  const [selectedSubCategory, setSelectedSubCategory] = useState('Product Design');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedSkills, setSelectedSkills] = useState(['Retail Media', 'Email Marketing', 'Programmatic']);
+  const [customSkillInput, setCustomSkillInput] = useState('');
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleSelectCategory = (catName) => {
     setSelectedCategory(catName);
@@ -47,6 +77,7 @@ export default function SkillsSelection() {
   const handleClearCategory = () => {
     setSelectedCategory(null);
     setSelectedSubCategory(null);
+    setSelectedSkills([]);
     localStorage.removeItem('userSelectedCategory');
     localStorage.removeItem('userSelectedSubCategory');
   };
@@ -54,6 +85,24 @@ export default function SkillsSelection() {
   const handleSelectSubCategory = (subCatName) => {
     setSelectedSubCategory(subCatName);
     localStorage.setItem('userSelectedSubCategory', subCatName);
+  };
+
+  const toggleSkill = (skill) => {
+    if (selectedSkills.includes(skill)) {
+      setSelectedSkills(selectedSkills.filter((s) => s !== skill));
+    } else {
+      if (selectedSkills.length < 15) {
+        setSelectedSkills([...selectedSkills, skill]);
+      }
+    }
+  };
+
+  const handleAddCustomSkill = (skillToAdd) => {
+    const trimmed = skillToAdd.trim();
+    if (trimmed && !selectedSkills.includes(trimmed) && selectedSkills.length < 15) {
+      setSelectedSkills([...selectedSkills, trimmed]);
+      setCustomSkillInput('');
+    }
   };
 
   const currentCategoryObj = CATEGORIES.find((c) => c.name === selectedCategory);
@@ -124,7 +173,7 @@ export default function SkillsSelection() {
           </p>
 
           {!selectedCategory ? (
-            /* Mode 1: Grid of All Categories */
+            /* Mode 1: Grid of All 22 Categories */
             <div
               style={{
                 display: 'flex',
@@ -192,7 +241,7 @@ export default function SkillsSelection() {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span style={{ fontSize: '18px' }}>{currentCategoryObj?.icon || '📁'}</span>
+                    <span style={{ fontSize: '18px' }}>{currentCategoryObj?.icon || '📢'}</span>
                     <span>{selectedCategory}</span>
                   </div>
 
@@ -249,6 +298,7 @@ export default function SkillsSelection() {
                   display: 'flex',
                   flexWrap: 'wrap',
                   gap: '14px',
+                  marginBottom: '40px',
                 }}
               >
                 {currentSubCategories.map((sub) => {
@@ -261,15 +311,15 @@ export default function SkillsSelection() {
                       style={{
                         padding: '14px 26px',
                         borderRadius: '14px',
-                        border: isSubSelected ? '2px solid #2334CD' : '1px solid #D6E4FF',
-                        background: isSubSelected ? '#EEF2FF' : '#F8FAFE',
-                        color: '#050A5F',
+                        border: isSubSelected ? 'none' : '1px solid #D6E4FF',
+                        background: isSubSelected ? '#2334CD' : '#F8FAFE',
+                        color: isSubSelected ? '#FFFFFF' : '#050A5F',
                         fontFamily: F,
                         fontSize: '13px',
                         fontWeight: 600,
                         cursor: 'pointer',
                         boxShadow: isSubSelected
-                          ? '0 4px 14px rgba(35, 52, 205, 0.15)'
+                          ? '0 4px 14px rgba(35, 52, 205, 0.25)'
                           : '0 2px 6px rgba(5, 10, 95, 0.02)',
                         transition: 'all 0.2s ease',
                       }}
@@ -287,22 +337,252 @@ export default function SkillsSelection() {
                       }}
                     >
                       <span>{sub}</span>
-                      {isSubSelected && (
-                        <span
-                          style={{
-                            marginLeft: '8px',
-                            color: '#22C55E',
-                            fontSize: '14px',
-                            fontWeight: 700,
-                          }}
-                        >
-                          ✓
-                        </span>
-                      )}
                     </button>
                   );
                 })}
               </div>
+
+              {/* Section 3: Skills Multi-Select Dropdown & Badges */}
+              {selectedSubCategory && (
+                <div style={{ marginTop: '32px' }}>
+                  <label
+                    style={{
+                      fontFamily: F,
+                      fontSize: '12.5px',
+                      fontWeight: 600,
+                      color: '#050A5F',
+                      display: 'block',
+                      marginBottom: '8px',
+                    }}
+                  >
+                    Skills
+                  </label>
+
+                  {/* Dropdown Container */}
+                  <div ref={dropdownRef} style={{ position: 'relative', width: '280px', marginBottom: '24px' }}>
+                    <div
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      style={{
+                        width: '100%',
+                        height: '42px',
+                        padding: '0 16px',
+                        borderRadius: '21px',
+                        border: '1px solid #D6E4FF',
+                        background: '#F0F4FF',
+                        fontFamily: F,
+                        fontSize: '13px',
+                        color: '#050A5F',
+                        fontWeight: 500,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        cursor: 'pointer',
+                        userSelect: 'none',
+                        boxSizing: 'border-box',
+                      }}
+                    >
+                      <span>
+                        {selectedSkills.length > 0
+                          ? `${selectedSkills.length} skill(s) selected`
+                          : 'Select'}
+                      </span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2334CD" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+
+                    {/* Checkbox Items Popup Menu */}
+                    {dropdownOpen && (
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '48px',
+                          left: 0,
+                          width: '280px',
+                          maxHeight: '320px',
+                          overflowY: 'auto',
+                          background: '#FFFFFF',
+                          borderRadius: '16px',
+                          boxShadow: '0 10px 30px rgba(5, 10, 95, 0.12)',
+                          border: '1px solid #E5E7EB',
+                          padding: '12px',
+                          zIndex: 100,
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '6px',
+                          boxSizing: 'border-box',
+                        }}
+                      >
+                        {DROPDOWN_SKILLS_LIST.map((skill) => {
+                          const isChecked = selectedSkills.includes(skill);
+                          return (
+                            <div
+                              key={skill}
+                              onClick={() => toggleSkill(skill)}
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '12px',
+                                padding: '8px 10px',
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                transition: 'background 0.15s ease',
+                              }}
+                              onMouseEnter={(e) => (e.currentTarget.style.background = '#F4F7FC')}
+                              onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                            >
+                              <div
+                                style={{
+                                  width: '18px',
+                                  height: '18px',
+                                  borderRadius: '6px',
+                                  border: isChecked ? 'none' : '1.5px solid #050A5F',
+                                  background: isChecked ? '#2334CD' : 'transparent',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  color: '#FFFFFF',
+                                  fontSize: '12px',
+                                  fontWeight: 700,
+                                }}
+                              >
+                                {isChecked && '✓'}
+                              </div>
+                              <span
+                                style={{
+                                  fontFamily: F,
+                                  fontSize: '13px',
+                                  fontWeight: 600,
+                                  color: '#050A5F',
+                                }}
+                              >
+                                {skill}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Selected Mint Green Skill Badges Cloud */}
+                  {selectedSkills.length > 0 && (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '16px' }}>
+                      {selectedSkills.map((skill) => (
+                        <div
+                          key={skill}
+                          style={{
+                            background: '#22C55E',
+                            color: '#FFFFFF',
+                            fontFamily: F,
+                            fontSize: '13px',
+                            fontWeight: 600,
+                            padding: '8px 18px',
+                            borderRadius: '18px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            boxShadow: '0 2px 8px rgba(34, 197, 94, 0.25)',
+                          }}
+                        >
+                          <span>{skill}</span>
+                          <span
+                            onClick={() => toggleSkill(skill)}
+                            style={{ cursor: 'pointer', fontSize: '13px', fontWeight: 700 }}
+                            title="Remove skill"
+                          >
+                            ✕
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Limit Warning Notice */}
+                  <p
+                    style={{
+                      fontFamily: F,
+                      fontSize: '13px',
+                      fontWeight: 600,
+                      color: '#22C55E',
+                      margin: '0 0 32px 0',
+                    }}
+                  >
+                    *You can only select 15 skills in total
+                  </p>
+
+                  {/* Section 4: Suggest missing skill */}
+                  <div style={{ maxWidth: '420px' }}>
+                    <label
+                      style={{
+                        fontFamily: F,
+                        fontSize: '12.5px',
+                        fontWeight: 600,
+                        color: '#050A5F',
+                        display: 'block',
+                        marginBottom: '8px',
+                      }}
+                    >
+                      Suggest missing skill
+                    </label>
+
+                    <input
+                      type="text"
+                      value={customSkillInput}
+                      onChange={(e) => setCustomSkillInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleAddCustomSkill(customSkillInput);
+                        }
+                      }}
+                      placeholder="Type a skill..."
+                      style={{
+                        width: '100%',
+                        height: '42px',
+                        padding: '0 20px',
+                        borderRadius: '21px',
+                        border: '1px solid #D6E4FF',
+                        background: '#F0F4FF',
+                        fontFamily: F,
+                        fontSize: '13px',
+                        color: '#050A5F',
+                        outline: 'none',
+                        boxSizing: 'border-box',
+                        marginBottom: '16px',
+                      }}
+                    />
+
+                    {/* Quick Add Chips */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                      {SUGGESTED_SKILL_CHIPS.map((chip) => (
+                        <button
+                          key={chip}
+                          type="button"
+                          onClick={() => handleAddCustomSkill(chip)}
+                          style={{
+                            background: '#22C55E',
+                            color: '#FFFFFF',
+                            border: 'none',
+                            borderRadius: '18px',
+                            padding: '8px 18px',
+                            fontFamily: F,
+                            fontSize: '13px',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                            boxShadow: '0 2px 8px rgba(34, 197, 94, 0.2)',
+                            transition: 'background 0.2s ease',
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget.style.background = '#16A34A')}
+                          onMouseLeave={(e) => (e.currentTarget.style.background = '#22C55E')}
+                        >
+                          {chip}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </>
           )}
         </div>
@@ -388,5 +668,6 @@ export default function SkillsSelection() {
     </div>
   );
 }
+
 
 
