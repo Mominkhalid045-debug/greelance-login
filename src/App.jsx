@@ -79,6 +79,7 @@ export default function App() {
     <Router>
       <Routes>
         {/* Full-screen routes */}
+        <Route path="/verify-otp" element={<VerifyOTP />} />
         <Route path="/form" element={<FreelancerForm />} />
         <Route path="/setup-profile" element={<SetupProfile />} />
         <Route path="/skills" element={<SkillsSelection />} />
@@ -92,7 +93,6 @@ export default function App() {
         <Route path="/login" element={<SplitLayout><Login /></SplitLayout>} />
         <Route path="/signup" element={<SplitLayout><Signup /></SplitLayout>} />
         <Route path="/forgot-password" element={<SplitLayout><ForgotPassword /></SplitLayout>} />
-        <Route path="/verify-otp" element={<SplitLayout><VerifyOTP /></SplitLayout>} />
         <Route path="/new-password" element={<SplitLayout><NewPassword /></SplitLayout>} />
         
         {/* Fallback */}
