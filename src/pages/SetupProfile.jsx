@@ -5,183 +5,430 @@ import { StepHeader, F } from './FreelancerForm';
 export default function SetupProfile() {
   const navigate = useNavigate();
 
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    countryResidence: '',
+    countryCitizenship: '',
+    countryCode: '+1',
+    phoneNumber: '201 555 0123',
+    englishProficiency: '',
+    noticePeriod: '',
+    commitment: '',
+    hourlyRate: '',
+    timeZone: '',
+  });
+
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem('userProfileData', JSON.stringify(formData));
+    navigate('/skills');
+  };
+
   return (
-    <div style={{ width: '100%', maxWidth: '1440px', margin: '0 auto', minHeight: '100vh', background: '#F7FAFF', display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{
+        width: '100vw',
+        minHeight: '100vh',
+        background: '#F4F7FC',
+        display: 'flex',
+        flexDirection: 'column',
+        boxSizing: 'border-box',
+      }}
+    >
+      {/* Floating Step Header Navigation */}
       <StepHeader activeStep={2} navigate={navigate} />
 
-      {/* Main Form Content */}
-      <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 60px', marginTop: '30px' }}>
-        
-        <div style={{ width: '100%', maxWidth: '1320px' }}>
-          
-          {/* Section Heading */}
-          <h2 style={{ fontFamily: F, fontSize: '18px', fontWeight: 700, color: '#050A5F', marginBottom: '20px' }}>
-            Personal Information<span style={{ color: '#EF4444' }}>*</span>
-          </h2>
-
-          {/* 4-Column Personal Info Grid */}
-          <div className="personal-info-grid-responsive" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '20px' }}>
-            
-            {/* Row 1 */}
-            <FormField label="First Name" defaultValue="Momin" />
-            <FormField label="Last Name" defaultValue="Khalid" />
-            <FormField label="Country of Residence" type="select" placeholder="Select" options={['United States', 'United Kingdom', 'Canada', 'Pakistan', 'Germany']} />
-            <FormField label="Country of Citizenship" type="select" placeholder="Select" options={['United States', 'United Kingdom', 'Canada', 'Pakistan', 'Germany']} />
-
-            {/* Row 2 */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F' }}>Phone Number</label>
-              <div style={{ display: 'flex', alignItems: 'center', background: '#F3F7FF', border: '0.75px solid #E0E2FE', borderRadius: '45px', height: '39px', padding: '0 12px', gap: '6px' }}>
-                <span style={{ fontSize: '14px' }}>🇺🇸</span>
-                <span style={{ fontSize: '10px', color: '#6B7280' }}>∨</span>
-                <input
-                  type="text"
-                  defaultValue="+1 201 555 -0123"
-                  style={{ border: 'none', background: 'transparent', outline: 'none', fontFamily: F, fontSize: '12px', color: '#9CA3AF', flex: 1 }}
-                />
-              </div>
-            </div>
-
-            <FormField label="English Proficiency" type="select" placeholder="Select" options={['Native / Bilingual', 'Fluent', 'Conversational', 'Basic']} />
-            <FormField label="Notice period to resign from current job" type="select" placeholder="Select" options={['Immediate', '2 Weeks', '1 Month', '2 Months']} />
-            <FormField label="Which type of job commitment do you prefer?" type="select" placeholder="Select" options={['Full Time', 'Part Time', 'Contract / Project']} />
-
-          </div>
-
-          {/* Row 3: Hourly Rate (Single column under Row 2) */}
-          <div style={{ width: '24%', minWidth: '260px', marginBottom: '36px' }}>
-            <FormField label="What's your preferred hourly rate in U.S. dollars?" defaultValue="" placeholder="" />
-          </div>
-
-          {/* Education Sub-section */}
-          <SubSection title="Education" buttonLabel="Add Education" />
-
-          {/* Experience Sub-section */}
-          <SubSection title="Experience" buttonLabel="Add Experience" />
-
-          {/* Certifications Sub-section */}
-          <SubSection title="Certifications" buttonLabel="Add Certification" />
-
-          {/* Portfolio Sub-section */}
-          <SubSection title="Portfolio" buttonLabel="Add Portfolio" />
-
-          {/* Next Button */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '30px', marginBottom: '40px' }}>
-            <button
-              onClick={() => navigate('/skills')}
+      {/* Main Content Area */}
+      <main
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '32px 20px 60px 20px',
+        }}
+      >
+        {/* Main White Card Container */}
+        <div
+          style={{
+            width: '1140px',
+            maxWidth: '96%',
+            background: '#FFFFFF',
+            borderRadius: '24px',
+            boxShadow: '0 10px 30px rgba(5, 10, 95, 0.03)',
+            padding: '48px',
+            boxSizing: 'border-box',
+            marginBottom: '32px',
+          }}
+        >
+          <form onSubmit={handleSubmit}>
+            {/* Section 1: Personal Information* */}
+            <h2
               style={{
-                background: '#3038BD',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '16.88px',
-                width: '99px',
-                height: '27.6px',
                 fontFamily: F,
-                fontSize: '11px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(48,56,189,0.25)',
+                fontSize: '22px',
+                fontWeight: 700,
+                color: '#050A5F',
+                margin: '0 0 28px 0',
               }}
             >
-              Next
-            </button>
-          </div>
+              Personal Information<span style={{ color: '#EF4444' }}>*</span>
+            </h2>
 
+            {/* 4-Column Inputs Grid */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: '24px 20px',
+                marginBottom: '24px',
+              }}
+            >
+              {/* Row 1 */}
+              <FormField
+                label="First Name"
+                required
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={(v) => handleChange('firstName', v)}
+              />
+
+              <FormField
+                label="Last Name"
+                required
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={(v) => handleChange('lastName', v)}
+              />
+
+              <FormField
+                label="Country of Residence"
+                type="select"
+                placeholder="Select"
+                options={['United States', 'United Kingdom', 'Canada', 'Pakistan', 'Germany', 'Australia', 'UAE']}
+                value={formData.countryResidence}
+                onChange={(v) => handleChange('countryResidence', v)}
+              />
+
+              <FormField
+                label="Country of Citizenship"
+                type="select"
+                placeholder="Select"
+                options={['United States', 'United Kingdom', 'Canada', 'Pakistan', 'Germany', 'Australia', 'UAE']}
+                value={formData.countryCitizenship}
+                onChange={(v) => handleChange('countryCitizenship', v)}
+              />
+
+              {/* Row 2 */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <label style={labelStyle}>Phone Number</label>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <select
+                    value={formData.countryCode}
+                    onChange={(e) => handleChange('countryCode', e.target.value)}
+                    style={{
+                      width: '76px',
+                      height: '42px',
+                      borderRadius: '21px',
+                      border: '1px solid #D6E4FF',
+                      background: '#F0F4FF',
+                      fontFamily: F,
+                      fontSize: '13px',
+                      color: '#050A5F',
+                      padding: '0 8px 0 12px',
+                      outline: 'none',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <option value="+1">+1</option>
+                    <option value="+44">+44</option>
+                    <option value="+92">+92</option>
+                    <option value="+49">+49</option>
+                  </select>
+
+                  <input
+                    type="text"
+                    value={formData.phoneNumber}
+                    onChange={(e) => handleChange('phoneNumber', e.target.value)}
+                    placeholder="201 555 0123"
+                    style={{ ...inputStyle, flex: 1 }}
+                  />
+                </div>
+              </div>
+
+              <FormField
+                label="English Proficiency"
+                type="select"
+                placeholder="Select"
+                options={['Native / Bilingual', 'Fluent', 'Conversational', 'Basic']}
+                value={formData.englishProficiency}
+                onChange={(v) => handleChange('englishProficiency', v)}
+              />
+
+              <FormField
+                label="Notice period to resign from current job"
+                type="select"
+                placeholder="Select"
+                options={['Immediate', '2 Weeks', '1 Month', '2 Months', '3 Months']}
+                value={formData.noticePeriod}
+                onChange={(v) => handleChange('noticePeriod', v)}
+              />
+
+              <FormField
+                label="Which type of job commitment do you prefer?"
+                type="select"
+                placeholder="Select"
+                options={['Full Time (40 hrs/wk)', 'Part Time (20 hrs/wk)', 'Contract / Project Basis']}
+                value={formData.commitment}
+                onChange={(v) => handleChange('commitment', v)}
+              />
+
+              {/* Row 3 */}
+              <FormField
+                label="What's your preferred hourly rate in U.S. dollars?"
+                placeholder="$ 0.00"
+                value={formData.hourlyRate}
+                onChange={(v) => handleChange('hourlyRate', v)}
+              />
+
+              <FormField
+                label="Time Zone"
+                type="select"
+                placeholder="Select"
+                options={['(GMT-05:00) Eastern Time', '(GMT-08:00) Pacific Time', '(GMT+00:00) UTC', '(GMT+05:00) PKT', '(GMT+01:00) CET']}
+                value={formData.timeZone}
+                onChange={(v) => handleChange('timeZone', v)}
+              />
+            </div>
+
+            {/* Spacing before sections */}
+            <div style={{ marginTop: '40px' }} />
+
+            {/* Sub-sections */}
+            <SubSection title="Education" buttonLabel="Add Education" />
+            <SubSection title="Experience" buttonLabel="Add Experience" />
+            <SubSection title="Certifications" buttonLabel="Add Certificate" />
+            <SubSection title="Portfolio" buttonLabel="Add Portfolio" isLast />
+          </form>
         </div>
-      </div>
+
+        {/* Bottom Navigation Buttons (Outside Card) */}
+        <div
+          style={{
+            width: '1140px',
+            maxWidth: '96%',
+            display: 'flex',
+            justify: 'space-between',
+            alignItems: 'center',
+            boxSizing: 'border-box',
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => navigate('/form')}
+            style={{
+              background: '#FFFFFF',
+              color: '#2334CD',
+              border: '1.5px solid #2334CD',
+              borderRadius: '20px',
+              height: '42px',
+              padding: '0 28px',
+              fontFamily: F,
+              fontSize: '13px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+              transition: 'background 0.2s ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#EEF2FF')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#FFFFFF')}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
+            <span>Back</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => navigate('/skills')}
+            style={{
+              background: '#2334CD',
+              color: '#FFFFFF',
+              border: 'none',
+              borderRadius: '20px',
+              height: '42px',
+              padding: '0 32px',
+              fontFamily: F,
+              fontSize: '13px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px',
+              transition: 'background 0.2s ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#1B2AB2')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#2334CD')}
+          >
+            <span>Next</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </button>
+        </div>
+      </main>
     </div>
   );
 }
 
-/* Helper Component: Form Input / Select Field */
-function FormField({ label, defaultValue, type = 'text', placeholder = '', options = [] }) {
+/* Helper FormField Component */
+function FormField({ label, required = false, type = 'text', placeholder = '', options = [], value, onChange }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      <label style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F', lineHeight: '15px' }}>
+      <label style={labelStyle}>
         {label}
+        {required && <span style={{ color: '#EF4444', marginLeft: '3px' }}>*</span>}
       </label>
+
       {type === 'select' ? (
-        <select style={selectStyle} defaultValue="">
-          <option value="" disabled>{placeholder}</option>
-          {options.map((o) => (
-            <option key={o} value={o}>{o}</option>
-          ))}
-        </select>
+        <div style={{ position: 'relative', width: '100%' }}>
+          <select
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            style={selectStyle}
+          >
+            <option value="" disabled>
+              {placeholder}
+            </option>
+            {options.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
+          </select>
+          <div
+            style={{
+              position: 'absolute',
+              right: '16px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              pointerEvents: 'none',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2334CD" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+        </div>
       ) : (
-        <input type="text" defaultValue={defaultValue} placeholder={placeholder} style={inputFieldStyle} />
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          style={inputStyle}
+        />
       )}
     </div>
   );
 }
 
-/* Helper Component: Sub-Section Header with Mint Green Add Button */
-function SubSection({ title, buttonLabel }) {
+/* Helper SubSection Component */
+function SubSection({ title, buttonLabel, isLast = false }) {
   return (
     <div
       style={{
         width: '100%',
-        paddingBottom: '14px',
-        marginBottom: '20px',
-        borderBottom: '1px solid #E0E2FE',
+        paddingBottom: '24px',
+        marginBottom: '28px',
+        borderBottom: isLast ? 'none' : '1px solid #F3F4F6',
         display: 'flex',
         flexDirection: 'column',
-        gap: '10px',
+        gap: '12px',
       }}
     >
-      <h3 style={{ fontFamily: F, fontSize: '16px', fontWeight: 700, color: '#050A5F', margin: 0 }}>
+      <h3
+        style={{
+          fontFamily: F,
+          fontSize: '18px',
+          fontWeight: 700,
+          color: '#050A5F',
+          margin: 0,
+        }}
+      >
         {title}
       </h3>
       <button
         type="button"
         style={{
           width: 'fit-content',
-          background: '#22D3A6',
+          background: '#22C55E',
           color: '#FFFFFF',
           border: 'none',
-          borderRadius: '18px',
-          padding: '5px 14px',
+          borderRadius: '20px',
+          padding: '8px 18px',
           fontFamily: F,
-          fontSize: '10px',
+          fontSize: '12px',
           fontWeight: 600,
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           gap: '6px',
-          boxShadow: '0 2px 6px rgba(34,211,166,0.3)',
+          boxShadow: '0 2px 8px rgba(34, 197, 94, 0.2)',
+          transition: 'background 0.2s ease',
         }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = '#16A34A')}
+        onMouseLeave={(e) => (e.currentTarget.style.background = '#22C55E')}
       >
-        <span style={{
-          width: '14px', height: '14px', borderRadius: '50%',
-          border: '1.2px solid #fff', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '10px', fontWeight: 700, lineHeight: 1,
-        }}>+</span>
-        {buttonLabel}
+        <span style={{ fontSize: '14px', fontWeight: 700, lineHeight: 1 }}>+</span>
+        <span>{buttonLabel}</span>
       </button>
     </div>
   );
 }
 
-const inputFieldStyle = {
-  width: '100%',
-  height: '39px',
-  padding: '0 16px',
-  borderRadius: '45px',
-  border: '0.75px solid #E0E2FE',
-  background: '#F3F7FF',
+const labelStyle = {
   fontFamily: F,
-  fontSize: '12px',
+  fontSize: '12.5px',
+  fontWeight: 600,
+  color: '#050A5F',
+  lineHeight: '16px',
+};
+
+const inputStyle = {
+  width: '100%',
+  height: '42px',
+  padding: '0 16px',
+  borderRadius: '21px',
+  border: '1px solid #D6E4FF',
+  background: '#F0F4FF',
+  fontFamily: F,
+  fontSize: '13px',
   color: '#050A5F',
   outline: 'none',
   boxSizing: 'border-box',
+  transition: 'all 0.2s ease',
 };
 
 const selectStyle = {
-  ...inputFieldStyle,
+  ...inputStyle,
   appearance: 'none',
+  WebkitAppearance: 'none',
   cursor: 'pointer',
-  color: '#9CA3AF',
-  backgroundImage: `url("data:image/svg+xml;utf8,<svg fill='none' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5' stroke='%23050A5F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")`,
-  backgroundPosition: 'right 14px center',
-  backgroundRepeat: 'no-repeat',
-  paddingRight: '32px',
+  paddingRight: '36px',
 };
+
