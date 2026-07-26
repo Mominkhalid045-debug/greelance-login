@@ -3,376 +3,247 @@ import { useNavigate } from 'react-router-dom';
 import { StepHeader, F } from './FreelancerForm';
 
 const CATEGORIES = [
-  { name: 'E Commerce Skills', icon: '🛒' },
-  { name: 'Cybersecurity Engineer', icon: '🛡️' },
-  { name: 'Cloud Computing Engineer', icon: '☁️' },
-  { name: 'Digital Marketing Expert', icon: '📣' },
-  { name: 'Software Engineering', icon: '💻' },
-  { name: 'IT Staffing', icon: '🖥️' },
-  { name: 'Data Center security', icon: '🔒' },
-  { name: 'Artificial Intelligence', icon: '🧠' },
-  { name: 'Business Intelligence', icon: '💼' },
-  { name: 'Decision Intelligence', icon: '💡' },
-  { name: 'Robotics', icon: '🤖' },
-  { name: 'Virtual/Augmented', icon: '🕶️' },
-  { name: 'Systems Engineering', icon: '💻' },
-  { name: 'Cryptocurrency', icon: '🪙' },
-  { name: 'Fintech', icon: '💳' },
-  { name: 'Autonomous Systems', icon: '🚚' },
-  { name: 'Machine Learning', icon: '⚙️' },
-  { name: 'Electric-Vehicle Technology', icon: '🔌' },
-  { name: 'Internet of Things', icon: '🌐' },
-  { name: 'Recycle-Energy', icon: '⚡' },
-  { name: 'Smart-Home', icon: '🏠' },
-  { name: 'Quantum Computing', icon: '⚛️' },
-  { name: 'Blockchain', icon: '🔗' },
-];
-
-const DEFAULT_SKILLS = [
-  'Retail Media',
-  'Programmatic',
-  'Network',
-  'Product Design',
-  'Mobile App Design',
-  'Wireframing',
-  'Prototype',
-  'UX Research',
+  { id: 'ecommerce', name: 'E-Commerce Skills', icon: '🛒' },
+  { id: 'it_staffing', name: 'IT Staffing', icon: '🖥️' },
+  { id: 'vr_ar', name: 'Virtual/Augmented', icon: '🥽' },
+  { id: 'ev_tech', name: 'Electric-Vehicle Technology', icon: '🚗' },
+  { id: 'cybersecurity', name: 'Cybersecurity Engineer', icon: '🛡️' },
+  { id: 'datacenter', name: 'Data Center Security', icon: '🏛️' },
+  { id: 'systems_eng', name: 'Systems Engineering', icon: '💻' },
+  { id: 'iot', name: 'Internet of Things', icon: '🌐' },
+  { id: 'cloud', name: 'Cloud Computing Engineer', icon: '☁️' },
+  { id: 'ai', name: 'Artificial Intelligence', icon: '🧠' },
+  { id: 'blockchain', name: 'Blockchain', icon: '🔗' },
+  { id: 'recycle_energy', name: 'Recycle-Energy', icon: '⚡' },
+  { id: 'digital_marketing', name: 'Digital Marketing Expert', icon: '📢' },
+  { id: 'bi', name: 'Business Intelligence', icon: '💼' },
+  { id: 'crypto', name: 'Cryptocurrency', icon: '🪙' },
+  { id: 'smarthome', name: 'Smart-Home', icon: '🏠' },
+  { id: 'software_eng', name: 'Software Engineering', icon: '💻' },
+  { id: 'decision_intel', name: 'Decision Intelligence', icon: '💡' },
+  { id: 'robotics', name: 'Robotics', icon: '🤖' },
+  { id: 'fintech', name: 'Fintech', icon: '💳' },
+  { id: 'autonomous', name: 'Autonomous Systems', icon: '🚙' },
+  { id: 'ml', name: 'Machine Learning', icon: '⚙️' },
 ];
 
 export default function SkillsSelection() {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState('E Commerce Skills');
-  const [selectedSubCategory, setSelectedSubCategory] = useState(0);
-  const [dropdownOpen, setDropdownOpen] = useState(true);
-  const [selectedSkills, setSelectedSkills] = useState([
-    'Retail Media', 'Programmatic', 'Network', 'Product Design', 'Product Design',
-    'Product Design', 'Product Design', 'Network', 'Network', 'Programmatic',
-    'Product Design', 'Product Design', 'Product Design', 'Product Design', 'Network'
-  ]);
-  const [suggestedSkillInput, setSuggestedSkillInput] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const toggleSkill = (skill) => {
-    if (selectedSkills.includes(skill)) {
-      setSelectedSkills(selectedSkills.filter(s => s !== skill));
-    } else {
-      setSelectedSkills([...selectedSkills, skill]);
-    }
-  };
-
-  const addSuggestedSkill = (skillToAdd) => {
-    if (skillToAdd.trim()) {
-      setSelectedSkills([...selectedSkills, skillToAdd.trim()]);
-      setSuggestedSkillInput('');
-    }
+  const handleSelectCategory = (catName) => {
+    setSelectedCategory(catName);
+    localStorage.setItem('userSelectedCategory', catName);
   };
 
   return (
-    <div style={{ width: '100%', maxWidth: '1440px', margin: '0 auto', minHeight: '100vh', background: '#F7FAFF', display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{
+        width: '100vw',
+        minHeight: '100vh',
+        background: '#F4F7FC',
+        display: 'flex',
+        flexDirection: 'column',
+        boxSizing: 'border-box',
+      }}
+    >
+      {/* Floating Step Header Navigation */}
       <StepHeader activeStep={3} navigate={navigate} />
 
-      <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 60px', marginTop: '30px' }}>
-        
-        <div style={{ width: '100%', maxWidth: '1320px' }}>
-          
-          {/* Category Section */}
-          <h2 style={{ fontFamily: F, fontSize: '18px', fontWeight: 700, color: '#050A5F', marginBottom: '4px' }}>
+      {/* Main Content Area */}
+      <main
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '32px 20px 60px 20px',
+        }}
+      >
+        {/* Main White Card Container */}
+        <div
+          style={{
+            width: '1140px',
+            maxWidth: '96%',
+            background: '#FFFFFF',
+            borderRadius: '24px',
+            boxShadow: '0 10px 30px rgba(5, 10, 95, 0.03)',
+            padding: '48px',
+            boxSizing: 'border-box',
+            marginBottom: '32px',
+          }}
+        >
+          {/* Section Title & Subtitle */}
+          <h2
+            style={{
+              fontFamily: F,
+              fontSize: '22px',
+              fontWeight: 700,
+              color: '#050A5F',
+              margin: '0 0 6px 0',
+            }}
+          >
             Category<span style={{ color: '#EF4444' }}>*</span>
           </h2>
 
-          {!selectedCategory ? (
-            /* Mode 1: Full Category Grid Unselected State (V1.F1.6-A) */
-            <>
-              <p style={{ fontFamily: F, fontSize: '12px', color: '#050A5F', opacity: 0.8, marginBottom: '24px' }}>
-                Select a category from the following.
-              </p>
+          <p
+            style={{
+              fontFamily: F,
+              fontSize: '13px',
+              color: '#050A5F',
+              fontWeight: 500,
+              margin: '0 0 32px 0',
+            }}
+          >
+            Select a category from the following.
+          </p>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '40px' }}>
-                {CATEGORIES.map(cat => (
-                  <button
-                    key={cat.name}
-                    type="button"
-                    onClick={() => setSelectedCategory(cat.name)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      padding: '10px 18px',
-                      borderRadius: '8px',
-                      border: '0.75px solid #E0E2FE',
-                      background: '#F3F7FF',
-                      color: '#050A5F',
-                      cursor: 'pointer',
-                      fontFamily: F,
-                      fontSize: '12px',
-                      fontWeight: 600,
-                      boxShadow: '0 2px 6px rgba(5,10,95,0.03)',
-                      transition: 'all 0.2s',
-                    }}
-                  >
-                    <span style={{ fontSize: '16px' }}>{cat.icon}</span>
-                    {cat.name}
-                  </button>
-                ))}
-              </div>
-            </>
-          ) : (
-            /* Mode 2: Category Selected State with Sub-Categories & Skills (V1.F1.6-B & C) */
-            <>
-              {/* Selected Category Pill with Clear Option */}
-              <div style={{ display: 'flex', alignItems: 'center', margin: '12px 0 24px 0' }}>
-                <div
+          {/* Category Cards Flex Wrap Container */}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '14px',
+              marginBottom: '16px',
+            }}
+          >
+            {CATEGORIES.map((cat) => {
+              const isSelected = selectedCategory === cat.name;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => handleSelectCategory(cat.name)}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '12px',
-                    padding: '12px 20px',
-                    borderRadius: '8px',
-                    border: '0.75px solid #E0E2FE',
-                    background: '#F3F7FF',
+                    gap: '10px',
+                    padding: '12px 22px',
+                    borderRadius: '14px',
+                    border: isSelected ? '2px solid #2334CD' : '1px solid #D6E4FF',
+                    background: isSelected ? '#EEF2FF' : '#F8FAFE',
                     color: '#050A5F',
                     fontFamily: F,
                     fontSize: '13px',
                     fontWeight: 600,
-                  }}
-                >
-                  <span style={{ fontSize: '18px' }}>
-                    {CATEGORIES.find(c => c.name === selectedCategory)?.icon || '🛒'}
-                  </span>
-                  <span>{selectedCategory}</span>
-                  <span
-                    onClick={() => setSelectedCategory(null)}
-                    style={{ cursor: 'pointer', color: '#3038BD', fontSize: '16px', marginLeft: '8px' }}
-                    title="Clear Category"
-                  >
-                    ⊗
-                  </span>
-                </div>
-              </div>
-
-              {/* Sub Category Section */}
-              <h3 style={{ fontFamily: F, fontSize: '16px', fontWeight: 700, color: '#050A5F', marginBottom: '4px' }}>
-                Sub Category<span style={{ color: '#EF4444' }}>*</span>
-              </h3>
-              <p style={{ fontFamily: F, fontSize: '12px', color: '#050A5F', opacity: 0.8, marginBottom: '16px' }}>
-                Select a category from the following.
-              </p>
-
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '28px' }}>
-                {['E Commerce Skills', 'E Commerce Skills', 'E Commerce Skills', 'E Commerce Skills', 'E Commerce Skills', 'E Commerce Skills'].map((sub, idx) => {
-                  const isSelected = selectedSubCategory === idx;
-                  return (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => setSelectedSubCategory(idx)}
-                      style={{
-                        padding: '10px 24px',
-                        borderRadius: '8px',
-                        border: isSelected ? 'none' : '0.75px solid #E0E2FE',
-                        background: isSelected ? '#3038BD' : '#F3F7FF',
-                        color: isSelected ? '#FFFFFF' : '#050A5F',
-                        fontFamily: F,
-                        fontSize: '12px',
-                        fontWeight: 600,
-                        cursor: 'pointer',
-                        boxShadow: isSelected ? '0 4px 12px rgba(48,56,189,0.3)' : 'none',
-                      }}
-                    >
-                      {sub}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Skills Dropdown Section */}
-              <div style={{ position: 'relative', marginBottom: '20px', width: '240px' }}>
-                <label style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F', display: 'block', marginBottom: '8px' }}>
-                  Skills
-                </label>
-                <div
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                  style={{
-                    width: '100%',
-                    height: '39px',
-                    padding: '0 16px',
-                    borderRadius: '45px',
-                    border: '0.75px solid #E0E2FE',
-                    background: '#F3F7FF',
-                    fontFamily: F,
-                    fontSize: '12px',
-                    color: '#050A5F',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
                     cursor: 'pointer',
-                    userSelect: 'none',
+                    boxShadow: isSelected
+                      ? '0 4px 14px rgba(35, 52, 205, 0.15)'
+                      : '0 2px 6px rgba(5, 10, 95, 0.02)',
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isSelected) {
+                      e.currentTarget.style.background = '#F0F4FF';
+                      e.currentTarget.style.borderColor = '#C7D2FE';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isSelected) {
+                      e.currentTarget.style.background = '#F8FAFE';
+                      e.currentTarget.style.borderColor = '#D6E4FF';
+                    }
                   }}
                 >
-                  <span>Select</span>
-                  <span style={{ fontSize: '12px', color: '#050A5F' }}>∨</span>
-                </div>
-
-                {/* Multiselect Dropdown Menu */}
-                {dropdownOpen && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '72px',
-                      left: 0,
-                      width: '240px',
-                      background: '#FFFFFF',
-                      borderRadius: '12px',
-                      boxShadow: '0 12px 32px rgba(5,10,95,0.15)',
-                      padding: '12px',
-                      zIndex: 10,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '8px',
-                    }}
-                  >
-                    {DEFAULT_SKILLS.map((skill, idx) => {
-                      const isChecked = selectedSkills.includes(skill);
-                      return (
-                        <div
-                          key={idx}
-                          onClick={() => toggleSkill(skill)}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '10px',
-                            cursor: 'pointer',
-                            padding: '4px 6px',
-                            borderRadius: '6px',
-                            transition: 'background 0.15s',
-                          }}
-                        >
-                          <div
-                            style={{
-                              width: '18px',
-                              height: '18px',
-                              borderRadius: '50%',
-                              background: isChecked ? '#22D3A6' : 'transparent',
-                              border: isChecked ? 'none' : '1.5px solid #D1D5DB',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              color: '#fff',
-                              fontSize: '11px',
-                              fontWeight: 700,
-                            }}
-                          >
-                            {isChecked && '✓'}
-                          </div>
-                          <span style={{ fontFamily: F, fontSize: '12px', color: '#3038BD', fontWeight: 600 }}>
-                            {skill}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-
-              {/* Selected Skills Tag Cloud (Mint Green Badges) */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '32px', marginTop: '16px' }}>
-                {selectedSkills.map((skill, idx) => (
-                  <span
-                    key={idx}
-                    style={{
-                      background: '#22D3A6',
-                      color: '#FFFFFF',
-                      fontFamily: F,
-                      fontSize: '11px',
-                      fontWeight: 600,
-                      padding: '6px 14px',
-                      borderRadius: '16px',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      boxShadow: '0 2px 6px rgba(34,211,166,0.3)',
-                    }}
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-
-              {/* Suggest Missing Skill Section */}
-              <div style={{ width: '100%', maxWidth: '400px', marginBottom: '36px' }}>
-                <label style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F', display: 'block', marginBottom: '8px' }}>
-                  Suggest missing skill
-                </label>
-                <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
-                  <input
-                    type="text"
-                    value={suggestedSkillInput}
-                    onChange={(e) => setSuggestedSkillInput(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && addSuggestedSkill(suggestedSkillInput)}
-                    placeholder=""
-                    style={{
-                      flex: 1,
-                      height: '39px',
-                      padding: '0 16px',
-                      borderRadius: '45px',
-                      border: '0.75px solid #E0E2FE',
-                      background: '#F3F7FF',
-                      fontFamily: F,
-                      fontSize: '12px',
-                      color: '#050A5F',
-                      outline: 'none',
-                    }}
-                  />
-                </div>
-
-                {/* Quick Add Suggested Skill Chips */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                  {['Retail Media', 'Programmatic', 'Network', 'Product Design'].map((s, i) => (
+                  <span style={{ fontSize: '18px' }}>{cat.icon}</span>
+                  <span>{cat.name}</span>
+                  {isSelected && (
                     <span
-                      key={i}
-                      onClick={() => addSuggestedSkill(s)}
                       style={{
-                        background: '#22D3A6',
-                        color: '#FFFFFF',
-                        fontFamily: F,
-                        fontSize: '10px',
-                        fontWeight: 600,
-                        padding: '5px 12px',
-                        borderRadius: '14px',
-                        cursor: 'pointer',
-                        display: 'inline-block',
+                        marginLeft: '4px',
+                        color: '#22C55E',
+                        fontSize: '14px',
+                        fontWeight: 700,
                       }}
                     >
-                      {s}
+                      ✓
                     </span>
-                  ))}
-                </div>
-              </div>
-            </>
-          )}
-
-          {/* Next Button */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px', marginBottom: '40px' }}>
-            <button
-              onClick={() => navigate('/connect-wallet')}
-              style={{
-                background: '#3038BD',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '16.88px',
-                width: '99px',
-                height: '27.6px',
-                fontFamily: F,
-                fontSize: '11px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(48,56,189,0.25)',
-              }}
-            >
-              Next
-            </button>
+                  )}
+                </button>
+              );
+            })}
           </div>
-
         </div>
-      </div>
+
+        {/* Bottom Navigation Controls (Outside Card) */}
+        <div
+          style={{
+            width: '1140px',
+            maxWidth: '96%',
+            display: 'flex',
+            justify: 'space-between',
+            alignItems: 'center',
+            boxSizing: 'border-box',
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => navigate('/setup-profile')}
+            style={{
+              background: '#FFFFFF',
+              color: '#2334CD',
+              border: '1.5px solid #2334CD',
+              borderRadius: '20px',
+              height: '42px',
+              padding: '0 28px',
+              fontFamily: F,
+              fontSize: '13px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+              transition: 'background 0.2s ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#EEF2FF')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#FFFFFF')}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
+            <span>Back</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => navigate('/connect-wallet')}
+            style={{
+              background: selectedCategory ? '#2334CD' : '#A5B4FC',
+              color: '#FFFFFF',
+              border: 'none',
+              borderRadius: '20px',
+              height: '42px',
+              padding: '0 32px',
+              fontFamily: F,
+              fontSize: '13px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              boxShadow: selectedCategory
+                ? 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px'
+                : 'none',
+              transition: 'background 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              if (selectedCategory) e.currentTarget.style.background = '#1B2AB2';
+            }}
+            onMouseLeave={(e) => {
+              if (selectedCategory) e.currentTarget.style.background = '#2334CD';
+            }}
+          >
+            <span>Next</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </button>
+        </div>
+      </main>
     </div>
   );
 }
+
