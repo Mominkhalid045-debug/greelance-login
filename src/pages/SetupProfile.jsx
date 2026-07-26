@@ -6,8 +6,8 @@ export default function SetupProfile() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    firstName: 'Momin',
+    lastName: 'Khalid',
     countryResidence: '',
     countryCitizenship: '',
     countryCode: '+1',

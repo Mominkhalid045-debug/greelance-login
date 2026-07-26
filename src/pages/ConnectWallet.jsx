@@ -55,8 +55,8 @@ export default function ConnectWallet() {
   const navigate = useNavigate();
   const [selectedWallet, setSelectedWallet] = useState('MetaMask');
   const [uniqueAddress, setUniqueAddress] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('Momin');
+  const [lastName, setLastName] = useState('Khalid');
 
   const wallets = [
     {

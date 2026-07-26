@@ -136,7 +136,7 @@ export default function Signup() {
                 setEmail(e.target.value);
                 setErrorMessage('');
               }}
-              placeholder="ss@gmail.com"
+              placeholder="momin.khalid@gmail.com"
               style={inputStyle}
             />
           </div>
