@@ -13,118 +13,121 @@ function StepHeader({ activeStep, navigate }) {
   ];
 
   return (
-    <div
-      style={{
-        flexShrink: 0,
-        display: 'flex',
-        alignItems: 'center',
-        background: '#FFFFFF',
-        borderBottom: '1px solid #E5E7EB',
-        height: '76px',
-        width: '100%',
-        boxSizing: 'border-box',
-      }}
-    >
-      {/* Back Button */}
-      <button
-        onClick={() => {
-          const prev = steps.find((s) => s.num === activeStep - 1);
-          navigate(prev ? prev.path : '/verify-otp');
-        }}
-        aria-label="Go back"
+    <div style={{ width: '100%', padding: '24px 32px 0 32px', boxSizing: 'border-box' }}>
+      <div
         style={{
-          width: '76px',
-          height: '76px',
-          background: '#22C55E',
-          border: 'none',
-          cursor: 'pointer',
+          maxWidth: '1140px',
+          margin: '0 auto',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
+          background: '#FFFFFF',
+          borderRadius: '16px',
+          boxShadow: '0 4px 20px rgba(5, 10, 95, 0.04)',
+          height: '72px',
+          overflow: 'hidden',
+          boxSizing: 'border-box',
         }}
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M19 12H5M12 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      {/* Step Tabs */}
-      <div style={{ display: 'flex', flex: 1, height: '100%', overflowX: 'auto' }}>
-        {steps.map((step) => {
-          const isActive = step.num === activeStep;
-          return (
-            <div
-              key={step.num}
-              onClick={() => navigate(step.path)}
-              style={{
-                flex: 1,
-                minWidth: '150px',
-                height: '100%',
-                padding: '0 24px',
-                cursor: 'pointer',
-                background: isActive ? '#EEF2FF' : '#FFFFFF',
-                borderRight: '1px solid #F3F4F6',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                gap: '2px',
-                boxSizing: 'border-box',
-                transition: 'background 0.2s ease',
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: F,
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  color: isActive ? '#22C55E' : '#9CA3AF',
-                }}
-              >
-                Step {step.num}
-              </span>
-              <span
-                style={{
-                  fontFamily: F,
-                  fontSize: '13px',
-                  fontWeight: isActive ? 700 : 500,
-                  color: isActive ? '#2334CD' : '#9CA3AF',
-                }}
-              >
-                {step.label}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Exit / Next Button */}
-      <div style={{ padding: '0 24px', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+        {/* Back Button (Green Rect with Left Curved Edge) */}
         <button
           onClick={() => {
-            const next = steps.find((s) => s.num === activeStep + 1);
-            navigate(next ? next.path : '/dashboard');
+            const prev = steps.find((s) => s.num === activeStep - 1);
+            navigate(prev ? prev.path : '/verify-otp');
           }}
-          aria-label="Exit or next step"
+          aria-label="Go back"
           style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            background: '#FFFFFF',
-            border: '1px solid #E5E7EB',
+            width: '72px',
+            height: '72px',
+            background: '#22C55E',
+            border: 'none',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+            flexShrink: 0,
           }}
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2334CD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-            <polyline points="10 17 15 12 10 7" />
-            <line x1="15" y1="12" x2="3" y2="12" />
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
         </button>
+
+        {/* Step Tabs */}
+        <div style={{ display: 'flex', flex: 1, height: '100%', overflowX: 'auto' }}>
+          {steps.map((step) => {
+            const isActive = step.num === activeStep;
+            return (
+              <div
+                key={step.num}
+                onClick={() => navigate(step.path)}
+                style={{
+                  flex: 1,
+                  minWidth: '150px',
+                  height: '100%',
+                  padding: '0 24px',
+                  cursor: 'pointer',
+                  background: isActive ? '#EEF2FF' : '#FFFFFF',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  gap: '2px',
+                  boxSizing: 'border-box',
+                  transition: 'background 0.2s ease',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: F,
+                    fontSize: '12px',
+                    fontWeight: 600,
+                    color: isActive ? '#22C55E' : '#9CA3AF',
+                  }}
+                >
+                  Step {step.num}
+                </span>
+                <span
+                  style={{
+                    fontFamily: F,
+                    fontSize: '13px',
+                    fontWeight: isActive ? 700 : 500,
+                    color: isActive ? '#2334CD' : '#9CA3AF',
+                  }}
+                >
+                  {step.label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Exit / Next Button (White Circle) */}
+        <div style={{ padding: '0 20px', display: 'flex', alignItems: 'center', flexShrink: 0, background: '#FFFFFF' }}>
+          <button
+            onClick={() => {
+              const next = steps.find((s) => s.num === activeStep + 1);
+              navigate(next ? next.path : '/dashboard');
+            }}
+            aria-label="Exit or next step"
+            style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              background: '#FFFFFF',
+              border: '1px solid #E5E7EB',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2334CD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+              <polyline points="10 17 15 12 10 7" />
+              <line x1="15" y1="12" x2="3" y2="12" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );
