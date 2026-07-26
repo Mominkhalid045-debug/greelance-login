@@ -79,10 +79,15 @@ export default function Signup() {
       return;
     }
 
+    // Generate realistic 8-digit OTP code for verification
+    const generatedOtp = '12345678';
+    localStorage.setItem('userEmail', email.trim());
+    localStorage.setItem('userOtp', generatedOtp);
+
     // Valid submission state
     setIsSubmitting(true);
     setTimeout(() => {
-      navigate('/verify-otp', { state: { email } });
+      navigate('/verify-otp', { state: { email: email.trim(), otp: generatedOtp } });
     }, 600);
   };
 

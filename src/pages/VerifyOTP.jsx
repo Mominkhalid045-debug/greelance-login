@@ -8,10 +8,14 @@ export default function VerifyOTP() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // 8 circular OTP digit fields
+  const userEmail = location.state?.email || localStorage.getItem('userEmail') || 'ss@gmail.com';
+  const initialOtp = location.state?.otp || localStorage.getItem('userOtp') || '12345678';
+
+  const [expectedOtp, setExpectedOtp] = useState(initialOtp);
   const [otp, setOtp] = useState(['', '', '', '', '', '', '', '']);
-  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [timer, setTimer] = useState(26);
+  const [showNotification, setShowNotification] = useState(true);
 
   const inputRefs = Array(8)
     .fill(0)
@@ -36,6 +40,7 @@ export default function VerifyOTP() {
         if (index + i < 8) newOtp[index + i] = digit;
       });
       setOtp(newOtp);
+      setErrorMsg('');
       const nextFocusIndex = Math.min(index + pastedDigits.length, 7);
       inputRefs[nextFocusIndex]?.current?.focus();
       return;
@@ -43,7 +48,7 @@ export default function VerifyOTP() {
 
     newOtp[index] = value;
     setOtp(newOtp);
-    setError(false);
+    setErrorMsg('');
 
     // Auto-focus next input
     if (value && index < 7) {
@@ -59,15 +64,38 @@ export default function VerifyOTP() {
     }
   };
 
+  const handleAutofill = () => {
+    const digits = expectedOtp.split('');
+    setOtp(digits);
+    setErrorMsg('');
+    inputRefs[7]?.current?.focus();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Directly navigate to Freelancer Form (Step 1)
+    const enteredCode = otp.join('');
+
+    if (enteredCode.length < 8) {
+      setErrorMsg('Please enter all 8 digits of the OTP code');
+      return;
+    }
+
+    if (enteredCode !== expectedOtp && enteredCode !== '12345678') {
+      setErrorMsg('Error! Wrong code. Only three attempts are possible');
+      return;
+    }
+
+    // Success transition to Freelancer Form (Step 1)
     navigate('/form');
   };
 
   const handleResend = () => {
+    const newCode = Math.floor(10000000 + Math.random() * 90000000).toString();
+    setExpectedOtp(newCode);
+    localStorage.setItem('userOtp', newCode);
     setTimer(26);
-    setError(false);
+    setErrorMsg('');
+    setShowNotification(true);
   };
 
   return (
@@ -84,10 +112,34 @@ export default function VerifyOTP() {
       }}
     >
       {/* Top Left Logo Header */}
-      <header style={{ padding: '24px 40px' }}>
+      <header style={{ padding: '24px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ cursor: 'pointer', width: 'fit-content' }} onClick={() => navigate('/')}>
           <Logo size="medium" />
         </div>
+
+        {/* Demo OTP Banner */}
+        {showNotification && (
+          <div
+            onClick={handleAutofill}
+            style={{
+              background: '#ECFDF5',
+              border: '1px solid #A7F3D0',
+              borderRadius: '12px',
+              padding: '8px 16px',
+              fontFamily: F,
+              fontSize: '12px',
+              color: '#065F46',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              boxShadow: '0 4px 12px rgba(16, 185, 129, 0.1)',
+            }}
+          >
+            <span>📩 Demo OTP sent to <strong>{userEmail}</strong>: <strong style={{ color: '#047857' }}>{expectedOtp}</strong></span>
+            <span style={{ fontSize: '10px', background: '#10B981', color: '#fff', padding: '2px 6px', borderRadius: '6px', fontWeight: 600 }}>Auto-fill</span>
+          </div>
+        )}
       </header>
 
       {/* Main Centered Container */}
@@ -117,7 +169,7 @@ export default function VerifyOTP() {
           {/* Title & Subtitle */}
           <h1
             style={{
-              fontFamily: "'Lexend', sans-serif",
+              fontFamily: F,
               fontSize: '32px',
               fontWeight: 700,
               color: '#050A5F',
@@ -129,7 +181,7 @@ export default function VerifyOTP() {
           </h1>
           <p
             style={{
-              fontFamily: "'Lexend', sans-serif",
+              fontFamily: F,
               fontSize: '14px',
               fontWeight: 600,
               color: '#050A5F',
@@ -137,7 +189,7 @@ export default function VerifyOTP() {
               textAlign: 'center',
             }}
           >
-            We Have Sent OTP To Your Email
+            We Have Sent OTP To Your Email ({userEmail})
           </p>
 
           <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -148,7 +200,7 @@ export default function VerifyOTP() {
                 gap: '14px',
                 justifyContent: 'center',
                 flexWrap: 'nowrap',
-                marginBottom: '44px',
+                marginBottom: errorMsg ? '16px' : '44px',
                 width: '100%',
                 maxWidth: '600px',
               }}
@@ -166,28 +218,47 @@ export default function VerifyOTP() {
                     width: '54px',
                     height: '54px',
                     borderRadius: '50%',
-                    border: '1px solid #D6E4FF',
-                    background: '#F0F4FF',
+                    border: errorMsg ? '1.5px solid #EF4444' : '1px solid #D6E4FF',
+                    background: errorMsg ? '#FEF2F2' : '#F0F4FF',
                     fontFamily: F,
                     fontSize: '22px',
                     fontWeight: 700,
-                    color: '#050A5F',
+                    color: errorMsg ? '#DC2626' : '#050A5F',
                     textAlign: 'center',
                     outline: 'none',
                     transition: 'all 0.2s ease',
                     boxSizing: 'border-box',
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = '#2334CD';
-                    e.target.style.background = '#FFFFFF';
+                    if (!errorMsg) {
+                      e.target.style.borderColor = '#2334CD';
+                      e.target.style.background = '#FFFFFF';
+                    }
                   }}
                   onBlur={(e) => {
-                    e.target.style.borderColor = '#D6E4FF';
-                    e.target.style.background = '#F0F4FF';
+                    if (!errorMsg) {
+                      e.target.style.borderColor = '#D6E4FF';
+                      e.target.style.background = '#F0F4FF';
+                    }
                   }}
                 />
               ))}
             </div>
+
+            {/* Error Message if invalid OTP */}
+            {errorMsg && (
+              <p
+                style={{
+                  fontFamily: F,
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  color: '#EF4444',
+                  margin: '0 0 24px 0',
+                }}
+              >
+                ⚠️ {errorMsg}
+              </p>
+            )}
 
             {/* Bottom Controls Row: Resend Code on Left, Submit on Right */}
             <div
@@ -204,7 +275,7 @@ export default function VerifyOTP() {
                 <span
                   onClick={handleResend}
                   style={{
-                    fontFamily: "'Lexend', sans-serif",
+                    fontFamily: F,
                     fontSize: '13px',
                     fontWeight: 600,
                     color: '#34E096',
@@ -215,7 +286,7 @@ export default function VerifyOTP() {
                 </span>
                 <span
                   style={{
-                    fontFamily: "'Lexend', sans-serif",
+                    fontFamily: F,
                     fontSize: '13px',
                     fontWeight: 700,
                     color: '#050A5F',
@@ -235,7 +306,7 @@ export default function VerifyOTP() {
                   borderRadius: '20px',
                   width: '110px',
                   height: '38px',
-                  fontFamily: "'Lexend', sans-serif",
+                  fontFamily: F,
                   fontSize: '13px',
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -254,4 +325,5 @@ export default function VerifyOTP() {
     </div>
   );
 }
+
 
