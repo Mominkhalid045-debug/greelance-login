@@ -185,12 +185,40 @@ export default function VerifyOTP() {
               fontSize: '14px',
               fontWeight: 600,
               color: '#050A5F',
-              margin: '0 0 44px 0',
+              margin: '0 0 20px 0',
               textAlign: 'center',
             }}
           >
             We Have Sent OTP To Your Email ({userEmail})
           </p>
+
+          {/* Inline OTP Helper & Auto-fill button */}
+          <div
+            onClick={handleAutofill}
+            style={{
+              background: '#ECFDF5',
+              border: '1px solid #A7F3D0',
+              borderRadius: '20px',
+              padding: '8px 20px',
+              fontFamily: F,
+              fontSize: '13px',
+              color: '#065F46',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              marginBottom: '32px',
+              boxShadow: '0 2px 8px rgba(16, 185, 129, 0.12)',
+              transition: 'transform 0.15s ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+          >
+            <span>🔑 Demo Code: <strong style={{ color: '#047857', letterSpacing: '1px' }}>{expectedOtp}</strong></span>
+            <span style={{ fontSize: '11px', background: '#10B981', color: '#ffffff', padding: '3px 10px', borderRadius: '12px', fontWeight: 600 }}>
+              Click to Auto-fill ✨
+            </span>
+          </div>
 
           <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {/* 8 Circular OTP Input Fields */}

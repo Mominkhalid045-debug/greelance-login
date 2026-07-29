@@ -10,8 +10,11 @@ export default function ForgotPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Reset password for:', email);
-    navigate('/verify-otp', { state: { from: 'forgot' } });
+    const cleanEmail = email.trim() || 'momin.khalid@gmail.com';
+    const generatedOtp = '12345678';
+    localStorage.setItem('userEmail', cleanEmail);
+    localStorage.setItem('userOtp', generatedOtp);
+    navigate('/verify-otp', { state: { email: cleanEmail, otp: generatedOtp, from: 'forgot' } });
   };
 
   return (
