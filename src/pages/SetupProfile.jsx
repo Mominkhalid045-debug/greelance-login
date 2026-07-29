@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StepHeader, F } from './FreelancerForm';
 
-const YEARS = Array.from({ length: 25 }, (_, i) => (2026 - i).toString());
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const YEARS = Array.from({ length: 30 }, (_, i) => (2026 - i).toString());
 
 export default function SetupProfile() {
   const navigate = useNavigate();
 
+  // Personal Information State
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -21,75 +23,61 @@ export default function SetupProfile() {
     timeZone: '',
   });
 
-  // Section Inline Form Visibility
-  const [showEduForm, setShowEduForm] = useState(false);
-  const [showExpForm, setShowExpForm] = useState(false);
-  const [showCertForm, setShowCertForm] = useState(false);
-  const [showPortForm, setShowPortForm] = useState(false);
+  // Section Inline Cards visibility (default true so user sees filled Figma state, or toggles with + Add button)
+  const [showEdu, setShowEdu] = useState(true);
+  const [showExp, setShowExp] = useState(true);
+  const [showCert, setShowCert] = useState(true);
+  const [showPort, setShowPort] = useState(true);
 
-  // Dynamic Item Lists
-  const [educationList, setEducationList] = useState([]);
-  const [experienceList, setExperienceList] = useState([]);
-  const [certificationsList, setCertificationsList] = useState([]);
-  const [portfolioList, setPortfolioList] = useState([]);
+  // Education Values
+  const [eduData, setEduData] = useState({
+    degree: 'Bachelor in UX Designing',
+    university: 'University Of Punjab College of Art & Design',
+    startMonth: 'September',
+    startYear: '2018',
+    endMonth: 'September',
+    endYear: '2018',
+  });
 
-  // Form Inputs for Adding Items
-  const [eduInput, setEduInput] = useState({ degree: '', university: '', startYear: '2020', endYear: '2024' });
-  const [expInput, setExpInput] = useState({ position: '', workplace: '', currentlyWorking: false, startYear: '2021', endYear: '2023', description: '' });
-  const [certInput, setCertInput] = useState({ name: '', link: '' });
-  const [portInput, setPortInput] = useState({ title: '', link: '', description: '' });
+  // Experience Values
+  const [expData, setExpData] = useState({
+    position: 'Network Support Engineer',
+    workplace: 'Central Texas College',
+    startMonth: 'September',
+    startYear: '2013',
+    endMonth: 'September',
+    endYear: '2019',
+    currentlyWorking: false,
+    description: '',
+  });
+
+  // Certification Values
+  const [certData, setCertData] = useState({
+    name: 'Certificate of Appreciation',
+    link: 'http://dbfceucgjkndckjwchouvhjcuo',
+    file: null,
+  });
+
+  // Portfolio Values
+  const [portData, setPortData] = useState({
+    title: '',
+    link: '',
+    file: null,
+    description: '',
+  });
 
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Add Handlers
-  const handleAddEducation = (e) => {
-    if (e) e.preventDefault();
-    if (!eduInput.degree && !eduInput.university) return;
-    setEducationList((prev) => [...prev, { id: Date.now(), ...eduInput }]);
-    setEduInput({ degree: '', university: '', startYear: '2020', endYear: '2024' });
-    setShowEduForm(false);
-  };
-
-  const handleAddExperience = (e) => {
-    if (e) e.preventDefault();
-    if (!expInput.position && !expInput.workplace) return;
-    setExperienceList((prev) => [...prev, { id: Date.now(), ...expInput }]);
-    setExpInput({ position: '', workplace: '', currentlyWorking: false, startYear: '2021', endYear: '2023', description: '' });
-    setShowExpForm(false);
-  };
-
-  const handleAddCertification = (e) => {
-    if (e) e.preventDefault();
-    if (!certInput.name) return;
-    setCertificationsList((prev) => [...prev, { id: Date.now(), ...certInput }]);
-    setCertInput({ name: '', link: '' });
-    setShowCertForm(false);
-  };
-
-  const handleAddPortfolio = (e) => {
-    if (e) e.preventDefault();
-    if (!portInput.title) return;
-    setPortfolioList((prev) => [...prev, { id: Date.now(), ...portInput }]);
-    setPortInput({ title: '', link: '', description: '' });
-    setShowPortForm(false);
-  };
-
-  // Remove Handlers
-  const removeEdu = (id) => setEducationList((prev) => prev.filter((i) => i.id !== id));
-  const removeExp = (id) => setExperienceList((prev) => prev.filter((i) => i.id !== id));
-  const removeCert = (id) => setCertificationsList((prev) => prev.filter((i) => i.id !== id));
-  const removePort = (id) => setPortfolioList((prev) => prev.filter((i) => i.id !== id));
-
   const handleSubmit = (e) => {
     if (e) e.preventDefault();
     const fullProfileData = {
       ...formData,
-      education: educationList,
-      experience: experienceList,
-      certifications: certificationsList,
-      portfolio: portfolioList,
+      education: showEdu ? [eduData] : [],
+      experience: showExp ? [expData] : [],
+      certifications: showCert ? [certData] : [],
+      portfolio: showPort ? [portData] : [],
     };
     localStorage.setItem('userProfileData', JSON.stringify(fullProfileData));
     navigate('/skills');
@@ -133,31 +121,6 @@ export default function SetupProfile() {
           }}
         >
           <form onSubmit={handleSubmit}>
-            {/* Centered Page Header Title & Subtitle */}
-            <div style={{ textAlign: 'center', marginBottom: '36px' }}>
-              <h1
-                style={{
-                  fontFamily: F,
-                  fontSize: '28px',
-                  fontWeight: 700,
-                  color: '#050A5F',
-                  margin: '0 0 8px 0',
-                }}
-              >
-                Setup Profile
-              </h1>
-              <p
-                style={{
-                  fontFamily: F,
-                  fontSize: '13.5px',
-                  color: '#6B7280',
-                  margin: 0,
-                }}
-              >
-                Enter your personal details to display on your freelancer card.
-              </p>
-            </div>
-
             {/* Section 1: Personal Information* */}
             <h2
               style={{
@@ -177,14 +140,14 @@ export default function SetupProfile() {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
                 gap: '24px 20px',
-                marginBottom: '40px',
+                marginBottom: '36px',
               }}
             >
               {/* Row 1 */}
               <FormField
                 label="First Name"
                 required
-                placeholder="e.g. Ziafat"
+                placeholder="First Name"
                 value={formData.firstName}
                 onChange={(v) => handleChange('firstName', v)}
               />
@@ -192,7 +155,7 @@ export default function SetupProfile() {
               <FormField
                 label="Last Name"
                 required
-                placeholder="e.g. Raool"
+                placeholder="Last Name"
                 value={formData.lastName}
                 onChange={(v) => handleChange('lastName', v)}
               />
@@ -219,7 +182,6 @@ export default function SetupProfile() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <label style={labelStyle}>Phone Number</label>
                 <div style={{ display: 'flex', gap: '8px' }}>
-                  {/* Country Flag & Code Select */}
                   <div style={{ position: 'relative', width: '90px' }}>
                     <select
                       value={formData.countryCode}
@@ -293,7 +255,7 @@ export default function SetupProfile() {
               {/* Row 3 */}
               <FormField
                 label="What's your preferred hourly rate in U.S. dollars?"
-                placeholder="e.g. 45"
+                placeholder="Select"
                 value={formData.hourlyRate}
                 onChange={(v) => handleChange('hourlyRate', v)}
               />
@@ -309,100 +271,188 @@ export default function SetupProfile() {
             </div>
 
             {/* =====================================
-                SECTION 2: EDUCATION
+                SECTION 2: EDUCATION (FIGMA EXACT)
                ===================================== */}
-            <SectionRow
-              title="Education"
-              buttonText="+ Add Education"
-              isOpen={showEduForm}
-              onToggle={() => setShowEduForm(!showEduForm)}
-            />
-            {showEduForm && (
-              <InlineCard title="Add Education" onSave={handleAddEducation} onCancel={() => setShowEduForm(false)}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                  <FormField label="Degree" placeholder="e.g. Bachelor in Software Engineering" value={eduInput.degree} onChange={(v) => setEduInput({ ...eduInput, degree: v })} />
-                  <FormField label="University" placeholder="e.g. University of Texas" value={eduInput.university} onChange={(v) => setEduInput({ ...eduInput, university: v })} />
+            <SectionHeader title="Education" buttonText="+ Add Education" onAdd={() => setShowEdu(true)} />
+            {showEdu && (
+              <FigmaCard onClose={() => setShowEdu(false)}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr 1fr', gap: '16px' }}>
+                  <FormField
+                    label="Degree"
+                    type="select"
+                    placeholder="Bachelor in UX Designing"
+                    options={['Bachelor in UX Designing', 'BS Computer Science', 'MS Software Engineering', 'Diploma in Graphic Design']}
+                    value={eduData.degree}
+                    onChange={(v) => setEduData({ ...eduData, degree: v })}
+                  />
+
+                  <FormField
+                    label="University"
+                    type="select"
+                    placeholder="University Of Punjab College of Art & Design"
+                    options={['University Of Punjab College of Art & Design', 'Harvard University', 'MIT', 'Stanford', 'NUST']}
+                    value={eduData.university}
+                    onChange={(v) => setEduData({ ...eduData, university: v })}
+                  />
+
+                  <DateRangeGroup
+                    label="Starting from"
+                    month={eduData.startMonth}
+                    year={eduData.startYear}
+                    onMonthChange={(v) => setEduData({ ...eduData, startMonth: v })}
+                    onYearChange={(v) => setEduData({ ...eduData, startYear: v })}
+                  />
+
+                  <DateRangeGroup
+                    label="Ending"
+                    month={eduData.endMonth}
+                    year={eduData.endYear}
+                    onMonthChange={(v) => setEduData({ ...eduData, endMonth: v })}
+                    onYearChange={(v) => setEduData({ ...eduData, endYear: v })}
+                  />
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginTop: '12px' }}>
-                  <div>
-                    <label style={labelStyle}>Start Year</label>
-                    <SelectInput value={eduInput.startYear} options={YEARS} onChange={(v) => setEduInput({ ...eduInput, startYear: v })} />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>End Year</label>
-                    <SelectInput value={eduInput.endYear} options={YEARS} onChange={(v) => setEduInput({ ...eduInput, endYear: v })} />
-                  </div>
-                </div>
-              </InlineCard>
+              </FigmaCard>
             )}
-            <ItemList items={educationList} renderTitle={(i) => i.degree || i.university} renderSub={(i) => `${i.university} (${i.startYear} - ${i.endYear})`} onRemove={removeEdu} />
 
             {/* =====================================
-                SECTION 3: EXPERIENCE
+                SECTION 3: EXPERIENCE (FIGMA EXACT)
                ===================================== */}
-            <SectionRow
-              title="Experience"
-              buttonText="+ Add Experience"
-              isOpen={showExpForm}
-              onToggle={() => setShowExpForm(!showExpForm)}
-            />
-            {showExpForm && (
-              <InlineCard title="Add Experience" onSave={handleAddExperience} onCancel={() => setShowExpForm(false)}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                  <FormField label="Position" placeholder="e.g. Network Support Engineer" value={expInput.position} onChange={(v) => setExpInput({ ...expInput, position: v })} />
-                  <FormField label="Workplace" placeholder="e.g. Central Texas College" value={expInput.workplace} onChange={(v) => setExpInput({ ...expInput, workplace: v })} />
+            <SectionHeader title="Experience" buttonText="+ Add Experience" onAdd={() => setShowExp(true)} />
+            {showExp && (
+              <FigmaCard onClose={() => setShowExp(false)}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+                  <FormField
+                    label="Position"
+                    type="select"
+                    placeholder="Network Support Engineer"
+                    options={['Network Support Engineer', 'Senior UX Architect', 'Full Stack Developer', 'Product Designer']}
+                    value={expData.position}
+                    onChange={(v) => setExpData({ ...expData, position: v })}
+                  />
+
+                  <FormField
+                    label="Work Place"
+                    type="select"
+                    placeholder="Central Texas College"
+                    options={['Central Texas College', 'Google', 'Microsoft', 'Freelance', 'Meta']}
+                    value={expData.workplace}
+                    onChange={(v) => setExpData({ ...expData, workplace: v })}
+                  />
+
+                  <DateRangeGroup
+                    label="Starting from"
+                    month={expData.startMonth}
+                    year={expData.startYear}
+                    onMonthChange={(v) => setExpData({ ...expData, startMonth: v })}
+                    onYearChange={(v) => setExpData({ ...expData, startYear: v })}
+                  />
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <label style={labelStyle}>Ending</label>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', fontFamily: F, fontSize: '11.5px', color: '#050A5F', fontWeight: 600 }}>
+                        <input
+                          type="checkbox"
+                          checked={expData.currentlyWorking}
+                          onChange={(e) => setExpData({ ...expData, currentlyWorking: e.target.checked })}
+                          style={{ accentColor: '#22C55E' }}
+                        />
+                        Currently Working
+                      </label>
+                    </div>
+                    {!expData.currentlyWorking ? (
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                        <SelectInput value={expData.endMonth} options={MONTHS} onChange={(v) => setExpData({ ...expData, endMonth: v })} />
+                        <SelectInput value={expData.endYear} options={YEARS} onChange={(v) => setExpData({ ...expData, endYear: v })} />
+                      </div>
+                    ) : (
+                      <div style={{ height: '42px', display: 'flex', alignItems: 'center', paddingLeft: '12px', fontFamily: F, fontSize: '13px', color: '#22C55E', fontWeight: 600 }}>
+                        Present
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px' }}>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <label style={labelStyle}>Description</label>
                   <textarea
-                    rows={2}
-                    value={expInput.description}
-                    onChange={(e) => setExpInput({ ...expInput, description: e.target.value })}
-                    placeholder="Type details..."
+                    rows={3}
+                    value={expData.description}
+                    onChange={(e) => setExpData({ ...expData, description: e.target.value })}
+                    placeholder="Type your comments..."
                     style={textareaStyle}
                   />
                 </div>
-              </InlineCard>
+              </FigmaCard>
             )}
-            <ItemList items={experienceList} renderTitle={(i) => i.position || i.workplace} renderSub={(i) => `${i.workplace} (${i.startYear} - ${i.endYear})`} onRemove={removeExp} />
 
             {/* =====================================
-                SECTION 4: CERTIFICATIONS
+                SECTION 4: CERTIFICATIONS (FIGMA EXACT)
                ===================================== */}
-            <SectionRow
-              title="Certifications"
-              buttonText="+ Add Certification"
-              isOpen={showCertForm}
-              onToggle={() => setShowCertForm(!showCertForm)}
-            />
-            {showCertForm && (
-              <InlineCard title="Add Certification" onSave={handleAddCertification} onCancel={() => setShowCertForm(false)}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                  <FormField label="Certificate Name" placeholder="e.g. AWS Certified Developer" value={certInput.name} onChange={(v) => setCertInput({ ...certInput, name: v })} />
-                  <FormField label="Certificate Link" placeholder="https://..." value={certInput.link} onChange={(v) => setCertInput({ ...certInput, link: v })} />
+            <SectionHeader title="Certifications" buttonText="+ Add Certificate" onAdd={() => setShowCert(true)} />
+            {showCert && (
+              <FigmaCard onClose={() => setShowCert(false)}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr', gap: '20px', alignItems: 'flex-end' }}>
+                  <FormField
+                    label="Certificate name"
+                    placeholder="Certificate of Appreciation"
+                    value={certData.name}
+                    onChange={(v) => setCertData({ ...certData, name: v })}
+                  />
+
+                  <FormField
+                    label="Certificate Link"
+                    placeholder="http://dbfceucgjkndckjwchouvhjcuo"
+                    value={certData.link}
+                    onChange={(v) => setCertData({ ...certData, link: v })}
+                  />
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <FileUploadButton label="Upload Certificate" onFileSelect={(f) => setCertData({ ...certData, file: f })} />
+                  </div>
                 </div>
-              </InlineCard>
+              </FigmaCard>
             )}
-            <ItemList items={certificationsList} renderTitle={(i) => i.name} renderSub={(i) => i.link} onRemove={removeCert} />
 
             {/* =====================================
-                SECTION 5: PORTFOLIO
+                SECTION 5: PORTFOLIO (FIGMA EXACT)
                ===================================== */}
-            <SectionRow
-              title="Portfolio"
-              buttonText="+ Add Portfolio"
-              isOpen={showPortForm}
-              onToggle={() => setShowPortForm(!showPortForm)}
-            />
-            {showPortForm && (
-              <InlineCard title="Add Portfolio" onSave={handleAddPortfolio} onCancel={() => setShowPortForm(false)}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                  <FormField label="Title" placeholder="e.g. E-Commerce Redesign" value={portInput.title} onChange={(v) => setPortInput({ ...portInput, title: v })} />
-                  <FormField label="Portfolio Link" placeholder="https://..." value={portInput.link} onChange={(v) => setPortInput({ ...portInput, link: v })} />
+            <SectionHeader title="Portfolio" buttonText="+ Add Portfolio" onAdd={() => setShowPort(true)} />
+            {showPort && (
+              <FigmaCard onClose={() => setShowPort(false)}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr', gap: '20px', alignItems: 'flex-end', marginBottom: '16px' }}>
+                  <FormField
+                    label="Title"
+                    placeholder="Title"
+                    value={portData.title}
+                    onChange={(v) => setPortData({ ...portData, title: v })}
+                  />
+
+                  <FormField
+                    label="Portfolio Link"
+                    placeholder="Portfolio Link"
+                    value={portData.link}
+                    onChange={(v) => setPortData({ ...portData, link: v })}
+                  />
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <FileUploadButton label="Upload Portfolio" onFileSelect={(f) => setPortData({ ...portData, file: f })} />
+                    <span style={{ fontFamily: F, fontSize: '10.5px', color: '#9CA3AF' }}>*You can upload any PDF, TXT, or DOC file</span>
+                  </div>
                 </div>
-              </InlineCard>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={labelStyle}>Description</label>
+                  <textarea
+                    rows={3}
+                    value={portData.description}
+                    onChange={(e) => setPortData({ ...portData, description: e.target.value })}
+                    placeholder="Type your comments..."
+                    style={textareaStyle}
+                  />
+                </div>
+              </FigmaCard>
             )}
-            <ItemList items={portfolioList} renderTitle={(i) => i.title} renderSub={(i) => i.link} onRemove={removePort} />
 
             {/* Bottom Right ONLY Next Button */}
             <div
@@ -442,15 +492,15 @@ export default function SetupProfile() {
   );
 }
 
-/* Helper SectionRow Component with Right-aligned Green Button and Bottom Line */
-function SectionRow({ title, buttonText, isOpen, onToggle }) {
+/* Helper SectionHeader Component with Right Green Add Button and Divider Line */
+function SectionHeader({ title, buttonText, onAdd }) {
   return (
     <div
       style={{
         width: '100%',
         paddingBottom: '14px',
-        marginBottom: '14px',
-        marginTop: '28px',
+        marginBottom: '16px',
+        marginTop: '32px',
         borderBottom: '1px solid #E5E7EB',
         display: 'flex',
         justify: 'space-between',
@@ -466,7 +516,7 @@ function SectionRow({ title, buttonText, isOpen, onToggle }) {
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          onToggle();
+          onAdd();
         }}
         style={{
           background: '#22C55E',
@@ -494,8 +544,8 @@ function SectionRow({ title, buttonText, isOpen, onToggle }) {
   );
 }
 
-/* Helper InlineCard Form Component */
-function InlineCard({ title, onSave, onCancel, children }) {
+/* Helper Figma Card Container */
+function FigmaCard({ onClose, children }) {
   return (
     <div
       style={{
@@ -503,84 +553,88 @@ function InlineCard({ title, onSave, onCancel, children }) {
         border: '1px solid #D6E4FF',
         borderRadius: '16px',
         padding: '24px',
-        marginBottom: '16px',
-        marginTop: '8px',
+        marginBottom: '20px',
+        position: 'relative',
       }}
     >
-      <h4 style={{ fontFamily: F, fontSize: '15px', fontWeight: 700, color: '#050A5F', margin: '0 0 16px 0' }}>{title}</h4>
+      <button
+        type="button"
+        onClick={onClose}
+        style={{
+          position: 'absolute',
+          top: '16px',
+          right: '16px',
+          background: 'none',
+          border: 'none',
+          color: '#6B7280',
+          fontSize: '16px',
+          fontWeight: 700,
+          cursor: 'pointer',
+        }}
+        title="Remove"
+      >
+        ✕
+      </button>
       {children}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' }}>
-        <button
-          type="button"
-          onClick={onCancel}
-          style={{
-            background: '#FFFFFF',
-            color: '#4B5563',
-            border: '1px solid #D1D5DB',
-            borderRadius: '14px',
-            padding: '6px 16px',
-            fontFamily: F,
-            fontSize: '12.5px',
-            fontWeight: 600,
-            cursor: 'pointer',
-          }}
-        >
-          Cancel
-        </button>
-        <button
-          type="button"
-          onClick={onSave}
-          style={{
-            background: '#22C55E',
-            color: '#FFFFFF',
-            border: 'none',
-            borderRadius: '14px',
-            padding: '6px 20px',
-            fontFamily: F,
-            fontSize: '12.5px',
-            fontWeight: 600,
-            cursor: 'pointer',
-          }}
-        >
-          Save
-        </button>
+    </div>
+  );
+}
+
+/* Helper Date Range Selector (Month + Year) */
+function DateRangeGroup({ label, month, year, onMonthChange, onYearChange }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <label style={labelStyle}>{label}</label>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+        <SelectInput value={month} options={MONTHS} onChange={onMonthChange} />
+        <SelectInput value={year} options={YEARS} onChange={onYearChange} />
       </div>
     </div>
   );
 }
 
-/* Helper ItemList Component */
-function ItemList({ items, renderTitle, renderSub, onRemove }) {
-  if (!items || items.length === 0) return null;
+/* Helper File Upload Button Component */
+function FileUploadButton({ label, onFileSelect }) {
+  const [fileName, setFileName] = useState('');
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
-      {items.map((item) => (
-        <div
-          key={item.id}
-          style={{
-            display: 'flex',
-            justify: 'space-between',
-            alignItems: 'center',
-            background: '#F8FAFE',
-            border: '1px solid #D6E4FF',
-            borderRadius: '12px',
-            padding: '10px 16px',
-          }}
-        >
-          <div>
-            <div style={{ fontFamily: F, fontSize: '13px', fontWeight: 700, color: '#050A5F' }}>{renderTitle(item)}</div>
-            {renderSub && <div style={{ fontFamily: F, fontSize: '12px', color: '#6B7280' }}>{renderSub(item)}</div>}
-          </div>
-          <button
-            type="button"
-            onClick={() => onRemove(item.id)}
-            style={{ background: 'none', border: 'none', color: '#EF4444', fontSize: '16px', fontWeight: 700, cursor: 'pointer' }}
-          >
-            ✕
-          </button>
-        </div>
-      ))}
-    </div>
+    <label
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '8px',
+        height: '42px',
+        background: '#FFFFFF',
+        border: '1px solid #D6E4FF',
+        borderRadius: '21px',
+        padding: '0 16px',
+        cursor: 'pointer',
+        fontFamily: F,
+        fontSize: '12.5px',
+        fontWeight: 600,
+        color: '#050A5F',
+        boxSizing: 'border-box',
+      }}
+    >
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2334CD" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="17 8 12 3 7 8" />
+        <line x1="12" y1="3" x2="12" y2="15" />
+      </svg>
+      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        {fileName || label}
+      </span>
+      <input
+        type="file"
+        style={{ display: 'none' }}
+        onChange={(e) => {
+          if (e.target.files[0]) {
+            setFileName(e.target.files[0].name);
+            onFileSelect(e.target.files[0]);
+          }
+        }}
+      />
+    </label>
   );
 }
 
@@ -612,10 +666,12 @@ function FormField({ label, required = false, type = 'text', placeholder = '', o
 function SelectInput({ value, placeholder = 'Select', options = [], onChange }) {
   return (
     <div style={{ position: 'relative', width: '100%' }}>
-      <select value={value} onChange={(e) => onChange(e.target.value)} style={selectStyle}>
-        <option value="" disabled>
-          {placeholder}
-        </option>
+      <select value={value || ''} onChange={(e) => onChange(e.target.value)} style={selectStyle}>
+        {placeholder && (
+          <option value="" disabled>
+            {placeholder}
+          </option>
+        )}
         {options.map((opt) => (
           <option key={opt} value={opt}>
             {opt}
@@ -623,7 +679,7 @@ function SelectInput({ value, placeholder = 'Select', options = [], onChange }) 
         ))}
       </select>
       <div style={chevronStyle}>
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#2334CD" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#2334CD" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </div>
@@ -659,7 +715,7 @@ const selectStyle = {
   appearance: 'none',
   WebkitAppearance: 'none',
   cursor: 'pointer',
-  paddingRight: '32px',
+  paddingRight: '30px',
 };
 
 const textareaStyle = {
@@ -678,7 +734,7 @@ const textareaStyle = {
 
 const chevronStyle = {
   position: 'absolute',
-  right: '14px',
+  right: '12px',
   top: '50%',
   transform: 'translateY(-50%)',
   pointerEvents: 'none',
