@@ -459,7 +459,8 @@ export default function SetupProfile() {
               style={{
                 width: '100%',
                 display: 'flex',
-                justify: 'flex-end',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
                 marginTop: '40px',
               }}
             >
@@ -478,6 +479,7 @@ export default function SetupProfile() {
                   cursor: 'pointer',
                   boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px',
                   transition: 'background 0.2s ease',
+                  marginLeft: 'auto',
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = '#1B2AB2')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = '#2334CD')}
