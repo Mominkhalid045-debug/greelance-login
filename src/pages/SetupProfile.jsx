@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StepHeader, F } from './FreelancerForm';
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const YEARS = Array.from({ length: 25 }, (_, i) => (2026 - i).toString());
 
 export default function SetupProfile() {
@@ -22,59 +21,62 @@ export default function SetupProfile() {
     timeZone: '',
   });
 
+  // Section Inline Form Visibility
+  const [showEduForm, setShowEduForm] = useState(false);
+  const [showExpForm, setShowExpForm] = useState(false);
+  const [showCertForm, setShowCertForm] = useState(false);
+  const [showPortForm, setShowPortForm] = useState(false);
+
   // Dynamic Item Lists
   const [educationList, setEducationList] = useState([]);
   const [experienceList, setExperienceList] = useState([]);
   const [certificationsList, setCertificationsList] = useState([]);
   const [portfolioList, setPortfolioList] = useState([]);
 
-  // Modal Control States
-  const [activeModal, setActiveModal] = useState(null); // 'education' | 'experience' | 'certification' | 'portfolio' | null
-
-  // Temporary Form States inside Modals
-  const [tempEdu, setTempEdu] = useState({ degree: '', university: '', startMonth: 'September', startYear: '2020', endMonth: 'September', endYear: '2024' });
-  const [tempExp, setTempExp] = useState({ position: '', workplace: '', startMonth: 'September', startYear: '2021', currentlyWorking: false, endMonth: 'September', endYear: '2023', description: '' });
-  const [tempCert, setTempCert] = useState({ name: '', link: '', fileName: '' });
-  const [tempPort, setTempPort] = useState({ title: '', link: '', fileName: '', description: '' });
+  // Form Inputs for Adding Items
+  const [eduInput, setEduInput] = useState({ degree: '', university: '', startYear: '2020', endYear: '2024' });
+  const [expInput, setExpInput] = useState({ position: '', workplace: '', currentlyWorking: false, startYear: '2021', endYear: '2023', description: '' });
+  const [certInput, setCertInput] = useState({ name: '', link: '' });
+  const [portInput, setPortInput] = useState({ title: '', link: '', description: '' });
 
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Add Item Handlers
-  const handleSaveEducation = (e) => {
-    e.preventDefault();
-    if (!tempEdu.degree && !tempEdu.university) return;
-    setEducationList((prev) => [...prev, { id: Date.now(), ...tempEdu }]);
-    setTempEdu({ degree: '', university: '', startMonth: 'September', startYear: '2020', endMonth: 'September', endYear: '2024' });
-    setActiveModal(null);
+  // Add Handlers
+  const handleAddEducation = (e) => {
+    if (e) e.preventDefault();
+    if (!eduInput.degree && !eduInput.university) return;
+    setEducationList((prev) => [...prev, { id: Date.now(), ...eduInput }]);
+    setEduInput({ degree: '', university: '', startYear: '2020', endYear: '2024' });
+    setShowEduForm(false);
   };
 
-  const handleSaveExperience = (e) => {
-    e.preventDefault();
-    if (!tempExp.position && !tempExp.workplace) return;
-    setExperienceList((prev) => [...prev, { id: Date.now(), ...tempExp }]);
-    setTempExp({ position: '', workplace: '', startMonth: 'September', startYear: '2021', currentlyWorking: false, endMonth: 'September', endYear: '2023', description: '' });
-    setActiveModal(null);
+  const handleAddExperience = (e) => {
+    if (e) e.preventDefault();
+    if (!expInput.position && !expInput.workplace) return;
+    setExperienceList((prev) => [...prev, { id: Date.now(), ...expInput }]);
+    setExpInput({ position: '', workplace: '', currentlyWorking: false, startYear: '2021', endYear: '2023', description: '' });
+    setShowExpForm(false);
   };
 
-  const handleSaveCertification = (e) => {
-    e.preventDefault();
-    if (!tempCert.name) return;
-    setCertificationsList((prev) => [...prev, { id: Date.now(), ...tempCert }]);
-    setTempCert({ name: '', link: '', fileName: '' });
-    setActiveModal(null);
+  const handleAddCertification = (e) => {
+    if (e) e.preventDefault();
+    if (!certInput.name) return;
+    setCertificationsList((prev) => [...prev, { id: Date.now(), ...certInput }]);
+    setCertInput({ name: '', link: '' });
+    setShowCertForm(false);
   };
 
-  const handleSavePortfolio = (e) => {
-    e.preventDefault();
-    if (!tempPort.title) return;
-    setPortfolioList((prev) => [...prev, { id: Date.now(), ...tempPort }]);
-    setTempPort({ title: '', link: '', fileName: '', description: '' });
-    setActiveModal(null);
+  const handleAddPortfolio = (e) => {
+    if (e) e.preventDefault();
+    if (!portInput.title) return;
+    setPortfolioList((prev) => [...prev, { id: Date.now(), ...portInput }]);
+    setPortInput({ title: '', link: '', description: '' });
+    setShowPortForm(false);
   };
 
-  // Delete Handlers
+  // Remove Handlers
   const removeEdu = (id) => setEducationList((prev) => prev.filter((i) => i.id !== id));
   const removeExp = (id) => setExperienceList((prev) => prev.filter((i) => i.id !== id));
   const removeCert = (id) => setCertificationsList((prev) => prev.filter((i) => i.id !== id));
@@ -309,28 +311,100 @@ export default function SetupProfile() {
             {/* =====================================
                 SECTION 2: EDUCATION
                ===================================== */}
-            <SectionHeader title="Education" onAdd={() => setActiveModal('education')} buttonLabel="Add Education" />
-            <ItemBadges items={educationList} renderTitle={(i) => i.degree || i.university} renderSub={(i) => `${i.university} (${i.startYear} - ${i.endYear})`} onRemove={removeEdu} />
+            <SectionRow
+              title="Education"
+              buttonText="+ Add Education"
+              isOpen={showEduForm}
+              onToggle={() => setShowEduForm(!showEduForm)}
+            />
+            {showEduForm && (
+              <InlineCard title="Add Education" onSave={handleAddEducation} onCancel={() => setShowEduForm(false)}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <FormField label="Degree" placeholder="e.g. Bachelor in Software Engineering" value={eduInput.degree} onChange={(v) => setEduInput({ ...eduInput, degree: v })} />
+                  <FormField label="University" placeholder="e.g. University of Texas" value={eduInput.university} onChange={(v) => setEduInput({ ...eduInput, university: v })} />
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginTop: '12px' }}>
+                  <div>
+                    <label style={labelStyle}>Start Year</label>
+                    <SelectInput value={eduInput.startYear} options={YEARS} onChange={(v) => setEduInput({ ...eduInput, startYear: v })} />
+                  </div>
+                  <div>
+                    <label style={labelStyle}>End Year</label>
+                    <SelectInput value={eduInput.endYear} options={YEARS} onChange={(v) => setEduInput({ ...eduInput, endYear: v })} />
+                  </div>
+                </div>
+              </InlineCard>
+            )}
+            <ItemList items={educationList} renderTitle={(i) => i.degree || i.university} renderSub={(i) => `${i.university} (${i.startYear} - ${i.endYear})`} onRemove={removeEdu} />
 
             {/* =====================================
                 SECTION 3: EXPERIENCE
                ===================================== */}
-            <SectionHeader title="Experience" onAdd={() => setActiveModal('experience')} buttonLabel="Add Experience" />
-            <ItemBadges items={experienceList} renderTitle={(i) => i.position || i.workplace} renderSub={(i) => `${i.workplace} (${i.currentlyWorking ? 'Present' : i.endYear})`} onRemove={removeExp} />
+            <SectionRow
+              title="Experience"
+              buttonText="+ Add Experience"
+              isOpen={showExpForm}
+              onToggle={() => setShowExpForm(!showExpForm)}
+            />
+            {showExpForm && (
+              <InlineCard title="Add Experience" onSave={handleAddExperience} onCancel={() => setShowExpForm(false)}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <FormField label="Position" placeholder="e.g. Network Support Engineer" value={expInput.position} onChange={(v) => setExpInput({ ...expInput, position: v })} />
+                  <FormField label="Workplace" placeholder="e.g. Central Texas College" value={expInput.workplace} onChange={(v) => setExpInput({ ...expInput, workplace: v })} />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px' }}>
+                  <label style={labelStyle}>Description</label>
+                  <textarea
+                    rows={2}
+                    value={expInput.description}
+                    onChange={(e) => setExpInput({ ...expInput, description: e.target.value })}
+                    placeholder="Type details..."
+                    style={textareaStyle}
+                  />
+                </div>
+              </InlineCard>
+            )}
+            <ItemList items={experienceList} renderTitle={(i) => i.position || i.workplace} renderSub={(i) => `${i.workplace} (${i.startYear} - ${i.endYear})`} onRemove={removeExp} />
 
             {/* =====================================
                 SECTION 4: CERTIFICATIONS
                ===================================== */}
-            <SectionHeader title="Certifications" onAdd={() => setActiveModal('certification')} buttonLabel="Add Certification" />
-            <ItemBadges items={certificationsList} renderTitle={(i) => i.name} renderSub={(i) => i.link} onRemove={removeCert} />
+            <SectionRow
+              title="Certifications"
+              buttonText="+ Add Certification"
+              isOpen={showCertForm}
+              onToggle={() => setShowCertForm(!showCertForm)}
+            />
+            {showCertForm && (
+              <InlineCard title="Add Certification" onSave={handleAddCertification} onCancel={() => setShowCertForm(false)}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <FormField label="Certificate Name" placeholder="e.g. AWS Certified Developer" value={certInput.name} onChange={(v) => setCertInput({ ...certInput, name: v })} />
+                  <FormField label="Certificate Link" placeholder="https://..." value={certInput.link} onChange={(v) => setCertInput({ ...certInput, link: v })} />
+                </div>
+              </InlineCard>
+            )}
+            <ItemList items={certificationsList} renderTitle={(i) => i.name} renderSub={(i) => i.link} onRemove={removeCert} />
 
             {/* =====================================
                 SECTION 5: PORTFOLIO
                ===================================== */}
-            <SectionHeader title="Portfolio" onAdd={() => setActiveModal('portfolio')} buttonLabel="Add Portfolio" />
-            <ItemBadges items={portfolioList} renderTitle={(i) => i.title} renderSub={(i) => i.link} onRemove={removePort} />
+            <SectionRow
+              title="Portfolio"
+              buttonText="+ Add Portfolio"
+              isOpen={showPortForm}
+              onToggle={() => setShowPortForm(!showPortForm)}
+            />
+            {showPortForm && (
+              <InlineCard title="Add Portfolio" onSave={handleAddPortfolio} onCancel={() => setShowPortForm(false)}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <FormField label="Title" placeholder="e.g. E-Commerce Redesign" value={portInput.title} onChange={(v) => setPortInput({ ...portInput, title: v })} />
+                  <FormField label="Portfolio Link" placeholder="https://..." value={portInput.link} onChange={(v) => setPortInput({ ...portInput, link: v })} />
+                </div>
+              </InlineCard>
+            )}
+            <ItemList items={portfolioList} renderTitle={(i) => i.title} renderSub={(i) => i.link} onRemove={removePort} />
 
-            {/* Bottom Right ONLY Next Button (Inside Main Card Container) */}
+            {/* Bottom Right ONLY Next Button */}
             <div
               style={{
                 width: '100%',
@@ -364,87 +438,18 @@ export default function SetupProfile() {
           </form>
         </div>
       </main>
-
-      {/* =====================================
-          INTERACTIVE MODALS
-         ===================================== */}
-      {/* 1. Education Modal */}
-      {activeModal === 'education' && (
-        <Modal title="Add Education" onClose={() => setActiveModal(null)} onSave={handleSaveEducation}>
-          <FormField label="Degree" placeholder="e.g. Bachelor in UX Designing" value={tempEdu.degree} onChange={(v) => setTempEdu({ ...tempEdu, degree: v })} />
-          <FormField label="University" placeholder="e.g. University Of Punjab" value={tempEdu.university} onChange={(v) => setTempEdu({ ...tempEdu, university: v })} />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-            <div>
-              <label style={labelStyle}>Start Year</label>
-              <SelectInput value={tempEdu.startYear} options={YEARS} onChange={(v) => setTempEdu({ ...tempEdu, startYear: v })} />
-            </div>
-            <div>
-              <label style={labelStyle}>End Year</label>
-              <SelectInput value={tempEdu.endYear} options={YEARS} onChange={(v) => setTempEdu({ ...tempEdu, endYear: v })} />
-            </div>
-          </div>
-        </Modal>
-      )}
-
-      {/* 2. Experience Modal */}
-      {activeModal === 'experience' && (
-        <Modal title="Add Experience" onClose={() => setActiveModal(null)} onSave={handleSaveExperience}>
-          <FormField label="Position" placeholder="e.g. Network Support Engineer" value={tempExp.position} onChange={(v) => setTempExp({ ...tempExp, position: v })} />
-          <FormField label="Workplace" placeholder="e.g. Central Texas College" value={tempExp.workplace} onChange={(v) => setTempExp({ ...tempExp, workplace: v })} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }} onClick={() => setTempExp({ ...tempExp, currentlyWorking: !tempExp.currentlyWorking })}>
-            <input type="checkbox" checked={tempExp.currentlyWorking} onChange={() => {}} />
-            <span style={{ fontFamily: F, fontSize: '13px', color: '#050A5F', fontWeight: 600 }}>Currently Working</span>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <label style={labelStyle}>Description</label>
-            <textarea
-              rows={3}
-              value={tempExp.description}
-              onChange={(e) => setTempExp({ ...tempExp, description: e.target.value })}
-              placeholder="Type your description..."
-              style={textareaStyle}
-            />
-          </div>
-        </Modal>
-      )}
-
-      {/* 3. Certifications Modal */}
-      {activeModal === 'certification' && (
-        <Modal title="Add Certification" onClose={() => setActiveModal(null)} onSave={handleSaveCertification}>
-          <FormField label="Certificate Name" placeholder="e.g. Certificate of Appreciation" value={tempCert.name} onChange={(v) => setTempCert({ ...tempCert, name: v })} />
-          <FormField label="Certificate Link" placeholder="http://..." value={tempCert.link} onChange={(v) => setTempCert({ ...tempCert, link: v })} />
-        </Modal>
-      )}
-
-      {/* 4. Portfolio Modal */}
-      {activeModal === 'portfolio' && (
-        <Modal title="Add Portfolio" onClose={() => setActiveModal(null)} onSave={handleSavePortfolio}>
-          <FormField label="Title" placeholder="e.g. Mobile App Redesign" value={tempPort.title} onChange={(v) => setTempPort({ ...tempPort, title: v })} />
-          <FormField label="Portfolio Link" placeholder="https://..." value={tempPort.link} onChange={(v) => setTempPort({ ...tempPort, link: v })} />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <label style={labelStyle}>Description</label>
-            <textarea
-              rows={3}
-              value={tempPort.description}
-              onChange={(e) => setTempPort({ ...tempPort, description: e.target.value })}
-              placeholder="Type details..."
-              style={textareaStyle}
-            />
-          </div>
-        </Modal>
-      )}
     </div>
   );
 }
 
-/* Helper SectionHeader Component with divider line underneath */
-function SectionHeader({ title, onAdd, buttonLabel }) {
+/* Helper SectionRow Component with Right-aligned Green Button and Bottom Line */
+function SectionRow({ title, buttonText, isOpen, onToggle }) {
   return (
     <div
       style={{
         width: '100%',
-        paddingBottom: '16px',
-        marginBottom: '12px',
+        paddingBottom: '14px',
+        marginBottom: '14px',
         marginTop: '28px',
         borderBottom: '1px solid #E5E7EB',
         display: 'flex',
@@ -452,15 +457,7 @@ function SectionHeader({ title, onAdd, buttonLabel }) {
         alignItems: 'center',
       }}
     >
-      <h3
-        style={{
-          fontFamily: F,
-          fontSize: '18px',
-          fontWeight: 700,
-          color: '#050A5F',
-          margin: 0,
-        }}
-      >
+      <h3 style={{ fontFamily: F, fontSize: '18px', fontWeight: 700, color: '#050A5F', margin: 0 }}>
         {title}
       </h3>
 
@@ -469,7 +466,7 @@ function SectionHeader({ title, onAdd, buttonLabel }) {
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          onAdd();
+          onToggle();
         }}
         style={{
           background: '#22C55E',
@@ -481,24 +478,79 @@ function SectionHeader({ title, onAdd, buttonLabel }) {
           fontSize: '12px',
           fontWeight: 600,
           cursor: 'pointer',
-          display: 'flex',
+          display: 'inline-flex',
           alignItems: 'center',
           gap: '6px',
           boxShadow: '0 2px 8px rgba(34, 197, 94, 0.2)',
-          transition: 'background 0.2s ease',
+          transition: 'all 0.2s ease',
         }}
         onMouseEnter={(e) => (e.currentTarget.style.background = '#16A34A')}
         onMouseLeave={(e) => (e.currentTarget.style.background = '#22C55E')}
       >
         <span style={{ fontSize: '14px', fontWeight: 700, lineHeight: 1 }}>+</span>
-        <span>{buttonLabel}</span>
+        <span>{buttonText}</span>
       </button>
     </div>
   );
 }
 
-/* Helper ItemBadges Container */
-function ItemBadges({ items, renderTitle, renderSub, onRemove }) {
+/* Helper InlineCard Form Component */
+function InlineCard({ title, onSave, onCancel, children }) {
+  return (
+    <div
+      style={{
+        background: '#F0F4FF',
+        border: '1px solid #D6E4FF',
+        borderRadius: '16px',
+        padding: '24px',
+        marginBottom: '16px',
+        marginTop: '8px',
+      }}
+    >
+      <h4 style={{ fontFamily: F, fontSize: '15px', fontWeight: 700, color: '#050A5F', margin: '0 0 16px 0' }}>{title}</h4>
+      {children}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' }}>
+        <button
+          type="button"
+          onClick={onCancel}
+          style={{
+            background: '#FFFFFF',
+            color: '#4B5563',
+            border: '1px solid #D1D5DB',
+            borderRadius: '14px',
+            padding: '6px 16px',
+            fontFamily: F,
+            fontSize: '12.5px',
+            fontWeight: 600,
+            cursor: 'pointer',
+          }}
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          onClick={onSave}
+          style={{
+            background: '#22C55E',
+            color: '#FFFFFF',
+            border: 'none',
+            borderRadius: '14px',
+            padding: '6px 20px',
+            fontFamily: F,
+            fontSize: '12.5px',
+            fontWeight: 600,
+            cursor: 'pointer',
+          }}
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* Helper ItemList Component */
+function ItemList({ items, renderTitle, renderSub, onRemove }) {
   if (!items || items.length === 0) return null;
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
@@ -509,7 +561,7 @@ function ItemBadges({ items, renderTitle, renderSub, onRemove }) {
             display: 'flex',
             justify: 'space-between',
             alignItems: 'center',
-            background: '#F0F4FF',
+            background: '#F8FAFE',
             border: '1px solid #D6E4FF',
             borderRadius: '12px',
             padding: '10px 16px',
@@ -528,87 +580,6 @@ function ItemBadges({ items, renderTitle, renderSub, onRemove }) {
           </button>
         </div>
       ))}
-    </div>
-  );
-}
-
-/* Helper Modal Dialog Component */
-function Modal({ title, onClose, onSave, children }) {
-  return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'rgba(5, 10, 95, 0.4)',
-        backdropFilter: 'blur(4px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-      }}
-    >
-      <div
-        style={{
-          width: '500px',
-          maxWidth: '90%',
-          background: '#FFFFFF',
-          borderRadius: '24px',
-          padding: '32px',
-          boxShadow: '0 20px 40px rgba(5, 10, 95, 0.15)',
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-          <h3 style={{ fontFamily: F, fontSize: '20px', fontWeight: 700, color: '#050A5F', margin: 0 }}>{title}</h3>
-          <button type="button" onClick={onClose} style={{ background: 'none', border: 'none', fontSize: '20px', cursor: 'pointer', color: '#6B7280' }}>
-            ✕
-          </button>
-        </div>
-
-        <form onSubmit={onSave} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          {children}
-
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '12px' }}>
-            <button
-              type="button"
-              onClick={onClose}
-              style={{
-                background: '#F3F4F6',
-                color: '#4B5563',
-                border: 'none',
-                borderRadius: '16px',
-                height: '38px',
-                padding: '0 20px',
-                fontFamily: F,
-                fontSize: '13px',
-                fontWeight: 600,
-                cursor: 'pointer',
-              }}
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              style={{
-                background: '#22C55E',
-                color: '#FFFFFF',
-                border: 'none',
-                borderRadius: '16px',
-                height: '38px',
-                padding: '0 24px',
-                fontFamily: F,
-                fontSize: '13px',
-                fontWeight: 600,
-                cursor: 'pointer',
-              }}
-            >
-              Save Item
-            </button>
-          </div>
-        </form>
-      </div>
     </div>
   );
 }
