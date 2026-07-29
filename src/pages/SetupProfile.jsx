@@ -539,7 +539,6 @@ function SectionHeader({ title, buttonText, onAdd }) {
         onMouseEnter={(e) => (e.currentTarget.style.background = '#16A34A')}
         onMouseLeave={(e) => (e.currentTarget.style.background = '#22C55E')}
       >
-        <span style={{ fontSize: '14px', fontWeight: 700, lineHeight: 1 }}>+</span>
         <span>{buttonText}</span>
       </button>
     </div>
