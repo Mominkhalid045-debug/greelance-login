@@ -466,7 +466,11 @@ function SectionHeader({ title, onAdd, buttonLabel }) {
 
       <button
         type="button"
-        onClick={onAdd}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onAdd();
+        }}
         style={{
           background: '#22C55E',
           color: '#FFFFFF',
