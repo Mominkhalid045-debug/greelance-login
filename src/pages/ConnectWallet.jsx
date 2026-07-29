@@ -1,55 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StepHeader, F } from './FreelancerForm';
-
-// High-fidelity vector logos matching reference screenshot
-function CoinbaseLogo() {
-  return (
-    <svg width="42" height="42" viewBox="0 0 48 48" fill="none">
-      <circle cx="24" cy="24" r="24" fill="#0052FF" />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M24 11C16.8203 11 11 16.8203 11 24C11 31.1797 16.8203 37 24 37C31.1797 37 37 31.1797 37 24C37 16.8203 31.1797 11 24 11ZM17.5 24C17.5 20.4101 20.4101 17.5 24 17.5C27.5899 17.5 30.5 20.4101 30.5 24C30.5 27.5899 27.5899 30.5 24 30.5C20.4101 30.5 17.5 27.5899 17.5 24ZM24 21C22.3431 21 21 22.3431 21 24C21 25.6569 22.3431 27 24 27C25.6569 27 27 25.6569 27 24H30.5C30.5 27.5899 27.5899 30.5 24 30.5C20.4101 30.5 17.5 27.5899 17.5 24C17.5 20.4101 20.4101 17.5 24 17.5C27.5899 17.5 30.5 20.4101 30.5 24H27C27 22.3431 25.6569 21 24 21Z"
-        fill="white"
-      />
-    </svg>
-  );
-}
-
-function FormaticLogo() {
-  return (
-    <svg width="42" height="42" viewBox="0 0 48 48" fill="none">
-      <path
-        d="M10 8H38V18.5H23.5V24H34V31C34 35.5 30 39.5 25 39.5H23.5V26.5H10V8Z"
-        fill="#6748FF"
-      />
-    </svg>
-  );
-}
-
-function MetamaskLogo() {
-  return (
-    <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-      <path d="M39.6 4.4L24.8 15.3L27.7 8.5L39.6 4.4Z" fill="#E67E22" />
-      <path d="M4.4 4.4L19.2 15.3L16.3 8.5L4.4 4.4Z" fill="#E67E22" />
-      <path d="M34.1 31.1L30.2 37L38.8 34.6L34.1 31.1Z" fill="#D35400" />
-      <path d="M9.9 31.1L13.8 37L5.2 34.6L9.9 31.1Z" fill="#D35400" />
-      <path d="M14.9 19.4L13.3 24.7L19 25L18.7 18.8L14.9 19.4Z" fill="#E67E22" />
-      <path d="M29.1 19.4L25.3 18.8L25 25L30.7 24.7L29.1 19.4Z" fill="#E67E22" />
-      <path d="M15.1 34.7L19.6 32.5L18.9 29.3L15.1 34.7Z" fill="#E67E22" />
-      <path d="M28.9 34.7L25.1 29.3L24.4 32.5L28.9 34.7Z" fill="#E67E22" />
-      <path d="M29.8 37L25.1 29.3L24.4 32.5L28.9 34.7Z" fill="#D35400" />
-      <path d="M14.2 37L15.1 34.7L19.6 32.5L18.9 29.3Z" fill="#D35400" />
-      <path d="M22 22.9L25.8 18.8L29.5 19.4L25.1 15.3L22 22.9Z" fill="#F39C12" />
-      <path d="M22 22.9L18.9 15.3L14.5 19.4L18.2 18.8L22 22.9Z" fill="#F39C12" />
-      <path d="M25.1 29.3L22 24.1L18.9 29.3L22 30.5L25.1 29.3Z" fill="#BDC3C7" />
-      <path d="M22 31.8L18.9 29.3L22 30.5L25.1 29.3L22 31.8Z" fill="#7F8C8D" />
-      <path d="M19 25L13.3 24.7L15.1 34.7L18.9 29.3L22 24.1L19 25Z" fill="#E67E22" />
-      <path d="M25 25L22 24.1L25.1 29.3L28.9 34.7L30.7 24.7L25 25Z" fill="#E67E22" />
-    </svg>
-  );
-}
+import coinbaseImg from '../assets/coinbase.png';
+import fortmaticImg from '../assets/fortmatic.png';
+import metamaskImg from '../assets/metamask.png';
 
 export default function ConnectWallet() {
   const navigate = useNavigate();
@@ -62,17 +16,17 @@ export default function ConnectWallet() {
     {
       id: 'CoinBase',
       name: 'CoinBase',
-      icon: <CoinbaseLogo />,
+      img: coinbaseImg,
     },
     {
       id: 'Formatic',
       name: 'Formatic',
-      icon: <FormaticLogo />,
+      img: fortmaticImg,
     },
     {
       id: 'MetaMask',
       name: 'MetaMask',
-      icon: <MetamaskLogo />,
+      img: metamaskImg,
     },
   ];
 
@@ -159,43 +113,26 @@ export default function ConnectWallet() {
                     width: '140px',
                     height: '140px',
                     borderRadius: '18px',
-                    background: isSelected ? '#2334CD' : '#F8FAFE',
-                    border: isSelected ? 'none' : '1px solid #D6E4FF',
+                    overflow: 'hidden',
                     cursor: 'pointer',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '14px',
+                    border: isSelected ? '2px solid #2334CD' : '1px solid #E5E7EB',
                     boxShadow: isSelected
                       ? '0 10px 24px rgba(35, 52, 205, 0.3)'
                       : '0 2px 6px rgba(5, 10, 95, 0.02)',
                     transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isSelected) {
-                      e.currentTarget.style.background = '#F0F4FF';
-                      e.currentTarget.style.borderColor = '#C7D2FE';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isSelected) {
-                      e.currentTarget.style.background = '#F8FAFE';
-                      e.currentTarget.style.borderColor = '#D6E4FF';
-                    }
+                    transform: isSelected ? 'scale(1.02)' : 'scale(1)',
                   }}
                 >
-                  {w.icon}
-                  <span
+                  <img
+                    src={w.img}
+                    alt={w.name}
                     style={{
-                      fontFamily: F,
-                      fontSize: '14px',
-                      fontWeight: 700,
-                      color: isSelected ? '#FFFFFF' : '#050A5F',
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
                     }}
-                  >
-                    {w.name}
-                  </span>
+                  />
                 </div>
               );
             })}
