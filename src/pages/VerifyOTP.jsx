@@ -90,6 +90,7 @@ export default function VerifyOTP() {
     localStorage.setItem('userOtp', newCode);
     setTimer(26);
     setErrorMsg('');
+    setShowNotification(true);
   };
 
   return (
@@ -105,6 +106,62 @@ export default function VerifyOTP() {
         overflowX: 'hidden',
       }}
     >
+      {/* Demo Notification Toast */}
+      {showNotification && (
+        <div
+          style={{
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            zIndex: 9999,
+            background: '#0A0F2E',
+            color: '#FFFFFF',
+            padding: '14px 20px',
+            borderRadius: '12px',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            fontFamily: F,
+            fontSize: '13px',
+            borderLeft: '4px solid #34E096',
+            animation: 'fadeIn 0.3s ease',
+          }}
+        >
+          <span>📧 <strong>Demo OTP Code:</strong> <code style={{ background: '#1E293B', padding: '2px 8px', borderRadius: '4px', color: '#4ADE80', fontSize: '14px', letterSpacing: '1px' }}>{expectedOtp}</code></span>
+          <button
+            type="button"
+            onClick={handleAutofill}
+            style={{
+              background: '#34E096',
+              color: '#0A0F2E',
+              border: 'none',
+              borderRadius: '6px',
+              padding: '4px 10px',
+              fontWeight: 700,
+              fontSize: '12px',
+              cursor: 'pointer',
+            }}
+          >
+            Auto-fill
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowNotification(false)}
+            style={{
+              background: 'transparent',
+              color: '#9CA3AF',
+              border: 'none',
+              fontSize: '16px',
+              cursor: 'pointer',
+              marginLeft: '4px',
+            }}
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       {/* Top Left Logo Header */}
       <header style={{ padding: '24px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ cursor: 'pointer', width: 'fit-content' }} onClick={() => navigate('/')}>
