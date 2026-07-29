@@ -19,13 +19,65 @@ export default function SetupProfile() {
     timeZone: '',
   });
 
+  // Dynamic Lists State
+  const [educationList, setEducationList] = useState([]);
+  const [experienceList, setExperienceList] = useState([]);
+  const [certificationsList, setCertificationsList] = useState([]);
+  const [portfolioList, setPortfolioList] = useState([]);
+
+  // Modal State
+  const [activeModal, setActiveModal] = useState(null); // 'education' | 'experience' | 'certification' | 'portfolio' | null
+  const [modalForm, setModalForm] = useState({});
+
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handleOpenModal = (type) => {
+    setActiveModal(type);
+    setModalForm({});
+  };
+
+  const handleCloseModal = () => {
+    setActiveModal(null);
+    setModalForm({});
+  };
+
+  const handleSaveModalItem = (e) => {
+    e.preventDefault();
+    if (activeModal === 'education') {
+      if (!modalForm.school || !modalForm.degree) return;
+      setEducationList((prev) => [...prev, { ...modalForm, id: Date.now() }]);
+    } else if (activeModal === 'experience') {
+      if (!modalForm.title || !modalForm.company) return;
+      setExperienceList((prev) => [...prev, { ...modalForm, id: Date.now() }]);
+    } else if (activeModal === 'certification') {
+      if (!modalForm.name || !modalForm.issuer) return;
+      setCertificationsList((prev) => [...prev, { ...modalForm, id: Date.now() }]);
+    } else if (activeModal === 'portfolio') {
+      if (!modalForm.title || !modalForm.url) return;
+      setPortfolioList((prev) => [...prev, { ...modalForm, id: Date.now() }]);
+    }
+    handleCloseModal();
+  };
+
+  const removeItem = (type, id) => {
+    if (type === 'education') setEducationList((prev) => prev.filter((item) => item.id !== id));
+    if (type === 'experience') setExperienceList((prev) => prev.filter((item) => item.id !== id));
+    if (type === 'certification') setCertificationsList((prev) => prev.filter((item) => item.id !== id));
+    if (type === 'portfolio') setPortfolioList((prev) => prev.filter((item) => item.id !== id));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem('userProfileData', JSON.stringify(formData));
+    const completeProfileData = {
+      ...formData,
+      education: educationList,
+      experience: experienceList,
+      certifications: certificationsList,
+      portfolio: portfolioList,
+    };
+    localStorage.setItem('userProfileData', JSON.stringify(completeProfileData));
     navigate('/skills');
   };
 
@@ -209,11 +261,65 @@ export default function SetupProfile() {
             {/* Spacing before sections */}
             <div style={{ marginTop: '40px' }} />
 
-            {/* Sub-sections */}
-            <SubSection title="Education" buttonLabel="Add Education" />
-            <SubSection title="Experience" buttonLabel="Add Experience" />
-            <SubSection title="Certifications" buttonLabel="Add Certificate" />
-            <SubSection title="Portfolio" buttonLabel="Add Portfolio" isLast />
+            {/* Dynamic Sub-sections */}
+            <SubSection
+              title="Education"
+              buttonLabel="Add Education"
+              items={educationList}
+              onAdd={() => handleOpenModal('education')}
+              onRemove={(id) => removeItem('education', id)}
+              renderItem={(item) => (
+                <div>
+                  <div style={{ fontWeight: 700, color: '#050A5F' }}>{item.degree}</div>
+                  <div style={{ fontSize: '12px', color: '#6B7280' }}>{item.school} {item.year ? `• (${item.year})` : ''}</div>
+                </div>
+              )}
+            />
+
+            <SubSection
+              title="Experience"
+              buttonLabel="Add Experience"
+              items={experienceList}
+              onAdd={() => handleOpenModal('experience')}
+              onRemove={(id) => removeItem('experience', id)}
+              renderItem={(item) => (
+                <div>
+                  <div style={{ fontWeight: 700, color: '#050A5F' }}>{item.title}</div>
+                  <div style={{ fontSize: '12px', color: '#6B7280' }}>{item.company} {item.duration ? `• ${item.duration}` : ''}</div>
+                </div>
+              )}
+            />
+
+            <SubSection
+              title="Certifications"
+              buttonLabel="Add Certificate"
+              items={certificationsList}
+              onAdd={() => handleOpenModal('certification')}
+              onRemove={(id) => removeItem('certification', id)}
+              renderItem={(item) => (
+                <div>
+                  <div style={{ fontWeight: 700, color: '#050A5F' }}>{item.name}</div>
+                  <div style={{ fontSize: '12px', color: '#6B7280' }}>Issued by {item.issuer} {item.year ? `(${item.year})` : ''}</div>
+                </div>
+              )}
+            />
+
+            <SubSection
+              title="Portfolio"
+              buttonLabel="Add Portfolio"
+              items={portfolioList}
+              onAdd={() => handleOpenModal('portfolio')}
+              onRemove={(id) => removeItem('portfolio', id)}
+              isLast
+              renderItem={(item) => (
+                <div>
+                  <div style={{ fontWeight: 700, color: '#050A5F' }}>{item.title}</div>
+                  <a href={item.url} target="_blank" rel="noreferrer" style={{ fontSize: '12px', color: '#2334CD', textDecoration: 'none' }}>
+                    {item.url}
+                  </a>
+                </div>
+              )}
+            />
           </form>
         </div>
 
@@ -223,7 +329,7 @@ export default function SetupProfile() {
             width: '1140px',
             maxWidth: '96%',
             display: 'flex',
-            justify: 'space-between',
+            justifyContent: 'space-between',
             alignItems: 'center',
             boxSizing: 'border-box',
           }}
@@ -289,6 +395,175 @@ export default function SetupProfile() {
           </button>
         </div>
       </main>
+
+      {/* Modal Dialog for Dynamic Add */}
+      {activeModal && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(10, 15, 46, 0.45)',
+            backdropFilter: 'blur(3px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 10000,
+            padding: '20px',
+          }}
+        >
+          <div
+            style={{
+              width: '460px',
+              maxWidth: '95%',
+              background: '#FFFFFF',
+              borderRadius: '20px',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+              padding: '28px',
+              boxSizing: 'border-box',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <h3 style={{ fontFamily: F, fontSize: '18px', fontWeight: 700, color: '#050A5F', margin: 0 }}>
+                {activeModal === 'education' && 'Add Education'}
+                {activeModal === 'experience' && 'Add Experience'}
+                {activeModal === 'certification' && 'Add Certification'}
+                {activeModal === 'portfolio' && 'Add Portfolio Project'}
+              </h3>
+              <button
+                type="button"
+                onClick={handleCloseModal}
+                style={{ background: 'none', border: 'none', fontSize: '18px', cursor: 'pointer', color: '#9CA3AF' }}
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveModalItem} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {activeModal === 'education' && (
+                <>
+                  <ModalInput
+                    label="School / University"
+                    placeholder="e.g. Stanford University"
+                    value={modalForm.school || ''}
+                    onChange={(val) => setModalForm((prev) => ({ ...prev, school: val }))}
+                  />
+                  <ModalInput
+                    label="Degree / Certificate"
+                    placeholder="e.g. B.S. Computer Science"
+                    value={modalForm.degree || ''}
+                    onChange={(val) => setModalForm((prev) => ({ ...prev, degree: val }))}
+                  />
+                  <ModalInput
+                    label="Graduation Year"
+                    placeholder="e.g. 2023"
+                    value={modalForm.year || ''}
+                    onChange={(val) => setModalForm((prev) => ({ ...prev, year: val }))}
+                  />
+                </>
+              )}
+
+              {activeModal === 'experience' && (
+                <>
+                  <ModalInput
+                    label="Job Title / Role"
+                    placeholder="e.g. Senior Frontend Developer"
+                    value={modalForm.title || ''}
+                    onChange={(val) => setModalForm((prev) => ({ ...prev, title: val }))}
+                  />
+                  <ModalInput
+                    label="Company Name"
+                    placeholder="e.g. TechCorp Inc."
+                    value={modalForm.company || ''}
+                    onChange={(val) => setModalForm((prev) => ({ ...prev, company: val }))}
+                  />
+                  <ModalInput
+                    label="Duration"
+                    placeholder="e.g. 2021 - Present"
+                    value={modalForm.duration || ''}
+                    onChange={(val) => setModalForm((prev) => ({ ...prev, duration: val }))}
+                  />
+                </>
+              )}
+
+              {activeModal === 'certification' && (
+                <>
+                  <ModalInput
+                    label="Certification Name"
+                    placeholder="e.g. AWS Certified Solutions Architect"
+                    value={modalForm.name || ''}
+                    onChange={(val) => setModalForm((prev) => ({ ...prev, name: val }))}
+                  />
+                  <ModalInput
+                    label="Issuing Organization"
+                    placeholder="e.g. Amazon Web Services"
+                    value={modalForm.issuer || ''}
+                    onChange={(val) => setModalForm((prev) => ({ ...prev, issuer: val }))}
+                  />
+                  <ModalInput
+                    label="Issue Year"
+                    placeholder="e.g. 2024"
+                    value={modalForm.year || ''}
+                    onChange={(val) => setModalForm((prev) => ({ ...prev, year: val }))}
+                  />
+                </>
+              )}
+
+              {activeModal === 'portfolio' && (
+                <>
+                  <ModalInput
+                    label="Project Title"
+                    placeholder="e.g. Greelance E-Commerce App"
+                    value={modalForm.title || ''}
+                    onChange={(val) => setModalForm((prev) => ({ ...prev, title: val }))}
+                  />
+                  <ModalInput
+                    label="Project URL"
+                    placeholder="https://myportfolio.com/project"
+                    value={modalForm.url || ''}
+                    onChange={(val) => setModalForm((prev) => ({ ...prev, url: val }))}
+                  />
+                </>
+              )}
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '14px' }}>
+                <button
+                  type="button"
+                  onClick={handleCloseModal}
+                  style={{
+                    padding: '8px 16px',
+                    borderRadius: '10px',
+                    border: '1px solid #E5E7EB',
+                    background: '#FFFFFF',
+                    color: '#4B5563',
+                    fontFamily: F,
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  style={{
+                    padding: '8px 20px',
+                    borderRadius: '10px',
+                    border: 'none',
+                    background: '#2334CD',
+                    color: '#FFFFFF',
+                    fontFamily: F,
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Add Entry
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -347,8 +622,34 @@ function FormField({ label, required = false, type = 'text', placeholder = '', o
   );
 }
 
-/* Helper SubSection Component */
-function SubSection({ title, buttonLabel, isLast = false }) {
+/* Helper Modal Input */
+function ModalInput({ label, placeholder, value, onChange }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+      <label style={{ fontFamily: F, fontSize: '12px', fontWeight: 600, color: '#374151' }}>{label}</label>
+      <input
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        style={{
+          width: '100%',
+          height: '38px',
+          padding: '0 12px',
+          borderRadius: '8px',
+          border: '1px solid #D1D5DB',
+          fontFamily: F,
+          fontSize: '13px',
+          outline: 'none',
+          boxSizing: 'border-box',
+        }}
+      />
+    </div>
+  );
+}
+
+/* Helper SubSection Component with Items List & Add Handler */
+function SubSection({ title, buttonLabel, isLast = false, items = [], onAdd, onRemove, renderItem }) {
   return (
     <div
       style={{
@@ -358,7 +659,7 @@ function SubSection({ title, buttonLabel, isLast = false }) {
         borderBottom: isLast ? 'none' : '1px solid #F3F4F6',
         display: 'flex',
         flexDirection: 'column',
-        gap: '12px',
+        gap: '14px',
       }}
     >
       <h3
@@ -372,8 +673,50 @@ function SubSection({ title, buttonLabel, isLast = false }) {
       >
         {title}
       </h3>
+
+      {/* Render existing items list */}
+      {items.length > 0 && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', maxWidth: '600px' }}>
+          {items.map((item) => (
+            <div
+              key={item.id}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '12px 16px',
+                background: '#F0F4FF',
+                borderRadius: '12px',
+                border: '1px solid #D6E4FF',
+                fontFamily: F,
+              }}
+            >
+              {renderItem(item)}
+              <button
+                type="button"
+                onClick={() => onRemove(item.id)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#EF4444',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: 700,
+                  padding: '4px 8px',
+                }}
+                title="Remove"
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Add Button */}
       <button
         type="button"
+        onClick={onAdd}
         style={{
           width: 'fit-content',
           background: '#22C55E',
@@ -389,7 +732,7 @@ function SubSection({ title, buttonLabel, isLast = false }) {
           alignItems: 'center',
           gap: '6px',
           boxShadow: '0 2px 8px rgba(34, 197, 94, 0.2)',
-          transition: 'background 0.2s ease',
+          transition: 'background 0.2s ease, transform 0.1s ease',
         }}
         onMouseEnter={(e) => (e.currentTarget.style.background = '#16A34A')}
         onMouseLeave={(e) => (e.currentTarget.style.background = '#22C55E')}
@@ -431,4 +774,3 @@ const selectStyle = {
   cursor: 'pointer',
   paddingRight: '36px',
 };
-
