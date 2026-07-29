@@ -593,47 +593,11 @@ export default function SkillsSelection() {
             width: '1140px',
             maxWidth: '96%',
             display: 'flex',
-            justify: 'space-between',
+            justifyContent: 'flex-end',
             alignItems: 'center',
             boxSizing: 'border-box',
           }}
         >
-          <button
-            type="button"
-            onClick={() => {
-              if (selectedCategory) {
-                handleClearCategory();
-              } else {
-                navigate('/setup-profile');
-              }
-            }}
-            style={{
-              background: '#FFFFFF',
-              color: '#2334CD',
-              border: '1.5px solid #2334CD',
-              borderRadius: '20px',
-              height: '42px',
-              padding: '0 28px',
-              fontFamily: F,
-              fontSize: '13px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
-              transition: 'background 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = '#EEF2FF')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = '#FFFFFF')}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12" />
-              <polyline points="12 19 5 12 12 5" />
-            </svg>
-            <span>Back</span>
-          </button>
-
           <button
             type="button"
             onClick={() => navigate('/connect-wallet')}
@@ -643,7 +607,7 @@ export default function SkillsSelection() {
               border: 'none',
               borderRadius: '20px',
               height: '42px',
-              padding: '0 32px',
+              padding: '0 36px',
               fontFamily: F,
               fontSize: '13px',
               fontWeight: 600,

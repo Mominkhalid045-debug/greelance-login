@@ -9,12 +9,12 @@ export default function SetupProfile() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    firstName: 'Momin',
-    lastName: 'Khalid',
+    firstName: '',
+    lastName: '',
     countryResidence: '',
     countryCitizenship: '',
     countryCode: '+1',
-    phoneNumber: '201 555 0123',
+    phoneNumber: '201 555-0123',
     englishProficiency: '',
     noticePeriod: '',
     commitment: '',
@@ -22,62 +22,11 @@ export default function SetupProfile() {
     timeZone: '',
   });
 
-  // Sub-section dynamic lists matching Figma
-  const [educationList, setEducationList] = useState([
-    {
-      id: 1,
-      degree: 'Bachelor in UX Designing',
-      university: 'University Of Punjab College of Art & Design',
-      startMonth: 'September',
-      startYear: '2013',
-      endMonth: 'September',
-      endYear: '2013',
-    },
-  ]);
-
-  const [experienceList, setExperienceList] = useState([
-    {
-      id: 1,
-      position: 'Network Support Engineer',
-      workplace: 'Central Texas Collage',
-      startMonth: 'September',
-      startYear: '2013',
-      currentlyWorking: true,
-      endMonth: 'September',
-      endYear: '2013',
-      description: '',
-    },
-    {
-      id: 2,
-      position: 'Network Support Engineer',
-      workplace: 'Central Texas Collage',
-      startMonth: 'September',
-      startYear: '2013',
-      currentlyWorking: false,
-      endMonth: 'September',
-      endYear: '2015',
-      description: '',
-    },
-  ]);
-
-  const [certificationsList, setCertificationsList] = useState([
-    {
-      id: 1,
-      name: 'Certificate of Appreciation',
-      link: 'http://dshsusus.gc.kndckjwchouwhjcua',
-      fileName: '',
-    },
-  ]);
-
-  const [portfolioList, setPortfolioList] = useState([
-    {
-      id: 1,
-      title: '',
-      link: '',
-      fileName: '',
-      description: '',
-    },
-  ]);
+  // Sub-section dynamic lists
+  const [educationList, setEducationList] = useState([]);
+  const [experienceList, setExperienceList] = useState([]);
+  const [certificationsList, setCertificationsList] = useState([]);
+  const [portfolioList, setPortfolioList] = useState([]);
 
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -215,14 +164,39 @@ export default function SetupProfile() {
           }}
         >
           <form onSubmit={handleSubmit}>
+            {/* Centered Page Header Title & Subtitle */}
+            <div style={{ textAlign: 'center', marginBottom: '36px' }}>
+              <h1
+                style={{
+                  fontFamily: F,
+                  fontSize: '26px',
+                  fontWeight: 700,
+                  color: '#050A5F',
+                  margin: '0 0 8px 0',
+                }}
+              >
+                Setup Profile
+              </h1>
+              <p
+                style={{
+                  fontFamily: F,
+                  fontSize: '13.5px',
+                  color: '#6B7280',
+                  margin: 0,
+                }}
+              >
+                Enter your personal details to display on your freelancer card.
+              </p>
+            </div>
+
             {/* Section 1: Personal Information* */}
             <h2
               style={{
                 fontFamily: F,
-                fontSize: '22px',
+                fontSize: '20px',
                 fontWeight: 700,
                 color: '#050A5F',
-                margin: '0 0 28px 0',
+                margin: '0 0 24px 0',
               }}
             >
               Personal Information<span style={{ color: '#EF4444' }}>*</span>
@@ -234,14 +208,14 @@ export default function SetupProfile() {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
                 gap: '24px 20px',
-                marginBottom: '24px',
+                marginBottom: '40px',
               }}
             >
               {/* Row 1 */}
               <FormField
                 label="First Name"
                 required
-                placeholder="First Name"
+                placeholder="e.g. Ziafat"
                 value={formData.firstName}
                 onChange={(v) => handleChange('firstName', v)}
               />
@@ -249,7 +223,7 @@ export default function SetupProfile() {
               <FormField
                 label="Last Name"
                 required
-                placeholder="Last Name"
+                placeholder="e.g. Raool"
                 value={formData.lastName}
                 onChange={(v) => handleChange('lastName', v)}
               />
@@ -314,7 +288,7 @@ export default function SetupProfile() {
                     type="text"
                     value={formData.phoneNumber}
                     onChange={(e) => handleChange('phoneNumber', e.target.value)}
-                    placeholder="201 555 0123"
+                    placeholder="201 555-0123"
                     style={{ ...inputStyle, flex: 1 }}
                   />
                 </div>
@@ -350,7 +324,7 @@ export default function SetupProfile() {
               {/* Row 3 */}
               <FormField
                 label="What's your preferred hourly rate in U.S. dollars?"
-                placeholder="$ 0.00"
+                placeholder="e.g. 45"
                 value={formData.hourlyRate}
                 onChange={(v) => handleChange('hourlyRate', v)}
               />
@@ -364,9 +338,6 @@ export default function SetupProfile() {
                 onChange={(v) => handleChange('timeZone', v)}
               />
             </div>
-
-            {/* Spacing before sections */}
-            <div style={{ marginTop: '48px' }} />
 
             {/* =====================================
                 SECTION 2: EDUCATION
@@ -623,7 +594,6 @@ export default function SetupProfile() {
                         fontWeight: 600,
                         color: '#050A5F',
                         boxShadow: '0 2px 6px rgba(5,10,95,0.02)',
-                        transition: 'border-color 0.2s',
                       }}
                     >
                       <input
@@ -737,13 +707,13 @@ export default function SetupProfile() {
               </InlineCard>
             ))}
 
-            {/* Bottom Right ONLY Next Button (Exact Figma Spec: No bottom Back button) */}
+            {/* Bottom Right ONLY Next Button (Inside Main Card Container) */}
             <div
               style={{
                 width: '100%',
                 display: 'flex',
                 justifyContent: 'flex-end',
-                marginTop: '36px',
+                marginTop: '40px',
               }}
             >
               <button
@@ -753,26 +723,19 @@ export default function SetupProfile() {
                   color: '#FFFFFF',
                   border: 'none',
                   borderRadius: '20px',
-                  height: '42px',
-                  padding: '0 36px',
+                  width: '110px',
+                  height: '40px',
                   fontFamily: F,
-                  fontSize: '13px',
+                  fontSize: '14px',
                   fontWeight: 600,
                   cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
                   boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px',
                   transition: 'background 0.2s ease',
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = '#1B2AB2')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = '#2334CD')}
               >
-                <span>Next</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
+                Next
               </button>
             </div>
           </form>
@@ -782,22 +745,25 @@ export default function SetupProfile() {
   );
 }
 
-/* Helper SectionHeader Component */
+/* Helper SectionHeader Component with divider line underneath */
 function SectionHeader({ title, onAdd, buttonLabel }) {
   return (
     <div
       style={{
+        width: '100%',
+        paddingBottom: '16px',
+        marginBottom: '20px',
+        marginTop: '28px',
+        borderBottom: '1px solid #E5E7EB',
         display: 'flex',
-        justifyContent: 'space-between',
+        justify: 'space-between',
         alignItems: 'center',
-        marginBottom: '16px',
-        marginTop: '32px',
       }}
     >
       <h3
         style={{
           fontFamily: F,
-          fontSize: '20px',
+          fontSize: '18px',
           fontWeight: 700,
           color: '#050A5F',
           margin: 0,
@@ -845,7 +811,7 @@ function InlineCard({ children, onRemove }) {
         borderRadius: '20px',
         border: '1px solid #D6E4FF',
         padding: '24px 28px',
-        marginBottom: '16px',
+        marginBottom: '20px',
         position: 'relative',
         boxSizing: 'border-box',
       }}
