@@ -9,16 +9,16 @@ export default function SetupProfile() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    firstName: 'Momin',
-    lastName: 'Khalid',
+    firstName: '',
+    lastName: '',
     countryResidence: '',
     countryCitizenship: '',
     countryCode: '+1',
-    phoneNumber: '201 555 0123',
+    phoneNumber: '201 555-0123',
     englishProficiency: '',
     noticePeriod: '',
     commitment: '',
-    hourlyRate: '$ 0.00',
+    hourlyRate: '',
     timeZone: '',
   });
 
@@ -127,18 +127,43 @@ export default function SetupProfile() {
             boxShadow: '0 10px 30px rgba(5, 10, 95, 0.03)',
             padding: '48px',
             boxSizing: 'border-box',
-            marginBottom: '28px',
+            marginBottom: '32px',
           }}
         >
           <form onSubmit={handleSubmit}>
+            {/* Centered Page Header Title & Subtitle */}
+            <div style={{ textAlign: 'center', marginBottom: '36px' }}>
+              <h1
+                style={{
+                  fontFamily: F,
+                  fontSize: '28px',
+                  fontWeight: 700,
+                  color: '#050A5F',
+                  margin: '0 0 8px 0',
+                }}
+              >
+                Setup Profile
+              </h1>
+              <p
+                style={{
+                  fontFamily: F,
+                  fontSize: '13.5px',
+                  color: '#6B7280',
+                  margin: 0,
+                }}
+              >
+                Enter your personal details to display on your freelancer card.
+              </p>
+            </div>
+
             {/* Section 1: Personal Information* */}
             <h2
               style={{
                 fontFamily: F,
-                fontSize: '22px',
+                fontSize: '20px',
                 fontWeight: 700,
                 color: '#050A5F',
-                margin: '0 0 28px 0',
+                margin: '0 0 24px 0',
               }}
             >
               Personal Information<span style={{ color: '#EF4444' }}>*</span>
@@ -157,7 +182,7 @@ export default function SetupProfile() {
               <FormField
                 label="First Name"
                 required
-                placeholder="Momin"
+                placeholder="e.g. Ziafat"
                 value={formData.firstName}
                 onChange={(v) => handleChange('firstName', v)}
               />
@@ -165,7 +190,7 @@ export default function SetupProfile() {
               <FormField
                 label="Last Name"
                 required
-                placeholder="Khalid"
+                placeholder="e.g. Raool"
                 value={formData.lastName}
                 onChange={(v) => handleChange('lastName', v)}
               />
@@ -230,7 +255,7 @@ export default function SetupProfile() {
                     type="text"
                     value={formData.phoneNumber}
                     onChange={(e) => handleChange('phoneNumber', e.target.value)}
-                    placeholder="201 555 0123"
+                    placeholder="201 555-0123"
                     style={{ ...inputStyle, flex: 1 }}
                   />
                 </div>
@@ -266,7 +291,7 @@ export default function SetupProfile() {
               {/* Row 3 */}
               <FormField
                 label="What's your preferred hourly rate in U.S. dollars?"
-                placeholder="$ 0.00"
+                placeholder="e.g. 45"
                 value={formData.hourlyRate}
                 onChange={(v) => handleChange('hourlyRate', v)}
               />
@@ -284,128 +309,59 @@ export default function SetupProfile() {
             {/* =====================================
                 SECTION 2: EDUCATION
                ===================================== */}
-            <SectionBlock
-              title="Education"
-              buttonText="+ Add Education"
-              onAddClick={() => setActiveModal('education')}
-              items={educationList}
-              renderItem={(item) => (
-                <AddedBadge key={item.id} title={item.degree || item.university} subtitle={`${item.university} (${item.startYear} - ${item.endYear})`} onRemove={() => removeEdu(item.id)} />
-              )}
-            />
+            <SectionHeader title="Education" onAdd={() => setActiveModal('education')} buttonLabel="Add Education" />
+            <ItemBadges items={educationList} renderTitle={(i) => i.degree || i.university} renderSub={(i) => `${i.university} (${i.startYear} - ${i.endYear})`} onRemove={removeEdu} />
 
             {/* =====================================
                 SECTION 3: EXPERIENCE
                ===================================== */}
-            <SectionBlock
-              title="Experience"
-              buttonText="+ Add Experience"
-              onAddClick={() => setActiveModal('experience')}
-              items={experienceList}
-              renderItem={(item) => (
-                <AddedBadge key={item.id} title={item.position || item.workplace} subtitle={`${item.workplace} (${item.currentlyWorking ? 'Present' : item.endYear})`} onRemove={() => removeExp(item.id)} />
-              )}
-            />
+            <SectionHeader title="Experience" onAdd={() => setActiveModal('experience')} buttonLabel="Add Experience" />
+            <ItemBadges items={experienceList} renderTitle={(i) => i.position || i.workplace} renderSub={(i) => `${i.workplace} (${i.currentlyWorking ? 'Present' : i.endYear})`} onRemove={removeExp} />
 
             {/* =====================================
                 SECTION 4: CERTIFICATIONS
                ===================================== */}
-            <SectionBlock
-              title="Certifications"
-              buttonText="+ Add Certificate"
-              onAddClick={() => setActiveModal('certification')}
-              items={certificationsList}
-              renderItem={(item) => (
-                <AddedBadge key={item.id} title={item.name} subtitle={item.link} onRemove={() => removeCert(item.id)} />
-              )}
-            />
+            <SectionHeader title="Certifications" onAdd={() => setActiveModal('certification')} buttonLabel="Add Certification" />
+            <ItemBadges items={certificationsList} renderTitle={(i) => i.name} renderSub={(i) => i.link} onRemove={removeCert} />
 
             {/* =====================================
                 SECTION 5: PORTFOLIO
                ===================================== */}
-            <SectionBlock
-              title="Portfolio"
-              buttonText="+ Add Portfolio"
-              onAddClick={() => setActiveModal('portfolio')}
-              items={portfolioList}
-              renderItem={(item) => (
-                <AddedBadge key={item.id} title={item.title} subtitle={item.link} onRemove={() => removePort(item.id)} />
-              )}
-            />
+            <SectionHeader title="Portfolio" onAdd={() => setActiveModal('portfolio')} buttonLabel="Add Portfolio" />
+            <ItemBadges items={portfolioList} renderTitle={(i) => i.title} renderSub={(i) => i.link} onRemove={removePort} />
+
+            {/* Bottom Right ONLY Next Button (Inside Main Card Container) */}
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                justify: 'flex-end',
+                marginTop: '40px',
+              }}
+            >
+              <button
+                type="submit"
+                style={{
+                  background: '#2334CD',
+                  color: '#FFFFFF',
+                  border: 'none',
+                  borderRadius: '20px',
+                  width: '110px',
+                  height: '40px',
+                  fontFamily: F,
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px',
+                  transition: 'background 0.2s ease',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#1B2AB2')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = '#2334CD')}
+              >
+                Next
+              </button>
+            </div>
           </form>
-        </div>
-
-        {/* Bottom Navigation Buttons (Side-by-Side: Back & Next on Left/Bottom) */}
-        <div
-          style={{
-            width: '1140px',
-            maxWidth: '96%',
-            display: 'flex',
-            gap: '16px',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-            boxSizing: 'border-box',
-          }}
-        >
-          <button
-            type="button"
-            onClick={() => navigate('/signup')}
-            style={{
-              background: '#FFFFFF',
-              color: '#2334CD',
-              border: '1.5px solid #2334CD',
-              borderRadius: '20px',
-              height: '42px',
-              padding: '0 32px',
-              fontFamily: F,
-              fontSize: '13.5px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
-              transition: 'background 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = '#EEF2FF')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = '#FFFFFF')}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12" />
-              <polyline points="12 19 5 12 12 5" />
-            </svg>
-            <span>Back</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={handleSubmit}
-            style={{
-              background: '#2334CD',
-              color: '#FFFFFF',
-              border: 'none',
-              borderRadius: '20px',
-              height: '42px',
-              padding: '0 36px',
-              fontFamily: F,
-              fontSize: '13.5px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px',
-              transition: 'background 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = '#1B2AB2')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = '#2334CD')}
-          >
-            <span>Next</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </button>
         </div>
       </main>
 
@@ -481,80 +437,93 @@ export default function SetupProfile() {
   );
 }
 
-/* Helper SectionBlock Component */
-function SectionBlock({ title, buttonText, onAddClick, items = [], renderItem }) {
+/* Helper SectionHeader Component with divider line underneath */
+function SectionHeader({ title, onAdd, buttonLabel }) {
   return (
-    <div style={{ marginBottom: '32px' }}>
-      <h3 style={{ fontFamily: F, fontSize: '18px', fontWeight: 700, color: '#050A5F', margin: '0 0 12px 0' }}>
+    <div
+      style={{
+        width: '100%',
+        paddingBottom: '16px',
+        marginBottom: '12px',
+        marginTop: '28px',
+        borderBottom: '1px solid #E5E7EB',
+        display: 'flex',
+        justify: 'space-between',
+        alignItems: 'center',
+      }}
+    >
+      <h3
+        style={{
+          fontFamily: F,
+          fontSize: '18px',
+          fontWeight: 700,
+          color: '#050A5F',
+          margin: 0,
+        }}
+      >
         {title}
       </h3>
 
       <button
         type="button"
-        onClick={onAddClick}
+        onClick={onAdd}
         style={{
           background: '#22C55E',
           color: '#FFFFFF',
           border: 'none',
           borderRadius: '20px',
-          padding: '8px 20px',
+          padding: '8px 18px',
           fontFamily: F,
-          fontSize: '12.5px',
+          fontSize: '12px',
           fontWeight: 600,
           cursor: 'pointer',
-          display: 'inline-flex',
+          display: 'flex',
           alignItems: 'center',
           gap: '6px',
-          boxShadow: '0 2px 8px rgba(34, 197, 94, 0.25)',
-          marginBottom: items.length > 0 ? '16px' : '0',
-          transition: 'all 0.2s ease',
+          boxShadow: '0 2px 8px rgba(34, 197, 94, 0.2)',
+          transition: 'background 0.2s ease',
         }}
         onMouseEnter={(e) => (e.currentTarget.style.background = '#16A34A')}
         onMouseLeave={(e) => (e.currentTarget.style.background = '#22C55E')}
       >
-        <span>{buttonText}</span>
+        <span style={{ fontSize: '14px', fontWeight: 700, lineHeight: 1 }}>+</span>
+        <span>{buttonLabel}</span>
       </button>
-
-      {/* Render added badges/cards */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        {items.map((item) => renderItem(item))}
-      </div>
     </div>
   );
 }
 
-/* Helper Added Item Badge Component */
-function AddedBadge({ title, subtitle, onRemove }) {
+/* Helper ItemBadges Container */
+function ItemBadges({ items, renderTitle, renderSub, onRemove }) {
+  if (!items || items.length === 0) return null;
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        background: '#F0F4FF',
-        border: '1px solid #D6E4FF',
-        borderRadius: '14px',
-        padding: '12px 18px',
-      }}
-    >
-      <div>
-        <div style={{ fontFamily: F, fontSize: '13px', fontWeight: 700, color: '#050A5F' }}>{title}</div>
-        {subtitle && <div style={{ fontFamily: F, fontSize: '12px', color: '#6B7280', marginTop: '2px' }}>{subtitle}</div>}
-      </div>
-      <button
-        type="button"
-        onClick={onRemove}
-        style={{
-          background: 'none',
-          border: 'none',
-          color: '#EF4444',
-          fontSize: '16px',
-          fontWeight: 700,
-          cursor: 'pointer',
-        }}
-      >
-        ✕
-      </button>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
+      {items.map((item) => (
+        <div
+          key={item.id}
+          style={{
+            display: 'flex',
+            justify: 'space-between',
+            alignItems: 'center',
+            background: '#F0F4FF',
+            border: '1px solid #D6E4FF',
+            borderRadius: '12px',
+            padding: '10px 16px',
+          }}
+        >
+          <div>
+            <div style={{ fontFamily: F, fontSize: '13px', fontWeight: 700, color: '#050A5F' }}>{renderTitle(item)}</div>
+            {renderSub && <div style={{ fontFamily: F, fontSize: '12px', color: '#6B7280' }}>{renderSub(item)}</div>}
+          </div>
+          <button
+            type="button"
+            onClick={() => onRemove(item.id)}
+            style={{ background: 'none', border: 'none', color: '#EF4444', fontSize: '16px', fontWeight: 700, cursor: 'pointer' }}
+          >
+            ✕
+          </button>
+        </div>
+      ))}
     </div>
   );
 }
@@ -701,7 +670,7 @@ const inputStyle = {
   padding: '0 16px',
   borderRadius: '21px',
   border: '1px solid #D6E4FF',
-  background: '#F0F4FF',
+  background: '#FFFFFF',
   fontFamily: F,
   fontSize: '13px',
   color: '#050A5F',
@@ -722,7 +691,7 @@ const textareaStyle = {
   width: '100%',
   borderRadius: '16px',
   border: '1px solid #D6E4FF',
-  background: '#F0F4FF',
+  background: '#FFFFFF',
   padding: '14px 18px',
   fontFamily: F,
   fontSize: '13px',
