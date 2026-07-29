@@ -23,11 +23,11 @@ export default function SetupProfile() {
     timeZone: '',
   });
 
-  // Section Inline Cards visibility (default true so user sees filled Figma state, or toggles with + Add button)
-  const [showEdu, setShowEdu] = useState(true);
-  const [showExp, setShowExp] = useState(true);
-  const [showCert, setShowCert] = useState(true);
-  const [showPort, setShowPort] = useState(true);
+  // Section Inline Cards visibility (default false so user clicks + Add button to show details)
+  const [showEdu, setShowEdu] = useState(false);
+  const [showExp, setShowExp] = useState(false);
+  const [showCert, setShowCert] = useState(false);
+  const [showPort, setShowPort] = useState(false);
 
   // Education Values
   const [eduData, setEduData] = useState({
@@ -273,7 +273,7 @@ export default function SetupProfile() {
             {/* =====================================
                 SECTION 2: EDUCATION (FIGMA EXACT)
                ===================================== */}
-            <SectionHeader title="Education" buttonText="+ Add Education" onAdd={() => setShowEdu(true)} />
+            <SectionHeader title="Education" buttonText="+ Add Education" onAdd={() => setShowEdu((prev) => !prev)} />
             {showEdu && (
               <FigmaCard onClose={() => setShowEdu(false)}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr 1fr', gap: '16px' }}>
@@ -317,7 +317,7 @@ export default function SetupProfile() {
             {/* =====================================
                 SECTION 3: EXPERIENCE (FIGMA EXACT)
                ===================================== */}
-            <SectionHeader title="Experience" buttonText="+ Add Experience" onAdd={() => setShowExp(true)} />
+            <SectionHeader title="Experience" buttonText="+ Add Experience" onAdd={() => setShowExp((prev) => !prev)} />
             {showExp && (
               <FigmaCard onClose={() => setShowExp(false)}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr 1fr', gap: '16px', marginBottom: '16px' }}>
@@ -389,7 +389,7 @@ export default function SetupProfile() {
             {/* =====================================
                 SECTION 4: CERTIFICATIONS (FIGMA EXACT)
                ===================================== */}
-            <SectionHeader title="Certifications" buttonText="+ Add Certificate" onAdd={() => setShowCert(true)} />
+            <SectionHeader title="Certifications" buttonText="+ Add Certificate" onAdd={() => setShowCert((prev) => !prev)} />
             {showCert && (
               <FigmaCard onClose={() => setShowCert(false)}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr', gap: '20px', alignItems: 'flex-end' }}>
@@ -417,7 +417,7 @@ export default function SetupProfile() {
             {/* =====================================
                 SECTION 5: PORTFOLIO (FIGMA EXACT)
                ===================================== */}
-            <SectionHeader title="Portfolio" buttonText="+ Add Portfolio" onAdd={() => setShowPort(true)} />
+            <SectionHeader title="Portfolio" buttonText="+ Add Portfolio" onAdd={() => setShowPort((prev) => !prev)} />
             {showPort && (
               <FigmaCard onClose={() => setShowPort(false)}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr', gap: '20px', alignItems: 'flex-end', marginBottom: '16px' }}>
