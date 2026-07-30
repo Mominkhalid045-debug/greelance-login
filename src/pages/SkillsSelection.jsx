@@ -2,30 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StepHeader, F } from './FreelancerForm';
 
-const CATEGORIES = [
-  { id: 'ecommerce', name: 'E-Commerce Skills', icon: '🛒' },
-  { id: 'it_staffing', name: 'IT Staffing', icon: '🖥️' },
-  { id: 'vr_ar', name: 'Virtual/Augmented', icon: '🥽' },
-  { id: 'ev_tech', name: 'Electric-Vehicle Technology', icon: '🚗' },
-  { id: 'cybersecurity', name: 'Cybersecurity Engineer', icon: '🛡️' },
-  { id: 'datacenter', name: 'Data Center Security', icon: '🏛️' },
-  { id: 'systems_eng', name: 'Systems Engineering', icon: '💻' },
-  { id: 'iot', name: 'Internet of Things', icon: '🌐' },
-  { id: 'cloud', name: 'Cloud Computing Engineer', icon: '☁️' },
-  { id: 'ai', name: 'Artificial Intelligence', icon: '🧠' },
-  { id: 'blockchain', name: 'Blockchain', icon: '🔗' },
-  { id: 'recycle_energy', name: 'Recycle-Energy', icon: '⚡' },
-  { id: 'digital_marketing', name: 'Digital Marketing Expert', icon: '📢' },
-  { id: 'bi', name: 'Business Intelligence', icon: '💼' },
-  { id: 'crypto', name: 'Cryptocurrency', icon: '🪙' },
-  { id: 'smarthome', name: 'Smart-Home', icon: '🏠' },
-  { id: 'software_eng', name: 'Software Engineering', icon: '💻' },
-  { id: 'decision_intel', name: 'Decision Intelligence', icon: '💡' },
-  { id: 'robotics', name: 'Robotics', icon: '🤖' },
-  { id: 'fintech', name: 'Fintech', icon: '💳' },
-  { id: 'autonomous', name: 'Autonomous Systems', icon: '🚙' },
-  { id: 'ml', name: 'Machine Learning', icon: '⚙️' },
-];
+import { CATEGORIES } from '../data/categoryData';
 
 const SUB_CATEGORIES_MAP = {
   'Digital Marketing Expert': ['Retail Media', 'Programmatic Ads', 'Network Marketing', 'Product Design', 'Email Marketing', 'SEO Strategy'],
@@ -211,7 +188,9 @@ export default function SkillsSelection() {
                     e.currentTarget.style.borderColor = '#E0E2FE';
                   }}
                 >
-                  <span style={{ fontSize: '18px' }}>{cat.icon}</span>
+                  {cat.img ? (
+                    <img src={cat.img} alt={cat.name} style={{ width: '33px', height: '33px', objectFit: 'contain' }} />
+                  ) : null}
                   <span>{cat.name}</span>
                 </button>
               ))}
@@ -239,7 +218,9 @@ export default function SkillsSelection() {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span style={{ fontSize: '18px' }}>{currentCategoryObj?.icon || '📢'}</span>
+                    {currentCategoryObj?.img ? (
+                      <img src={currentCategoryObj.img} alt={selectedCategory} style={{ width: '33px', height: '33px', objectFit: 'contain' }} />
+                    ) : null}
                     <span>{selectedCategory}</span>
                   </div>
 
