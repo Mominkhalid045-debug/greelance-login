@@ -494,7 +494,7 @@ export default function SetupProfile() {
   );
 }
 
-/* Helper SectionHeader Component with Right Green Add Button and Divider Line */
+/* Helper SectionHeader Component with Green Add Button Inline Next to Heading */
 function SectionHeader({ title, buttonText, onAdd }) {
   return (
     <div
@@ -505,8 +505,9 @@ function SectionHeader({ title, buttonText, onAdd }) {
         marginTop: '32px',
         borderBottom: '1px solid #E5E7EB',
         display: 'flex',
-        justify: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+        gap: '16px',
       }}
     >
       <h3 style={{ fontFamily: F, fontSize: '18px', fontWeight: 700, color: '#050A5F', margin: 0 }}>
