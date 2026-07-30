@@ -255,7 +255,7 @@ export default function SetupProfile() {
               {/* Row 3 */}
               <FormField
                 label="What's your preferred hourly rate in U.S. dollars?"
-                placeholder="Select"
+                placeholder="e.g. 45"
                 value={formData.hourlyRate}
                 onChange={(v) => handleChange('hourlyRate', v)}
               />
@@ -271,9 +271,9 @@ export default function SetupProfile() {
             </div>
 
             {/* =====================================
-                SECTION 2: EDUCATION (FIGMA EXACT)
+                SECTION 2: EDUCATION (FIGMA / REFERENCE EXACT)
                ===================================== */}
-            <SectionHeader title="Education" buttonText="+ Add Education" onAdd={() => setShowEdu((prev) => !prev)} />
+            <SectionHeader title="Education" buttonText="Add Education" onAdd={() => setShowEdu((prev) => !prev)} />
             {showEdu && (
               <FigmaCard onClose={() => setShowEdu(false)}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr 1fr', gap: '16px' }}>
@@ -315,9 +315,9 @@ export default function SetupProfile() {
             )}
 
             {/* =====================================
-                SECTION 3: EXPERIENCE (FIGMA EXACT)
+                SECTION 3: EXPERIENCE (FIGMA / REFERENCE EXACT)
                ===================================== */}
-            <SectionHeader title="Experience" buttonText="+ Add Experience" onAdd={() => setShowExp((prev) => !prev)} />
+            <SectionHeader title="Experience" buttonText="Add Experience" onAdd={() => setShowExp((prev) => !prev)} />
             {showExp && (
               <FigmaCard onClose={() => setShowExp(false)}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr 1fr', gap: '16px', marginBottom: '16px' }}>
@@ -387,9 +387,9 @@ export default function SetupProfile() {
             )}
 
             {/* =====================================
-                SECTION 4: CERTIFICATIONS (FIGMA EXACT)
+                SECTION 4: CERTIFICATIONS (FIGMA / REFERENCE EXACT)
                ===================================== */}
-            <SectionHeader title="Certifications" buttonText="+ Add Certificate" onAdd={() => setShowCert((prev) => !prev)} />
+            <SectionHeader title="Certifications" buttonText="Add Certification" onAdd={() => setShowCert((prev) => !prev)} />
             {showCert && (
               <FigmaCard onClose={() => setShowCert(false)}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr', gap: '20px', alignItems: 'flex-end' }}>
@@ -415,9 +415,9 @@ export default function SetupProfile() {
             )}
 
             {/* =====================================
-                SECTION 5: PORTFOLIO (FIGMA EXACT)
+                SECTION 5: PORTFOLIO (FIGMA / REFERENCE EXACT)
                ===================================== */}
-            <SectionHeader title="Portfolio" buttonText="+ Add Portfolio" onAdd={() => setShowPort((prev) => !prev)} />
+            <SectionHeader title="Portfolio" buttonText="Add Portfolio" onAdd={() => setShowPort((prev) => !prev)} />
             {showPort && (
               <FigmaCard onClose={() => setShowPort(false)}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr', gap: '20px', alignItems: 'flex-end', marginBottom: '16px' }}>
@@ -494,7 +494,7 @@ export default function SetupProfile() {
   );
 }
 
-/* Helper SectionHeader Component with Green Add Button Inline Next to Heading */
+/* Helper SectionHeader Component with Right Green Add Button (Circle Plus Icon & Space-Between Layout) */
 function SectionHeader({ title, buttonText, onAdd }) {
   return (
     <div
@@ -505,9 +505,8 @@ function SectionHeader({ title, buttonText, onAdd }) {
         marginTop: '32px',
         borderBottom: '1px solid #E5E7EB',
         display: 'flex',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        gap: '16px',
       }}
     >
       <h3 style={{ fontFamily: F, fontSize: '18px', fontWeight: 700, color: '#050A5F', margin: 0 }}>
@@ -540,6 +539,11 @@ function SectionHeader({ title, buttonText, onAdd }) {
         onMouseEnter={(e) => (e.currentTarget.style.background = '#16A34A')}
         onMouseLeave={(e) => (e.currentTarget.style.background = '#22C55E')}
       >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="16" />
+          <line x1="8" y1="12" x2="16" y2="12" />
+        </svg>
         <span>{buttonText}</span>
       </button>
     </div>
