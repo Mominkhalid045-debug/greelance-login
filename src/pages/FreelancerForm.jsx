@@ -38,7 +38,7 @@ function StepHeader({ activeStep, navigate }) {
           style={{
             width: '72px',
             height: '72px',
-            background: '#22C55E',
+            background: '#4ADF86',
             border: 'none',
             cursor: 'pointer',
             display: 'flex',
@@ -62,17 +62,19 @@ function StepHeader({ activeStep, navigate }) {
                 onClick={() => navigate(step.path)}
                 style={{
                   flex: 1,
-                  minWidth: '150px',
+                  minWidth: '140px',
                   height: '100%',
-                  padding: '0 24px',
+                  padding: '0 20px',
                   cursor: 'pointer',
-                  background: isActive ? '#EEF2FF' : '#FFFFFF',
+                  background: isActive ? '#E6EFFF' : '#FFFFFF',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
                   gap: '2px',
                   boxSizing: 'border-box',
-                  transition: 'background 0.2s ease',
+                  transition: 'all 0.2s ease',
+                  borderRight: '0.66px solid rgba(34, 211, 166, 0.15)',
+                  boxShadow: isActive ? '#3038BD 0px -2.25px 0px 0px inset' : 'none',
                 }}
               >
                 <span
@@ -80,7 +82,7 @@ function StepHeader({ activeStep, navigate }) {
                     fontFamily: F,
                     fontSize: '12px',
                     fontWeight: 600,
-                    color: isActive ? '#22C55E' : '#9CA3AF',
+                    color: isActive ? '#3038BD' : '#4ADF86',
                   }}
                 >
                   Step {step.num}
@@ -88,9 +90,9 @@ function StepHeader({ activeStep, navigate }) {
                 <span
                   style={{
                     fontFamily: F,
-                    fontSize: '13px',
-                    fontWeight: isActive ? 700 : 500,
-                    color: isActive ? '#2334CD' : '#9CA3AF',
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    color: '#050A5F',
                   }}
                 >
                   {step.label}
@@ -121,7 +123,7 @@ function StepHeader({ activeStep, navigate }) {
               boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
             }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2334CD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3038BD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
               <polyline points="10 17 15 12 10 7" />
               <line x1="15" y1="12" x2="3" y2="12" />
@@ -154,7 +156,7 @@ export default function FreelancerForm() {
       style={{
         width: '100vw',
         minHeight: '100vh',
-        background: '#F4F7FC',
+        background: '#F7FAFF',
         display: 'flex',
         flexDirection: 'column',
         boxSizing: 'border-box',
@@ -178,7 +180,7 @@ export default function FreelancerForm() {
             width: '900px',
             maxWidth: '96%',
             background: '#FFFFFF',
-            borderRadius: '20px',
+            borderRadius: '24px',
             boxShadow: '0 10px 30px rgba(5, 10, 95, 0.03)',
             padding: '48px',
             boxSizing: 'border-box',
@@ -188,9 +190,9 @@ export default function FreelancerForm() {
           <div
             style={{
               width: '100%',
-              background: '#F8F9FE',
-              border: '1.5px dashed #C7D2FE',
-              borderRadius: '16px',
+              background: '#F3F7FF',
+              border: '1.33px dashed #D2D4FF',
+              borderRadius: '12px',
               padding: '48px 24px',
               display: 'flex',
               flexDirection: 'column',
@@ -218,7 +220,7 @@ export default function FreelancerForm() {
                   width: '140px',
                   height: '140px',
                   borderRadius: '50%',
-                  background: '#EEF2FF',
+                  background: '#E6EFFF',
                   zIndex: 1,
                 }}
               />
@@ -232,7 +234,7 @@ export default function FreelancerForm() {
                   height: '110px',
                   background: '#FFFFFF',
                   borderRadius: '10px',
-                  boxShadow: '0 8px 24px rgba(35, 52, 205, 0.12)',
+                  boxShadow: '0 8px 24px rgba(48, 56, 189, 0.12)',
                   border: '1px solid #E5E7EB',
                   display: 'flex',
                   overflow: 'hidden',
@@ -240,7 +242,7 @@ export default function FreelancerForm() {
               >
                 {/* Left Sidebar */}
                 <div style={{ width: '25%', background: '#0F172A', height: '100%', padding: '8px' }}>
-                  <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3B82F6', marginBottom: '8px' }} />
+                  <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3038BD', marginBottom: '8px' }} />
                   <div style={{ width: '100%', height: '4px', background: '#334155', borderRadius: '2px', marginBottom: '4px' }} />
                   <div style={{ width: '70%', height: '4px', background: '#334155', borderRadius: '2px' }} />
                 </div>
@@ -263,7 +265,7 @@ export default function FreelancerForm() {
                       gap: '4px',
                     }}
                   >
-                    <span style={{ fontSize: '9px', fontWeight: 700, color: '#FFFFFF', background: '#22C55E', padding: '2px 5px', borderRadius: '4px' }}>
+                    <span style={{ fontSize: '9px', fontWeight: 700, color: '#FFFFFF', background: '#4ADF86', padding: '2px 5px', borderRadius: '4px' }}>
                       PDF
                     </span>
                     <div style={{ width: '28px', height: '2px', background: '#E2E8F0' }} />
@@ -286,7 +288,7 @@ export default function FreelancerForm() {
                       gap: '4px',
                     }}
                   >
-                    <span style={{ fontSize: '9px', fontWeight: 700, color: '#FFFFFF', background: '#3B82F6', padding: '2px 5px', borderRadius: '4px' }}>
+                    <span style={{ fontSize: '9px', fontWeight: 700, color: '#FFFFFF', background: '#3038BD', padding: '2px 5px', borderRadius: '4px' }}>
                       DOC
                     </span>
                     <div style={{ width: '28px', height: '2px', background: '#E2E8F0' }} />
@@ -301,7 +303,7 @@ export default function FreelancerForm() {
               style={{
                 fontFamily: F,
                 fontSize: '13px',
-                color: '#6B7280',
+                color: '#7C8BA1',
                 margin: '0 0 28px 0',
                 textAlign: 'center',
               }}
@@ -311,7 +313,7 @@ export default function FreelancerForm() {
 
             {/* Upload Status Feedback */}
             {selectedFile && (
-              <p style={{ fontFamily: F, fontSize: '13px', fontWeight: 600, color: '#22C55E', margin: '0 0 16px 0' }}>
+              <p style={{ fontFamily: F, fontSize: '13px', fontWeight: 600, color: '#4ADF86', margin: '0 0 16px 0' }}>
                 📄 {selectedFile} selected! Redirecting...
               </p>
             )}
@@ -331,27 +333,27 @@ export default function FreelancerForm() {
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 style={{
-                  background: '#2334CD',
+                  background: '#3038BD',
                   color: '#FFFFFF',
                   border: 'none',
-                  borderRadius: '20px',
-                  height: '42px',
-                  padding: '0 26px',
+                  borderRadius: '16.88px',
+                  height: '38px',
+                  padding: '0 24px',
                   fontFamily: F,
-                  fontSize: '13px',
-                  fontWeight: 600,
+                  fontSize: '11px',
+                  fontWeight: 500,
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px',
-                  boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px',
+                  boxShadow: 'rgba(48, 56, 189, 0.25) 0px 4px 12px 0px',
                   transition: 'background 0.2s ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = '#1B2AB2')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = '#2334CD')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#252BA3')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = '#3038BD')}
               >
                 <span>Upload Resume</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                   <polyline points="17 8 12 3 7 8" />
                   <line x1="12" y1="3" x2="12" y2="15" />
@@ -362,23 +364,23 @@ export default function FreelancerForm() {
                 type="button"
                 onClick={() => navigate('/setup-profile')}
                 style={{
-                  background: '#FFFFFF',
-                  color: '#2334CD',
-                  border: '1.5px solid #2334CD',
-                  borderRadius: '20px',
-                  height: '42px',
-                  padding: '0 26px',
+                  background: '#E6EFFF',
+                  color: '#3038BD',
+                  border: '0.66px solid #3038BD',
+                  borderRadius: '16.88px',
+                  height: '38px',
+                  padding: '0 24px',
                   fontFamily: F,
-                  fontSize: '13px',
-                  fontWeight: 600,
+                  fontSize: '11px',
+                  fontWeight: 500,
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#EEF2FF';
+                  e.currentTarget.style.background = '#D8E5FF';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#FFFFFF';
+                  e.currentTarget.style.background = '#E6EFFF';
                 }}
               >
                 Create Manually

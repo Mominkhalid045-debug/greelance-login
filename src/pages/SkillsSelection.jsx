@@ -115,7 +115,7 @@ export default function SkillsSelection() {
       style={{
         width: '100vw',
         minHeight: '100vh',
-        background: '#F4F7FC',
+        background: '#F7FAFF',
         display: 'flex',
         flexDirection: 'column',
         boxSizing: 'border-box',
@@ -191,25 +191,24 @@ export default function SkillsSelection() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '10px',
-                    padding: '12px 22px',
-                    borderRadius: '14px',
-                    border: '1px solid #D6E4FF',
-                    background: '#F8FAFE',
+                    padding: '10px 20px',
+                    borderRadius: '7.5px',
+                    border: '1.33px solid #E0E2FE',
+                    background: '#F3F7FF',
                     color: '#050A5F',
                     fontFamily: F,
                     fontSize: '13px',
                     fontWeight: 600,
                     cursor: 'pointer',
-                    boxShadow: '0 2px 6px rgba(5, 10, 95, 0.02)',
                     transition: 'all 0.2s ease',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = '#F0F4FF';
-                    e.currentTarget.style.borderColor = '#C7D2FE';
+                    e.currentTarget.style.background = '#E6EFFF';
+                    e.currentTarget.style.borderColor = '#3038BD';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = '#F8FAFE';
-                    e.currentTarget.style.borderColor = '#D6E4FF';
+                    e.currentTarget.style.background = '#F3F7FF';
+                    e.currentTarget.style.borderColor = '#E0E2FE';
                   }}
                 >
                   <span style={{ fontSize: '18px' }}>{cat.icon}</span>
@@ -221,23 +220,22 @@ export default function SkillsSelection() {
             /* Mode 2: Selected Category Pill + Sub Category List */
             <>
               {/* Selected Category Pill with X Icon */}
-              <div style={{ marginBottom: '40px' }}>
+              <div style={{ marginBottom: '32px' }}>
                 <div
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     gap: '16px',
-                    padding: '14px 22px',
-                    borderRadius: '14px',
-                    border: '1px solid #D6E4FF',
-                    background: '#F8FAFE',
+                    padding: '10px 20px',
+                    borderRadius: '7.5px',
+                    border: '1.33px solid #3038BD',
+                    background: '#E6EFFF',
                     color: '#050A5F',
                     fontFamily: F,
                     fontSize: '13px',
                     fontWeight: 600,
                     minWidth: '220px',
-                    boxShadow: '0 2px 8px rgba(5, 10, 95, 0.03)',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -309,30 +307,28 @@ export default function SkillsSelection() {
                       type="button"
                       onClick={() => handleSelectSubCategory(sub)}
                       style={{
-                        padding: '14px 26px',
-                        borderRadius: '14px',
-                        border: isSubSelected ? 'none' : '1px solid #D6E4FF',
-                        background: isSubSelected ? '#2334CD' : '#F8FAFE',
+                        height: '39px',
+                        padding: '0 22px',
+                        borderRadius: '7.5px',
+                        border: isSubSelected ? '1.33px solid #3038BD' : '1.33px solid #E0E2FE',
+                        background: isSubSelected ? '#3038BD' : '#F3F7FF',
                         color: isSubSelected ? '#FFFFFF' : '#050A5F',
                         fontFamily: F,
-                        fontSize: '13px',
+                        fontSize: '12px',
                         fontWeight: 600,
                         cursor: 'pointer',
-                        boxShadow: isSubSelected
-                          ? '0 4px 14px rgba(35, 52, 205, 0.25)'
-                          : '0 2px 6px rgba(5, 10, 95, 0.02)',
                         transition: 'all 0.2s ease',
                       }}
                       onMouseEnter={(e) => {
                         if (!isSubSelected) {
-                          e.currentTarget.style.background = '#F0F4FF';
-                          e.currentTarget.style.borderColor = '#C7D2FE';
+                          e.currentTarget.style.background = '#E6EFFF';
+                          e.currentTarget.style.borderColor = '#3038BD';
                         }
                       }}
                       onMouseLeave={(e) => {
                         if (!isSubSelected) {
-                          e.currentTarget.style.background = '#F8FAFE';
-                          e.currentTarget.style.borderColor = '#D6E4FF';
+                          e.currentTarget.style.background = '#F3F7FF';
+                          e.currentTarget.style.borderColor = '#E0E2FE';
                         }
                       }}
                     >
@@ -348,7 +344,7 @@ export default function SkillsSelection() {
                   <label
                     style={{
                       fontFamily: F,
-                      fontSize: '12.5px',
+                      fontSize: '14px',
                       fontWeight: 600,
                       color: '#050A5F',
                       display: 'block',
@@ -359,18 +355,18 @@ export default function SkillsSelection() {
                   </label>
 
                   {/* Dropdown Container */}
-                  <div ref={dropdownRef} style={{ position: 'relative', width: '280px', marginBottom: '24px' }}>
+                  <div ref={dropdownRef} style={{ position: 'relative', width: '280px', marginBottom: '16px', zIndex: 100 }}>
                     <div
                       onClick={() => setDropdownOpen(!dropdownOpen)}
                       style={{
                         width: '100%',
-                        height: '42px',
-                        padding: '0 16px',
-                        borderRadius: '21px',
-                        border: '1px solid #D6E4FF',
-                        background: '#F0F4FF',
+                        height: '39px',
+                        padding: '0 18px',
+                        borderRadius: '45px',
+                        border: '0.66px solid #D2D4FF',
+                        background: '#F3F7FF',
                         fontFamily: F,
-                        fontSize: '13px',
+                        fontSize: '12px',
                         color: '#050A5F',
                         fontWeight: 500,
                         display: 'flex',
@@ -386,7 +382,7 @@ export default function SkillsSelection() {
                           ? `${selectedSkills.length} skill(s) selected`
                           : 'Select'}
                       </span>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2334CD" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3038BD" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="6 9 12 15 18 9" />
                       </svg>
                     </div>
@@ -396,20 +392,20 @@ export default function SkillsSelection() {
                       <div
                         style={{
                           position: 'absolute',
-                          top: '48px',
+                          top: '46px',
                           left: 0,
                           width: '280px',
-                          maxHeight: '320px',
+                          maxHeight: '280px',
                           overflowY: 'auto',
                           background: '#FFFFFF',
                           borderRadius: '16px',
-                          boxShadow: '0 10px 30px rgba(5, 10, 95, 0.12)',
-                          border: '1px solid #E5E7EB',
-                          padding: '12px',
-                          zIndex: 100,
+                          boxShadow: '0 12px 32px rgba(5, 10, 95, 0.16)',
+                          border: '1px solid #D2D4FF',
+                          padding: '10px',
+                          zIndex: 1000,
                           display: 'flex',
                           flexDirection: 'column',
-                          gap: '6px',
+                          gap: '4px',
                           boxSizing: 'border-box',
                         }}
                       >
@@ -422,27 +418,27 @@ export default function SkillsSelection() {
                               style={{
                                 display: 'flex',
                                 alignItems: 'center',
-                                gap: '12px',
+                                gap: '10px',
                                 padding: '8px 10px',
                                 borderRadius: '8px',
                                 cursor: 'pointer',
                                 transition: 'background 0.15s ease',
                               }}
-                              onMouseEnter={(e) => (e.currentTarget.style.background = '#F4F7FC')}
+                              onMouseEnter={(e) => (e.currentTarget.style.background = '#F3F7FF')}
                               onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                             >
                               <div
                                 style={{
-                                  width: '18px',
-                                  height: '18px',
-                                  borderRadius: '6px',
+                                  width: '16px',
+                                  height: '16px',
+                                  borderRadius: '4px',
                                   border: isChecked ? 'none' : '1.5px solid #050A5F',
-                                  background: isChecked ? '#2334CD' : 'transparent',
+                                  background: isChecked ? '#3038BD' : 'transparent',
                                   display: 'flex',
                                   alignItems: 'center',
                                   justifyContent: 'center',
                                   color: '#FFFFFF',
-                                  fontSize: '12px',
+                                  fontSize: '11px',
                                   fontWeight: 700,
                                 }}
                               >
@@ -451,7 +447,7 @@ export default function SkillsSelection() {
                               <span
                                 style={{
                                   fontFamily: F,
-                                  fontSize: '13px',
+                                  fontSize: '12px',
                                   fontWeight: 600,
                                   color: '#050A5F',
                                 }}
@@ -465,30 +461,31 @@ export default function SkillsSelection() {
                     )}
                   </div>
 
-                  {/* Selected Mint Green Skill Badges Cloud */}
+                  {/* Selected Mint Green Skill Badges Cloud (Positioned cleanly below dropdown) */}
                   {selectedSkills.length > 0 && (
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '16px' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '16px' }}>
                       {selectedSkills.map((skill) => (
                         <div
                           key={skill}
                           style={{
-                            background: '#22C55E',
+                            background: '#4ADF86',
                             color: '#FFFFFF',
                             fontFamily: F,
-                            fontSize: '13px',
-                            fontWeight: 600,
-                            padding: '8px 18px',
-                            borderRadius: '18px',
+                            fontSize: '12px',
+                            fontWeight: 500,
+                            height: '27px',
+                            padding: '0 12px',
+                            borderRadius: '7.5px',
                             display: 'inline-flex',
                             alignItems: 'center',
                             gap: '8px',
-                            boxShadow: '0 2px 8px rgba(34, 197, 94, 0.25)',
+                            boxShadow: '0 2px 6px rgba(74, 223, 134, 0.2)',
                           }}
                         >
                           <span>{skill}</span>
                           <span
                             onClick={() => toggleSkill(skill)}
-                            style={{ cursor: 'pointer', fontSize: '13px', fontWeight: 700 }}
+                            style={{ cursor: 'pointer', fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}
                             title="Remove skill"
                           >
                             ✕
@@ -502,9 +499,9 @@ export default function SkillsSelection() {
                   <p
                     style={{
                       fontFamily: F,
-                      fontSize: '13px',
+                      fontSize: '12px',
                       fontWeight: 600,
-                      color: '#22C55E',
+                      color: '#4ADF86',
                       margin: '0 0 32px 0',
                     }}
                   >
@@ -516,7 +513,7 @@ export default function SkillsSelection() {
                     <label
                       style={{
                         fontFamily: F,
-                        fontSize: '12.5px',
+                        fontSize: '14px',
                         fontWeight: 600,
                         color: '#050A5F',
                         display: 'block',
@@ -539,13 +536,13 @@ export default function SkillsSelection() {
                       placeholder="Type a skill..."
                       style={{
                         width: '100%',
-                        height: '42px',
-                        padding: '0 20px',
-                        borderRadius: '21px',
-                        border: '1px solid #D6E4FF',
-                        background: '#F0F4FF',
+                        height: '39px',
+                        padding: '0 18px',
+                        borderRadius: '45px',
+                        border: '0.66px solid #D2D4FF',
+                        background: '#F3F7FF',
                         fontFamily: F,
-                        fontSize: '13px',
+                        fontSize: '12px',
                         color: '#050A5F',
                         outline: 'none',
                         boxSizing: 'border-box',
@@ -561,20 +558,21 @@ export default function SkillsSelection() {
                           type="button"
                           onClick={() => handleAddCustomSkill(chip)}
                           style={{
-                            background: '#22C55E',
+                            background: '#4ADF86',
                             color: '#FFFFFF',
                             border: 'none',
-                            borderRadius: '18px',
-                            padding: '8px 18px',
+                            borderRadius: '7.5px',
+                            height: '27px',
+                            padding: '0 12px',
                             fontFamily: F,
-                            fontSize: '13px',
-                            fontWeight: 600,
+                            fontSize: '12px',
+                            fontWeight: 500,
                             cursor: 'pointer',
-                            boxShadow: '0 2px 8px rgba(34, 197, 94, 0.2)',
+                            boxShadow: '0 2px 6px rgba(74, 223, 134, 0.2)',
                             transition: 'background 0.2s ease',
                           }}
-                          onMouseEnter={(e) => (e.currentTarget.style.background = '#16A34A')}
-                          onMouseLeave={(e) => (e.currentTarget.style.background = '#22C55E')}
+                          onMouseEnter={(e) => (e.currentTarget.style.background = '#38C972')}
+                          onMouseLeave={(e) => (e.currentTarget.style.background = '#4ADF86')}
                         >
                           {chip}
                         </button>
@@ -602,27 +600,28 @@ export default function SkillsSelection() {
             type="button"
             onClick={() => navigate('/connect-wallet')}
             style={{
-              background: '#2334CD',
+              background: '#3038BD',
               color: '#FFFFFF',
               border: 'none',
-              borderRadius: '20px',
-              height: '42px',
-              padding: '0 36px',
+              borderRadius: '16.875px',
+              width: '99px',
+              height: '28px',
               fontFamily: F,
-              fontSize: '13px',
-              fontWeight: 600,
+              fontSize: '9px',
+              fontWeight: 500,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px',
-              boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px',
+              justifyContent: 'center',
+              gap: '6px',
+              boxShadow: 'rgba(48, 56, 189, 0.25) 0px 4px 12px 0px',
               transition: 'background 0.2s ease',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = '#1B2AB2')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = '#2334CD')}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#252BA3')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#3038BD')}
           >
             <span>Next</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
             </svg>

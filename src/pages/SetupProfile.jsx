@@ -88,7 +88,7 @@ export default function SetupProfile() {
       style={{
         width: '100vw',
         minHeight: '100vh',
-        background: '#F4F7FC',
+        background: '#F7FAFF',
         display: 'flex',
         flexDirection: 'column',
         boxSizing: 'border-box',
@@ -467,22 +467,22 @@ export default function SetupProfile() {
               <button
                 type="submit"
                 style={{
-                  background: '#2334CD',
+                  background: '#3038BD',
                   color: '#FFFFFF',
                   border: 'none',
-                  borderRadius: '20px',
-                  width: '110px',
-                  height: '40px',
+                  borderRadius: '16.875px',
+                  width: '99px',
+                  height: '28px',
                   fontFamily: F,
-                  fontSize: '14px',
-                  fontWeight: 600,
+                  fontSize: '9px',
+                  fontWeight: 500,
                   cursor: 'pointer',
-                  boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px',
+                  boxShadow: 'rgba(48, 56, 189, 0.25) 0px 4px 12px 0px',
                   transition: 'background 0.2s ease',
                   marginLeft: 'auto',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = '#1B2AB2')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = '#2334CD')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#252BA3')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = '#3038BD')}
               >
                 Next
               </button>
@@ -503,7 +503,7 @@ function SectionHeader({ title, buttonText, onAdd }) {
         paddingBottom: '14px',
         marginBottom: '16px',
         marginTop: '32px',
-        borderBottom: '1px solid #E5E7EB',
+        borderBottom: '0.66px solid #E0E2FE',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -521,25 +521,26 @@ function SectionHeader({ title, buttonText, onAdd }) {
           onAdd();
         }}
         style={{
-          background: '#22C55E',
+          background: '#4ADF86',
           color: '#FFFFFF',
           border: 'none',
-          borderRadius: '20px',
-          padding: '8px 18px',
+          borderRadius: '15px',
+          padding: '4px 12px',
+          height: '24px',
           fontFamily: F,
-          fontSize: '12px',
-          fontWeight: 600,
+          fontSize: '9px',
+          fontWeight: 500,
           cursor: 'pointer',
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '6px',
-          boxShadow: '0 2px 8px rgba(34, 197, 94, 0.2)',
+          gap: '5px',
+          boxShadow: '0 2px 6px rgba(74, 223, 134, 0.2)',
           transition: 'all 0.2s ease',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = '#16A34A')}
-        onMouseLeave={(e) => (e.currentTarget.style.background = '#22C55E')}
+        onMouseEnter={(e) => (e.currentTarget.style.background = '#38C972')}
+        onMouseLeave={(e) => (e.currentTarget.style.background = '#4ADF86')}
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10" />
           <line x1="12" y1="8" x2="12" y2="16" />
           <line x1="8" y1="12" x2="16" y2="12" />

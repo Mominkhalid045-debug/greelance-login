@@ -59,7 +59,7 @@ export default function CompleteProfile() {
       style={{
         width: '100vw',
         minHeight: '100vh',
-        background: '#F4F7FC',
+        background: '#F7FAFF',
         display: 'flex',
         flexDirection: 'column',
         boxSizing: 'border-box',
@@ -144,26 +144,25 @@ export default function CompleteProfile() {
                 type="button"
                 onClick={handleUploadClick}
                 style={{
-                  border: '1.5px dashed #D6E4FF',
-                  background: '#F8FAFE',
-                  borderRadius: '16px',
-                  width: '320px',
-                  height: '72px',
-                  padding: '0 20px',
+                  border: '1.33px solid #E0E2FE',
+                  background: '#F3F7FF',
+                  borderRadius: '7.5px',
+                  width: '282.75px',
+                  height: '70px',
+                  padding: '0 15px',
                   display: 'flex',
-                  justify: 'space-between',
+                  justifyContent: 'space-between',
                   alignItems: 'center',
                   cursor: 'pointer',
-                  boxShadow: '0 2px 8px rgba(5, 10, 95, 0.02)',
                   transition: 'all 0.2s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#F0F4FF';
-                  e.currentTarget.style.borderColor = '#C7D2FE';
+                  e.currentTarget.style.background = '#E6EFFF';
+                  e.currentTarget.style.borderColor = '#3038BD';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#F8FAFE';
-                  e.currentTarget.style.borderColor = '#D6E4FF';
+                  e.currentTarget.style.background = '#F3F7FF';
+                  e.currentTarget.style.borderColor = '#E0E2FE';
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -173,13 +172,13 @@ export default function CompleteProfile() {
                       width: '36px',
                       height: '36px',
                       borderRadius: '10px',
-                      background: '#EEF2FF',
+                      background: '#E6EFFF',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2334CD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3038BD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                       <circle cx="12" cy="7" r="4" />
                     </svg>
@@ -197,7 +196,7 @@ export default function CompleteProfile() {
                 </div>
 
                 {/* Upload Arrow */}
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2334CD" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3038BD" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                   <polyline points="17 8 12 3 7 8" />
                   <line x1="12" y1="3" x2="12" y2="15" />
@@ -214,8 +213,8 @@ export default function CompleteProfile() {
                     height: '100px',
                     borderRadius: '50%',
                     objectFit: 'cover',
-                    border: '3px solid #2334CD',
-                    boxShadow: '0 6px 18px rgba(35, 52, 205, 0.2)',
+                    border: '3px solid #3038BD',
+                    boxShadow: '0 6px 18px rgba(48, 56, 189, 0.2)',
                   }}
                 />
                 <button
@@ -229,7 +228,7 @@ export default function CompleteProfile() {
                     width: '32px',
                     height: '32px',
                     borderRadius: '50%',
-                    background: '#2334CD',
+                    background: '#3038BD',
                     color: '#FFFFFF',
                     border: '2px solid #FFFFFF',
                     cursor: 'pointer',
@@ -248,9 +247,9 @@ export default function CompleteProfile() {
             <p
               style={{
                 fontFamily: F,
-                fontSize: '13px',
+                fontSize: '12px',
                 fontWeight: 600,
-                color: '#22C55E',
+                color: '#4ADF86',
                 margin: '12px 0 0 0',
                 textAlign: 'center',
               }}
@@ -264,7 +263,7 @@ export default function CompleteProfile() {
             <div
               style={{
                 display: 'flex',
-                justify: 'space-between',
+                justifyContent: 'space-between',
                 alignItems: 'center',
                 marginBottom: '10px',
               }}
@@ -272,8 +271,8 @@ export default function CompleteProfile() {
               <label
                 style={{
                   fontFamily: F,
-                  fontSize: '13px',
-                  fontWeight: 700,
+                  fontSize: '14px',
+                  fontWeight: 600,
                   color: '#050A5F',
                 }}
               >
@@ -286,24 +285,23 @@ export default function CompleteProfile() {
                 onClick={handleModifyWithAI}
                 disabled={isAiGenerating}
                 style={{
-                  background: '#EEF2FF',
-                  color: '#2334CD',
-                  border: '1.5px solid #C7D2FE',
-                  borderRadius: '20px',
-                  height: '36px',
-                  padding: '0 18px',
+                  background: '#E6EFFF',
+                  color: '#3038BD',
+                  border: 'none',
+                  borderRadius: '12px',
+                  height: '24px',
+                  padding: '4px 10px',
                   fontFamily: F,
-                  fontSize: '12.5px',
-                  fontWeight: 600,
+                  fontSize: '10px',
+                  fontWeight: 500,
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
-                  boxShadow: '0 2px 6px rgba(35, 52, 205, 0.05)',
+                  gap: '5px',
                   transition: 'all 0.2s ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = '#E0E7FF')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = '#EEF2FF')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#D8E5FF')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = '#E6EFFF')}
               >
                 <span>{isAiGenerating ? '⌛ Generating...' : '✨ Modify with AI'}</span>
               </button>
@@ -317,12 +315,12 @@ export default function CompleteProfile() {
               placeholder="Write a short introduction about your work..."
               style={{
                 width: '100%',
-                padding: '18px 20px',
-                borderRadius: '18px',
-                border: '1px solid #D6E4FF',
-                background: '#F8FAFE',
+                padding: '15px',
+                borderRadius: '15px',
+                border: '0.66px solid #D2D4FF',
+                background: '#F3F7FF',
                 fontFamily: F,
-                fontSize: '13px',
+                fontSize: '12px',
                 color: '#050A5F',
                 outline: 'none',
                 resize: 'vertical',
@@ -337,21 +335,21 @@ export default function CompleteProfile() {
             type="button"
             onClick={handlePreview}
             style={{
-              background: '#2334CD',
+              background: '#3038BD',
               color: '#FFFFFF',
               border: 'none',
-              borderRadius: '20px',
-              height: '42px',
-              padding: '0 48px',
+              borderRadius: '16.875px',
+              width: '99px',
+              height: '28px',
               fontFamily: F,
-              fontSize: '13px',
-              fontWeight: 600,
+              fontSize: '9px',
+              fontWeight: 500,
               cursor: 'pointer',
-              boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 14px 0px',
+              boxShadow: 'rgba(48, 56, 189, 0.25) 0px 4px 14px 0px',
               transition: 'background 0.2s ease',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = '#1B2AB2')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = '#2334CD')}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#252BA3')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#3038BD')}
           >
             Preview
           </button>

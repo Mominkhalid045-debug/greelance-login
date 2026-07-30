@@ -35,7 +35,7 @@ export default function ConnectWallet() {
       style={{
         width: '100vw',
         minHeight: '100vh',
-        background: '#F4F7FC',
+        background: '#F7FAFF',
         display: 'flex',
         flexDirection: 'column',
         boxSizing: 'border-box',
@@ -110,17 +110,17 @@ export default function ConnectWallet() {
                     localStorage.setItem('userSelectedWallet', w.name);
                   }}
                   style={{
-                    width: '140px',
-                    height: '140px',
-                    borderRadius: '18px',
+                    width: '139.5px',
+                    height: '139.5px',
+                    borderRadius: '7.5px',
                     overflow: 'hidden',
                     cursor: 'pointer',
-                    border: isSelected ? '2px solid #2334CD' : '1px solid #E5E7EB',
+                    background: isSelected ? '#5961CB' : '#F3F7FF',
+                    border: isSelected ? '1.33px solid #3038BD' : '1.33px solid #E6EFFF',
                     boxShadow: isSelected
-                      ? '0 10px 24px rgba(35, 52, 205, 0.3)'
+                      ? '0 10px 24px rgba(48, 56, 189, 0.3)'
                       : '0 2px 6px rgba(5, 10, 95, 0.02)',
                     transition: 'all 0.2s ease',
-                    transform: isSelected ? 'scale(1.02)' : 'scale(1)',
                   }}
                 >
                   <img
@@ -151,7 +151,7 @@ export default function ConnectWallet() {
               <label
                 style={{
                   fontFamily: F,
-                  fontSize: '12.5px',
+                  fontSize: '14px',
                   fontWeight: 600,
                   color: '#050A5F',
                 }}
@@ -171,7 +171,7 @@ export default function ConnectWallet() {
               <label
                 style={{
                   fontFamily: F,
-                  fontSize: '12.5px',
+                  fontSize: '14px',
                   fontWeight: 600,
                   color: '#050A5F',
                 }}
@@ -191,7 +191,7 @@ export default function ConnectWallet() {
               <label
                 style={{
                   fontFamily: F,
-                  fontSize: '12.5px',
+                  fontSize: '14px',
                   fontWeight: 600,
                   color: '#050A5F',
                 }}
@@ -215,7 +215,7 @@ export default function ConnectWallet() {
             width: '1140px',
             maxWidth: '96%',
             display: 'flex',
-            justify: 'flex-end',
+            justifyContent: 'flex-end',
             alignItems: 'center',
             boxSizing: 'border-box',
           }}
@@ -224,27 +224,28 @@ export default function ConnectWallet() {
             type="button"
             onClick={() => navigate('/complete-profile')}
             style={{
-              background: '#2334CD',
+              background: '#3038BD',
               color: '#FFFFFF',
               border: 'none',
-              borderRadius: '20px',
-              height: '42px',
-              padding: '0 36px',
+              borderRadius: '16.875px',
+              width: '99px',
+              height: '28px',
               fontFamily: F,
-              fontSize: '13px',
-              fontWeight: 600,
+              fontSize: '9px',
+              fontWeight: 500,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px',
-              boxShadow: 'rgba(35, 52, 205, 0.25) 0px 4px 12px 0px',
+              justifyContent: 'center',
+              gap: '6px',
+              boxShadow: 'rgba(48, 56, 189, 0.25) 0px 4px 12px 0px',
               transition: 'background 0.2s ease',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = '#1B2AB2')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = '#2334CD')}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#252BA3')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#3038BD')}
           >
             <span>Next</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
             </svg>
@@ -257,13 +258,13 @@ export default function ConnectWallet() {
 
 const inputStyle = {
   width: '100%',
-  height: '42px',
-  padding: '0 20px',
-  borderRadius: '21px',
-  border: '1px solid #D6E4FF',
-  background: '#F8FAFE',
+  height: '39px',
+  padding: '0 18px',
+  borderRadius: '45px',
+  border: '0.66px solid #D2D4FF',
+  background: '#F3F7FF',
   fontFamily: F,
-  fontSize: '13px',
+  fontSize: '12px',
   color: '#050A5F',
   outline: 'none',
   boxSizing: 'border-box',
