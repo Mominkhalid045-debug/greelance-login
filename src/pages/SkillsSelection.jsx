@@ -429,20 +429,23 @@ export default function SkillsSelection() {
                             >
                               <div
                                 style={{
-                                  width: '16px',
-                                  height: '16px',
+                                  width: '18px',
+                                  height: '18px',
                                   borderRadius: '4px',
-                                  border: isChecked ? 'none' : '1.5px solid #050A5F',
-                                  background: isChecked ? '#3038BD' : 'transparent',
+                                  border: isChecked ? '1.5px solid #4ADF86' : '1.5px solid #050A5F',
+                                  background: isChecked ? '#4ADF86' : 'transparent',
                                   display: 'flex',
                                   alignItems: 'center',
                                   justifyContent: 'center',
-                                  color: '#FFFFFF',
-                                  fontSize: '11px',
-                                  fontWeight: 700,
+                                  flexShrink: 0,
+                                  boxSizing: 'border-box',
                                 }}
                               >
-                                {isChecked && '✓'}
+                                {isChecked && (
+                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                  </svg>
+                                )}
                               </div>
                               <span
                                 style={{
