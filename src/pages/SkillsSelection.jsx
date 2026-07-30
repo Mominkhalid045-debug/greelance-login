@@ -28,10 +28,10 @@ export default function SkillsSelection() {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
-  const [selectedCategory, setSelectedCategory] = useState('Digital Marketing Expert');
-  const [selectedSubCategory, setSelectedSubCategory] = useState('Product Design');
+  const [selectedCategory, setSelectedCategory] = useState(localStorage.getItem('userSelectedCategory') || null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [selectedSkills, setSelectedSkills] = useState(['Retail Media', 'Email Marketing', 'Programmatic']);
+  const [selectedSkills, setSelectedSkills] = useState([]);
   const [customSkillInput, setCustomSkillInput] = useState('');
 
   // Close dropdown on outside click
@@ -150,34 +150,35 @@ export default function SkillsSelection() {
           </p>
 
           {!selectedCategory ? (
-            /* Mode 1: Grid of All 22 Categories */
+            /* Mode 1: Grid of All 23 Categories matching Screenshot 2 */
             <div
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                gap: '14px',
-                marginBottom: '16px',
+                gap: '15px',
+                marginBottom: '20px',
+                width: '100%',
+                justifyContent: 'flex-start',
               }}
             >
               {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
+                <div
+                  key={cat.id || cat.name}
                   onClick={() => handleSelectCategory(cat.name)}
                   style={{
-                    display: 'inline-flex',
+                    display: 'flex',
+                    flexDirection: 'row',
                     alignItems: 'center',
-                    gap: '10px',
-                    padding: '10px 20px',
-                    borderRadius: '7.5px',
-                    border: '1.33px solid #E0E2FE',
+                    padding: '11.25px 15px',
+                    gap: '14.25px',
+                    height: '55.5px',
                     background: '#F3F7FF',
-                    color: '#050A5F',
-                    fontFamily: F,
-                    fontSize: '13px',
-                    fontWeight: 600,
+                    border: '1.5px solid #E0E2FE',
+                    borderRadius: '7.5px',
                     cursor: 'pointer',
+                    userSelect: 'none',
                     transition: 'all 0.2s ease',
+                    boxSizing: 'border-box',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = '#E6EFFF';
@@ -188,11 +189,13 @@ export default function SkillsSelection() {
                     e.currentTarget.style.borderColor = '#E0E2FE';
                   }}
                 >
-                  {cat.img ? (
-                    <img src={cat.img} alt={cat.name} style={{ width: '33px', height: '33px', objectFit: 'contain' }} />
-                  ) : null}
-                  <span>{cat.name}</span>
-                </button>
+                  <div style={{ width: '33px', height: '33px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    {cat.img ? (
+                      <img src={cat.img} alt={cat.name} style={{ width: '33px', height: '33px', objectFit: 'contain' }} />
+                    ) : null}
+                  </div>
+                  <span style={{ fontFamily: F, fontSize: '10.5px', fontWeight: 500, lineHeight: '22px', color: '#050A5F' }}>{cat.name}</span>
+                </div>
               ))}
             </div>
           ) : (

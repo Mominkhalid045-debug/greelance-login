@@ -66,15 +66,14 @@ function StepHeader({ activeStep, navigate }) {
                   height: '100%',
                   padding: '0 20px',
                   cursor: 'pointer',
-                  background: isActive ? '#E6EFFF' : '#FFFFFF',
+                  background: isActive ? '#EBF2FF' : '#FFFFFF',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
                   gap: '2px',
                   boxSizing: 'border-box',
                   transition: 'all 0.2s ease',
-                  borderRight: '0.66px solid rgba(34, 211, 166, 0.15)',
-                  boxShadow: isActive ? '#3038BD 0px -2.25px 0px 0px inset' : 'none',
+                  borderRight: '1px solid #E0E2FE',
                 }}
               >
                 <span
@@ -82,7 +81,7 @@ function StepHeader({ activeStep, navigate }) {
                     fontFamily: F,
                     fontSize: '12px',
                     fontWeight: 600,
-                    color: isActive ? '#3038BD' : '#4ADF86',
+                    color: '#22D3A6',
                   }}
                 >
                   Step {step.num}
@@ -91,7 +90,7 @@ function StepHeader({ activeStep, navigate }) {
                   style={{
                     fontFamily: F,
                     fontSize: '12px',
-                    fontWeight: 500,
+                    fontWeight: isActive ? 700 : 500,
                     color: '#050A5F',
                   }}
                 >
@@ -111,22 +110,20 @@ function StepHeader({ activeStep, navigate }) {
             }}
             aria-label="Exit or next step"
             style={{
-              width: '40px',
-              height: '40px',
+              width: '36px',
+              height: '36px',
               borderRadius: '50%',
               background: '#FFFFFF',
-              border: '1px solid #E5E7EB',
+              border: '1.5px solid #E0E2FE',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+              transition: 'all 0.2s ease',
             }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3038BD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-              <polyline points="10 17 15 12 10 7" />
-              <line x1="15" y1="12" x2="3" y2="12" />
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#050A5F" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
         </div>
