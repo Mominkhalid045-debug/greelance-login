@@ -66,7 +66,7 @@ function StepHeader({ activeStep, navigate }) {
                   height: '100%',
                   padding: '0 20px',
                   cursor: 'pointer',
-                  background: isActive ? '#EBF2FF' : '#FFFFFF',
+                  background: isActive ? '#E6EFFF' : '#FFFFFF',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
@@ -74,6 +74,7 @@ function StepHeader({ activeStep, navigate }) {
                   boxSizing: 'border-box',
                   transition: 'all 0.2s ease',
                   borderRight: '1px solid #E0E2FE',
+                  boxShadow: isActive ? '#3038BD 0px -2.25px 0px 0px inset' : '#22D3A6 0px -2.25px 0px 0px inset',
                 }}
               >
                 <span

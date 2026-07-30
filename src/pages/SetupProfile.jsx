@@ -215,15 +215,15 @@ export default function SetupProfile() {
                       onChange={(e) => handleChange('countryCode', e.target.value)}
                       style={{
                         width: '100%',
-                        height: '42px',
-                        borderRadius: '21px',
-                        border: '1px solid #D6E4FF',
-                        background: '#F0F4FF',
+                        height: '39px',
+                        borderRadius: '45px',
+                        border: '0.67px solid #D2D4FF',
+                        background: '#F3F7FF',
                         fontFamily: F,
                         fontSize: '12px',
                         fontWeight: 600,
                         color: '#050A5F',
-                        padding: '0 8px 0 12px',
+                        padding: '0 8px 0 14px',
                         outline: 'none',
                         cursor: 'pointer',
                         appearance: 'none',
@@ -731,13 +731,13 @@ const labelStyle = {
 
 const inputStyle = {
   width: '100%',
-  height: '42px',
-  padding: '0 16px',
-  borderRadius: '21px',
-  border: '1px solid #D6E4FF',
-  background: '#FFFFFF',
+  height: '39px',
+  padding: '0 20px',
+  borderRadius: '45px',
+  border: '0.67px solid #D2D4FF',
+  background: '#F3F7FF',
   fontFamily: F,
-  fontSize: '13px',
+  fontSize: '12px',
   color: '#050A5F',
   outline: 'none',
   boxSizing: 'border-box',
@@ -749,7 +749,7 @@ const selectStyle = {
   appearance: 'none',
   WebkitAppearance: 'none',
   cursor: 'pointer',
-  paddingRight: '30px',
+  paddingRight: '34px',
 };
 
 const textareaStyle = {
