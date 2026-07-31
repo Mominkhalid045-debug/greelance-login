@@ -403,7 +403,7 @@ export default function FreelancerForm() {
             </button>
           </div>
         </div>
-      </main>in>
+      </main>
     </div>
   );
 }

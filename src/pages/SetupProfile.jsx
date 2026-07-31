@@ -617,28 +617,6 @@ function FigmaCard({ onClose, children, minHeight = 'auto' }) {
     </div>
   );
 }
-      <button
-        type="button"
-        onClick={onClose}
-        style={{
-          position: 'absolute',
-          top: '16px',
-          right: '16px',
-          background: 'none',
-          border: 'none',
-          color: '#6B7280',
-          fontSize: '16px',
-          fontWeight: 700,
-          cursor: 'pointer',
-        }}
-        title="Remove"
-      >
-        ✕
-      </button>
-      {children}
-    </div>
-  );
-}
 
 /* Helper Date Range Selector (Month + Year) */
 function DateRangeGroup({ label, month, year, onMonthChange, onYearChange }) {
