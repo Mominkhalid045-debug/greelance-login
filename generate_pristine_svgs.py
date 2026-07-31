@@ -1,4 +1,4 @@
-import os, json
+import os, json, urllib.parse
 
 def make_svg(inner_content):
     svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
@@ -20,7 +20,9 @@ def make_svg(inner_content):
     {inner_content}
   </g>
 </svg>'''
-    return f"data:image/svg+xml;utf8,{svg.replace('\n', '').replace('  ', '')}"
+    # Properly URL encode SVG string so # becomes %23 for browser data URI parsing
+    encoded = urllib.parse.quote(svg.replace('\n', '').replace('  ', ''))
+    return f"data:image/svg+xml;utf8,{encoded}"
 
 categories_data = [
   {
@@ -146,4 +148,4 @@ target_file = r'c:\Users\HTC\.gemini\antigravity\scratch\greelance-login\src\dat
 with open(target_file, 'w', encoding='utf-8') as f:
     f.write(js_code)
 
-print("Generated pristine 3D SVG categoryData.js with zero text or image cropping artifacts!")
+print("Generated URL-encoded 3D SVG categoryData.js!")
