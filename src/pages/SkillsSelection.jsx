@@ -151,7 +151,7 @@ export default function SkillsSelection() {
 
           {!selectedCategory ? (
             /* Mode 1: Exact 4-Row Grid matching Figma Frame V1.F1.6-A */
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '24px', width: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '28px', width: '100%' }}>
               {[
                 ["E Commerce Skills", "Cybersecurity Engineer", "Cloud Computing Engineer", "Digital Marketing Expert", "Software Engineering"],
                 ["IT Staffing", "Data Center security", "Artificial Intelligence", "Business Intelligence", "Decision Intelligence", "Robotics"],
@@ -168,6 +168,7 @@ export default function SkillsSelection() {
                     justifyContent: 'flex-start',
                     alignItems: 'center',
                     boxSizing: 'border-box',
+                    flexWrap: 'wrap',
                   }}
                 >
                   {rowNames.map((name) => {
@@ -182,11 +183,11 @@ export default function SkillsSelection() {
                           alignItems: 'center',
                           padding: '0 14px',
                           gap: '10px',
-                          height: '52px',
+                          height: '40px',
                           width: 'auto',
                           whiteSpace: 'nowrap',
                           background: '#F3F7FF',
-                          border: '1.5px solid #E0E2FE',
+                          border: '1.3px solid #E0E2FE',
                           borderRadius: '8px',
                           cursor: 'pointer',
                           userSelect: 'none',
@@ -203,12 +204,12 @@ export default function SkillsSelection() {
                           e.currentTarget.style.borderColor = '#E0E2FE';
                         }}
                       >
-                        <div style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <div style={{ width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                           {cat.img ? (
-                            <img src={cat.img} alt={cat.name} style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+                            <img src={cat.img} alt={cat.name} style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
                           ) : null}
                         </div>
-                        <span style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F' }}>{cat.name}</span>
+                        <span style={{ fontFamily: F, fontSize: '12px', fontWeight: 600, color: '#050A5F' }}>{cat.name}</span>
                       </div>
                     );
                   })}
@@ -607,18 +608,18 @@ export default function SkillsSelection() {
               background: '#3038BD',
               color: '#FFFFFF',
               border: 'none',
-              borderRadius: '16.875px',
-              width: '99px',
-              height: '28px',
+              borderRadius: '16px',
+              width: '100px',
+              height: '32px',
               fontFamily: F,
-              fontSize: '9px',
-              fontWeight: 500,
+              fontSize: '11px',
+              fontWeight: 600,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '6px',
-              boxShadow: 'rgba(48, 56, 189, 0.25) 0px 4px 12px 0px',
+              boxShadow: '0px 4px 12px rgba(48, 56, 189, 0.25)',
               transition: 'background 0.2s ease',
             }}
             onMouseEnter={(e) => (e.currentTarget.style.background = '#252BA3')}
