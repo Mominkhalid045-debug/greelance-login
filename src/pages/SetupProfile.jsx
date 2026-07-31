@@ -174,7 +174,7 @@ export default function SetupProfile() {
               <FormField
                 label="First Name"
                 required
-                placeholder="e.g. Ziafat"
+                placeholder="e.g. Momin"
                 value={formData.firstName}
                 onChange={(v) => handleChange('firstName', v)}
               />
@@ -182,7 +182,7 @@ export default function SetupProfile() {
               <FormField
                 label="Last Name"
                 required
-                placeholder="e.g. Raool"
+                placeholder="e.g. Khalid"
                 value={formData.lastName}
                 onChange={(v) => handleChange('lastName', v)}
               />
