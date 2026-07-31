@@ -166,13 +166,14 @@ export default function SkillsSelection() {
                   key={cat.id || cat.name}
                   onClick={() => handleSelectCategory(cat.name)}
                   style={{
-                    display: 'flex',
+                    display: 'inline-flex',
                     flexDirection: 'row',
                     alignItems: 'center',
-                    padding: '8px 12px',
-                    gap: '10px',
-                    width: '159.75px',
+                    padding: '0 18px',
+                    gap: '12px',
+                    minWidth: '159.75px',
                     height: '55.5px',
+                    whiteSpace: 'nowrap',
                     background: '#F3F7FF',
                     border: '1.5px solid #E0E2FE',
                     borderRadius: '7.5px',
@@ -180,6 +181,7 @@ export default function SkillsSelection() {
                     userSelect: 'none',
                     transition: 'all 0.2s ease',
                     boxSizing: 'border-box',
+                    flexShrink: 0,
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = '#E6EFFF';
@@ -195,7 +197,7 @@ export default function SkillsSelection() {
                       <img src={cat.img} alt={cat.name} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
                     ) : null}
                   </div>
-                  <span style={{ fontFamily: F, fontSize: '11px', fontWeight: 600, lineHeight: '1.25', color: '#050A5F', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{cat.name}</span>
+                  <span style={{ fontFamily: F, fontSize: '11px', fontWeight: 600, color: '#050A5F' }}>{cat.name}</span>
                 </div>
               ))}
             </div>
