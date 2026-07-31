@@ -111,10 +111,10 @@ export default function SkillsSelection() {
           padding: '32px 20px 60px 20px',
         }}
       >
-        {/* Main White Card Container */}
+        {/* Main White Card Container (1320px width matching Figma frame) */}
         <div
           style={{
-            width: '1140px',
+            width: '1320px',
             maxWidth: '96%',
             background: '#FFFFFF',
             borderRadius: '24px',
@@ -575,7 +575,7 @@ export default function SkillsSelection() {
         {/* Bottom Navigation Controls (Outside Card) */}
         <div
           style={{
-            width: '1140px',
+            width: '1320px',
             maxWidth: '96%',
             display: 'flex',
             justifyContent: 'flex-end',
