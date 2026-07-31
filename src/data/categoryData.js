@@ -1,141 +1,117 @@
-import e_commerce_skills from '../assets/category_icons/e_commerce_skills.png';
-import cybersecurity_engineer from '../assets/category_icons/cybersecurity_engineer.png';
-import cloud_computing_engineer from '../assets/category_icons/cloud_computing_engineer.png';
-import digital_marketing_expert from '../assets/category_icons/digital_marketing_expert.png';
-import software_engineering from '../assets/category_icons/software_engineering.png';
-import it_staffing from '../assets/category_icons/it_staffing.png';
-import data_center_security from '../assets/category_icons/data_center_security.png';
-import artificial_intelligence from '../assets/category_icons/artificial_intelligence.png';
-import business_intelligence from '../assets/category_icons/business_intelligence.png';
-import decision_intelligence from '../assets/category_icons/decision_intelligence.png';
-import robotics from '../assets/category_icons/robotics.png';
-import virtual_augmented from '../assets/category_icons/virtual_augmented.png';
-import systems_engineering from '../assets/category_icons/systems_engineering.png';
-import cryptocurrency from '../assets/category_icons/cryptocurrency.png';
-import fintech from '../assets/category_icons/fintech.png';
-import autonomous_systems from '../assets/category_icons/autonomous_systems.png';
-import machine_learning from '../assets/category_icons/machine_learning.png';
-import electric_vehicle_technology from '../assets/category_icons/electric_vehicle_technology.png';
-import internet_of_things from '../assets/category_icons/internet_of_things.png';
-import recycle_energy from '../assets/category_icons/recycle_energy.png';
-import smart_home from '../assets/category_icons/smart_home.png';
-import quantum_computing from '../assets/category_icons/quantum_computing.png';
-import blockchain from '../assets/category_icons/blockchain.png';
-
 export const CATEGORIES = [
   {
     "id": 1,
     "name": "E Commerce Skills",
-    "img": e_commerce_skills
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><path d=\"M7 12h22l-2.5 11H9.5L7 12z\" fill=\"url(#g1)\"/><path d=\"M11 12V8a7 7 0 0 1 14 0v4\" fill=\"none\" stroke=\"url(#gLight)\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"27\" r=\"2.2\" fill=\"#3038BD\"/><circle cx=\"24\" cy=\"27\" r=\"2.2\" fill=\"#3038BD\"/><path d=\"M13 17h10\" stroke=\"#FFFFFF\" stroke-width=\"2\" stroke-linecap=\"round\"/></g></svg>"
   },
   {
     "id": 2,
     "name": "Cybersecurity Engineer",
-    "img": cybersecurity_engineer
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><path d=\"M18 3L6 8v9c0 7.5 5.1 14.5 12 16 6.9-1.5 12-8.5 12-16V8L18 3z\" fill=\"url(#g1)\"/><circle cx=\"18\" cy=\"14\" r=\"3\" fill=\"#FFFFFF\"/><path d=\"M18 17v5\" stroke=\"#FFFFFF\" stroke-width=\"2.5\" stroke-linecap=\"round\"/></g></svg>"
   },
   {
     "id": 3,
     "name": "Cloud Computing Engineer",
-    "img": cloud_computing_engineer
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><path d=\"M9 25h18a7 7 0 0 0 1-13.9 9 9 0 0 0-17.4-2.1A6.5 6.5 0 0 0 9 25z\" fill=\"url(#g1)\"/><path d=\"M18 14v8M15 17l3-3 3 3\" stroke=\"#FFFFFF\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></svg>"
   },
   {
     "id": 4,
     "name": "Digital Marketing Expert",
-    "img": digital_marketing_expert
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><path d=\"M6 14v8h4l9 6V8l-9 6H6z\" fill=\"url(#g1)\"/><path d=\"M23 12a6 6 0 0 1 0 12\" fill=\"none\" stroke=\"url(#g1)\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M26 8a11 11 0 0 1 0 20\" fill=\"none\" stroke=\"url(#g1)\" stroke-width=\"2\" stroke-linecap=\"round\"/></g></svg>"
   },
   {
     "id": 5,
     "name": "Software Engineering",
-    "img": software_engineering
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><rect x=\"4\" y=\"6\" width=\"28\" height=\"18\" rx=\"3\" fill=\"url(#g1)\"/><path d=\"M12 28h12M18 24v4\" stroke=\"url(#g1)\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M11 13l-3 3 3 3M25 13l3 3-3 3M19 12l-2 8\" stroke=\"#FFFFFF\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></svg>"
   },
   {
     "id": 6,
     "name": "IT Staffing",
-    "img": it_staffing
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><rect x=\"4\" y=\"6\" width=\"28\" height=\"18\" rx=\"3\" fill=\"url(#g1)\"/><circle cx=\"18\" cy=\"13\" r=\"3\" fill=\"#FFFFFF\"/><path d=\"M12 21c0-3 2.7-5 6-5s6 2 6 5\" fill=\"#FFFFFF\"/><path d=\"M12 28h12M18 24v4\" stroke=\"url(#g1)\" stroke-width=\"3\"/></g></svg>"
   },
   {
     "id": 7,
     "name": "Data Center security",
-    "img": data_center_security
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><rect x=\"6\" y=\"5\" width=\"24\" height=\"7\" rx=\"2\" fill=\"url(#g1)\"/><rect x=\"6\" y=\"14\" width=\"24\" height=\"7\" rx=\"2\" fill=\"url(#g1)\"/><rect x=\"6\" y=\"23\" width=\"24\" height=\"7\" rx=\"2\" fill=\"url(#g1)\"/><circle cx=\"10\" cy=\"8.5\" r=\"1.5\" fill=\"#00E676\"/><circle cx=\"10\" cy=\"17.5\" r=\"1.5\" fill=\"#00E676\"/><circle cx=\"10\" cy=\"26.5\" r=\"1.5\" fill=\"#00E676\"/></g></svg>"
   },
   {
     "id": 8,
     "name": "Artificial Intelligence",
-    "img": artificial_intelligence
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><rect x=\"8\" y=\"8\" width=\"20\" height=\"20\" rx=\"4\" fill=\"url(#g1)\"/><rect x=\"14\" y=\"14\" width=\"8\" height=\"8\" rx=\"2\" fill=\"#FFFFFF\"/><path d=\"M12 4v4M18 4v4M24 4v4M12 28v4M18 28v4M24 28v4M4 12h4M4 18h4M4 24h4M28 12h4M28 18h4M28 24h4\" stroke=\"url(#g1)\" stroke-width=\"2.5\" stroke-linecap=\"round\"/></g></svg>"
   },
   {
     "id": 9,
     "name": "Business Intelligence",
-    "img": business_intelligence
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><rect x=\"5\" y=\"11\" width=\"26\" height=\"18\" rx=\"3\" fill=\"url(#g1)\"/><path d=\"M13 11V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4\" fill=\"none\" stroke=\"url(#gLight)\" stroke-width=\"2.5\"/><path d=\"M10 21l4-4 4 2 7-7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></svg>"
   },
   {
     "id": 10,
     "name": "Decision Intelligence",
-    "img": decision_intelligence
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><path d=\"M18 4a10 10 0 0 0-6 18c1.5 1.2 2 2.5 2 4h8c0-1.5.5-2.8 2-4a10 10 0 0 0-6-18z\" fill=\"url(#g1)\"/><path d=\"M14 30h8M16 33h4\" stroke=\"url(#g1)\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><path d=\"M18 10v6M15 13h6\" stroke=\"#FFFFFF\" stroke-width=\"2\" stroke-linecap=\"round\"/></g></svg>"
   },
   {
     "id": 11,
     "name": "Robotics",
-    "img": robotics
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><rect x=\"7\" y=\"10\" width=\"22\" height=\"18\" rx=\"4\" fill=\"url(#g1)\"/><circle cx=\"13\" cy=\"17\" r=\"2.5\" fill=\"#FFFFFF\"/><circle cx=\"23\" cy=\"17\" r=\"2.5\" fill=\"#FFFFFF\"/><path d=\"M14 23h8\" stroke=\"#FFFFFF\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M18 3v7\" stroke=\"url(#g1)\" stroke-width=\"2.5\"/><circle cx=\"18\" cy=\"3\" r=\"2\" fill=\"url(#g1)\"/></g></svg>"
   },
   {
     "id": 12,
     "name": "Virtual/Augmented",
-    "img": virtual_augmented
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><path d=\"M7 7h6M7 7v6M29 7h-6M29 7v6M7 29h6M7 29v-6M29 29h-6M29 29v-6\" stroke=\"url(#g1)\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><rect x=\"9\" y=\"12\" width=\"18\" height=\"12\" rx=\"4\" fill=\"url(#g1)\"/><circle cx=\"14\" cy=\"18\" r=\"2.5\" fill=\"#FFFFFF\"/><circle cx=\"22\" cy=\"18\" r=\"2.5\" fill=\"#FFFFFF\"/></g></svg>"
   },
   {
     "id": 13,
     "name": "Systems Engineering",
-    "img": systems_engineering
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><rect x=\"5\" y=\"7\" width=\"26\" height=\"16\" rx=\"3\" fill=\"url(#g1)\"/><path d=\"M3 27h30a2 2 0 0 0 2-2v-2H1v2a2 2 0 0 0 2 2z\" fill=\"url(#g1)\"/><circle cx=\"18\" cy=\"15\" r=\"4\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"/><path d=\"M18 11v8M14 15h8\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"/></g></svg>"
   },
   {
     "id": 14,
     "name": "Cryptocurrency",
-    "img": cryptocurrency
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><circle cx=\"18\" cy=\"18\" r=\"14\" fill=\"url(#g1)\"/><path d=\"M15 11h5a3 3 0 0 1 0 6h-5m0 0h5a3 3 0 0 1 0 6h-5M15 9v18M18 9v18\" stroke=\"#FFFFFF\" stroke-width=\"2.2\" stroke-linecap=\"round\"/></g></svg>"
   },
   {
     "id": 15,
     "name": "Fintech",
-    "img": fintech
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><rect x=\"4\" y=\"6\" width=\"28\" height=\"18\" rx=\"3\" fill=\"url(#g1)\"/><circle cx=\"18\" cy=\"15\" r=\"5\" fill=\"#FFFFFF\"/><text x=\"18\" y=\"19\" font-family=\"Arial, sans-serif\" font-weight=\"bold\" font-size=\"12\" fill=\"#3038BD\" text-anchor=\"middle\">$</text><path d=\"M12 28h12M18 24v4\" stroke=\"url(#g1)\" stroke-width=\"3\"/></g></svg>"
   },
   {
     "id": 16,
     "name": "Autonomous Systems",
-    "img": autonomous_systems
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><path d=\"M7 17l2-5a3 3 0 0 1 3-2h12a3 3 0 0 1 3 2l2 5v8a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1H10v1a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-8z\" fill=\"url(#g1)\"/><circle cx=\"9.5\" cy=\"21.5\" r=\"2\" fill=\"#FFFFFF\"/><circle cx=\"26.5\" cy=\"21.5\" r=\"2\" fill=\"#FFFFFF\"/><path d=\"M15 6a3 3 0 0 1 6 0\" fill=\"none\" stroke=\"url(#g1)\" stroke-width=\"2.5\" stroke-linecap=\"round\"/></g></svg>"
   },
   {
     "id": 17,
     "name": "Machine Learning",
-    "img": machine_learning
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><rect x=\"7\" y=\"7\" width=\"22\" height=\"22\" rx=\"4\" fill=\"url(#g1)\"/><circle cx=\"13\" cy=\"13\" r=\"2.5\" fill=\"#FFFFFF\"/><circle cx=\"23\" cy=\"13\" r=\"2.5\" fill=\"#FFFFFF\"/><circle cx=\"18\" cy=\"22\" r=\"2.5\" fill=\"#FFFFFF\"/><path d=\"M13 13l5 9 5-9\" stroke=\"#FFFFFF\" stroke-width=\"1.8\"/></g></svg>"
   },
   {
     "id": 18,
     "name": "Electric-Vehicle Technology",
-    "img": electric_vehicle_technology
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><path d=\"M6 18l2-6a3 3 0 0 1 3-2h10a3 3 0 0 1 3 2l2 6v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1H9v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7z\" fill=\"url(#g1)\"/><circle cx=\"8.5\" cy=\"21.5\" r=\"2\" fill=\"#FFFFFF\"/><circle cx=\"23.5\" cy=\"21.5\" r=\"2\" fill=\"#FFFFFF\"/><path d=\"M26 13l4-3M30 10v4M27 10h3\" stroke=\"url(#g1)\" stroke-width=\"2\" stroke-linecap=\"round\"/></g></svg>"
   },
   {
     "id": 19,
     "name": "Internet of Things",
-    "img": internet_of_things
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><circle cx=\"18\" cy=\"18\" r=\"13\" fill=\"none\" stroke=\"url(#g1)\" stroke-width=\"3\"/><ellipse cx=\"18\" cy=\"18\" rx=\"6\" ry=\"13\" fill=\"none\" stroke=\"url(#g1)\" stroke-width=\"2\"/><path d=\"M5 18h26M7 11h22M7 25h22\" stroke=\"url(#g1)\" stroke-width=\"2\"/></g></svg>"
   },
   {
     "id": 20,
     "name": "Recycle-Energy",
-    "img": recycle_energy
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><circle cx=\"18\" cy=\"18\" r=\"14\" fill=\"none\" stroke=\"url(#g1)\" stroke-width=\"3.5\" stroke-dasharray=\"22 8\"/><path d=\"M19 8l-6 11h6l-2 9 8-12h-6l2-8z\" fill=\"url(#g1)\"/></g></svg>"
   },
   {
     "id": 21,
     "name": "Smart-Home",
-    "img": smart_home
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><path d=\"M18 3L4 14v15a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V14L18 3z\" fill=\"url(#g1)\"/><path d=\"M13 18a7 7 0 0 1 10 0M15 22a4 4 0 0 1 6 0\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"18\" cy=\"25\" r=\"1.5\" fill=\"#FFFFFF\"/></g></svg>"
   },
   {
     "id": 22,
     "name": "Quantum Computing",
-    "img": quantum_computing
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><rect x=\"5\" y=\"5\" width=\"26\" height=\"26\" rx=\"5\" fill=\"url(#g1)\"/><ellipse cx=\"18\" cy=\"18\" rx=\"9\" ry=\"3\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\" transform=\"rotate(30 18 18)\"/><ellipse cx=\"18\" cy=\"18\" rx=\"9\" ry=\"3\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\" transform=\"rotate(150 18 18)\"/><circle cx=\"18\" cy=\"18\" r=\"2.5\" fill=\"#FFFFFF\"/></g></svg>"
   },
   {
     "id": 23,
     "name": "Blockchain",
-    "img": blockchain
+    "img": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" width=\"36\" height=\"36\"><defs><linearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8090FF\"/><stop offset=\"50%\" stop-color=\"#5565FF\"/><stop offset=\"100%\" stop-color=\"#3038BD\"/></linearGradient><linearGradient id=\"gLight\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#EBF0FF\"/><stop offset=\"100%\" stop-color=\"#C5D0FF\"/></linearGradient><filter id=\"fShadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"1\" flood-color=\"#1A227E\" flood-opacity=\"0.3\"/></filter></defs><g filter=\"url(#fShadow)\"><path d=\"M18 4l10 5v11l-10 5-10-5V9l10-5z\" fill=\"url(#g1)\"/><path d=\"M18 4v11m0 0v11m0-11l10-5m-10 5l-10-5\" stroke=\"#FFFFFF\" stroke-width=\"1.8\"/></g></svg>"
   }
 ];
