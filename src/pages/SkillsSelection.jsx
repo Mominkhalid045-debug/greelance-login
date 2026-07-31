@@ -151,14 +151,28 @@ export default function SkillsSelection() {
 
           {!selectedCategory ? (
             /* Mode 1: Exact 4-Row Grid matching Figma Frame V1.F1.6-A */
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginBottom: '20px', width: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '20px', width: '100%' }}>
               {[
                 ["E Commerce Skills", "Cybersecurity Engineer", "Cloud Computing Engineer", "Digital Marketing Expert", "Software Engineering"],
                 ["IT Staffing", "Data Center security", "Artificial Intelligence", "Business Intelligence", "Decision Intelligence", "Robotics"],
                 ["Virtual/Augmented", "Systems Engineering", "Cryptocurrency", "Fintech", "Autonomous Systems", "Machine Learning"],
                 ["Electric-Vehicle Technology", "Internet of Things", "Recycle-Energy", "Smart-Home", "Quantum Computing", "Blockchain"]
               ].map((rowNames, rIdx) => (
-                <div key={rIdx} style={{ display: 'flex', flexWrap: 'nowrap', gap: '15px', width: '100%', overflowX: 'auto' }}>
+                <div
+                  key={rIdx}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '12px',
+                    width: '100%',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    overflowX: 'auto',
+                    scrollbarWidth: 'none', /* Firefox */
+                    msOverflowStyle: 'none',  /* IE/Edge */
+                  }}
+                  className="no-scrollbar"
+                >
                   {rowNames.map((name) => {
                     const cat = CATEGORIES.find((c) => c.name === name) || { name, img: '' };
                     return (
@@ -169,10 +183,10 @@ export default function SkillsSelection() {
                           display: 'inline-flex',
                           flexDirection: 'row',
                           alignItems: 'center',
-                          padding: '0 18px',
-                          gap: '12px',
-                          minWidth: '159.75px',
-                          height: '55.5px',
+                          padding: '0 14px',
+                          gap: '10px',
+                          minWidth: '150px',
+                          height: '52px',
                           whiteSpace: 'nowrap',
                           background: '#F3F7FF',
                           border: '1.5px solid #E0E2FE',
@@ -192,9 +206,9 @@ export default function SkillsSelection() {
                           e.currentTarget.style.borderColor = '#E0E2FE';
                         }}
                       >
-                        <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <div style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                           {cat.img ? (
-                            <img src={cat.img} alt={cat.name} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                            <img src={cat.img} alt={cat.name} style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
                           ) : null}
                         </div>
                         <span style={{ fontFamily: F, fontSize: '11px', fontWeight: 600, color: '#050A5F' }}>{cat.name}</span>
