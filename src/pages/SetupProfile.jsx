@@ -110,7 +110,7 @@ export default function SetupProfile() {
         {/* Main White Card Container */}
         <div
           style={{
-            width: '1140px',
+            width: '1320px',
             maxWidth: '96%',
             background: '#FFFFFF',
             borderRadius: '24px',
@@ -161,11 +161,11 @@ export default function SetupProfile() {
               Personal Information<span style={{ color: '#EF4444' }}>*</span>
             </h2>
 
-            {/* 4-Column Inputs Grid */}
+            {/* 4-Column Inputs Grid with 282.75px column width, 58.5px height fields */}
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
+                gridTemplateColumns: 'repeat(4, minmax(240px, 282.75px))',
                 gap: '24px 20px',
                 marginBottom: '36px',
               }}
@@ -206,7 +206,7 @@ export default function SetupProfile() {
               />
 
               {/* Row 2 */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', height: '58.5px', justifyContent: 'space-between' }}>
                 <label style={labelStyle}>Phone Number</label>
                 <div style={{ display: 'flex', gap: '8px' }}>
                   <div style={{ position: 'relative', width: '90px' }}>
@@ -215,7 +215,7 @@ export default function SetupProfile() {
                       onChange={(e) => handleChange('countryCode', e.target.value)}
                       style={{
                         width: '100%',
-                        height: '39px',
+                        height: '36px',
                         borderRadius: '45px',
                         border: '0.67px solid #D2D4FF',
                         background: '#F3F7FF',
@@ -298,12 +298,12 @@ export default function SetupProfile() {
             </div>
 
             {/* =====================================
-                SECTION 2: EDUCATION (FIGMA / REFERENCE EXACT)
+                SECTION 2: EDUCATION (Figma card: 1316.25px x 110.25px, #E6EFFF, radius 7.5px)
                ===================================== */}
             <SectionHeader title="Education" buttonText="Add Education" onAdd={() => setShowEdu((prev) => !prev)} />
             {showEdu && (
-              <FigmaCard onClose={() => setShowEdu(false)}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr 1fr', gap: '16px' }}>
+              <FigmaCard onClose={() => setShowEdu(false)} minHeight="110.25px">
+                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr 1fr', gap: '16px', alignItems: 'center' }}>
                   <FormField
                     label="Degree"
                     type="select"
@@ -342,11 +342,11 @@ export default function SetupProfile() {
             )}
 
             {/* =====================================
-                SECTION 3: EXPERIENCE (FIGMA / REFERENCE EXACT)
+                SECTION 3: EXPERIENCE (Figma card: 1316.25px x 264px, #E6EFFF, radius 7.5px)
                ===================================== */}
             <SectionHeader title="Experience" buttonText="Add Experience" onAdd={() => setShowExp((prev) => !prev)} />
             {showExp && (
-              <FigmaCard onClose={() => setShowExp(false)}>
+              <FigmaCard onClose={() => setShowExp(false)} minHeight="264px">
                 <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr 1fr', gap: '16px', marginBottom: '16px' }}>
                   <FormField
                     label="Position"
@@ -374,7 +374,7 @@ export default function SetupProfile() {
                     onYearChange={(v) => setExpData({ ...expData, startYear: v })}
                   />
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', height: '58.5px', justifyContent: 'space-between' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <label style={labelStyle}>Ending</label>
                       <label style={{ display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', fontFamily: F, fontSize: '11.5px', color: '#050A5F', fontWeight: 600 }}>
@@ -393,14 +393,14 @@ export default function SetupProfile() {
                         <SelectInput value={expData.endYear} options={YEARS} onChange={(v) => setExpData({ ...expData, endYear: v })} />
                       </div>
                     ) : (
-                      <div style={{ height: '42px', display: 'flex', alignItems: 'center', paddingLeft: '12px', fontFamily: F, fontSize: '13px', color: '#22C55E', fontWeight: 600 }}>
+                      <div style={{ height: '36px', display: 'flex', alignItems: 'center', paddingLeft: '12px', fontFamily: F, fontSize: '13px', color: '#22C55E', fontWeight: 600 }}>
                         Present
                       </div>
                     )}
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   <label style={labelStyle}>Description</label>
                   <textarea
                     rows={3}
@@ -414,11 +414,11 @@ export default function SetupProfile() {
             )}
 
             {/* =====================================
-                SECTION 4: CERTIFICATIONS (FIGMA / REFERENCE EXACT)
+                SECTION 4: CERTIFICATIONS (Figma card: 1320.6px x 230.25px, #E6EFFF, radius 7.5px)
                ===================================== */}
             <SectionHeader title="Certifications" buttonText="Add Certification" onAdd={() => setShowCert((prev) => !prev)} />
             {showCert && (
-              <FigmaCard onClose={() => setShowCert(false)}>
+              <FigmaCard onClose={() => setShowCert(false)} minHeight="230.25px">
                 <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr', gap: '20px', alignItems: 'flex-end' }}>
                   <FormField
                     label="Certificate name"
@@ -434,7 +434,7 @@ export default function SetupProfile() {
                     onChange={(v) => setCertData({ ...certData, link: v })}
                   />
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', height: '58.5px', justifyContent: 'flex-end' }}>
                     <FileUploadButton label="Upload Certificate" onFileSelect={(f) => setCertData({ ...certData, file: f })} />
                   </div>
                 </div>
@@ -442,11 +442,11 @@ export default function SetupProfile() {
             )}
 
             {/* =====================================
-                SECTION 5: PORTFOLIO (FIGMA / REFERENCE EXACT)
+                SECTION 5: PORTFOLIO (Figma card: 1321.1px x 297px, #E6EFFF, radius 7.5px)
                ===================================== */}
             <SectionHeader title="Portfolio" buttonText="Add Portfolio" onAdd={() => setShowPort((prev) => !prev)} />
             {showPort && (
-              <FigmaCard onClose={() => setShowPort(false)}>
+              <FigmaCard onClose={() => setShowPort(false)} minHeight="297px">
                 <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.5fr 1fr', gap: '20px', alignItems: 'flex-end', marginBottom: '16px' }}>
                   <FormField
                     label="Title"
@@ -464,11 +464,11 @@ export default function SetupProfile() {
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     <FileUploadButton label="Upload Portfolio" onFileSelect={(f) => setPortData({ ...portData, file: f })} />
-                    <span style={{ fontFamily: F, fontSize: '10.5px', color: '#9CA3AF' }}>*You can upload any PDF, TXT, or DOC file</span>
+                    <span style={{ fontFamily: F, fontSize: '10px', color: '#9CA3AF' }}>*You can upload any PDF, TXT, or DOC file</span>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   <label style={labelStyle}>Description</label>
                   <textarea
                     rows={3}
@@ -501,7 +501,7 @@ export default function SetupProfile() {
                   width: '99px',
                   height: '28px',
                   fontFamily: F,
-                  fontSize: '9px',
+                  fontSize: '11px',
                   fontWeight: 500,
                   cursor: 'pointer',
                   boxShadow: 'rgba(48, 56, 189, 0.25) 0px 4px 12px 0px',
@@ -521,7 +521,7 @@ export default function SetupProfile() {
   );
 }
 
-/* Helper SectionHeader Component with Right Green Add Button (Circle Plus Icon & Space-Between Layout) */
+/* Helper SectionHeader Component with Green Add Button (width: 105.38px, height: 24px, #4ADF86) */
 function SectionHeader({ title, buttonText, onAdd }) {
   return (
     <div
@@ -551,18 +551,20 @@ function SectionHeader({ title, buttonText, onAdd }) {
           background: '#4ADF86',
           color: '#FFFFFF',
           border: 'none',
-          borderRadius: '15px',
-          padding: '4px 12px',
+          borderRadius: '12px',
+          width: '105.38px',
           height: '24px',
           fontFamily: F,
-          fontSize: '9px',
-          fontWeight: 500,
+          fontSize: '10px',
+          fontWeight: 600,
           cursor: 'pointer',
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '5px',
+          justifyContent: 'center',
+          gap: '4px',
           boxShadow: '0 2px 6px rgba(74, 223, 134, 0.2)',
           transition: 'all 0.2s ease',
+          boxSizing: 'border-box',
         }}
         onMouseEnter={(e) => (e.currentTarget.style.background = '#38C972')}
         onMouseLeave={(e) => (e.currentTarget.style.background = '#4ADF86')}
@@ -578,19 +580,43 @@ function SectionHeader({ title, buttonText, onAdd }) {
   );
 }
 
-/* Helper Figma Card Container */
-function FigmaCard({ onClose, children }) {
+/* Helper Figma Card Container (background: #E6EFFF, border-radius: 7.5px) */
+function FigmaCard({ onClose, children, minHeight = 'auto' }) {
   return (
     <div
       style={{
-        background: '#F0F4FF',
+        background: '#E6EFFF',
         border: '1px solid #D6E4FF',
-        borderRadius: '16px',
+        borderRadius: '7.5px',
         padding: '24px',
         marginBottom: '20px',
         position: 'relative',
+        minHeight: minHeight,
+        boxSizing: 'border-box',
       }}
     >
+      <button
+        type="button"
+        onClick={onClose}
+        style={{
+          position: 'absolute',
+          top: '16px',
+          right: '16px',
+          background: 'none',
+          border: 'none',
+          color: '#6B7280',
+          fontSize: '16px',
+          fontWeight: 700,
+          cursor: 'pointer',
+        }}
+        title="Remove"
+      >
+        ✕
+      </button>
+      {children}
+    </div>
+  );
+}
       <button
         type="button"
         onClick={onClose}
