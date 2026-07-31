@@ -204,9 +204,9 @@ export default function SkillsSelection() {
                           e.currentTarget.style.borderColor = '#E0E2FE';
                         }}
                       >
-                        <div style={{ width: '26px', height: '26px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <div style={{ width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                           {cat.img ? (
-                            <img src={cat.img} alt={cat.name} style={{ width: '26px', height: '26px', objectFit: 'contain' }} />
+                            <img src={cat.img} alt={cat.name} width={24} height={24} style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
                           ) : null}
                         </div>
                         <span style={{ fontFamily: F, fontSize: '12px', fontWeight: 600, color: '#050A5F' }}>{cat.name}</span>
