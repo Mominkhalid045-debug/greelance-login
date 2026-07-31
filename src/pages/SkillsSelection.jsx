@@ -150,8 +150,8 @@ export default function SkillsSelection() {
           </p>
 
           {!selectedCategory ? (
-            /* Mode 1: Exact 4-Row Responsive Grid matching Figma Frame V1.F1.6-A */
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '24px', width: '100%' }}>
+            /* Mode 1: Exact 4-Row Grid matching Figma Frame V1.F1.6-A */
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '28px', width: '100%' }}>
               {[
                 ["E Commerce Skills", "Cybersecurity Engineer", "Cloud Computing Engineer", "Digital Marketing Expert", "Software Engineering"],
                 ["IT Staffing", "Data Center security", "Artificial Intelligence", "Business Intelligence", "Decision Intelligence", "Robotics"],
@@ -161,10 +161,12 @@ export default function SkillsSelection() {
                 <div
                   key={rIdx}
                   style={{
-                    display: 'grid',
-                    gridTemplateColumns: rIdx === 0 ? 'repeat(5, 1fr)' : 'repeat(6, 1fr)',
-                    gap: '12px',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '16px',
                     width: '100%',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
                     boxSizing: 'border-box',
                   }}
                 >
@@ -175,20 +177,22 @@ export default function SkillsSelection() {
                         key={cat.name}
                         onClick={() => handleSelectCategory(cat.name)}
                         style={{
-                          display: 'flex',
+                          display: 'inline-flex',
                           flexDirection: 'row',
                           alignItems: 'center',
-                          padding: '0 12px',
-                          gap: '10px',
-                          height: '54px',
-                          width: '100%',
+                          padding: '0 20px',
+                          gap: '12px',
+                          height: '56px',
+                          width: 'auto',
+                          whiteSpace: 'nowrap',
                           background: '#F3F7FF',
                           border: '1.5px solid #E0E2FE',
-                          borderRadius: '7.5px',
+                          borderRadius: '8px',
                           cursor: 'pointer',
                           userSelect: 'none',
                           transition: 'all 0.2s ease',
                           boxSizing: 'border-box',
+                          flexShrink: 0,
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.background = '#E6EFFF';
@@ -199,12 +203,12 @@ export default function SkillsSelection() {
                           e.currentTarget.style.borderColor = '#E0E2FE';
                         }}
                       >
-                        <div style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                           {cat.img ? (
-                            <img src={cat.img} alt={cat.name} style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+                            <img src={cat.img} alt={cat.name} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
                           ) : null}
                         </div>
-                        <span style={{ fontFamily: F, fontSize: '11px', fontWeight: 600, color: '#050A5F', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{cat.name}</span>
+                        <span style={{ fontFamily: F, fontSize: '12px', fontWeight: 600, color: '#050A5F' }}>{cat.name}</span>
                       </div>
                     );
                   })}
