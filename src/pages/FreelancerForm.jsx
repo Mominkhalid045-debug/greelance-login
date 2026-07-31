@@ -173,33 +173,36 @@ export default function FreelancerForm() {
           padding: '40px 20px',
         }}
       >
+        {/* Figma Upload File Outer Container: 861.75px x 358.5px, radius: 7.5px, border: 1.5px dashed */}
         <div
           style={{
-            width: '900px',
-            maxWidth: '96%',
-            background: '#FFFFFF',
-            borderRadius: '24px',
-            boxShadow: '0 10px 30px rgba(5, 10, 95, 0.03)',
-            padding: '48px',
+            width: '861.75px',
+            maxWidth: '100%',
+            height: '358.5px',
+            background: '#F3F7FF',
+            border: '1.5px dashed #D2D4FF',
+            borderRadius: '7.5px',
+            padding: '42px 25.5px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '41.25px',
             boxSizing: 'border-box',
           }}
         >
-          {/* Dashed Upload Dropzone Container */}
+          {/* Group 37791: Illustration + Hint text (Width: 187px, Height: 194.25px) */}
           <div
             style={{
-              width: '100%',
-              background: '#F3F7FF',
-              border: '1.33px dashed #D2D4FF',
-              borderRadius: '12px',
-              padding: '48px 24px',
+              width: '187px',
+              height: '194.25px',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center',
-              boxSizing: 'border-box',
+              justifyContent: 'space-between',
             }}
           >
-            {/* Soft Glow Circular Backdrop + Illustration */}
+            {/* Graphic Illustration */}
             <div
               style={{
                 position: 'relative',
@@ -208,27 +211,26 @@ export default function FreelancerForm() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '28px',
               }}
             >
-              {/* Soft purple glow circle */}
+              {/* Soft purple/light-blue circular glow backdrop */}
               <div
                 style={{
                   position: 'absolute',
-                  width: '140px',
-                  height: '140px',
+                  width: '135px',
+                  height: '135px',
                   borderRadius: '50%',
                   background: '#E6EFFF',
                   zIndex: 1,
                 }}
               />
 
-              {/* Graphic Window Card */}
+              {/* Document Window Card */}
               <div
                 style={{
                   position: 'relative',
                   zIndex: 2,
-                  width: '170px',
+                  width: '165px',
                   height: '110px',
                   background: '#FFFFFF',
                   borderRadius: '10px',
@@ -239,19 +241,19 @@ export default function FreelancerForm() {
                 }}
               >
                 {/* Left Sidebar */}
-                <div style={{ width: '25%', background: '#0F172A', height: '100%', padding: '8px' }}>
+                <div style={{ width: '26%', background: '#0F172A', height: '100%', padding: '8px', boxSizing: 'border-box' }}>
                   <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3038BD', marginBottom: '8px' }} />
                   <div style={{ width: '100%', height: '4px', background: '#334155', borderRadius: '2px', marginBottom: '4px' }} />
                   <div style={{ width: '70%', height: '4px', background: '#334155', borderRadius: '2px' }} />
                 </div>
 
-                {/* Right Document Previews */}
-                <div style={{ flex: 1, background: '#F8FAFC', padding: '10px', display: 'flex', gap: '8px', alignItems: 'center', justifyContent: 'center' }}>
+                {/* Right Document Badges */}
+                <div style={{ flex: 1, background: '#F8FAFC', padding: '8px', display: 'flex', gap: '8px', alignItems: 'center', justifyContent: 'center' }}>
                   {/* PDF Badge File */}
                   <div
                     style={{
-                      width: '48px',
-                      height: '60px',
+                      width: '46px',
+                      height: '58px',
                       background: '#FFFFFF',
                       borderRadius: '6px',
                       border: '1px solid #E2E8F0',
@@ -266,15 +268,15 @@ export default function FreelancerForm() {
                     <span style={{ fontSize: '9px', fontWeight: 700, color: '#FFFFFF', background: '#4ADF86', padding: '2px 5px', borderRadius: '4px' }}>
                       PDF
                     </span>
-                    <div style={{ width: '28px', height: '2px', background: '#E2E8F0' }} />
-                    <div style={{ width: '20px', height: '2px', background: '#E2E8F0' }} />
+                    <div style={{ width: '26px', height: '2px', background: '#E2E8F0' }} />
+                    <div style={{ width: '18px', height: '2px', background: '#E2E8F0' }} />
                   </div>
 
                   {/* DOC Badge File */}
                   <div
                     style={{
-                      width: '48px',
-                      height: '60px',
+                      width: '46px',
+                      height: '58px',
                       background: '#FFFFFF',
                       borderRadius: '6px',
                       border: '1px solid #E2E8F0',
@@ -289,104 +291,119 @@ export default function FreelancerForm() {
                     <span style={{ fontSize: '9px', fontWeight: 700, color: '#FFFFFF', background: '#3038BD', padding: '2px 5px', borderRadius: '4px' }}>
                       DOC
                     </span>
-                    <div style={{ width: '28px', height: '2px', background: '#E2E8F0' }} />
-                    <div style={{ width: '20px', height: '2px', background: '#E2E8F0' }} />
+                    <div style={{ width: '26px', height: '2px', background: '#E2E8F0' }} />
+                    <div style={{ width: '18px', height: '2px', background: '#E2E8F0' }} />
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Hint Text */}
+            {/* Hint Text (Figma Description Text: 12px) */}
             <p
               style={{
                 fontFamily: F,
-                fontSize: '13px',
-                color: '#7C8BA1',
-                margin: '0 0 28px 0',
+                fontSize: '12px',
+                color: '#3038BD',
+                margin: 0,
                 textAlign: 'center',
+                whiteSpace: 'nowrap',
+                fontWeight: 400,
               }}
             >
-              *You can upload any PDF or Word File
+              *You can upload PDF or WORD file
             </p>
+          </div>
 
-            {/* Upload Status Feedback */}
-            {selectedFile && (
-              <p style={{ fontFamily: F, fontSize: '13px', fontWeight: 600, color: '#4ADF86', margin: '0 0 16px 0' }}>
-                📄 {selectedFile} selected! Redirecting...
-              </p>
-            )}
+          {/* Upload Status Feedback */}
+          {selectedFile && (
+            <p style={{ fontFamily: F, fontSize: '12px', fontWeight: 600, color: '#4ADF86', margin: 0 }}>
+              📄 {selectedFile} selected! Redirecting...
+            </p>
+          )}
 
-            {/* Hidden File Input */}
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".pdf,.doc,.docx"
-              onChange={handleFileChange}
-              style={{ display: 'none' }}
-            />
+          {/* Hidden File Input */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".pdf,.doc,.docx"
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
 
-            {/* Action Buttons */}
-            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                style={{
-                  background: '#3038BD',
-                  color: '#FFFFFF',
-                  border: 'none',
-                  borderRadius: '16.88px',
-                  height: '38px',
-                  padding: '0 24px',
-                  fontFamily: F,
-                  fontSize: '11px',
-                  fontWeight: 500,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  boxShadow: 'rgba(48, 56, 189, 0.25) 0px 4px 12px 0px',
-                  transition: 'background 0.2s ease',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = '#252BA3')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = '#3038BD')}
-              >
-                <span>Upload Resume</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="17 8 12 3 7 8" />
-                  <line x1="12" y1="3" x2="12" y2="15" />
-                </svg>
-              </button>
+          {/* Group 37800: Action Buttons Container (Width: 330px, Height: 37.5px) */}
+          <div
+            style={{
+              width: '330px',
+              height: '37.5px',
+              display: 'flex',
+              gap: '12px',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              style={{
+                flex: 1,
+                height: '37.5px',
+                background: '#3038BD',
+                color: '#FFFFFF',
+                border: 'none',
+                borderRadius: '18.75px',
+                fontFamily: F,
+                fontSize: '12px',
+                fontWeight: 500,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                boxShadow: '0px 4px 12px rgba(48, 56, 189, 0.25)',
+                transition: 'background 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = '#252BA3')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = '#3038BD')}
+            >
+              <span>Upload Resume</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
+              </svg>
+            </button>
 
-              <button
-                type="button"
-                onClick={() => navigate('/setup-profile')}
-                style={{
-                  background: '#E6EFFF',
-                  color: '#3038BD',
-                  border: '0.66px solid #3038BD',
-                  borderRadius: '16.88px',
-                  height: '38px',
-                  padding: '0 24px',
-                  fontFamily: F,
-                  fontSize: '11px',
-                  fontWeight: 500,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#D8E5FF';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#E6EFFF';
-                }}
-              >
-                Create Manually
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => navigate('/setup-profile')}
+              style={{
+                flex: 1,
+                height: '37.5px',
+                background: '#E6EFFF',
+                color: '#3038BD',
+                border: '1px solid #3038BD',
+                borderRadius: '18.75px',
+                fontFamily: F,
+                fontSize: '12px',
+                fontWeight: 500,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#D8E5FF';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#E6EFFF';
+              }}
+            >
+              Create Manually
+            </button>
           </div>
         </div>
-      </main>
+      </main>in>
     </div>
   );
 }
