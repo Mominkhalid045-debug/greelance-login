@@ -151,7 +151,7 @@ export default function SkillsSelection() {
 
           {!selectedCategory ? (
             /* Mode 1: Exact 4-Row Grid matching Figma Frame V1.F1.6-A */
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '28px', width: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '24px', width: '100%' }}>
               {[
                 ["E Commerce Skills", "Cybersecurity Engineer", "Cloud Computing Engineer", "Digital Marketing Expert", "Software Engineering"],
                 ["IT Staffing", "Data Center security", "Artificial Intelligence", "Business Intelligence", "Decision Intelligence", "Robotics"],
@@ -163,7 +163,7 @@ export default function SkillsSelection() {
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    gap: '16px',
+                    gap: '12px',
                     width: '100%',
                     justifyContent: 'flex-start',
                     alignItems: 'center',
@@ -180,9 +180,9 @@ export default function SkillsSelection() {
                           display: 'inline-flex',
                           flexDirection: 'row',
                           alignItems: 'center',
-                          padding: '0 20px',
-                          gap: '12px',
-                          height: '56px',
+                          padding: '0 14px',
+                          gap: '10px',
+                          height: '52px',
                           width: 'auto',
                           whiteSpace: 'nowrap',
                           background: '#F3F7FF',
@@ -203,12 +203,12 @@ export default function SkillsSelection() {
                           e.currentTarget.style.borderColor = '#E0E2FE';
                         }}
                       >
-                        <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <div style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                           {cat.img ? (
-                            <img src={cat.img} alt={cat.name} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                            <img src={cat.img} alt={cat.name} style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
                           ) : null}
                         </div>
-                        <span style={{ fontFamily: F, fontSize: '12px', fontWeight: 600, color: '#050A5F' }}>{cat.name}</span>
+                        <span style={{ fontFamily: F, fontSize: '11.5px', fontWeight: 600, color: '#050A5F' }}>{cat.name}</span>
                       </div>
                     );
                   })}
