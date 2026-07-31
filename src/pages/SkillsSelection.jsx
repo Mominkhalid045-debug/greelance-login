@@ -169,8 +169,9 @@ export default function SkillsSelection() {
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
-                    padding: '11.25px 15px',
-                    gap: '14.25px',
+                    padding: '8px 12px',
+                    gap: '10px',
+                    width: '159.75px',
                     height: '55.5px',
                     background: '#F3F7FF',
                     border: '1.5px solid #E0E2FE',
@@ -189,12 +190,12 @@ export default function SkillsSelection() {
                     e.currentTarget.style.borderColor = '#E0E2FE';
                   }}
                 >
-                  <div style={{ width: '33px', height: '33px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     {cat.img ? (
-                      <img src={cat.img} alt={cat.name} style={{ width: '33px', height: '33px', objectFit: 'contain' }} />
+                      <img src={cat.img} alt={cat.name} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
                     ) : null}
                   </div>
-                  <span style={{ fontFamily: F, fontSize: '10.5px', fontWeight: 500, lineHeight: '22px', color: '#050A5F' }}>{cat.name}</span>
+                  <span style={{ fontFamily: F, fontSize: '11px', fontWeight: 600, lineHeight: '1.25', color: '#050A5F', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{cat.name}</span>
                 </div>
               ))}
             </div>
