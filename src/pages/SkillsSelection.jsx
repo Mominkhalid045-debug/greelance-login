@@ -150,54 +150,57 @@ export default function SkillsSelection() {
           </p>
 
           {!selectedCategory ? (
-            /* Mode 1: Grid of All 23 Categories matching Screenshot 2 */
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '15px',
-                marginBottom: '20px',
-                width: '100%',
-                justifyContent: 'flex-start',
-              }}
-            >
-              {CATEGORIES.map((cat) => (
-                <div
-                  key={cat.id || cat.name}
-                  onClick={() => handleSelectCategory(cat.name)}
-                  style={{
-                    display: 'inline-flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '0 18px',
-                    gap: '12px',
-                    minWidth: '159.75px',
-                    height: '55.5px',
-                    whiteSpace: 'nowrap',
-                    background: '#F3F7FF',
-                    border: '1.5px solid #E0E2FE',
-                    borderRadius: '7.5px',
-                    cursor: 'pointer',
-                    userSelect: 'none',
-                    transition: 'all 0.2s ease',
-                    boxSizing: 'border-box',
-                    flexShrink: 0,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = '#E6EFFF';
-                    e.currentTarget.style.borderColor = '#3038BD';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = '#F3F7FF';
-                    e.currentTarget.style.borderColor = '#E0E2FE';
-                  }}
-                >
-                  <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    {cat.img ? (
-                      <img src={cat.img} alt={cat.name} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
-                    ) : null}
-                  </div>
-                  <span style={{ fontFamily: F, fontSize: '11px', fontWeight: 600, color: '#050A5F' }}>{cat.name}</span>
+            /* Mode 1: Exact 4-Row Grid matching Figma Frame V1.F1.6-A */
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginBottom: '20px', width: '100%' }}>
+              {[
+                ["E Commerce Skills", "Cybersecurity Engineer", "Cloud Computing Engineer", "Digital Marketing Expert", "Software Engineering"],
+                ["IT Staffing", "Data Center security", "Artificial Intelligence", "Business Intelligence", "Decision Intelligence", "Robotics"],
+                ["Virtual/Augmented", "Systems Engineering", "Cryptocurrency", "Fintech", "Autonomous Systems", "Machine Learning"],
+                ["Electric-Vehicle Technology", "Internet of Things", "Recycle-Energy", "Smart-Home", "Quantum Computing", "Blockchain"]
+              ].map((rowNames, rIdx) => (
+                <div key={rIdx} style={{ display: 'flex', flexWrap: 'nowrap', gap: '15px', width: '100%', overflowX: 'auto' }}>
+                  {rowNames.map((name) => {
+                    const cat = CATEGORIES.find((c) => c.name === name) || { name, img: '' };
+                    return (
+                      <div
+                        key={cat.name}
+                        onClick={() => handleSelectCategory(cat.name)}
+                        style={{
+                          display: 'inline-flex',
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          padding: '0 18px',
+                          gap: '12px',
+                          minWidth: '159.75px',
+                          height: '55.5px',
+                          whiteSpace: 'nowrap',
+                          background: '#F3F7FF',
+                          border: '1.5px solid #E0E2FE',
+                          borderRadius: '7.5px',
+                          cursor: 'pointer',
+                          userSelect: 'none',
+                          transition: 'all 0.2s ease',
+                          boxSizing: 'border-box',
+                          flexShrink: 0,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = '#E6EFFF';
+                          e.currentTarget.style.borderColor = '#3038BD';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = '#F3F7FF';
+                          e.currentTarget.style.borderColor = '#E0E2FE';
+                        }}
+                      >
+                        <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          {cat.img ? (
+                            <img src={cat.img} alt={cat.name} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                          ) : null}
+                        </div>
+                        <span style={{ fontFamily: F, fontSize: '11px', fontWeight: 600, color: '#050A5F' }}>{cat.name}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               ))}
             </div>
