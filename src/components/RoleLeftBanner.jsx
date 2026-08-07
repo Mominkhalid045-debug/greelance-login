@@ -165,7 +165,7 @@ export default function RoleLeftBanner() {
             <button style={{ flex: 1, height: '22px', background: '#3741D4', color: '#fff', border: 'none', borderRadius: '11px', fontFamily: F, fontSize: '8px', fontWeight: 700, cursor: 'pointer' }}>
               Accept
             </button>
-            <button style={{ flex: 1, height: '22px', background: '#fff', color: '#3741D4', border: '1px solid #3741D4', borderRadius: '11px', fontFamily: F, fontSize: '8px', fontWeight 700, cursor: 'pointer' }}>
+            <button style={{ flex: 1, height: '22px', background: '#fff', color: '#3741D4', border: '1px solid #3741D4', borderRadius: '11px', fontFamily: F, fontSize: '8px', fontWeight: 700, cursor: 'pointer' }}>
               Decline
             </button>
           </div>
