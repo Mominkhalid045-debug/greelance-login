@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { StepHeader, F } from './FreelancerForm';
 
 import { CATEGORIES } from '../data/categoryData';
-import { CATEGORY_ICONS } from '../assets/category_icons/CategoryIcons.jsx';
 
 const SUB_CATEGORIES_MAP = {
   'Digital Marketing Expert': ['Retail Media', 'Programmatic Ads', 'Network Marketing', 'Product Design', 'Email Marketing', 'SEO Strategy'],
@@ -221,8 +220,20 @@ export default function SkillsSelection() {
                               e.currentTarget.style.borderColor = '#E0E2FE';
                             }}
                           >
-                            <div style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                              {(() => { const IconComp = CATEGORY_ICONS[cat.name]; return IconComp ? <IconComp /> : null; })()}
+                            <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                              {cat.img ? (
+                                <img
+                                  src={cat.img}
+                                  alt=""
+                                  style={{
+                                    width: '32px',
+                                    height: '32px',
+                                    objectFit: 'contain',
+                                    objectPosition: cat.name === 'E Commerce Skills' ? 'left center' : 'center',
+                                    display: 'block',
+                                  }}
+                                />
+                              ) : null}
                             </div>
                             <span style={{ fontFamily: F, fontSize: '13px', fontWeight: 600, color: '#050A5F', whiteSpace: 'nowrap' }}>{cat.name}</span>
                           </div>
