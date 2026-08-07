@@ -220,7 +220,7 @@ export default function SkillsSelection() {
                               e.currentTarget.style.borderColor = '#E0E2FE';
                             }}
                           >
-                            <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
                               {cat.img ? (
                                 <img
                                   src={cat.img}
@@ -228,7 +228,7 @@ export default function SkillsSelection() {
                                   style={{
                                     width: '32px',
                                     height: '32px',
-                                    objectFit: 'contain',
+                                    objectFit: cat.name === 'E Commerce Skills' ? 'cover' : 'contain',
                                     objectPosition: cat.name === 'E Commerce Skills' ? 'left center' : 'center',
                                     display: 'block',
                                   }}
