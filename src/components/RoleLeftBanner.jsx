@@ -44,14 +44,12 @@ export default function RoleLeftBanner() {
         }}
       >
         Join Our Decentralized<br />Talent Network
-      </h2>
-
-      {/* Center Illustration with Large Cyan Soft Glow Backdrop */}
+      </h2>      {/* Center Illustration with Large Cyan Soft Glow Backdrop */}
       <div
         className="center-illustration"
         style={{
-          width: '380px',
-          height: '360px',
+          width: '450px',
+          height: '380px',
           position: 'relative',
           display: 'flex',
           alignItems: 'center',
@@ -63,8 +61,8 @@ export default function RoleLeftBanner() {
         <div
           style={{
             position: 'absolute',
-            width: '320px',
-            height: '320px',
+            width: '360px',
+            height: '360px',
             borderRadius: '50%',
             background: 'radial-gradient(circle, rgba(34, 211, 166, 0.45) 0%, rgba(33, 50, 199, 0) 70%)',
             pointerEvents: 'none',
@@ -75,9 +73,9 @@ export default function RoleLeftBanner() {
         <div
           style={{
             position: 'absolute',
-            left: '0px',
-            top: '40px',
-            width: '260px',
+            left: '10px',
+            top: '45px',
+            width: '250px',
             background: '#FFFFFF',
             borderRadius: '16px',
             boxShadow: '0 12px 30px rgba(5,10,95,0.2)',
@@ -106,14 +104,14 @@ export default function RoleLeftBanner() {
         <div
           style={{
             position: 'absolute',
-            right: '0px',
-            top: '0px',
-            width: '240px',
+            right: '20px',
+            top: '10px',
+            width: '235px',
             background: '#FFFFFF',
             borderRadius: '16px',
             boxShadow: '0 20px 40px rgba(5,10,95,0.25)',
             padding: '12px 14px',
-            zIndex: 3,
+            zIndex: 2,
             display: 'flex',
             flexDirection: 'column',
             gap: '8px',
@@ -167,7 +165,7 @@ export default function RoleLeftBanner() {
             <button style={{ flex: 1, height: '22px', background: '#3741D4', color: '#fff', border: 'none', borderRadius: '11px', fontFamily: F, fontSize: '8px', fontWeight: 700, cursor: 'pointer' }}>
               Accept
             </button>
-            <button style={{ flex: 1, height: '22px', background: '#fff', color: '#3741D4', border: '1px solid #3741D4', borderRadius: '11px', fontFamily: F, fontSize: '8px', fontWeight: 700, cursor: 'pointer' }}>
+            <button style={{ flex: 1, height: '22px', background: '#fff', color: '#3741D4', border: '1px solid #3741D4', borderRadius: '11px', fontFamily: F, fontSize: '8px', fontWeight 700, cursor: 'pointer' }}>
               Decline
             </button>
           </div>
@@ -177,14 +175,14 @@ export default function RoleLeftBanner() {
         <div
           style={{
             position: 'absolute',
-            left: '10px',
-            bottom: '20px',
-            width: '240px',
+            left: '15px',
+            bottom: '30px',
+            width: '235px',
             background: '#FFFFFF',
             borderRadius: '16px',
             boxShadow: '0 16px 36px rgba(5,10,95,0.22)',
             padding: '12px 14px',
-            zIndex: 4,
+            zIndex: 3,
             display: 'flex',
             flexDirection: 'column',
             gap: '6px',
@@ -218,14 +216,14 @@ export default function RoleLeftBanner() {
         <div
           style={{
             position: 'absolute',
-            left: '125px',
-            bottom: '0px',
-            width: '100px',
+            left: '240px',
+            bottom: '15px',
+            width: '105px',
             background: '#EEF2FF',
             borderRadius: '14px',
             boxShadow: '0 12px 28px rgba(5,10,95,0.25)',
             padding: '10px',
-            zIndex: 5,
+            zIndex: 4,
             display: 'flex',
             flexDirection: 'column',
             gap: '3px',
