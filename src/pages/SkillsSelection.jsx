@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { StepHeader, F } from './FreelancerForm';
 
 import { CATEGORIES } from '../data/categoryData';
+import { CATEGORY_ICONS } from '../assets/category_icons/CategoryIcons.jsx';
 
 const SUB_CATEGORIES_MAP = {
   'Digital Marketing Expert': ['Retail Media', 'Programmatic Ads', 'Network Marketing', 'Product Design', 'Email Marketing', 'SEO Strategy'],
@@ -221,9 +222,7 @@ export default function SkillsSelection() {
                             }}
                           >
                             <div style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                              {cat.img ? (
-                                <img src={cat.img} alt={cat.name} width={28} height={28} style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
-                              ) : null}
+                              {(() => { const IconComp = CATEGORY_ICONS[cat.name]; return IconComp ? <IconComp /> : null; })()}
                             </div>
                             <span style={{ fontFamily: F, fontSize: '13px', fontWeight: 600, color: '#050A5F', whiteSpace: 'nowrap' }}>{cat.name}</span>
                           </div>
