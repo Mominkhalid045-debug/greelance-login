@@ -4,30 +4,6 @@ import { StepHeader, F } from './FreelancerForm';
 
 import { CATEGORIES } from '../data/categoryData';
 
-const C = '#3038BD';
-const SVG_OVERRIDES = {
-  'Cloud Computing Engineer': () => (
-    <svg width={32} height={32} viewBox="0 0 24 24" fill="none" stroke={C} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
-      <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
-    </svg>
-  ),
-  'Electric-Vehicle Technology': () => (
-    <svg width={32} height={32} viewBox="0 0 24 24" fill="none" stroke={C} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="1" y="3" width="15" height="13" rx="2"/>
-      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
-      <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-      <line x1="11" y1="6" x2="9" y2="10"/><line x1="9" y1="10" x2="11" y2="10"/><line x1="11" y1="10" x2="9" y2="14"/>
-    </svg>
-  ),
-  'Digital Marketing Expert': () => (
-    <svg width={32} height={32} viewBox="0 0 24 24" fill="none" stroke={C} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-    </svg>
-  ),
-};
 
 const SUB_CATEGORIES_MAP = {
   'Digital Marketing Expert': ['Retail Media', 'Programmatic Ads', 'Network Marketing', 'Product Design', 'Email Marketing', 'SEO Strategy'],
@@ -245,22 +221,20 @@ export default function SkillsSelection() {
                               e.currentTarget.style.borderColor = '#E0E2FE';
                             }}
                           >
-                            <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                              {SVG_OVERRIDES[cat.name] ? SVG_OVERRIDES[cat.name]() : (
-                                cat.img ? (
-                                  <img
-                                    src={cat.img}
-                                    alt=""
-                                    style={{
-                                      width: '32px',
-                                      height: '32px',
-                                      objectFit: cat.name === 'E Commerce Skills' ? 'cover' : 'contain',
-                                      objectPosition: cat.name === 'E Commerce Skills' ? 'left center' : 'center',
-                                      display: 'block',
-                                    }}
-                                  />
-                                ) : null
-                              )}
+                            <div style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                              {cat.img ? (
+                                <img
+                                  src={cat.img}
+                                  alt=""
+                                  style={{
+                                    width: '28px',
+                                    height: '28px',
+                                    objectFit: cat.name === 'E Commerce Skills' ? 'cover' : 'contain',
+                                    objectPosition: cat.name === 'E Commerce Skills' ? 'left center' : 'center',
+                                    display: 'block',
+                                  }}
+                                />
+                              ) : null}
                             </div>
                             <span style={{ fontFamily: F, fontSize: '13px', fontWeight: 600, color: '#050A5F', whiteSpace: 'nowrap' }}>{cat.name}</span>
                           </div>
