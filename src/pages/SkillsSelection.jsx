@@ -119,7 +119,7 @@ export default function SkillsSelection() {
             background: '#FFFFFF',
             borderRadius: '24px',
             boxShadow: '0 10px 30px rgba(5, 10, 95, 0.03)',
-            padding: '48px',
+            padding: '48px 24px',
             boxSizing: 'border-box',
             marginBottom: '32px',
           }}
@@ -201,9 +201,8 @@ export default function SkillsSelection() {
                               padding: '0 18px',
                               gap: '10px',
                               height: '55.5px',
-                              flex: `${fw} ${fw} 0`,
+                              flex: `${fw} ${fw} auto`,
                               minWidth: 0,
-                              overflow: 'hidden',
                               background: '#F3F7FF',
                               border: '1.3px solid #E0E2FE',
                               borderRadius: '10px',
@@ -226,7 +225,7 @@ export default function SkillsSelection() {
                                 <img src={cat.img} alt={cat.name} width={28} height={28} style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
                               ) : null}
                             </div>
-                            <span style={{ fontFamily: F, fontSize: '13px', fontWeight: 600, color: '#050A5F', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{cat.name}</span>
+                            <span style={{ fontFamily: F, fontSize: '13px', fontWeight: 600, color: '#050A5F', whiteSpace: 'nowrap' }}>{cat.name}</span>
                           </div>
                         );
                       })}
