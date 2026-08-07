@@ -150,72 +150,91 @@ export default function SkillsSelection() {
           </p>
 
           {!selectedCategory ? (
-            /* Mode 1: Exact 4-Row Grid matching Figma Frame — card size 235.5 x 55.5 */
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '28px', width: '100%' }}>
-              {[
-                ["E Commerce Skills", "Cybersecurity Engineer", "Cloud Computing Engineer", "Digital Marketing Expert", "Software Engineering"],
-                ["IT Staffing", "Data Center security", "Artificial Intelligence", "Business Intelligence", "Decision Intelligence", "Robotics"],
-                ["Virtual/Augmented", "Systems Engineering", "Cryptocurrency", "Fintech", "Autonomous Systems", "Machine Learning"],
-                ["Electric-Vehicle Technology", "Internet of Things", "Recycle-Energy", "Smart-Home", "Quantum Computing", "Blockchain"]
-              ].map((rowNames, rIdx) => (
-                <div
-                  key={rIdx}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: '14px',
-                    width: '100%',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    boxSizing: 'border-box',
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  {rowNames.map((name) => {
-                    const cat = CATEGORIES.find((c) => c.name === name) || { name, img: '' };
-                    return (
-                      <div
-                        key={cat.name}
-                        onClick={() => handleSelectCategory(cat.name)}
-                        style={{
-                          display: 'inline-flex',
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                          padding: '0 18px',
-                          gap: '10px',
-                          height: '55.5px',
-                          width: 'auto',
-                          whiteSpace: 'nowrap',
-                          background: '#F3F7FF',
-                          border: '1.3px solid #E0E2FE',
-                          borderRadius: '10px',
-                          cursor: 'pointer',
-                          userSelect: 'none',
-                          transition: 'all 0.2s ease',
-                          boxSizing: 'border-box',
-                          flexShrink: 0,
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background = '#E6EFFF';
-                          e.currentTarget.style.borderColor = '#3038BD';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background = '#F3F7FF';
-                          e.currentTarget.style.borderColor = '#E0E2FE';
-                        }}
-                      >
-                        <div style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                          {cat.img ? (
-                            <img src={cat.img} alt={cat.name} width={28} height={28} style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
-                          ) : null}
-                        </div>
-                        <span style={{ fontFamily: F, fontSize: '13px', fontWeight: 600, color: '#050A5F' }}>{cat.name}</span>
-                      </div>
-                    );
-                  })}
+            /* Mode 1: Figma-exact 4-Row Grid — proportional flex widths from Figma specs */
+            (() => {
+              // Figma width values for each card (used as flex-grow for proportional sizing)
+              const ROWS = [
+                {
+                  names: ["E Commerce Skills", "Cybersecurity Engineer", "Cloud Computing Engineer", "Digital Marketing Expert", "Software Engineering"],
+                  widths: [213, 252.75, 279.75, 263.25, 240.75],
+                },
+                {
+                  names: ["IT Staffing", "Data Center security", "Artificial Intelligence", "Business Intelligence", "Decision Intelligence", "Robotics"],
+                  widths: [159, 232.5, 236.25, 236.25, 235.5, 141.75],
+                },
+                {
+                  names: ["Virtual/Augmented", "Systems Engineering", "Cryptocurrency", "Fintech", "Autonomous Systems", "Machine Learning"],
+                  widths: [223.5, 235.5, 194.25, 132.75, 229.5, 212.25],
+                },
+                {
+                  names: ["Electric-Vehicle Technology", "Internet of Things", "Recycle-Energy", "Smart-Home", "Quantum Computing", "Blockchain"],
+                  widths: [284.25, 213.75, 194.25, 174, 235.5, 159.75],
+                },
+              ];
+              return (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '9.75px', marginBottom: '28px', width: '100%' }}>
+                  {ROWS.map((row, rIdx) => (
+                    <div
+                      key={rIdx}
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: '9.75px',
+                        width: '100%',
+                        alignItems: 'center',
+                        boxSizing: 'border-box',
+                        flexWrap: 'nowrap',
+                      }}
+                    >
+                      {row.names.map((name, nIdx) => {
+                        const cat = CATEGORIES.find((c) => c.name === name) || { name, img: '' };
+                        const fw = row.widths[nIdx];
+                        return (
+                          <div
+                            key={cat.name}
+                            onClick={() => handleSelectCategory(cat.name)}
+                            style={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              justifyContent: 'flex-start',
+                              padding: '0 18px',
+                              gap: '10px',
+                              height: '55.5px',
+                              flex: `${fw} ${fw} 0`,
+                              minWidth: 0,
+                              overflow: 'hidden',
+                              background: '#F3F7FF',
+                              border: '1.3px solid #E0E2FE',
+                              borderRadius: '10px',
+                              cursor: 'pointer',
+                              userSelect: 'none',
+                              transition: 'all 0.2s ease',
+                              boxSizing: 'border-box',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = '#E6EFFF';
+                              e.currentTarget.style.borderColor = '#3038BD';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = '#F3F7FF';
+                              e.currentTarget.style.borderColor = '#E0E2FE';
+                            }}
+                          >
+                            <div style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                              {cat.img ? (
+                                <img src={cat.img} alt={cat.name} width={28} height={28} style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+                              ) : null}
+                            </div>
+                            <span style={{ fontFamily: F, fontSize: '13px', fontWeight: 600, color: '#050A5F', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{cat.name}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              );
+            })()
           ) : (
             /* Mode 2: Selected Category Pill + Sub Category List */
             <>
