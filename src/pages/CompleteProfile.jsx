@@ -1,34 +1,24 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StepHeader, F } from './FreelancerForm';
+import EditProfilePictureModal from '../components/EditProfilePictureModal';
+import defaultAvatar from '../assets/default_avatar.svg';
+
+const DEFAULT_AVATAR = defaultAvatar;
 
 export default function CompleteProfile() {
   const navigate = useNavigate();
-  const fileInputRef = useRef(null);
 
-  const [profileImage, setProfileImage] = useState(null);
-  const [aboutText, setAboutText] = useState('');
+  const [profileImage, setProfileImage] = useState(
+    localStorage.getItem('userProfileImage') || DEFAULT_AVATAR
+  );
+  const [aboutText, setAboutText] = useState(
+    localStorage.getItem('userAboutBio') ||
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  );
   const [isAiGenerating, setIsAiGenerating] = useState(false);
   const [showToast, setShowToast] = useState(false);
-
-  // Direct file input trigger
-  const handleUploadClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setProfileImage(reader.result);
-        localStorage.setItem('userProfileImage', reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // AI Bio Generator simulator
   const handleModifyWithAI = () => {
@@ -36,7 +26,7 @@ export default function CompleteProfile() {
     const aiBios = [
       "Experienced Full Stack & Blockchain Developer with over 5 years of experience crafting high-performance decentralized web applications, smart contracts, and intuitive user interfaces. Passionate about clean code, UX excellence, and scalable cloud architecture.",
       "Senior Product Designer & Frontend Specialist focused on creating stunning, pixel-perfect user experiences for Web3 ecosystems and SaaS platforms. Proven track record of boosting conversion rates by 40% through human-centric UI design.",
-      "Dedicated Digital Marketing & SEO Strategist specializing in data-driven growth campaigns, brand position, and high-ROI conversion funnels for tech startups and enterprise platforms.",
+      "Dedicated Digital Marketing & SEO Strategist specializing in data-driven growth campaigns, brand positioning, and high-ROI conversion funnels for tech startups and enterprise platforms.",
     ];
 
     setTimeout(() => {
@@ -47,10 +37,15 @@ export default function CompleteProfile() {
     }, 400);
   };
 
+  const handleSaveModalImage = (newImageSrc) => {
+    setProfileImage(newImageSrc);
+    localStorage.setItem('userProfileImage', newImageSrc);
+  };
+
   const handlePreview = () => {
     setShowToast(true);
     setTimeout(() => {
-      navigate('/dashboard');
+      navigate('/assessment');
     }, 1800);
   };
 
@@ -63,18 +58,18 @@ export default function CompleteProfile() {
         display: 'flex',
         flexDirection: 'column',
         boxSizing: 'border-box',
+        fontFamily: F,
       }}
     >
       {/* Floating Step Header Navigation */}
       <StepHeader activeStep={5} navigate={navigate} />
 
-      {/* Hidden File Input */}
-      <input
-        type="file"
-        ref={fileInputRef}
-        accept="image/jpeg,image/png,image/jpg,image/webp"
-        onChange={handleImageChange}
-        style={{ display: 'none' }}
+      {/* Edit Profile Picture Modal */}
+      <EditProfilePictureModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        currentImage={profileImage}
+        onSaveImage={handleSaveModalImage}
       />
 
       {/* Main Content Area */}
@@ -87,15 +82,15 @@ export default function CompleteProfile() {
           padding: '32px 20px 60px 20px',
         }}
       >
-        {/* Main White Card Container */}
+        {/* Main White Card Container (Figma frame: 1006.5px x 580.5px) */}
         <div
           style={{
-            width: '1140px',
+            width: '1006.5px',
             maxWidth: '96%',
             background: '#FFFFFF',
             borderRadius: '24px',
             boxShadow: '0 10px 30px rgba(5, 10, 95, 0.03)',
-            padding: '48px',
+            padding: '40px 48px 48px 48px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -130,136 +125,69 @@ export default function CompleteProfile() {
             Upload your photo and write about your work to start your Greelance journey.
           </p>
 
-          {/* Upload Profile Picture Box */}
+          {/* Profile Picture Avatar Frame with Pencil Edit Icon */}
           <div
+            onClick={() => setIsModalOpen(true)}
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              position: 'relative',
+              cursor: 'pointer',
               marginBottom: '36px',
+              transition: 'transform 0.2s ease',
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
           >
-            {!profileImage ? (
-              <button
-                type="button"
-                onClick={handleUploadClick}
-                style={{
-                  border: '1.33px solid #E0E2FE',
-                  background: '#F3F7FF',
-                  borderRadius: '7.5px',
-                  width: '282.75px',
-                  height: '70px',
-                  padding: '0 15px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#E6EFFF';
-                  e.currentTarget.style.borderColor = '#3038BD';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#F3F7FF';
-                  e.currentTarget.style.borderColor = '#E0E2FE';
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  {/* Badge Icon */}
-                  <div
-                    style={{
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '10px',
-                      background: '#E6EFFF',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3038BD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
-                  </div>
-                  <span
-                    style={{
-                      fontFamily: F,
-                      fontSize: '13px',
-                      fontWeight: 600,
-                      color: '#050A5F',
-                    }}
-                  >
-                    Upload Profile Picture
-                  </span>
-                </div>
-
-                {/* Upload Arrow */}
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3038BD" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="17 8 12 3 7 8" />
-                  <line x1="12" y1="3" x2="12" y2="15" />
-                </svg>
-              </button>
-            ) : (
-              /* Display Uploaded Profile Image Avatar */
-              <div style={{ position: 'relative' }}>
-                <img
-                  src={profileImage}
-                  alt="Profile Avatar"
-                  style={{
-                    width: '100px',
-                    height: '100px',
-                    borderRadius: '50%',
-                    objectFit: 'cover',
-                    border: '3px solid #3038BD',
-                    boxShadow: '0 6px 18px rgba(48, 56, 189, 0.2)',
-                  }}
-                />
-                <button
-                  type="button"
-                  onClick={handleUploadClick}
-                  title="Change Picture"
-                  style={{
-                    position: 'absolute',
-                    bottom: '0',
-                    right: '0',
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    background: '#3038BD',
-                    color: '#FFFFFF',
-                    border: '2px solid #FFFFFF',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '14px',
-                  }}
-                >
-                  ✏️
-                </button>
-              </div>
-            )}
-
-            {/* Green Upload Format Notice */}
-            <p
+            <div
               style={{
-                fontFamily: F,
-                fontSize: '12px',
-                fontWeight: 600,
-                color: '#4ADF86',
-                margin: '12px 0 0 0',
-                textAlign: 'center',
+                width: '110px',
+                height: '110px',
+                borderRadius: '50%',
+                overflow: 'hidden',
+                border: '3px solid #E6EFFF',
+                boxShadow: '0 8px 24px rgba(48, 56, 189, 0.12)',
+                background: '#F3F7FF',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              *You can upload any JPEG or PNG
-            </p>
+              <img
+                src={profileImage}
+                alt="Profile Avatar"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+              />
+            </div>
+
+            {/* Pencil Badge Icon at Bottom Right */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '2px',
+                right: '2px',
+                width: '30px',
+                height: '30px',
+                borderRadius: '50%',
+                background: '#FFFFFF',
+                border: '1.5px solid #E6EFFF',
+                boxShadow: '0 2px 8px rgba(5, 10, 95, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#3038BD',
+                fontSize: '13px',
+              }}
+              title="Edit Profile Picture"
+            >
+              ✏️
+            </div>
           </div>
 
           {/* About Section */}
-          <div style={{ width: '100%', maxWidth: '840px', marginBottom: '40px' }}>
+          <div style={{ width: '100%', maxWidth: '880px', marginBottom: '32px' }}>
             <div
               style={{
                 display: 'flex',
@@ -290,7 +218,7 @@ export default function CompleteProfile() {
                   border: 'none',
                   borderRadius: '12px',
                   height: '24px',
-                  padding: '4px 10px',
+                  padding: '4px 12px',
                   fontFamily: F,
                   fontSize: '10px',
                   fontWeight: 500,
@@ -303,19 +231,19 @@ export default function CompleteProfile() {
                 onMouseEnter={(e) => (e.currentTarget.style.background = '#D8E5FF')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = '#E6EFFF')}
               >
-                <span>{isAiGenerating ? '⌛ Generating...' : '✨ Modify with AI'}</span>
+                <span>{isAiGenerating ? '⌛ Generating...' : 'Modify with AI'}</span>
               </button>
             </div>
 
             {/* About Textarea */}
             <textarea
-              rows={5}
+              rows={4}
               value={aboutText}
               onChange={(e) => setAboutText(e.target.value)}
               placeholder="Write a short introduction about your work..."
               style={{
                 width: '100%',
-                padding: '15px',
+                padding: '16px',
                 borderRadius: '15px',
                 border: '0.66px solid #D2D4FF',
                 background: '#F3F7FF',
@@ -325,12 +253,12 @@ export default function CompleteProfile() {
                 outline: 'none',
                 resize: 'vertical',
                 boxSizing: 'border-box',
-                lineHeight: '20px',
+                lineHeight: '18px',
               }}
             />
           </div>
 
-          {/* Centered Preview Button */}
+          {/* Centered Preview Button (Figma size: 99px x 28px) */}
           <button
             type="button"
             onClick={handlePreview}
@@ -366,7 +294,7 @@ export default function CompleteProfile() {
             background: '#ECFDF5',
             border: '1px solid #10B981',
             borderRadius: '40px',
-            padding: '12px 22px',
+            padding: '10px 20px',
             display: 'flex',
             alignItems: 'center',
             gap: '12px',
@@ -376,8 +304,8 @@ export default function CompleteProfile() {
         >
           <div
             style={{
-              width: '28px',
-              height: '28px',
+              width: '24px',
+              height: '24px',
               borderRadius: '50%',
               background: '#10B981',
               color: '#FFFFFF',
@@ -385,22 +313,22 @@ export default function CompleteProfile() {
               alignItems: 'center',
               justifyContent: 'center',
               fontWeight: 700,
-              fontSize: '14px',
+              fontSize: '12px',
             }}
           >
             ✓
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontFamily: F, fontSize: '12.5px', fontWeight: 700, color: '#065F46' }}>
+            <span style={{ fontFamily: F, fontSize: '12px', fontWeight: 700, color: '#065F46' }}>
               Profile Set Successfully
             </span>
-            <span style={{ fontFamily: F, fontSize: '11px', color: '#047857' }}>
-              Your profile is all set! Redirecting to dashboard...
+            <span style={{ fontFamily: F, fontSize: '10.5px', color: '#047857' }}>
+              Your profile is all set
             </span>
           </div>
           <span
             onClick={() => setShowToast(false)}
-            style={{ cursor: 'pointer', color: '#047857', marginLeft: '12px', fontSize: '14px' }}
+            style={{ cursor: 'pointer', color: '#047857', marginLeft: '12px', fontSize: '13px' }}
           >
             ✕
           </span>
@@ -409,3 +337,4 @@ export default function CompleteProfile() {
     </div>
   );
 }
+

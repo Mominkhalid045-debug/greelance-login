@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import RoleLeftBanner from './components/RoleLeftBanner';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -13,6 +13,8 @@ import SkillsSelection from './pages/SkillsSelection';
 import ConnectWallet from './pages/ConnectWallet';
 import Assessment from './pages/Assessment';
 import CompleteProfile from './pages/CompleteProfile';
+import ProfilePreview from './pages/ProfilePreview';
+import CVPreview from './pages/CVPreview';
 
 /**
  * SplitLayout — handles the 40/60 split screen.
@@ -85,6 +87,8 @@ export default function App() {
         <Route path="/skills" element={<SkillsSelection />} />
         <Route path="/connect-wallet" element={<ConnectWallet />} />
         <Route path="/complete-profile" element={<CompleteProfile />} />
+        <Route path="/profile-preview" element={<ProfilePreview />} />
+        <Route path="/cv-preview" element={<CVPreview />} />
         <Route path="/assessment" element={<Assessment />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
@@ -101,3 +105,5 @@ export default function App() {
     </Router>
   );
 }
+
+
